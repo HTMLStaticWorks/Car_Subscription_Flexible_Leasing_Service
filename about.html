@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ORVEXA — About Us</title>
+  <meta name="description" content="Cars should adapt to people, not the other way around. Learn about the ORVEXA philosophy.">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/brand-mark.svg">
+  <style>
+    /* Section 1: Philosophy */
+    .about-hero {
+      padding: 12rem 0 0;
+      background: var(--color-bg);
+      text-align: center;
+      position: relative;
+    }
+    .about-hero h1 { font-size: clamp(3rem, 6vw, 5rem); margin-bottom: 2rem; max-width: 900px; margin-left: auto; margin-right: auto; }
+    .hero-img-banner {
+      width: 100%; height: 500px;
+      margin-top: 4rem;
+      background: url('assets/images/about.png') center/cover;
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Section 2: Approach */
+    .approach-section {
+      padding: 8rem 0;
+      background: var(--color-surface);
+    }
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4rem;
+    }
+    .approach-item {
+      padding: 0;
+      background: var(--color-bg);
+      border-radius: 12px;
+      border: 1px solid var(--color-border);
+      transition: transform 0.3s;
+      overflow: hidden;
+    }
+    .approach-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+    .approach-content {
+      padding: 3rem;
+    }
+    .approach-item:hover { transform: translateY(-5px); border-color: var(--color-primary); }
+    .approach-item h3 { font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1rem; color: var(--color-primary); }
+
+    /* Section 3: Mobility Ecosystem */
+    .ecosystem-section {
+      padding: 8rem 0;
+      background: var(--color-bg);
+      text-align: center;
+    }
+    .eco-diagram {
+      position: relative;
+      max-width: 800px;
+      margin: 4rem auto;
+      height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .eco-center {
+      width: 150px; height: 150px;
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700;
+      z-index: 2;
+      box-shadow: 0 0 40px rgba(242,106,33,0.4);
+    }
+    .eco-node {
+      position: absolute;
+      width: 120px; height: 120px;
+      background: var(--color-surface);
+      border: 2px solid var(--color-border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      font-weight: 600; font-size: 0.875rem;
+      z-index: 2;
+      transition: all 0.3s;
+    }
+    .eco-node:hover { border-color: var(--color-primary); transform: scale(1.1); color: var(--color-primary); }
+    
+    /* Nodes positioning (Circle) */
+    .eco-node:nth-child(2) { top: 0; left: 50%; transform: translateX(-50%); } /* Vehicle */
+    .eco-node:nth-child(3) { top: 50%; right: 0; transform: translateY(-50%); } /* Subscription */
+    .eco-node:nth-child(4) { bottom: 0; left: 50%; transform: translateX(-50%); } /* Maintenance */
+    .eco-node:nth-child(5) { top: 50%; left: 0; transform: translateY(-50%); } /* Support */
+    
+    .eco-lines {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px; height: 400px;
+      border: 1px dashed var(--color-border);
+      border-radius: 50%;
+      z-index: 1;
+      animation: spin 60s linear infinite;
+    }
+
+    /* Section 4: CTA */
+    .about-cta {
+      padding: 8rem 0;
+      background: #111;
+      color: #fff;
+      text-align: center;
+    }
+    .about-cta h2 { font-size: 4rem; margin-bottom: 2rem; }
+
+    @media (max-width: 768px) {
+      .approach-grid { gap: 2rem; }
+      .eco-diagram { height: 400px; }
+      .eco-node { width: 90px; height: 90px; font-size: 0.75rem; }
+      .eco-lines { width: 250px; height: 250px; }
+      .hero-img-banner { height: 300px; }
+    }
+    @media (max-width: 576px) {
+      .approach-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo"><img src="assets/brand-mark.svg" alt="ORVEXA Logo"></a>
+      <ul class="nav-links">
+        <li class="nav-dropdown">
+          <a href="#" class="nav-link" style="display: inline-flex; align-items: center; gap: 0.25rem;">Home <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+          <div class="dropdown-menu">
+            <a href="index.html" class="dropdown-item">Home 1</a>
+            <a href="home-2.html" class="dropdown-item">Home 2</a>
+          </div>
+        </li>
+        <li><a href="about.html" class="nav-link active">About</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="fleet.html" class="nav-link">Fleet</a></li>
+        <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+        <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
+        <li><a href="locations.html" class="nav-link">Locations</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+        </button>
+        <button id="rtl-toggle" class="icon-btn" aria-label="Toggle RTL">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 9H3m14-4l4 4-4 4M3 15h18M7 11l-4 4 4 4"/></svg>
+        </button>
+        <a href="login.html" class="btn btn-primary">Login</a>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+    <button class="icon-btn" id="close-menu" style="position:absolute; top:2rem; right:2rem;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <ul class="nav-links">
+        <li class="nav-dropdown">
+          <a href="#" class="nav-link" style="display: inline-flex; align-items: center; gap: 0.25rem;">Home <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+          <div class="dropdown-menu">
+            <a href="index.html" class="dropdown-item">Home 1</a>
+            <a href="home-2.html" class="dropdown-item">Home 2</a>
+          </div>
+        </li>
+        <li><a href="about.html" class="nav-link active">About</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="fleet.html" class="nav-link">Fleet</a></li>
+        <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+        <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
+        <li><a href="locations.html" class="nav-link">Locations</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+    </ul>
+    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; margin-bottom: 2rem; width: 100%;">
+      <button id="theme-toggle-mob" class="icon-btn" aria-label="Toggle Theme">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+      </button>
+      <button id="rtl-toggle-mob" class="icon-btn" aria-label="Toggle RTL">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 9H3m14-4l4 4-4 4M3 15h18M7 11l-4 4 4 4"/></svg>
+      </button>
+    </div>
+    <a href="login.html" class="btn btn-primary btn-full">Login</a>
+  </div>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Section 1: Philosophy -->
+  <header class="about-hero fade-up">
+    <div class="container">
+      <span class="eyebrow">Our Philosophy</span>
+      <h1>Cars should adapt to people, not the other way around.</h1>
+      <p style="font-size: 1.25rem; max-width: 600px; margin: 0 auto; color: var(--color-text-muted);">
+        For too long, getting a car meant getting tied down. We built ORVEXA to decouple the joy of driving from the burden of ownership.
+      </p>
+    </div>
+  </header>
+
+  <!-- Section 2: Approach -->
+  <section class="approach-section">
+    <div class="container">
+      <div class="hero-img-banner fade-up" style="margin-top: 0; margin-bottom: 6rem;"></div>
+    </div>
+    <div class="container">
+      <div class="text-center fade-up" style="margin-bottom: 4rem;">
+        <span class="eyebrow">The Method</span>
+        <h2 class="heading-lg">Our Approach.</h2>
+      </div>
+      <div class="approach-grid fade-up">
+        <div class="approach-item">
+          <img src="assets/images/Technology.png" alt="Technology" class="approach-img">
+          <div class="approach-content">
+            <h3>Technology</h3>
+            <p class="text-muted">We replaced dealerships with a seamless digital platform. From application to vehicle swap scheduling, everything is handled through our proprietary software infrastructure, ensuring speed and reliability.</p>
+          </div>
+        </div>
+        <div class="approach-item">
+          <img src="assets/images/Transparency.png" alt="Transparency" class="approach-img">
+          <div class="approach-content">
+            <h3>Transparency</h3>
+            <p class="text-muted">No hidden fees, no surprise depreciation, and no ambiguous lease return costs. Our pricing is upfront, and what you see is exactly what you pay for the entire duration of your term.</p>
+          </div>
+        </div>
+        <div class="approach-item">
+          <img src="assets/images/Flexibility.png" alt="Flexibility" class="approach-img">
+          <div class="approach-content">
+            <h3>Flexibility</h3>
+            <p class="text-muted">We recognize that life is dynamic. By offering monthly commitments and mid-term vehicle swaps, we ensure that the car you drive always perfectly matches your current lifestyle needs.</p>
+          </div>
+        </div>
+        <div class="approach-item">
+          <img src="assets/images/Customer Experience.png" alt="Customer Experience" class="approach-img" style="object-position: center 35%;">
+          <div class="approach-content">
+            <h3>Customer Experience</h3>
+            <p class="text-muted">Every touchpoint is designed to feel premium. From white-glove concierge delivery to instant roadside assistance, we prioritize your time and comfort above all else.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Ecosystem -->
+  <section class="ecosystem-section">
+    <div class="container">
+      <div class="fade-up">
+        <span class="eyebrow">The Infrastructure</span>
+        <h2 class="heading-lg">An Interconnected Ecosystem.</h2>
+      </div>
+      
+      <div class="eco-diagram fade-up">
+        <div class="eco-center">Customer</div>
+        <div class="eco-node">Vehicle</div>
+        <div class="eco-node">Subscription</div>
+        <div class="eco-node">Maintenance</div>
+        <div class="eco-node">Support</div>
+        <div class="eco-lines"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: CTA -->
+  <section class="about-cta fade-up">
+    <div class="container">
+      <h2>Move differently.</h2>
+      <p style="font-size: 1.25rem; margin-bottom: 3rem; opacity: 0.9;">Join the next generation of drivers who refuse to compromise.</p>
+      <a href="register.html" class="btn btn-primary" style="padding: 1.5rem 3rem; font-size: 1.25rem;">Start Your Journey</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/brand-mark.svg" alt="ORVEXA">
+          <p>The premium car subscription service designed for modern flexibility. Drive more, commit less.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+            <a href="#" aria-label="X (Twitter)"><svg width="18" height="18" viewBox="-1.5 -1.5 27 27" fill="currentColor" stroke="none"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+            <a href="#" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Company</h4>
+          <div class="footer-links">
+            <a href="about.html">About Us</a>
+            <a href="how-it-works.html">How It Works</a>
+            <a href="locations.html">Locations</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Services</h4>
+          <div class="footer-links">
+            <a href="fleet.html">Our Fleet</a>
+            <a href="pricing.html">Pricing Plans</a>
+            <a href="services.html">Maintenance</a>
+            <a href="dashboard.html">Subscriber Portal</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Legal</h4>
+          <div class="footer-links">
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Cookie Policy</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 ORVEXA Mobility. All rights reserved.</p>
+        <p>Designed for Flexibility.</p>
+      </div>
+    </div>
+    
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top" class="scroll-to-top" aria-label="Scroll to top">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+    </button>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

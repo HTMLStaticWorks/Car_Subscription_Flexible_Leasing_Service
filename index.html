@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ORVEXA — Flexible Car Subscription & Leasing</title>
+  <meta name="description" content="Premium cars, flexible monthly subscriptions, and the freedom to change your vehicle when life changes.">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/brand-mark.svg">
+  <style>
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background-color: #111;
+    }
+    .hero-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: url('https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?q=80&w=2000&auto=format&fit=crop') center/cover;
+      opacity: 0.6;
+      transform: scale(1.05);
+      animation: heroZoom 20s infinite alternate linear;
+    }
+    @keyframes heroZoom {
+      from { transform: scale(1); }
+      to { transform: scale(1.1); }
+    }
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      color: #fff;
+      max-width: 800px;
+    }
+    .hero-glass-card {
+      position: absolute;
+      bottom: 10%;
+      right: 5%;
+      background: rgba(20,20,20,0.6);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 2rem;
+      border-radius: 12px;
+      width: 350px;
+      color: #fff;
+      z-index: 10;
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0); }
+    }
+    .hero-glass-card .price { font-size: 2rem; font-family: var(--font-heading); color: var(--color-primary); font-weight: 700; margin-bottom: 1rem; }
+    .hero-glass-card ul { list-style: none; margin: 0; padding: 0; }
+    .hero-glass-card ul li { padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; }
+    .hero-glass-card ul li:last-child { border-bottom: none; }
+
+    /* Comparison Section */
+    .comparison-wrapper {
+      display: flex;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
+    }
+    .comp-col { flex: 1; padding: 4rem; }
+    .comp-left { background-color: var(--color-surface); }
+    .comp-right { background-color: var(--color-primary); color: #fff; }
+    .comp-list li { padding: 1rem 0; border-bottom: 1px solid var(--color-border); display: flex; justify-content: space-between; }
+    .comp-right .comp-list li { border-color: rgba(255,255,255,0.2); }
+    .comp-list li:last-child { border-bottom: none; }
+    
+    /* Fleet Showcase */
+    .fleet-scroll {
+      display: flex;
+      gap: 2rem;
+      overflow-x: auto;
+      padding: 2rem 0;
+      scrollbar-width: none; /* Firefox */
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+    }
+    .fleet-scroll::-webkit-scrollbar { display: none; } /* Chrome */
+    .fleet-card {
+      flex: 0 0 calc((100% - 4rem) / 3);
+      scroll-snap-align: start;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+    .fleet-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-md); border-color: var(--color-primary); }
+    .fleet-img { height: 200px; background: #ddd; overflow: hidden; }
+    .fleet-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .fleet-card:hover .fleet-img img { transform: scale(1.1); }
+    .fleet-info { padding: 1.5rem; }
+    .fleet-title { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .fleet-price { color: var(--color-primary); font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
+    
+    /* Flexibility Engine */
+    .flex-engine {
+      position: relative;
+      height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle, var(--color-surface) 0%, var(--color-bg) 100%);
+    }
+    .flex-center {
+      text-align: center;
+      z-index: 2;
+    }
+    .flex-center h2 { font-size: 2.5rem; color: var(--color-primary); }
+    .flex-orbit {
+      position: absolute;
+      width: 450px; height: 450px;
+      border: 1px dashed var(--color-border);
+      border-radius: 50%;
+      animation: spin 30s linear infinite;
+    }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    .orbit-item {
+      position: absolute;
+      width: 100px; height: 100px;
+      background: var(--color-surface);
+      border: 2px solid var(--color-primary);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 600; font-size: 0.875rem;
+      box-shadow: var(--shadow-sm);
+      animation: anti-spin 30s linear infinite;
+    }
+    @keyframes anti-spin { 100% { transform: rotate(-360deg); } }
+    .orbit-item:nth-child(1) { top: -50px; left: 175px; } /* Subscribe */
+    .orbit-item:nth-child(2) { top: 175px; right: -50px; } /* Drive */
+    .orbit-item:nth-child(3) { bottom: -50px; left: 175px; } /* Swap */
+    .orbit-item:nth-child(4) { top: 175px; left: -50px; } /* Renew */
+
+    /* Why Subscribe */
+    .stats-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .stat-item { margin-bottom: 3rem; }
+    .stat-num { font-size: 4rem; font-family: var(--font-heading); color: var(--color-primary); line-height: 1; margin-bottom: 0.5rem; }
+    .stat-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .stat-desc { color: var(--color-text-muted); }
+    .stats-img img { border-radius: 20px; box-shadow: var(--shadow-lg); }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--color-primary) 0%, #111 100%);
+      color: #fff;
+      text-align: center;
+      padding: 8rem 2rem;
+    }
+    .cta-section h2 { font-size: 4rem; margin-bottom: 1.5rem; }
+    .cta-section p { font-size: 1.25rem; margin-bottom: 3rem; opacity: 0.9; }
+
+
+    @media (max-width: 768px) {
+      .hero-content {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-desc, .hero-content .eyebrow {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+      .comparison-wrapper { flex-direction: column; }
+      .hero-glass-card { position: relative; bottom: 0; right: 0; width: 100%; margin-top: 2rem; }
+      .fleet-card { flex: 0 0 calc((100% - 2rem) / 2); }
+      .stats-layout { grid-template-columns: 1fr; }
+      .flex-engine { height: 400px; }
+      .flex-orbit { width: 300px; height: 300px; }
+      .orbit-item:nth-child(1) { top: -40px; left: 110px; }
+      .orbit-item:nth-child(2) { top: 110px; right: -40px; }
+      .orbit-item:nth-child(3) { bottom: -40px; left: 110px; }
+      .orbit-item:nth-child(4) { top: 110px; left: -40px; }
+      .orbit-item { width: 80px; height: 80px; font-size: 0.75rem; }
+    }
+    @media (max-width: 576px) {
+      .fleet-card { flex: 0 0 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/brand-mark.svg" alt="ORVEXA Logo">
+      </a>
+      
+      <ul class="nav-links">
+        <li class="nav-dropdown">
+          <a href="#" class="nav-link active" style="display: inline-flex; align-items: center; gap: 0.25rem;">Home <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+          <div class="dropdown-menu">
+            <a href="index.html" class="dropdown-item active">Home 1</a>
+            <a href="home-2.html" class="dropdown-item">Home 2</a>
+          </div>
+        </li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="fleet.html" class="nav-link">Fleet</a></li>
+        <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+        <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
+        <li><a href="locations.html" class="nav-link">Locations</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+        </button>
+        <button id="rtl-toggle" class="icon-btn" aria-label="Toggle RTL">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 9H3m14-4l4 4-4 4M3 15h18M7 11l-4 4 4 4"/></svg>
+        </button>
+        <a href="login.html" class="btn btn-primary">Login</a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <button class="icon-btn" id="close-menu" style="position:absolute; top:2rem; right:2rem;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <ul class="nav-links">
+        <li class="nav-dropdown">
+          <a href="#" class="nav-link active" style="display: inline-flex; align-items: center; gap: 0.25rem;">Home <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+          <div class="dropdown-menu">
+            <a href="index.html" class="dropdown-item active">Home 1</a>
+            <a href="home-2.html" class="dropdown-item">Home 2</a>
+          </div>
+        </li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="fleet.html" class="nav-link">Fleet</a></li>
+        <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+        <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
+        <li><a href="locations.html" class="nav-link">Locations</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+    </ul>
+    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; margin-bottom: 2rem; width: 100%;">
+      <button id="theme-toggle-mob" class="icon-btn" aria-label="Toggle Theme">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+      </button>
+      <button id="rtl-toggle-mob" class="icon-btn" aria-label="Toggle RTL">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 9H3m14-4l4 4-4 4M3 15h18M7 11l-4 4 4 4"/></svg>
+      </button>
+    </div>
+    <a href="login.html" class="btn btn-primary btn-full">Login</a>
+  </div>
+
+  <!-- SECTION 1: HERO -->
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <div class="container relative">
+      <div class="hero-content fade-up">
+        <span class="eyebrow">Premium Car Subscription</span>
+        <h1 class="heading-xl">Drive More.<br>Commit Less.</h1>
+        <p class="hero-desc" style="font-size: 1.25rem; margin: 2rem 0; max-width: 500px; opacity: 0.9;">Premium cars, flexible monthly subscriptions, and the freedom to change your vehicle when life changes.</p>
+        <div class="btn-group">
+          <a href="fleet.html" class="btn btn-primary">Explore the Fleet</a>
+          <a href="pricing.html" class="btn btn-glass">Build My Subscription</a>
+        </div>
+      </div>
+      
+      <div class="hero-glass-card fade-up" style="transition-delay: 0.2s;">
+        <div style="font-size:0.875rem; text-transform:uppercase; letter-spacing:1px; color:#aaa;">Starting From</div>
+        <div class="price">$899 <span style="font-size:1rem; font-weight:400; color:#ccc;">/ month</span></div>
+        <ul>
+          <li><span>BMW 5 Series or similar</span> <span>★</span></li>
+          <li><span>Flexible mileage</span> <span>✓</span></li>
+          <li><span>Maintenance included</span> <span>✓</span></li>
+          <li><span>Insurance coverage</span> <span>✓</span></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECTION 2: SUBSCRIPTION VS OWNERSHIP -->
+  <section class="container" style="padding-top:10rem;">
+    <div class="text-center fade-up" style="margin-bottom: 4rem;">
+      <span class="eyebrow">A Smarter Way</span>
+      <h2 class="heading-lg">Subscription vs. Ownership</h2>
+    </div>
+    
+    <div class="comparison-wrapper fade-up">
+      <div class="comp-col comp-left">
+        <h3 style="font-size:2rem; margin-bottom:2rem; color:var(--color-text-muted);">Traditional Ownership</h3>
+        <ul class="comp-list">
+          <li><span>Upfront Costs</span> <strong>High Down Payment</strong></li>
+          <li><span>Commitment</span> <strong>36-60 Months</strong></li>
+          <li><span>Maintenance</span> <strong>Out of Pocket</strong></li>
+          <li><span>Insurance</span> <strong>Separate Cost</strong></li>
+          <li><span>Vehicle Changes</span> <strong>Trade-in Hassle</strong></li>
+          <li><span>Depreciation</span> <strong>Your Risk</strong></li>
+        </ul>
+      </div>
+      <div class="comp-col comp-right">
+        <h3 style="font-size:2rem; margin-bottom:2rem;">ORVEXA Subscription</h3>
+        <ul class="comp-list">
+          <li><span>Upfront Costs</span> <strong>$0 Down Options</strong></li>
+          <li><span>Commitment</span> <strong>Monthly Flexibility</strong></li>
+          <li><span>Maintenance</span> <strong>Fully Included</strong></li>
+          <li><span>Insurance</span> <strong>Included in Plan</strong></li>
+          <li><span>Vehicle Changes</span> <strong>Swap Anytime</strong></li>
+          <li><span>Depreciation</span> <strong>Not Your Problem</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: FEATURED FLEET -->
+  <section style="background-color: var(--color-surface); margin-top:6rem; overflow:hidden;">
+    <div class="container">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3rem;" class="fade-up">
+        <div>
+          <span class="eyebrow">Our Vehicles</span>
+          <h2 class="heading-lg">Featured Fleet</h2>
+        </div>
+        <div style="display:flex; align-items:center; gap: 1rem;">
+          <div class="slider-arrows" style="display:flex; gap: 0.5rem;">
+            <button id="fleet-prev" class="icon-btn" aria-label="Previous" style="border:1px solid var(--color-border); background:var(--color-surface); width:40px; height:40px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+            <button id="fleet-next" class="icon-btn" aria-label="Next" style="border:1px solid var(--color-border); background:var(--color-surface); width:40px; height:40px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+          </div>
+          <a href="fleet.html" class="btn btn-secondary">View All Vehicles</a>
+        </div>
+      </div>
+      
+      <div class="fleet-scroll fade-up">
+        <!-- Vehicle 1 -->
+        <div class="fleet-card">
+          <div class="fleet-img">
+            <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=800&auto=format&fit=crop" alt="Luxury Sedan">
+          </div>
+          <div class="fleet-info">
+            <div style="color:var(--color-text-muted); font-size:0.875rem; margin-bottom:0.25rem;">Luxury Sedan</div>
+            <div class="fleet-title">BMW 5 Series</div>
+            <div class="fleet-price">$899<span style="font-size:1rem; font-weight:400; color:var(--color-text-muted)">/mo</span></div>
+            <div class="spec-row">
+              <span>Automatic</span>
+              <span>Hybrid</span>
+              <span>1,200 mi/mo</span>
+            </div>
+          </div>
+        </div>
+        <!-- Vehicle 2 -->
+        <div class="fleet-card">
+          <div class="fleet-img">
+            <img src="assets/images/Range Rover Velar.png" alt="Premium SUV">
+          </div>
+          <div class="fleet-info">
+            <div style="color:var(--color-text-muted); font-size:0.875rem; margin-bottom:0.25rem;">Premium SUV</div>
+            <div class="fleet-title">Range Rover Velar</div>
+            <div class="fleet-price">$1,199<span style="font-size:1rem; font-weight:400; color:var(--color-text-muted)">/mo</span></div>
+            <div class="spec-row">
+              <span>Automatic</span>
+              <span>Gasoline</span>
+              <span>1,200 mi/mo</span>
+            </div>
+          </div>
+        </div>
+        <!-- Vehicle 3 -->
+        <div class="fleet-card">
+          <div class="fleet-img">
+            <img src="assets/images/Tesla Model 3.png" alt="Electric">
+          </div>
+          <div class="fleet-info">
+            <div style="color:var(--color-text-muted); font-size:0.875rem; margin-bottom:0.25rem;">Electric</div>
+            <div class="fleet-title">Tesla Model 3</div>
+            <div class="fleet-price">$799<span style="font-size:1rem; font-weight:400; color:var(--color-text-muted)">/mo</span></div>
+            <div class="spec-row">
+              <span>Automatic</span>
+              <span>Electric</span>
+              <span>1,000 mi/mo</span>
+            </div>
+          </div>
+        </div>
+        <!-- Vehicle 4 -->
+        <div class="fleet-card">
+          <div class="fleet-img">
+            <img src="assets/images/Porsche 911.png" alt="Performance">
+          </div>
+          <div class="fleet-info">
+            <div style="color:var(--color-text-muted); font-size:0.875rem; margin-bottom:0.25rem;">Performance</div>
+            <div class="fleet-title">Porsche 911</div>
+            <div class="fleet-price">$2,499<span style="font-size:1rem; font-weight:400; color:var(--color-text-muted)">/mo</span></div>
+            <div class="spec-row">
+              <span>PDK</span>
+              <span>Gasoline</span>
+              <span>800 mi/mo</span>
+            </div>
+          </div>
+        </div>
+        <!-- Vehicle 5 -->
+        <div class="fleet-card">
+          <div class="fleet-img" style="background: #fff; padding-top: 1rem;">
+            <img src="assets/images/Audi A3.png" alt="Premium Compact" style="object-fit: contain;">
+          </div>
+          <div class="fleet-info">
+            <div style="color:var(--color-text-muted); font-size:0.875rem; margin-bottom:0.25rem;">Premium Compact</div>
+            <div class="fleet-title">Audi A3</div>
+            <div class="fleet-price">$699<span style="font-size:1rem; font-weight:400; color:var(--color-text-muted)">/mo</span></div>
+            <div class="spec-row">
+              <span>Automatic</span>
+              <span>Gasoline</span>
+            </div>
+          </div>
+        </div>
+        <!-- Vehicle 6 -->
+        <div class="fleet-card">
+          <div class="fleet-img">
+            <img src="assets/images/Polestar 2.png" alt="Electric Fastback">
+          </div>
+          <div class="fleet-info">
+            <div style="color:var(--color-text-muted); font-size:0.875rem; margin-bottom:0.25rem;">Electric Fastback</div>
+            <div class="fleet-title">Polestar 2</div>
+            <div class="fleet-price">$849<span style="font-size:1rem; font-weight:400; color:var(--color-text-muted)">/mo</span></div>
+            <div class="spec-row">
+              <span>Automatic</span>
+              <span>Gasoline</span>
+              <span>1,200 mi/mo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: FLEXIBILITY ENGINE -->
+  <section class="flex-engine fade-up">
+    <div class="flex-orbit">
+      <div class="orbit-item">SUBSCRIBE</div>
+      <div class="orbit-item">DRIVE</div>
+      <div class="orbit-item">SWAP</div>
+      <div class="orbit-item">RENEW</div>
+    </div>
+    <div class="flex-center">
+      <h2 style="font-family:var(--font-heading); margin-bottom:1rem;">Your Drive.<br>Your Rules.</h2>
+      <p style="max-width:300px; margin:0 auto; color:var(--color-text-muted);">Flexible terms, vehicle swaps, and all-inclusive maintenance.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 5: WHY SUBSCRIBE -->
+  <section class="container">
+    <div class="stats-layout">
+      <div class="stats-text fade-up">
+        <span class="eyebrow">The ORVEXA Advantage</span>
+        <h2 class="heading-lg" style="margin-bottom:3rem;">Mobility Reimagined.</h2>
+        
+        <div class="stat-item">
+          <div class="stat-num">01</div>
+          <div class="stat-title">Flexible monthly terms</div>
+          <div class="stat-desc">Commit to a month, or stay for a year. It's entirely up to you.</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">02</div>
+          <div class="stat-title">Vehicle swap options</div>
+          <div class="stat-desc">Need an SUV for the winter and a convertible for the summer? Swap easily through the app.</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">03</div>
+          <div class="stat-title">Maintenance included</div>
+          <div class="stat-desc">We handle all routine maintenance, tire changes, and unexpected repairs.</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">04</div>
+          <div class="stat-title">Digital account management</div>
+          <div class="stat-desc">Control your subscription, schedule swaps, and track mileage entirely from your dashboard.</div>
+        </div>
+      </div>
+      <div class="stats-img fade-up" style="transition-delay: 0.2s;">
+        <img src="assets/images/Mobility Reimagined.png" alt="Mobility Reimagined" style="width: 100%; height: auto;">
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: CTA -->
+  <section class="cta-section fade-up">
+    <div class="container">
+      <h2 class="heading-lg">Your next car should fit your life.</h2>
+      <p>Explore available vehicles and build a subscription that works around you.</p>
+      <div class="btn-group">
+        <a href="fleet.html" class="btn btn-primary">Explore Available Cars</a>
+        <a href="pricing.html" class="btn btn-glass">Compare Plans</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/brand-mark.svg" alt="ORVEXA">
+          <p>The premium car subscription service designed for modern flexibility. Drive more, commit less.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+            <a href="#" aria-label="X (Twitter)"><svg width="18" height="18" viewBox="-1.5 -1.5 27 27" fill="currentColor" stroke="none"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+            <a href="#" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Company</h4>
+          <div class="footer-links">
+            <a href="about.html">About Us</a>
+            <a href="how-it-works.html">How It Works</a>
+            <a href="locations.html">Locations</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Services</h4>
+          <div class="footer-links">
+            <a href="fleet.html">Our Fleet</a>
+            <a href="pricing.html">Pricing Plans</a>
+            <a href="services.html">Maintenance</a>
+            <a href="dashboard.html">Subscriber Portal</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Legal</h4>
+          <div class="footer-links">
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Cookie Policy</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 ORVEXA Mobility. All rights reserved.</p>
+        <p>Designed for Flexibility.</p>
+      </div>
+    </div>
+    
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top" class="scroll-to-top" aria-label="Scroll to top">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+    </button>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

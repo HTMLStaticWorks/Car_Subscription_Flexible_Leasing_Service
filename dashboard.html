@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ORVEXA — Subscriber Dashboard</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/brand-mark.svg">
+  <style>
+    body { background-color: var(--color-bg); }
+    
+    /* Layout */
+    .dashboard-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      background: var(--color-surface);
+      border-right: 1px solid var(--color-border);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      z-index: 100;
+      transition: transform var(--transition-normal);
+    }
+    .sidebar-header {
+      padding: 2rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .sidebar-header img { height: 24px; }
+    
+    .sidebar-nav {
+      padding: 2rem 1rem;
+      flex: 1;
+      overflow-y: auto;
+    }
+    .dash-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      color: var(--color-text-muted);
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      transition: all var(--transition-fast);
+    }
+    .dash-nav-item:hover, .dash-nav-item.active {
+      background: var(--color-primary-muted);
+      color: var(--color-primary);
+    }
+    .dash-nav-item svg { width: 20px; height: 20px; }
+    
+    .sidebar-footer {
+      padding: 2rem;
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* Main Content */
+    .dash-main {
+      flex: 1;
+      margin-left: 280px;
+      padding: 3rem 4rem;
+    }
+    [dir="rtl"] .sidebar { left: auto; right: 0; border-right: none; border-left: 1px solid var(--color-border); }
+    [dir="rtl"] .dash-main { margin-left: 0; margin-right: 280px; }
+    
+    .dash-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; }
+    
+    .dash-section { display: none; animation: fadeIn 0.4s; }
+    .dash-section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* Cards */
+    .summary-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
+    .summary-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; }
+    .sc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; color: var(--color-text-muted); font-size: 0.875rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+    .sc-value { font-size: 1.75rem; font-weight: 700; font-family: var(--font-heading); color: var(--color-text); }
+    
+    .widget-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+    .widget { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 2rem; }
+    
+    /* Vehicle Widget */
+    .vehicle-widget { display: flex; gap: 2rem; align-items: center; }
+    .vehicle-widget img { width: 250px; border-radius: 8px; }
+    .v-stat { margin-top: 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .v-stat-item { background: var(--color-bg); padding: 1rem; border-radius: 8px; }
+    .v-stat-label { font-size: 0.75rem; text-transform: uppercase; color: var(--color-text-muted); letter-spacing: 1px; }
+    .v-stat-value { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 600; color: var(--color-text); }
+
+    /* Mileage Widget */
+    .mileage-bar-bg { width: 100%; height: 8px; background: var(--color-border); border-radius: 4px; margin: 1.5rem 0 1rem; overflow: hidden; }
+    .mileage-bar-fill { height: 100%; background: var(--color-primary); width: 0%; transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+
+    /* Swap Layout */
+    .swap-compare { display: grid; grid-template-columns: 1fr auto 1fr; gap: 2rem; align-items: center; }
+    .swap-arrow { font-size: 2rem; color: var(--color-primary); text-align: center; }
+    
+    /* Timeline */
+    .history-timeline { position: relative; padding-left: 2rem; }
+    .history-timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--color-border); }
+    .h-item { position: relative; margin-bottom: 2rem; }
+    .h-dot { position: absolute; left: -35px; top: 5px; width: 12px; height: 12px; background: var(--color-primary); border: 3px solid var(--color-surface); border-radius: 50%; box-shadow: 0 0 0 2px var(--color-primary-muted); }
+    .h-date { font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: 0.25rem; }
+    
+    /* Modals */
+    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; backdrop-filter: blur(5px); }
+    .modal-overlay.active { opacity: 1; pointer-events: all; }
+    .modal-content { background: var(--color-surface); width: 100%; max-width: 500px; padding: 3rem; border-radius: 12px; border: 1px solid var(--color-border); transform: translateY(20px); transition: transform 0.3s; }
+    .modal-overlay.active .modal-content { transform: translateY(0); }
+
+    .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--color-text); }
+
+    @media (max-width: 1024px) {
+      .widget-grid { grid-template-columns: 1fr; }
+      .vehicle-widget { flex-direction: column; align-items: flex-start; }
+      .vehicle-widget img { width: 100%; max-width: 400px; }
+      .swap-compare { grid-template-columns: 1fr; }
+      .swap-arrow { transform: rotate(90deg); }
+      
+      .sidebar { transform: translateX(-100%); }
+      [dir="rtl"] .sidebar { transform: translateX(100%); }
+      .sidebar.open { transform: translateX(0); }
+      .dash-main { margin-left: 0; padding: 2rem; }
+      [dir="rtl"] .dash-main { margin-right: 0; }
+      .mobile-menu-btn { display: block; margin-bottom: 1rem; }
+    }
+    
+    @media (max-width: 768px) {
+      .summary-grid { grid-template-columns: 1fr; }
+      .v-stat { grid-template-columns: 1fr; }
+      .custom-form-row { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar" id="dashSidebar">
+      <div class="sidebar-header">
+        <a href="index.html"><img src="assets/brand-mark.svg" alt="ORVEXA"></a>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#overview" class="dash-nav-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          Overview
+        </a>
+        <a href="#swap" class="dash-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 21h5v-5M21 3l-7 7M3 21l7-7"></path></svg>
+          Swap Vehicle
+        </a>
+        <a href="#billing" class="dash-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          Billing
+        </a>
+        <a href="#maintenance" class="dash-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          Maintenance
+        </a>
+        <a href="#history" class="dash-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          History
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-profile" style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+          <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary-muted); color: var(--color-primary); display: flex; align-items: center; justify-content: center; font-weight: bold; font-family: var(--font-heading); font-size: 1.25rem;">
+            A
+          </div>
+          <div>
+            <div style="font-weight: 600; color: var(--color-text); line-height: 1.2;">Alex</div>
+            <div style="font-size: 0.75rem; color: var(--color-text-muted);">Premium Subscriber</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 0;">
+          <button id="theme-toggle" class="icon-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg></button>
+          <button id="rtl-toggle" class="icon-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 9H3m14-4l4 4-4 4M3 15h18M7 11l-4 4 4 4"/></svg></button>
+        </div>
+        <a href="#logout" class="dash-nav-item" style="color: #d32f2f; margin: 0; padding: 0.5rem; justify-content: flex-start;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dash-main">
+      <button class="mobile-menu-btn" onclick="document.getElementById('dashSidebar').classList.toggle('open')">☰ Menu</button>
+      
+      <div class="dash-header">
+        <div>
+          <h1 class="heading-md">Good morning, Alex.</h1>
+          <p class="text-muted">Premium Plan • Subscriber since Jan 2026</p>
+        </div>
+      </div>
+
+      <!-- OVERVIEW SECTION -->
+      <section id="overview" class="dash-section active">
+
+        <div class="summary-grid">
+          <div class="summary-card">
+            <div class="sc-header">
+              <span>Plan Status</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <div class="sc-value">Active</div>
+            <div style="font-size:0.875rem; color:var(--color-text-muted); margin-top:0.5rem;">Renews Oct 1, 2026</div>
+          </div>
+          
+          <div class="summary-card">
+            <div class="sc-header">
+              <span>Available Swaps</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M16 3h5v5M4 21h5v-5M21 3l-7 7M3 21l7-7"></path></svg>
+            </div>
+            <div class="sc-value">2</div>
+            <div style="font-size:0.875rem; color:var(--color-text-muted); margin-top:0.5rem;">Included in Premium Plan</div>
+          </div>
+
+          <div class="summary-card">
+            <div class="sc-header">
+              <span>Insurance Coverage</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <div class="sc-value">Comprehensive</div>
+            <div style="font-size:0.875rem; color:var(--color-text-muted); margin-top:0.5rem;">Zero Deductible Tier</div>
+          </div>
+
+          <div class="summary-card">
+            <div class="sc-header">
+              <span>Concierge Delivery</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>
+            </div>
+            <div class="sc-value">100 Miles</div>
+            <div style="font-size:0.875rem; color:var(--color-text-muted); margin-top:0.5rem;">From nearest hub</div>
+          </div>
+        </div>
+
+        <div class="widget-grid">
+          
+          <div class="widget">
+            <h3 style="margin-bottom:1.5rem; font-family:var(--font-heading);">Current Vehicle</h3>
+            <div class="vehicle-widget">
+              <img src="https://images.unsplash.com/photo-1606152421802-db97b9c7a11b?q=80&w=800&auto=format&fit=crop" alt="Range Rover">
+              <div style="flex:1;">
+                <div class="eyebrow" style="margin-bottom:0.5rem; color:var(--color-text-muted);">Land Rover</div>
+                <h2 style="font-family:var(--font-heading); margin-bottom: 0.5rem;">Range Rover Velar</h2>
+                <div style="display:inline-block; padding:0.25rem 0.75rem; background:var(--color-primary-muted); color:var(--color-primary); border-radius:20px; font-size:0.75rem; font-weight:600;">Active Subscription</div>
+                
+                <div class="v-stat">
+                  <div class="v-stat-item">
+                    <div class="v-stat-label">Monthly</div>
+                    <div class="v-stat-value">$1,299</div>
+                  </div>
+                  <div class="v-stat-item">
+                    <div class="v-stat-label">Next Payment</div>
+                    <div class="v-stat-value">Oct 1</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="widget">
+            <h3 style="margin-bottom:1.5rem; font-family:var(--font-heading);">Mileage Tracker</h3>
+            <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+              <div>
+                <div style="font-size:3rem; line-height:1; font-family:var(--font-heading); font-weight:700; color:var(--color-primary);">900</div>
+                <div class="text-muted">Miles used</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:1.5rem; font-weight:600;">1,200</div>
+                <div class="text-muted">Total Allowance</div>
+              </div>
+            </div>
+            <div class="mileage-bar-bg">
+              <div class="mileage-bar-fill" id="mileageFill"></div>
+            </div>
+            <p style="font-size:0.875rem; color:var(--color-text-muted);">300 miles remaining until next cycle.</p>
+          </div>
+          
+        </div>
+      </section>
+
+      <!-- SWAP SECTION -->
+      <section id="swap" class="dash-section">
+        <h2 style="font-family:var(--font-heading); margin-bottom:2rem;">Vehicle Swap</h2>
+        
+        <div class="summary-grid">
+          <div class="summary-card">
+            <div class="sc-header">
+              <span>Current Class</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <div class="sc-value">Premium SUV</div>
+            <div style="font-size:0.875rem; color:var(--color-text-muted); margin-top:0.5rem;">Tier 2 Subscription</div>
+          </div>
+          <div class="summary-card">
+            <div class="sc-header">
+              <span>Included Swaps</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M16 3h5v5M4 21h5v-5M21 3l-7 7M3 21l7-7"></path></svg>
+            </div>
+            <div class="sc-value">2</div>
+            <div style="font-size:0.875rem; color:var(--color-text-muted); margin-top:0.5rem;">Remaining this year</div>
+          </div>
+          <div class="summary-card">
+            <div class="sc-header">
+              <span>Est. Upgrade</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            </div>
+            <div class="sc-value">+$500/mo</div>
+            <div style="font-size:0.875rem; color:var(--color-text-muted); margin-top:0.5rem;">To Performance Tier</div>
+          </div>
+          <div class="summary-card">
+            <div class="sc-header">
+              <span>Delivery Time</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            <div class="sc-value">24-48 Hrs</div>
+            <div style="font-size:0.875rem; color:var(--color-text-muted); margin-top:0.5rem;">Direct to your door</div>
+          </div>
+        </div>
+        
+        <div class="swap-compare">
+          <div class="widget">
+            <div class="eyebrow">Current</div>
+            <img src="https://images.unsplash.com/photo-1606152421802-db97b9c7a11b?q=80&w=400&auto=format&fit=crop" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px; margin-bottom:1rem;" alt="Current">
+            <h3 style="font-family:var(--font-heading);">Range Rover Velar</h3>
+            <p class="text-muted">$1,299 / month</p>
+          </div>
+          
+          <div class="swap-arrow">⇄</div>
+          
+          <div class="widget" style="border-color:var(--color-primary);">
+            <div class="eyebrow" style="color:var(--color-primary);">Available Replacement</div>
+            <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?q=80&w=400&auto=format&fit=crop" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px; margin-bottom:1rem;" alt="Replacement">
+            <h3 style="font-family:var(--font-heading);">Porsche 911</h3>
+            <p class="text-muted">Est. $2,499 / month</p>
+          </div>
+        </div>
+        
+        <div style="margin-top:3rem; text-align:center;">
+          <p style="margin-bottom:1rem; font-size:1.125rem;">You have <strong>3</strong> swaps remaining this year.</p>
+          <button class="btn btn-primary" onclick="openModal('swapModal')">Request This Swap</button>
+        </div>
+      </section>
+
+      <!-- BILLING SECTION -->
+      <section id="billing" class="dash-section">
+        <h2 style="font-family:var(--font-heading); margin-bottom:2rem;">Billing Management</h2>
+        
+        <div class="summary-grid">
+          <div class="summary-card">
+            <div class="sc-header">
+              <span>Next Payment</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+            </div>
+            <div class="sc-value">$1,299.00</div>
+            <div style="font-size:0.875rem; color:var(--color-text-muted); margin-top:0.5rem;">Due Oct 1, 2026</div>
+          </div>
+          <div class="summary-card">
+            <div class="sc-header">
+              <span>Auto-Pay</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <div class="sc-value">Enabled</div>
+            <div style="font-size:0.875rem; color:var(--color-text-muted); margin-top:0.5rem;">Visa ending in 4242</div>
+          </div>
+          <div class="summary-card">
+            <div class="sc-header">
+              <span>YTD Billed</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            </div>
+            <div class="sc-value">$11,691.00</div>
+            <div style="font-size:0.875rem; color:var(--color-text-muted); margin-top:0.5rem;">Last 9 months</div>
+          </div>
+          <div class="summary-card">
+            <div class="sc-header">
+              <span>Paperless</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </div>
+            <div class="sc-value">Active</div>
+            <div style="font-size:0.875rem; color:var(--color-text-muted); margin-top:0.5rem;">Digital invoices only</div>
+          </div>
+        </div>
+        
+        <div class="widget-grid">
+          <div class="widget">
+            <div class="eyebrow">Next Invoice</div>
+            <div style="font-size:3rem; font-family:var(--font-heading); color:var(--color-primary); margin:1rem 0;">$1,299.00</div>
+            <p class="text-muted">Scheduled for October 1, 2026</p>
+            <div style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center;">
+              <div style="display:flex; align-items:center; gap:0.5rem;">
+                <svg width="32" height="20" viewBox="0 0 32 20" fill="none"><rect width="32" height="20" rx="4" fill="#333"/><circle cx="10" cy="10" r="5" fill="#eb001b"/><circle cx="16" cy="10" r="5" fill="#f79e1b" style="mix-blend-mode:screen"/></svg>
+                <span>•••• 4242</span>
+              </div>
+              <button class="btn btn-secondary" style="padding:0.5rem 1rem;">Update</button>
+            </div>
+          </div>
+          
+          <div class="widget">
+            <h3 style="font-family:var(--font-heading); margin-bottom:1.5rem;">History</h3>
+            <ul style="list-style:none;">
+              <li style="display:flex; justify-content:space-between; padding:1rem 0; border-bottom:1px solid var(--color-border);">
+                <div>Sept 1, 2026</div><div>$1,299.00</div><div style="color:green;">Paid</div>
+              </li>
+              <li style="display:flex; justify-content:space-between; padding:1rem 0; border-bottom:1px solid var(--color-border);">
+                <div>Aug 1, 2026</div><div>$1,299.00</div><div style="color:green;">Paid</div>
+              </li>
+              <li style="display:flex; justify-content:space-between; padding:1rem 0;">
+                <div>Jul 1, 2026</div><div>$1,299.00</div><div style="color:green;">Paid</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- MAINTENANCE SECTION -->
+      <section id="maintenance" class="dash-section">
+        <h2 style="font-family:var(--font-heading); margin-bottom:2rem;">Schedule Maintenance</h2>
+        
+        <div class="summary-grid">
+          <div class="summary-card">
+            <div class="sc-header">
+              <span>Next Service</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+            </div>
+            <div class="sc-value">2,500 Mi</div>
+            <div style="font-size:0.875rem; color:var(--color-text-muted); margin-top:0.5rem;">Or 4 months away</div>
+          </div>
+          <div class="summary-card">
+            <div class="sc-header">
+              <span>Tire Health</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle></svg>
+            </div>
+            <div class="sc-value">Excellent</div>
+            <div style="font-size:0.875rem; color:var(--color-text-muted); margin-top:0.5rem;">Rotated recently</div>
+          </div>
+          <div class="summary-card">
+            <div class="sc-header">
+              <span>Coverage</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <div class="sc-value">100%</div>
+            <div style="font-size:0.875rem; color:var(--color-text-muted); margin-top:0.5rem;">All maintenance included</div>
+          </div>
+          <div class="summary-card">
+            <div class="sc-header">
+              <span>Loaner Car</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <div class="sc-value">Guaranteed</div>
+            <div style="font-size:0.875rem; color:var(--color-text-muted); margin-top:0.5rem;">During all services</div>
+          </div>
+        </div>
+        
+        <div class="widget" style="max-width: 600px;">
+          <form id="maintForm">
+            <div class="form-group">
+              <label class="form-label">Service Type</label>
+              <select class="form-control">
+                <option>Routine Maintenance (Oil/Fluids)</option>
+                <option>Tire Service</option>
+                <option>Issue/Repair</option>
+                <option>Detailing</option>
+              </select>
+            </div>
+            
+            <div class="form-row custom-form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1.5rem;">
+              <div>
+                <label class="form-label">Preferred Date</label>
+                <input type="date" class="form-control" required>
+              </div>
+              <div>
+                <label class="form-label">Preferred Time</label>
+                <select class="form-control">
+                  <option>Morning (8AM - 12PM)</option>
+                  <option>Afternoon (12PM - 4PM)</option>
+                  <option>Evening (4PM - 7PM)</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Additional Notes</label>
+              <textarea class="form-control" style="min-height:80px;"></textarea>
+            </div>
+            
+            <button id="btnScheduleMaint" class="btn btn-primary">Request Schedule</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- HISTORY SECTION -->
+      <section id="history" class="dash-section">
+        <h2 style="font-family:var(--font-heading); margin-bottom:2rem;">Account History</h2>
+        
+        <div class="summary-grid">
+          <div class="summary-card">
+            <div class="sc-header">
+              <span>Total Swaps</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M16 3h5v5M4 21h5v-5M21 3l-7 7M3 21l7-7"></path></svg>
+            </div>
+            <div class="sc-value">3</div>
+            <div style="font-size:0.875rem; color:var(--color-text-muted); margin-top:0.5rem;">Since Jan 2026</div>
+          </div>
+          <div class="summary-card">
+            <div class="sc-header">
+              <span>Active Months</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            <div class="sc-value">9</div>
+            <div style="font-size:0.875rem; color:var(--color-text-muted); margin-top:0.5rem;">Continuous Membership</div>
+          </div>
+          <div class="summary-card">
+            <div class="sc-header">
+              <span>Total Miles</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg>
+            </div>
+            <div class="sc-value">12,500</div>
+            <div style="font-size:0.875rem; color:var(--color-text-muted); margin-top:0.5rem;">Across all vehicles</div>
+          </div>
+          <div class="summary-card">
+            <div class="sc-header">
+              <span>Services</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+            </div>
+            <div class="sc-value">2</div>
+            <div style="font-size:0.875rem; color:var(--color-text-muted); margin-top:0.5rem;">Completed to date</div>
+          </div>
+        </div>
+        
+        <div class="widget" style="max-width: 600px;">
+          <div class="history-timeline">
+            
+            <div class="h-item">
+              <div class="h-dot"></div>
+              <div class="h-date">September 15, 2026</div>
+              <h4 style="margin-bottom:0.25rem;">Tire Rotation Completed</h4>
+              <p class="text-muted" style="font-size:0.875rem;">Vehicle serviced at 10,000 miles.</p>
+            </div>
+            
+            <div class="h-item">
+              <div class="h-dot"></div>
+              <div class="h-date">May 1, 2026</div>
+              <h4 style="margin-bottom:0.25rem;">Vehicle Swap Executed</h4>
+              <p class="text-muted" style="font-size:0.875rem;">Swapped BMW 5 Series for Range Rover Velar.</p>
+            </div>
+            
+            <div class="h-item">
+              <div class="h-dot"></div>
+              <div class="h-date">Jan 10, 2026</div>
+              <h4 style="margin-bottom:0.25rem;">Subscription Started</h4>
+              <p class="text-muted" style="font-size:0.875rem;">Received BMW 5 Series via concierge delivery.</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Modals -->
+  
+  <!-- Swap Modal -->
+  <div class="modal-overlay" id="swapModal">
+    <div class="modal-content text-center">
+      <h2 style="font-family:var(--font-heading); margin-bottom:1rem;">Confirm Vehicle Swap</h2>
+      <p class="text-muted" style="margin-bottom:2rem;">You are about to request a swap from the Range Rover Velar to the Porsche 911. Your estimated new monthly rate will be $2,499. Are you sure you want to proceed?</p>
+      <div class="btn-group">
+        <button class="btn btn-secondary" onclick="closeModal('swapModal')">Cancel</button>
+        <button class="btn btn-primary" id="btnConfirmSwap">Confirm Request</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Maint Modal -->
+  <div class="modal-overlay" id="maintModal">
+    <div class="modal-content text-center">
+      <div style="width:60px; height:60px; background:rgba(76,175,80,0.1); color:#2e7d32; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1.5rem;">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <h2 style="font-family:var(--font-heading); margin-bottom:1rem;">Request Submitted</h2>
+      <p class="text-muted" style="margin-bottom:2rem;">We have received your maintenance request. A concierge agent will contact you shortly to confirm the pickup details.</p>
+      <button class="btn btn-primary" onclick="closeModal('maintModal')">Done</button>
+    </div>
+  </div>
+
+  <!-- Logout Modal -->
+  <div class="modal-overlay" id="logoutModal">
+    <div class="modal-content text-center">
+      <h2 style="font-family:var(--font-heading); margin-bottom:1rem;">Ready to leave?</h2>
+      <p class="text-muted" style="margin-bottom:2rem;">Are you sure you want to log out of your subscriber dashboard?</p>
+      <div class="btn-group">
+        <button class="btn btn-secondary" onclick="closeModal('logoutModal')">Cancel</button>
+        <a href="index.html" class="btn btn-primary" style="background:#d32f2f;">Logout</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/dashboard.js"></script>
+  <!-- Use main.js for theme/RTL toggles -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
