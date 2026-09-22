@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ORVEXA — Services</title>
+  <title>Services</title>
   <meta name="description" content="Discover the complete suite of ORVEXA services including maintenance, swaps, and mileage management.">
   <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="icon" type="image/svg+xml" href="assets/brand-mark.svg">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <style>
     /* Section 1: Subscription Management */
     .service-hero {
@@ -96,18 +96,22 @@
       gap: 2rem;
     }
     .m-feature {
-      padding: 2rem;
       background: var(--color-bg);
       border-radius: 12px;
       border: 1px solid var(--color-border);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
-    .m-icon {
-      width: 50px; height: 50px;
-      background: var(--color-primary-muted);
-      color: var(--color-primary);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1rem;
+    .m-feature img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+    .m-feature-content {
+      padding: 2rem;
+      flex: 1;
     }
 
     /* Section 4: Mileage & Billing */
@@ -285,32 +289,32 @@
       </div>
       <div class="maint-features fade-up" style="transition-delay:0.2s;">
         <div class="m-feature">
-          <div class="m-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          <img src="assets/images/Routine Service.png" alt="Routine Service">
+          <div class="m-feature-content">
+            <h4>Routine Service</h4>
+            <p class="text-muted" style="font-size:0.875rem; margin-top:0.5rem;">Oil changes, fluids, and multipoint inspections handled automatically.</p>
           </div>
-          <h4>Routine Service</h4>
-          <p class="text-muted" style="font-size:0.875rem; margin-top:0.5rem;">Oil changes, fluids, and multipoint inspections handled automatically.</p>
         </div>
         <div class="m-feature">
-          <div class="m-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+          <img src="assets/images/Tires & Wear.png" alt="Tires & Wear">
+          <div class="m-feature-content">
+            <h4>Tires & Wear</h4>
+            <p class="text-muted" style="font-size:0.875rem; margin-top:0.5rem;">Brakes, wipers, and seasonal tire swaps are completely covered.</p>
           </div>
-          <h4>Tires & Wear</h4>
-          <p class="text-muted" style="font-size:0.875rem; margin-top:0.5rem;">Brakes, wipers, and seasonal tire swaps are completely covered.</p>
         </div>
         <div class="m-feature">
-          <div class="m-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M2.13 15.57a10 10 0 1 0 5.43-11.45l-5.43 5.43"></path></svg>
+          <img src="assets/images/Concierge Pickup.png" alt="Concierge Pickup">
+          <div class="m-feature-content">
+            <h4>Concierge Pickup</h4>
+            <p class="text-muted" style="font-size:0.875rem; margin-top:0.5rem;">We pick up your car for service and leave you with a premium loaner.</p>
           </div>
-          <h4>Concierge Pickup</h4>
-          <p class="text-muted" style="font-size:0.875rem; margin-top:0.5rem;">We pick up your car for service and leave you with a premium loaner.</p>
         </div>
         <div class="m-feature">
-          <div class="m-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <img src="assets/images/24 7 Roadside.png" alt="24/7 Roadside">
+          <div class="m-feature-content">
+            <h4>24/7 Roadside</h4>
+            <p class="text-muted" style="font-size:0.875rem; margin-top:0.5rem;">Immediate assistance across the nation, included at no extra cost.</p>
           </div>
-          <h4>24/7 Roadside</h4>
-          <p class="text-muted" style="font-size:0.875rem; margin-top:0.5rem;">Immediate assistance across the nation, included at no extra cost.</p>
         </div>
       </div>
     </div>

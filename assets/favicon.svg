@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 15 95 70" fill="none" width="100" height="100">
+  <path d="M 10 55 L 30 25 L 60 25 L 70 40 L 50 75 Z" fill="#F26A21" />
+  <path d="M 35 75 L 55 40 L 85 40 L 75 75 Z" fill="#111111" opacity="0.8" />
+  <style>
+    @media (prefers-color-scheme: dark) {
+      path:nth-of-type(2) { fill: #FFFFFF; }
+    }
+  </style>
+</svg>

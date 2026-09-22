@@ -38,6 +38,10 @@
   --shadow-lg: 0 20px 40px rgba(0,0,0,0.6);
 }
 
+[data-theme="dark"] img[src*="brand-mark.svg"] {
+  content: url("../brand-mark-dark.svg");
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -107,7 +111,7 @@ img, svg {
 }
 
 section {
-  padding: 8rem 0;
+  padding: 4rem 0;
   position: relative;
 }
 
@@ -394,7 +398,7 @@ section {
 /* Footer */
 .footer {
   background-color: var(--color-surface);
-  padding: 6rem 0 2rem;
+  padding: 3rem 0 2rem;
   border-top: 1px solid var(--color-border);
 }
 
@@ -620,7 +624,21 @@ section {
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 
+.section-header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3rem;
+}
+
 @media (max-width: 768px) {
+  .section-header-flex {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
   /* Prevent buttons from wrapping */
   .btn { white-space: nowrap; }
   
@@ -661,7 +679,7 @@ section {
   .grid-3 .card:last-child { grid-column: span 1; max-width: 100%; }
   
   .heading-xl { font-size: 2.5rem; }
-  section { padding: 4rem 0; }
+  section { padding: 2.5rem 0; }
   
   .footer-grid { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
   .footer-links { align-items: center; }

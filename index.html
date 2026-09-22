@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ORVEXA — Flexible Car Subscription & Leasing</title>
+  <title>Flexible Car Subscription & Leasing</title>
   <meta name="description" content="Premium cars, flexible monthly subscriptions, and the freedom to change your vehicle when life changes.">
   <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="icon" type="image/svg+xml" href="assets/brand-mark.svg">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <style>
     /* Hero Section */
     .hero {
@@ -165,20 +165,32 @@
     .cta-section p { font-size: 1.25rem; margin-bottom: 3rem; opacity: 0.9; }
 
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
+      .hero { height: auto; padding: 180px 0 100px 0; }
       .hero-content {
         text-align: center;
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin: 0 auto;
       }
       .hero-desc, .hero-content .eyebrow {
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
       }
+      .hero-glass-card { 
+        position: relative; 
+        bottom: auto; 
+        right: auto; 
+        width: 100%; 
+        max-width: 450px;
+        margin: 3rem auto 0 auto; 
+      }
+    }
+    @media (max-width: 768px) {
       .comparison-wrapper { flex-direction: column; }
-      .hero-glass-card { position: relative; bottom: 0; right: 0; width: 100%; margin-top: 2rem; }
+      .hero-glass-card { max-width: 100%; margin-top: 2rem; }
       .fleet-card { flex: 0 0 calc((100% - 2rem) / 2); }
       .stats-layout { grid-template-columns: 1fr; }
       .flex-engine { height: 400px; }
@@ -336,7 +348,7 @@
   <!-- SECTION 3: FEATURED FLEET -->
   <section style="background-color: var(--color-surface); margin-top:6rem; overflow:hidden;">
     <div class="container">
-      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3rem;" class="fade-up">
+      <div class="section-header-flex fade-up">
         <div>
           <span class="eyebrow">Our Vehicles</span>
           <h2 class="heading-lg">Featured Fleet</h2>
