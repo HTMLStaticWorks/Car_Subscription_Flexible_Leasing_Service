@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
@@ -8,36 +8,247 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <style>
-    /* Section 1: Philosophy */
+    /* Section 1: Philosophy & Hero */
     .about-hero {
-      padding: 12rem 0 0;
+      padding: 9.5rem 0 5.5rem;
       background: var(--color-bg);
       text-align: center;
       position: relative;
     }
-    .about-hero h1 { font-size: clamp(3rem, 6vw, 5rem); margin-bottom: 2rem; max-width: 900px; margin-left: auto; margin-right: auto; }
+    .about-hero h1 { font-size: clamp(2.75rem, 5vw, 4.5rem); margin-bottom: 1.5rem; max-width: 900px; margin-left: auto; margin-right: auto; line-height: 1.15; }
+    
     .hero-img-banner {
-      width: 100%; height: 500px;
-      margin-top: 4rem;
-      background: url('assets/images/about.png') center/cover;
+      width: 100%; height: 520px;
+      margin: 0;
+      background: url('assets/images/about_hero_handover.jpg') center 40%/cover no-repeat;
       border-radius: 20px;
       box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+    }
+    .hero-img-caption {
+      position: absolute;
+      bottom: 2rem;
+      left: 2rem;
+      background: rgba(17, 17, 17, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      max-width: 420px;
+      text-align: left;
+      font-size: 0.875rem;
+      z-index: 2;
+    }
+
+    /* Business Explanation Section */
+    .business-section {
+      padding: 5rem 0 6rem;
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .business-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    /* Why Choose Us Section */
+    .why-section {
+      padding: 7rem 0;
+      background: var(--color-bg);
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3.5rem;
+    }
+    .why-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      overflow: hidden;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+    }
+    .why-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(242, 106, 33, 0.4);
+    }
+    .why-card-img {
+      width: 100%;
+      height: 210px;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      display: block;
+      background-color: var(--color-surface);
+    }
+    .why-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      margin: 0;
+      padding: 0;
+      transition: transform var(--transition-slow);
+    }
+    .why-card:hover .why-card-img img {
+      transform: scale(1.05);
+    }
+    .why-card-body {
+      padding: 1.75rem 1.6rem 2rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .why-card-body h3 {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      margin-bottom: 0.75rem;
+      color: var(--color-text);
+    }
+    .why-card-body p {
+      color: var(--color-text-muted);
+      font-size: 0.925rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Subscription Process Timeline */
+    .process-section {
+      padding: 7rem 0;
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .process-timeline {
+      position: relative;
+      max-width: 920px;
+      margin: 4.5rem auto 0;
+      padding: 1.5rem 0;
+    }
+    .process-timeline-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background-color: var(--color-border);
+      transform: translateX(-50%);
+    }
+    .process-timeline-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-bottom: 3.5rem;
+      width: 100%;
+    }
+    .process-timeline-item:last-child {
+      margin-bottom: 0;
+    }
+    .process-timeline-item.step-left {
+      justify-content: flex-start;
+    }
+    .process-timeline-item.step-right {
+      justify-content: flex-end;
+    }
+    .process-timeline-item .step-card {
+      width: 44%;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 2.25rem 2rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+      position: relative;
+      box-sizing: border-box;
+    }
+    .process-timeline-item .step-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-primary);
+    }
+    .process-timeline-dot {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      background-color: var(--color-primary);
+      border-radius: 50%;
+      border: 4px solid var(--color-surface);
+      box-shadow: 0 0 10px rgba(242, 106, 33, 0.45);
+      z-index: 2;
+    }
+    .step-number {
+      font-size: 2.25rem;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      color: var(--color-primary);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Services Breakdown */
+    .services-breakdown-section {
+      padding: 7rem 0;
+      background: var(--color-bg);
+    }
+    .services-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3.5rem;
+    }
+    .service-box {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .service-badge {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 0.25rem 0.75rem;
+      background: var(--color-primary-muted);
+      color: var(--color-primary);
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     /* Section 2: Approach */
     .approach-section {
-      padding: 8rem 0;
+      padding: 7rem 0;
       background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
     }
     .approach-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 4rem;
+      gap: 3rem;
     }
     .approach-item {
       padding: 0;
       background: var(--color-bg);
-      border-radius: 12px;
+      border-radius: 16px;
       border: 1px solid var(--color-border);
       transition: transform 0.3s;
       overflow: hidden;
@@ -49,65 +260,11 @@
       display: block;
     }
     .approach-content {
-      padding: 3rem;
+      padding: 2.5rem;
     }
     .approach-item:hover { transform: translateY(-5px); border-color: var(--color-primary); }
     .approach-item h3 { font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 1rem; color: var(--color-primary); }
 
-    /* Section 3: Mobility Ecosystem */
-    .ecosystem-section {
-      padding: 8rem 0;
-      background: var(--color-bg);
-      text-align: center;
-    }
-    .eco-diagram {
-      position: relative;
-      max-width: 800px;
-      margin: 4rem auto;
-      height: 600px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .eco-center {
-      width: 150px; height: 150px;
-      background: var(--color-primary);
-      color: #fff;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700;
-      z-index: 2;
-      box-shadow: 0 0 40px rgba(242,106,33,0.4);
-    }
-    .eco-node {
-      position: absolute;
-      width: 120px; height: 120px;
-      background: var(--color-surface);
-      border: 2px solid var(--color-border);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; text-align: center;
-      font-weight: 600; font-size: 0.875rem;
-      z-index: 2;
-      transition: all 0.3s;
-    }
-    .eco-node:hover { border-color: var(--color-primary); transform: scale(1.1); color: var(--color-primary); }
-    
-    /* Nodes positioning (Circle) */
-    .eco-node:nth-child(2) { top: 0; left: 50%; transform: translateX(-50%); } /* Vehicle */
-    .eco-node:nth-child(3) { top: 50%; right: 0; transform: translateY(-50%); } /* Subscription */
-    .eco-node:nth-child(4) { bottom: 0; left: 50%; transform: translateX(-50%); } /* Maintenance */
-    .eco-node:nth-child(5) { top: 50%; left: 0; transform: translateY(-50%); } /* Support */
-    
-    .eco-lines {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 400px; height: 400px;
-      border: 1px dashed var(--color-border);
-      border-radius: 50%;
-      z-index: 1;
-      animation: spin 60s linear infinite;
-    }
 
     /* Section 4: CTA */
     .about-cta {
@@ -116,17 +273,22 @@
       color: #fff;
       text-align: center;
     }
-    .about-cta h2 { font-size: 4rem; margin-bottom: 2rem; }
+    .about-cta h2 { font-size: clamp(2.5rem, 4vw, 4rem); margin-bottom: 1.5rem; }
+
+    @media (max-width: 1024px) {
+      .why-grid, .services-cards-grid { grid-template-columns: repeat(2, 1fr); }
+      .business-grid { grid-template-columns: 1fr; }
+    }
 
     @media (max-width: 768px) {
-      .approach-grid { gap: 2rem; }
-      .eco-diagram { height: 400px; }
-      .eco-node { width: 90px; height: 90px; font-size: 0.75rem; }
-      .eco-lines { width: 250px; height: 250px; }
-      .hero-img-banner { height: 300px; }
-    }
-    @media (max-width: 576px) {
-      .approach-grid { grid-template-columns: 1fr; }
+      .approach-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .why-grid, .services-cards-grid { grid-template-columns: 1fr; }
+      .process-timeline-line { left: 20px; transform: none; }
+      .process-timeline-item { justify-content: flex-start !important; padding-left: 50px; box-sizing: border-box; margin-bottom: 2.5rem; }
+      .process-timeline-item .step-card { width: 100%; padding: 1.75rem 1.5rem; }
+      .process-timeline-dot { left: 20px; transform: translate(-50%, -50%); }
+      .hero-img-banner { height: 350px; }
+      .hero-img-caption { display: none; }
     }
   </style>
 </head>
@@ -199,53 +361,280 @@
   </div>
   <div class="overlay" id="overlay"></div>
 
-  <!-- Section 1: Philosophy -->
+  <!-- Section 1: Philosophy & Hero -->
   <header class="about-hero fade-up">
     <div class="container">
-      <span class="eyebrow">Our Philosophy</span>
+      <span class="eyebrow">Redefining Automotive Freedom</span>
       <h1>Cars should adapt to people, not the other way around.</h1>
-      <p style="font-size: 1.25rem; max-width: 600px; margin: 0 auto; color: var(--color-text-muted);">
-        For too long, getting a car meant getting tied down. We built ORVEXA to decouple the joy of driving from the burden of ownership.
+      <p style="font-size: 1.25rem; max-width: 680px; margin: 0 auto; color: var(--color-text-muted); line-height: 1.7;">
+        For decades, getting behind the wheel meant long 5-year loans, painful depreciation, dealership haggling, and hidden maintenance costs. <strong>ORVEXA</strong> decouples the pure joy of driving from the heavy burdens of ownership.
       </p>
     </div>
   </header>
 
-  <!-- Section 2: Approach -->
-  <section class="approach-section">
-    <div class="container">
-      <div class="hero-img-banner fade-up" style="margin-top: 0; margin-bottom: 6rem;"></div>
+  <!-- Section 2: The Car Subscription Business Model -->
+  <section class="business-section fade-up">
+    <div class="container" style="margin-bottom: 5rem;">
+      <div class="hero-img-banner">
+        <img src="assets/images/about_hero_handover.jpg" alt="ORVEXA Concierge Handover" style="width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block;">
+        <div class="hero-img-caption">
+          <div style="font-weight:700; color:#fff; font-size:1rem; margin-bottom:0.25rem;">ORVEXA Concierge Handover</div>
+          <div>All-inclusive vehicle subscription delivered right to your home with zero paperwork.</div>
+        </div>
+      </div>
     </div>
+    <div class="container">
+      <div class="business-grid">
+        <div>
+          <span class="eyebrow">The Business Model</span>
+          <h2 class="heading-md" style="margin-bottom:1.5rem;">What is a Car Subscription?</h2>
+          <p class="text-muted" style="margin-bottom:1.25rem; font-size:1.05rem;">
+            A car subscription is the modern bridge between inflexible multi-year leasing and expensive short-term car rentals. Instead of buying a car and worrying about financing interest, rapid depreciation, insurance premiums, and unpredictable repairs, you pay one predictable monthly fee.
+          </p>
+          <p class="text-muted" style="margin-bottom:1.75rem; font-size:1.05rem;">
+            Whether you need an electric vehicle for 3 months, a luxury sedan for 6 months, or wish to swap into a mountain-ready SUV for the winter ski season, ORVEXA puts your entire garage in your pocket.
+          </p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
+            <div style="background:var(--color-bg); padding:1.25rem; border-radius:10px; border:1px solid var(--color-border);">
+              <div style="font-weight:700; color:var(--color-primary); font-size:1.5rem;">1 - 24 Mo</div>
+              <div style="font-size:0.875rem; color:var(--color-text-muted);">Flexible Terms (Min 30 Days)</div>
+            </div>
+            <div style="background:var(--color-bg); padding:1.25rem; border-radius:10px; border:1px solid var(--color-border);">
+              <div style="font-weight:700; color:var(--color-primary); font-size:1.5rem;">$0 Down</div>
+              <div style="font-size:0.875rem; color:var(--color-text-muted);">Zero Capital Down Payment</div>
+            </div>
+          </div>
+        </div>
+        <div style="background:var(--color-bg); border:1px solid var(--color-border); border-radius:16px; padding:2.5rem;">
+          <h3 style="font-size:1.5rem; margin-bottom:1.5rem;">Everything Included in One Price</h3>
+          <ul style="display:flex; flex-direction:column; gap:1rem;">
+            <li style="display:flex; align-items:center; gap:0.75rem;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>Comprehensive Insurance Coverage:</strong> Collision, liability & zero deductible options.</span>
+            </li>
+            <li style="display:flex; align-items:center; gap:0.75rem;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>100% Maintenance & Routine Service:</strong> Factory scheduled service, oil, and brake pads.</span>
+            </li>
+            <li style="display:flex; align-items:center; gap:0.75rem;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>Tires & Normal Wear:</strong> Seasonal tire changes, rotations, and wear replacements.</span>
+            </li>
+            <li style="display:flex; align-items:center; gap:0.75rem;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>24/7 Nationwide Roadside Assistance:</strong> Towing, flat-tire rescue, and lock-out service.</span>
+            </li>
+            <li style="display:flex; align-items:center; gap:0.75rem;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>White-Glove Doorstep Delivery:</strong> Handed over detailed and fully prepped in 48 hours.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: WHY CHOOSE US (Highlighting Key Benefits) -->
+  <section class="why-section fade-up">
+    <div class="container">
+      <div class="text-center" style="max-width:700px; margin:0 auto;">
+        <span class="eyebrow">The ORVEXA Value Proposition</span>
+        <h2 class="heading-lg">Why Choose Us?</h2>
+        <p class="text-muted">Designed from the ground up for modern urban professionals, executives, and families seeking premium mobility without financial lock-in.</p>
+      </div>
+
+      <div class="why-grid">
+        <!-- Benefit 1 -->
+        <div class="why-card">
+          <div class="why-card-img">
+            <img src="assets/images/$0 Capital Down.png" alt="$0 Capital Down" loading="lazy">
+          </div>
+          <div class="why-card-body">
+            <h3>$0 Capital Down</h3>
+            <p>Avoid tying up $5,000 to $10,000 in heavy down payments. Keep your money invested in your business or savings while driving brand new premium models.</p>
+          </div>
+        </div>
+
+        <!-- Benefit 2 -->
+        <div class="why-card">
+          <div class="why-card-img">
+            <img src="assets/images/Switch Cars Anytime.png" alt="Switch Cars Anytime" loading="lazy">
+          </div>
+          <div class="why-card-body">
+            <h3>Switch Cars Anytime</h3>
+            <p>Need an agile electric sedan for city commutes, a convertible for summer, or a 7-seat SUV for a family road trip? Swap between categories directly in your app.</p>
+          </div>
+        </div>
+
+        <!-- Benefit 3 -->
+        <div class="why-card">
+          <div class="why-card-img">
+            <img src="assets/images/Zero Maintenance Anxiety.png" alt="Zero Maintenance Anxiety" loading="lazy">
+          </div>
+          <div class="why-card-body">
+            <h3>Zero Maintenance Anxiety</h3>
+            <p>No unexpected $1,500 repair bills or dealer service negotiations. Routine service, brakes, fluids, multipoint checks, and tire wear are 100% covered by ORVEXA.</p>
+          </div>
+        </div>
+
+        <!-- Benefit 4 -->
+        <div class="why-card">
+          <div class="why-card-img">
+            <img src="assets/images/Included Insurance &amp; Shield.png" alt="Included Insurance &amp; Shield" loading="lazy">
+          </div>
+          <div class="why-card-body">
+            <h3>Included Insurance &amp; Shield</h3>
+            <p>Enjoy comprehensive liability and collision insurance built into every subscription tier. No shopping around for third-party auto policies or surprise rate spikes.</p>
+          </div>
+        </div>
+
+        <!-- Benefit 5 -->
+        <div class="why-card">
+          <div class="why-card-img">
+            <img src="assets/images/100%25 Digital &amp; Paperless.png" alt="100% Digital &amp; Paperless" loading="lazy">
+          </div>
+          <div class="why-card-body">
+            <h3>100% Digital &amp; Paperless</h3>
+            <p>Sign up, upload your driver's license, select your car, and schedule delivery in less than 5 minutes from your smartphone or laptop. Zero dealership visits.</p>
+          </div>
+        </div>
+
+        <!-- Benefit 6 -->
+        <div class="why-card">
+          <div class="why-card-img">
+            <img src="assets/images/Cancel or Pause Without Penalty.png" alt="Cancel or Pause Without Penalty" loading="lazy">
+          </div>
+          <div class="why-card-body">
+            <h3>Cancel or Pause Without Penalty</h3>
+            <p>Life changes fast. Once your initial minimum term (as little as 30 days) is completed, you can pause, swap, renew, or return your vehicle with simple 14-day notice.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: THE SUBSCRIPTION PROCESS -->
+  <section class="process-section fade-up">
+    <div class="container">
+      <div class="text-center" style="max-width:700px; margin:0 auto;">
+        <span class="eyebrow">Clear User Journey</span>
+        <h2 class="heading-lg">How the Subscription Process Works</h2>
+        <p class="text-muted">A clear, friction-free 4-step journey to getting your keys delivered in 48 hours.</p>
+      </div>
+
+      <div class="process-timeline">
+        <div class="process-timeline-line"></div>
+
+        <!-- Step 1: Left -->
+        <div class="process-timeline-item step-left fade-up">
+          <div class="step-card">
+            <div class="step-number">01</div>
+            <h3 style="font-size:1.3rem; margin-bottom:0.75rem;">Choose Vehicle & Plan</h3>
+            <p class="text-muted" style="font-size:0.9rem; line-height: 1.6;">Browse our curated fleet of luxury sedans, SUVs, and EVs. Choose your lease duration (1, 3, 6, or 12+ months) and monthly mileage allowance (1,000 to 2,000+ mi).</p>
+          </div>
+          <div class="process-timeline-dot"></div>
+        </div>
+
+        <!-- Step 2: Right -->
+        <div class="process-timeline-item step-right fade-up">
+          <div class="process-timeline-dot"></div>
+          <div class="step-card">
+            <div class="step-number">02</div>
+            <h3 style="font-size:1.3rem; margin-bottom:0.75rem;">Fast 2-Min Approval</h3>
+            <p class="text-muted" style="font-size:0.9rem; line-height: 1.6;">Submit your driver's license and payment method. Our automated system performs a soft verification in seconds without impacting your credit score.</p>
+          </div>
+        </div>
+
+        <!-- Step 3: Left -->
+        <div class="process-timeline-item step-left fade-up">
+          <div class="step-card">
+            <div class="step-number">03</div>
+            <h3 style="font-size:1.3rem; margin-bottom:0.75rem;">White-Glove Delivery</h3>
+            <p class="text-muted" style="font-size:0.9rem; line-height: 1.6;">A certified concierge delivers your freshly detailed vehicle straight to your home, office, or airport terminal with a full tank or charge in as little as 48 hours.</p>
+          </div>
+          <div class="process-timeline-dot"></div>
+        </div>
+
+        <!-- Step 4: Right -->
+        <div class="process-timeline-item step-right fade-up">
+          <div class="process-timeline-dot"></div>
+          <div class="step-card">
+            <div class="step-number">04</div>
+            <h3 style="font-size:1.3rem; margin-bottom:0.75rem;">Drive, Swap, or Renew</h3>
+            <p class="text-muted" style="font-size:0.9rem; line-height: 1.6;">Track your mileage in real-time, book routine servicing, or request a vehicle swap directly from your digital subscriber portal whenever life demands a change.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: COMPREHENSIVE AVAILABLE SERVICES -->
+  <section class="services-breakdown-section fade-up">
+    <div class="container">
+      <div class="text-center" style="max-width:700px; margin:0 auto;">
+        <span class="eyebrow">Our Mobility Solutions</span>
+        <h2 class="heading-lg">Available Services & Programs</h2>
+        <p class="text-muted">Tailored flexible mobility plans to suit personal, family, and executive lifestyles.</p>
+      </div>
+
+      <div class="services-cards-grid">
+        <div class="service-box">
+          <span class="service-badge">Personal Mobility</span>
+          <h3 style="font-size:1.35rem; margin-bottom:0.75rem;">Flexible Personal Subscriptions</h3>
+          <p class="text-muted" style="font-size:0.925rem; margin-bottom:1.5rem;">For individuals who desire top-tier vehicles without long-term debt. Choose from 1 to 24 months with transparent monthly pricing.</p>
+          <a href="fleet.html" class="btn btn-secondary" style="margin-top:auto; padding:0.6rem 1rem; font-size:0.875rem;">Explore Personal Fleet</a>
+        </div>
+
+        <div class="service-box">
+          <span class="service-badge">Corporate Mobility</span>
+          <h3 style="font-size:1.35rem; margin-bottom:0.75rem;">Executive & Business Fleets</h3>
+          <p class="text-muted" style="font-size:0.925rem; margin-bottom:1.5rem;">Equip your leadership and team with flexible corporate vehicles. Tax-deductible operational expense with no balance sheet debt.</p>
+          <a href="contact.html" class="btn btn-secondary" style="margin-top:auto; padding:0.6rem 1rem; font-size:0.875rem;">Corporate Inquiries</a>
+        </div>
+
+        <div class="service-box">
+          <span class="service-badge">Lifestyle Dynamic</span>
+          <h3 style="font-size:1.35rem; margin-bottom:0.75rem;">Seasonal Vehicle Swapping</h3>
+          <p class="text-muted" style="font-size:0.925rem; margin-bottom:1.5rem;">Switch between vehicle body styles up to 4 times a year. Drive an electric fastback for work and a Range Rover for winter holidays.</p>
+          <a href="services.html" class="btn btn-secondary" style="margin-top:auto; padding:0.6rem 1rem; font-size:0.875rem;">Learn About Swaps</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Approach -->
+  <section class="approach-section">
     <div class="container">
       <div class="text-center fade-up" style="margin-bottom: 4rem;">
         <span class="eyebrow">The Method</span>
-        <h2 class="heading-lg">Our Approach.</h2>
+        <h2 class="heading-lg">Our Operating Principles.</h2>
       </div>
       <div class="approach-grid fade-up">
         <div class="approach-item">
           <img src="assets/images/Technology.png" alt="Technology" class="approach-img">
           <div class="approach-content">
-            <h3>Technology</h3>
+            <h3>Technology First</h3>
             <p class="text-muted">We replaced dealerships with a seamless digital platform. From application to vehicle swap scheduling, everything is handled through our proprietary software infrastructure, ensuring speed and reliability.</p>
           </div>
         </div>
         <div class="approach-item">
           <img src="assets/images/Transparency.png" alt="Transparency" class="approach-img">
           <div class="approach-content">
-            <h3>Transparency</h3>
+            <h3>Total Transparency</h3>
             <p class="text-muted">No hidden fees, no surprise depreciation, and no ambiguous lease return costs. Our pricing is upfront, and what you see is exactly what you pay for the entire duration of your term.</p>
           </div>
         </div>
         <div class="approach-item">
           <img src="assets/images/Flexibility.png" alt="Flexibility" class="approach-img">
           <div class="approach-content">
-            <h3>Flexibility</h3>
+            <h3>True Flexibility</h3>
             <p class="text-muted">We recognize that life is dynamic. By offering monthly commitments and mid-term vehicle swaps, we ensure that the car you drive always perfectly matches your current lifestyle needs.</p>
           </div>
         </div>
         <div class="approach-item">
           <img src="assets/images/Customer Experience.png" alt="Customer Experience" class="approach-img" style="object-position: center 35%;">
           <div class="approach-content">
-            <h3>Customer Experience</h3>
+            <h3>White-Glove Hospitality</h3>
             <p class="text-muted">Every touchpoint is designed to feel premium. From white-glove concierge delivery to instant roadside assistance, we prioritize your time and comfort above all else.</p>
           </div>
         </div>
@@ -253,31 +642,16 @@
     </div>
   </section>
 
-  <!-- Section 3: Ecosystem -->
-  <section class="ecosystem-section">
-    <div class="container">
-      <div class="fade-up">
-        <span class="eyebrow">The Infrastructure</span>
-        <h2 class="heading-lg">An Interconnected Ecosystem.</h2>
-      </div>
-      
-      <div class="eco-diagram fade-up">
-        <div class="eco-center">Customer</div>
-        <div class="eco-node">Vehicle</div>
-        <div class="eco-node">Subscription</div>
-        <div class="eco-node">Maintenance</div>
-        <div class="eco-node">Support</div>
-        <div class="eco-lines"></div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Section 4: CTA -->
+  <!-- Section 8: CTA -->
   <section class="about-cta fade-up">
     <div class="container">
-      <h2>Move differently.</h2>
-      <p style="font-size: 1.25rem; margin-bottom: 3rem; opacity: 0.9;">Join the next generation of drivers who refuse to compromise.</p>
-      <a href="register.html" class="btn btn-primary" style="padding: 1.5rem 3rem; font-size: 1.25rem;">Start Your Journey</a>
+      <h2>Move differently with ORVEXA.</h2>
+      <p style="font-size: 1.25rem; margin-bottom: 3rem; opacity: 0.9;">Join thousands of modern drivers who have traded depreciation for subscription freedom.</p>
+      <div class="btn-group">
+        <a href="fleet.html" class="btn btn-primary" style="padding: 1.25rem 2.5rem; font-size: 1.15rem;">Browse Subscription Fleet</a>
+        <a href="pricing.html" class="btn btn-glass" style="padding: 1.25rem 2.5rem; font-size: 1.15rem;">Compare Monthly Plans</a>
+      </div>
     </div>
   </section>
 

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
@@ -332,8 +332,26 @@
   </header>
 
   <main class="container">
-    <div class="demo-notice fade-up">
-      <strong>Note:</strong> The locations listed below are placeholders for demonstration purposes. ORVEXA does not claim real-world availability in these regions.
+    <div class="network-stats-banner fade-up" style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; padding:1.25rem 2rem; margin:2rem auto 3rem; display:flex; justify-content:space-around; align-items:center; flex-wrap:wrap; gap:1.5rem; text-align:center;">
+      <div>
+        <div style="font-size:1.75rem; font-family:var(--font-heading); font-weight:700; color:var(--color-primary);">6 Major Hubs</div>
+        <div style="font-size:0.875rem; color:var(--color-text-muted);">Active Coast-to-Coast</div>
+      </div>
+      <div style="width:1px; height:40px; background:var(--color-border);"></div>
+      <div>
+        <div style="font-size:1.75rem; font-family:var(--font-heading); font-weight:700; color:var(--color-primary);">950+ Vehicles</div>
+        <div style="font-size:0.875rem; color:var(--color-text-muted);">Ready for Subscription</div>
+      </div>
+      <div style="width:1px; height:40px; background:var(--color-border);"></div>
+      <div>
+        <div style="font-size:1.75rem; font-family:var(--font-heading); font-weight:700; color:var(--color-primary);">48-Hour</div>
+        <div style="font-size:0.875rem; color:var(--color-text-muted);">White-Glove Doorstep Delivery</div>
+      </div>
+      <div style="width:1px; height:40px; background:var(--color-border);"></div>
+      <div>
+        <div style="font-size:1.75rem; font-family:var(--font-heading); font-weight:700; color:var(--color-primary);">Airport Valet</div>
+        <div style="font-size:0.875rem; color:var(--color-text-muted);">Complimentary on Premium Plans</div>
+      </div>
     </div>
 
     <!-- Map Interactive -->
@@ -375,76 +393,185 @@
       </div>
     </div>
 
+    <!-- Hub Coverage & Delivery Radius Checker -->
+    <div class="delivery-checker-box fade-up" style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:16px; padding:2.5rem; margin-bottom:4rem; box-shadow:var(--shadow-sm);">
+      <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:2rem;">
+        <div style="max-width:550px;">
+          <span class="eyebrow" style="margin-bottom:0.5rem;">Doorstep Handover Coverage</span>
+          <h2 style="font-size:1.75rem; margin-bottom:0.75rem;">Check Your Delivery Zone</h2>
+          <p class="text-muted">Enter your ZIP code or city to verify white-glove doorstep car subscription delivery and same-day swap eligibility.</p>
+        </div>
+        <div style="display:flex; gap:0.75rem; flex:1; min-width:300px; max-width:480px;">
+          <input type="text" id="loc-search-input" placeholder="e.g. 10001 or Los Angeles" style="flex:1; padding:0.9rem 1.25rem; border:1px solid var(--color-border); border-radius:8px; background:var(--color-bg); color:var(--color-text); font-family:var(--font-body); font-size:1rem;">
+          <button id="loc-search-btn" class="btn btn-primary" style="padding:0.9rem 1.5rem; white-space:nowrap;">Check Zone</button>
+        </div>
+      </div>
+      <div id="loc-search-result" style="margin-top:1.25rem; display:none; padding:1rem 1.25rem; border-radius:8px; font-weight:500;"></div>
+    </div>
+
     <!-- Cards Grid -->
     <div class="loc-grid fade-up">
       
-      <div class="loc-card" id="card-ny">
+      <!-- New York -->
+      <div class="loc-card" id="card-ny" data-city="new york" data-zips="10001,10002,10011,10016,10022,11201">
+        <img src="assets/images/loc_newyork.jpg" alt="New York City Manhattan Skyline" class="loc-card-img">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+          <h2 class="loc-city" style="margin-bottom:0;">New York</h2>
+          <span class="loc-status" style="margin-bottom:0;">Active Flagship Hub</span>
+        </div>
+        <p class="text-muted" style="font-size:0.875rem; margin-bottom:1.25rem;">Serving Greater NYC, Long Island, Westchester & Northern New Jersey.</p>
         
-        <img src="assets/images/New York.png" alt="New York" class="loc-card-img">
-        <h2 class="loc-city">New York</h2>
-        <div class="loc-status">Active Hub</div>
         <div class="loc-info">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18"/></svg>
-          Full Fleet Available
+          <strong>Fleet:</strong> Executive Sedans, Luxury SUVs & EVs
         </div>
         <div class="loc-info">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Concierge Delivery: 50-mile radius
+          <strong>Delivery:</strong> 50-mile doorstep delivery in 24-48 hrs
         </div>
         <div class="loc-info">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Same-day Swaps
+          <strong>Airport Valet:</strong> JFK, LaGuardia & Newark (EWR)
+        </div>
+        <div style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:0.875rem; color:var(--color-primary); font-weight:600;">180+ Vehicles Ready</span>
+          <a href="fleet.html" class="btn btn-secondary" style="padding:0.5rem 1rem; font-size:0.875rem;">View NYC Fleet</a>
         </div>
       </div>
 
-      <div class="loc-card" id="card-la">
+      <!-- Los Angeles -->
+      <div class="loc-card" id="card-la" data-city="los angeles" data-zips="90001,90210,90401,90028,91101">
+        <img src="assets/images/loc_losangeles.jpg" alt="Los Angeles Sunset Boulevard & Skyline" class="loc-card-img">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+          <h2 class="loc-city" style="margin-bottom:0;">Los Angeles</h2>
+          <span class="loc-status" style="margin-bottom:0;">EV Center of Excellence</span>
+        </div>
+        <p class="text-muted" style="font-size:0.875rem; margin-bottom:1.25rem;">Serving West LA, Beverly Hills, Santa Monica, OC & Pasadena.</p>
         
-        <img src="assets/images/Los Angeles.png" alt="Los Angeles" class="loc-card-img">
-        <h2 class="loc-city">Los Angeles</h2>
-        <div class="loc-status">Active Hub</div>
-        <div class="loc-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18"/></svg> Full Fleet Available (EV focus)</div>
-        <div class="loc-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Concierge Delivery: 100-mile radius</div>
-        <div class="loc-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Same-day Swaps</div>
+        <div class="loc-info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18"/></svg>
+          <strong>Fleet:</strong> Porsche Taycan, Lucid Air, Tesla & High-End EVs
+        </div>
+        <div class="loc-info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <strong>Delivery:</strong> 100-mile Southern California radius
+        </div>
+        <div class="loc-info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <strong>Airport Valet:</strong> LAX & Burbank (BUR)
+        </div>
+        <div style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:0.875rem; color:var(--color-primary); font-weight:600;">220+ Vehicles Ready</span>
+          <a href="fleet.html" class="btn btn-secondary" style="padding:0.5rem 1rem; font-size:0.875rem;">View LA Fleet</a>
+        </div>
       </div>
 
-      <div class="loc-card" id="card-mia">
+      <!-- Miami -->
+      <div class="loc-card" id="card-mia" data-city="miami" data-zips="33101,33139,33140,33146,33301">
+        <img src="assets/images/loc_miami.jpg" alt="Miami South Beach & Ocean Drive" class="loc-card-img">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+          <h2 class="loc-city" style="margin-bottom:0;">Miami</h2>
+          <span class="loc-status" style="margin-bottom:0;">Luxury & Convertible Hub</span>
+        </div>
+        <p class="text-muted" style="font-size:0.875rem; margin-bottom:1.25rem;">Serving Miami Beach, Brickell, Coral Gables & Fort Lauderdale.</p>
         
-        <img src="assets/images/Miami.png" alt="Miami" class="loc-card-img">
-        <h2 class="loc-city">Miami</h2>
-        <div class="loc-status">Active Hub</div>
-        <div class="loc-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18"/></svg> Full Fleet Available (Luxury focus)</div>
-        <div class="loc-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Concierge Delivery: 40-mile radius</div>
-        <div class="loc-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 24hr Swaps</div>
+        <div class="loc-info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18"/></svg>
+          <strong>Fleet:</strong> Porsche 911, Convertible GTs, Range Rover & SUVs
+        </div>
+        <div class="loc-info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <strong>Delivery:</strong> 40-mile coastal delivery radius
+        </div>
+        <div class="loc-info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <strong>Airport Valet:</strong> MIA & Fort Lauderdale (FLL)
+        </div>
+        <div style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:0.875rem; color:var(--color-primary); font-weight:600;">140+ Vehicles Ready</span>
+          <a href="fleet.html" class="btn btn-secondary" style="padding:0.5rem 1rem; font-size:0.875rem;">View Miami Fleet</a>
+        </div>
       </div>
 
-      <div class="loc-card" id="card-chi">
+      <!-- Chicago -->
+      <div class="loc-card" id="card-chi" data-city="chicago" data-zips="60601,60611,60614,60654">
+        <img src="assets/images/loc_chicago.jpg" alt="Chicago Downtown Millennium Park & Skyline" class="loc-card-img">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+          <h2 class="loc-city" style="margin-bottom:0;">Chicago</h2>
+          <span class="loc-status" style="margin-bottom:0;">Midwest Hub</span>
+        </div>
+        <p class="text-muted" style="font-size:0.875rem; margin-bottom:1.25rem;">Serving The Loop, River North, Lincoln Park & North Shore.</p>
         
-        <img src="assets/images/Chicago.png" alt="Chicago" class="loc-card-img">
-        <h2 class="loc-city">Chicago</h2>
-        <div class="loc-status" style="background:#555; color:#fff;">Expanding 2027</div>
-        <div class="loc-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18"/></svg> Select Models Only</div>
-        <div class="loc-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Concierge Delivery: Coming Soon</div>
-        <div class="loc-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Standard Swaps (48hr)</div>
+        <div class="loc-info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18"/></svg>
+          <strong>Fleet:</strong> AWD Luxury Sedans, Winter-Ready SUVs & Compacts
+        </div>
+        <div class="loc-info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <strong>Delivery:</strong> 45-mile Chicagoland concierge delivery
+        </div>
+        <div class="loc-info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <strong>Airport Valet:</strong> O'Hare (ORD) & Midway (MDW)
+        </div>
+        <div style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:0.875rem; color:var(--color-primary); font-weight:600;">110+ Vehicles Ready</span>
+          <a href="fleet.html" class="btn btn-secondary" style="padding:0.5rem 1rem; font-size:0.875rem;">View Chicago Fleet</a>
+        </div>
       </div>
 
-      <div class="loc-card" id="card-dal">
+      <!-- Dallas -->
+      <div class="loc-card" id="card-dal" data-city="dallas" data-zips="75201,75205,75219,75024">
+        <img src="assets/images/loc_dallas.jpg" alt="Dallas Skyline & Margaret Hunt Hill Bridge" class="loc-card-img">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+          <h2 class="loc-city" style="margin-bottom:0;">Dallas</h2>
+          <span class="loc-status" style="margin-bottom:0;">Texas Headquarters Hub</span>
+        </div>
+        <p class="text-muted" style="font-size:0.875rem; margin-bottom:1.25rem;">Serving DFW Metroplex, Plano, Frisco, Highland Park & Fort Worth.</p>
         
-        <img src="assets/images/Dallas.png" alt="Dallas" class="loc-card-img">
-        <h2 class="loc-city">Dallas</h2>
-        <div class="loc-status">Active Hub</div>
-        <div class="loc-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18"/></svg> Full Fleet Available (SUV focus)</div>
-        <div class="loc-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Concierge Delivery: 60-mile radius</div>
-        <div class="loc-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 24hr Swaps</div>
+        <div class="loc-info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18"/></svg>
+          <strong>Fleet:</strong> Premium SUVs, Mercedes G-Class, BMW X5 & Sedans
+        </div>
+        <div class="loc-info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <strong>Delivery:</strong> 60-mile DFW Metro delivery radius
+        </div>
+        <div class="loc-info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <strong>Airport Valet:</strong> DFW International & Dallas Love Field (DAL)
+        </div>
+        <div style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:0.875rem; color:var(--color-primary); font-weight:600;">160+ Vehicles Ready</span>
+          <a href="fleet.html" class="btn btn-secondary" style="padding:0.5rem 1rem; font-size:0.875rem;">View Dallas Fleet</a>
+        </div>
       </div>
 
-      <div class="loc-card" id="card-atx">
+      <!-- Austin -->
+      <div class="loc-card" id="card-atx" data-city="austin" data-zips="78701,78703,78704,78746">
+        <img src="assets/images/loc_austin.jpg" alt="Austin Texas Lady Bird Lake & Skyline" class="loc-card-img">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+          <h2 class="loc-city" style="margin-bottom:0;">Austin</h2>
+          <span class="loc-status" style="margin-bottom:0;">Tech & Innovation Hub</span>
+        </div>
+        <p class="text-muted" style="font-size:0.875rem; margin-bottom:1.25rem;">Serving Downtown Austin, South Congress, Westlake & Domain.</p>
         
-        <img src="assets/images/Austin.png" alt="Austin" class="loc-card-img">
-        <h2 class="loc-city">Austin</h2>
-        <div class="loc-status">Active Hub</div>
-        <div class="loc-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18"/></svg> Full Fleet Available</div>
-        <div class="loc-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Concierge Delivery: 30-mile radius</div>
-        <div class="loc-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 24hr Swaps</div>
+        <div class="loc-info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18"/></svg>
+          <strong>Fleet:</strong> High-Tech EV Fleet, Tesla Model 3, Polestar & Rivian
+        </div>
+        <div class="loc-info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <strong>Delivery:</strong> 35-mile Central Texas concierge radius
+        </div>
+        <div class="loc-info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <strong>Airport Valet:</strong> Austin-Bergstrom (AUS)
+        </div>
+        <div style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:0.875rem; color:var(--color-primary); font-weight:600;">130+ Vehicles Ready</span>
+          <a href="fleet.html" class="btn btn-secondary" style="padding:0.5rem 1rem; font-size:0.875rem;">View Austin Fleet</a>
+        </div>
       </div>
 
     </div>
@@ -562,6 +689,53 @@
           if(targetSkyline) targetSkyline.classList.add('active');
         });
       });
+
+      // Delivery Checker Search Logic
+      const searchBtn = document.getElementById('loc-search-btn');
+      const searchInput = document.getElementById('loc-search-input');
+      const searchResult = document.getElementById('loc-search-result');
+
+      const performCheck = () => {
+        const query = searchInput.value.trim().toLowerCase();
+        if(!query) {
+          searchResult.style.display = 'block';
+          searchResult.style.background = 'rgba(242, 106, 33, 0.1)';
+          searchResult.style.color = 'var(--color-primary)';
+          searchResult.innerHTML = '⚠️ Please enter a ZIP code or city name.';
+          return;
+        }
+
+        let found = false;
+        cards.forEach(card => {
+          const city = card.getAttribute('data-city') || '';
+          const zips = card.getAttribute('data-zips') || '';
+          if(city.includes(query) || zips.includes(query)) {
+            found = true;
+            card.classList.add('active');
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            searchResult.style.display = 'block';
+            searchResult.style.background = 'rgba(46, 125, 50, 0.15)';
+            searchResult.style.color = '#2e7d32';
+            searchResult.innerHTML = `✓ Great news! <strong>${query.toUpperCase()}</strong> is inside our active 48-Hour Doorstep Delivery Zone! Same-day vehicle swaps and concierge delivery available.`;
+          } else {
+            card.classList.remove('active');
+          }
+        });
+
+        if(!found) {
+          searchResult.style.display = 'block';
+          searchResult.style.background = 'rgba(242, 106, 33, 0.15)';
+          searchResult.style.color = 'var(--color-primary)';
+          searchResult.innerHTML = `📍 We are rapidly expanding! While doorstep delivery to "<strong>${query}</strong>" is scheduled for our next phase, you can still collect your subscribed vehicle from our nearest Flagship Hub or request custom regional delivery.`;
+        }
+      };
+
+      if(searchBtn && searchInput) {
+        searchBtn.addEventListener('click', performCheck);
+        searchInput.addEventListener('keypress', (e) => {
+          if(e.key === 'Enter') performCheck();
+        });
+      }
     });
   </script>
 </body>

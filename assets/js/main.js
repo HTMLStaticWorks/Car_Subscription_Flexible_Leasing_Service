@@ -1,51 +1,50 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Theme Management
   const themeToggle = document.getElementById('theme-toggle');
+  const themeToggleMob = document.getElementById('theme-toggle-mob');
   const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
-  
-  const currentTheme = localStorage.getItem('theme');
-  if (currentTheme == 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
-  } else if (currentTheme == 'light') {
-    document.documentElement.setAttribute('data-theme', 'light');
-  } else if (prefersDarkScheme.matches) {
-    document.documentElement.setAttribute('data-theme', 'dark');
-  }
 
-  if(themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      let theme = document.documentElement.getAttribute('data-theme');
-      if (theme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light');
-      } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-      }
+  const updateLogos = (theme) => {
+    const logos = document.querySelectorAll('.nav-logo img, .footer-brand img');
+    logos.forEach(img => {
+      const isDark = theme === 'dark';
+      img.src = isDark ? 'assets/brand-mark-dark.svg' : 'assets/brand-mark.svg';
     });
+  };
+  
+  let currentTheme = localStorage.getItem('theme');
+  if (!currentTheme) {
+    currentTheme = prefersDarkScheme.matches ? 'dark' : 'light';
   }
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  updateLogos(currentTheme);
+
+  const toggleTheme = () => {
+    let theme = document.documentElement.getAttribute('data-theme');
+    let nextTheme = theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', nextTheme);
+    localStorage.setItem('theme', nextTheme);
+    updateLogos(nextTheme);
+  };
+
+  if(themeToggle) themeToggle.addEventListener('click', toggleTheme);
+  if(themeToggleMob) themeToggleMob.addEventListener('click', toggleTheme);
 
   // RTL Management
   const rtlToggle = document.getElementById('rtl-toggle');
-  const currentDir = localStorage.getItem('dir');
-  if (currentDir == 'rtl') {
-    document.documentElement.setAttribute('dir', 'rtl');
-  } else {
-    document.documentElement.setAttribute('dir', 'ltr');
-  }
+  const rtlToggleMob = document.getElementById('rtl-toggle-mob');
+  const currentDir = localStorage.getItem('dir') || 'ltr';
+  document.documentElement.setAttribute('dir', currentDir);
 
-  if(rtlToggle) {
-    rtlToggle.addEventListener('click', () => {
-      let dir = document.documentElement.getAttribute('dir');
-      if (dir === 'rtl') {
-        document.documentElement.setAttribute('dir', 'ltr');
-        localStorage.setItem('dir', 'ltr');
-      } else {
-        document.documentElement.setAttribute('dir', 'rtl');
-        localStorage.setItem('dir', 'rtl');
-      }
-    });
-  }
+  const toggleRtl = () => {
+    let dir = document.documentElement.getAttribute('dir');
+    let nextDir = dir === 'rtl' ? 'ltr' : 'rtl';
+    document.documentElement.setAttribute('dir', nextDir);
+    localStorage.setItem('dir', nextDir);
+  };
+
+  if(rtlToggle) rtlToggle.addEventListener('click', toggleRtl);
+  if(rtlToggleMob) rtlToggleMob.addEventListener('click', toggleRtl);
 
   // Mobile Menu
   const hamburger = document.getElementById('hamburger');

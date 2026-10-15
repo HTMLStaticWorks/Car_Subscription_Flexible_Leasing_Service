@@ -3,59 +3,98 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Future of Ownership</title>
-  <meta name="description" content="Ownership isn't the only way forward. Explore ORVEXA flexible driving.">
+  <title>The Future of Mobility | ORVEXA Car Subscription</title>
+  <meta name="description" content="Ownership isn't the only way forward. Experience ORVEXA's flexible car subscription with 1 to 24 month terms, $0 down, seasonal vehicle swapping, and all-inclusive maintenance.">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <style>
     /* Home 2 Specific Styles */
     
-    /* Editorial Hero */
+    /* Editorial Split Hero */
     .hero-split {
       display: flex;
       height: 100vh;
+      min-height: 600px;
       overflow: hidden;
       padding: 0;
+      position: relative;
+      box-sizing: border-box;
     }
     .hero-split-text {
-      flex: 1;
+      flex: 1.1;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 4rem;
-      padding-top: calc(4rem + 80px);
+      padding: 70px 4rem 1.75rem 4rem;
       position: relative;
       background-color: var(--color-bg);
+      z-index: 2;
+      box-sizing: border-box;
+      height: 100%;
+    }
+    .hero-split-title {
+      font-size: clamp(2rem, 3.2vw, 3.2rem);
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--color-text);
+    }
+    .hero-split-desc {
+      margin: 0.5rem 0 1.25rem;
+      max-width: 520px;
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      line-height: 1.5;
     }
     .hero-split-img {
       flex: 1;
-      background: url('assets/images/home2-hero.png') center / cover no-repeat;
+      background: linear-gradient(180deg, rgba(12,13,14,0.2) 0%, rgba(12,13,14,0.6) 100%),
+                  url('assets/images/about_hero_handover.jpg') center / cover no-repeat;
       position: relative;
-      animation: moveFrontBack 15s ease-in-out infinite;
+      height: 100%;
       width: 100%;
     }
-    @keyframes moveFrontBack {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-    .animated-line {
+    .hero-floating-badge {
       position: absolute;
+      bottom: 2rem;
       left: 2rem;
-      top: 0;
-      width: 2px;
-      height: 0%;
-      background-color: var(--color-primary);
-      animation: growLine 2s forwards ease-in-out;
+      background: rgba(18, 20, 24, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 1rem 1.4rem;
+      border-radius: 14px;
+      color: #fff;
+      max-width: 360px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
     }
-    @keyframes growLine { to { height: 100%; } }
+
+    /* Inclusions Strip */
+    .sub-pillars {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--color-border);
+    }
+    .pillar-item strong {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--color-text);
+      margin-bottom: 0.15rem;
+    }
+    .pillar-item span {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+    }
     
-    /* Timeline */
+    /* Timeline: Adapts to Life */
     .timeline-container {
       position: relative;
-      max-width: 800px;
+      max-width: 850px;
       margin: 0 auto;
-      padding: 4rem 0;
+      padding: 3rem 0;
     }
     .timeline-line {
       position: absolute;
@@ -70,7 +109,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 4rem;
+      margin-bottom: 3.5rem;
       position: relative;
     }
     .timeline-item:nth-child(even) { flex-direction: row-reverse; }
@@ -79,8 +118,13 @@
       padding: 2rem;
       background: var(--color-surface);
       border: 1px solid var(--color-border);
-      border-radius: 12px;
+      border-radius: 16px;
       box-shadow: var(--shadow-sm);
+      transition: transform var(--transition-normal);
+    }
+    .timeline-content:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-primary);
     }
     .timeline-dot {
       position: absolute;
@@ -92,9 +136,17 @@
       background-color: var(--color-primary);
       border-radius: 50%;
       border: 4px solid var(--color-bg);
+      box-shadow: 0 0 10px rgba(242, 106, 33, 0.5);
     }
 
-    /* Vehicle Swap Before/After */
+    /* Vehicle Swap Before/After Showcase */
+    .swap-showcase-box {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      padding: 3rem;
+      margin-top: 2rem;
+    }
     .swap-container {
       display: flex;
       align-items: center;
@@ -103,127 +155,362 @@
     }
     .swap-card {
       flex: 1;
-      background: var(--color-surface);
+      background: var(--color-bg);
       border: 1px solid var(--color-border);
-      border-radius: 12px;
+      border-radius: 16px;
       overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: all var(--transition-normal);
+    }
+    .swap-card:hover {
+      transform: translateY(-4px);
       box-shadow: var(--shadow-lg);
     }
-    .swap-card img {
+    .swap-card-img-wrap {
       width: 100%;
-      height: 350px;
-      object-fit: cover;
+      height: 220px;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
       display: block;
+      position: relative;
+      background-color: var(--color-surface);
     }
-    .swap-arrow {
-      font-size: 3rem;
+    .swap-card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      margin: 0;
+      padding: 0;
+      transition: transform var(--transition-slow);
+    }
+    .swap-card:hover .swap-card-img-wrap img {
+      transform: scale(1.05);
+    }
+    .swap-card-info {
+      padding: 1.5rem;
+    }
+    .swap-divider {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      text-align: center;
+      min-width: 140px;
+    }
+    .swap-arrow-icon {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 20px rgba(242, 106, 33, 0.4);
+    }
+    .swap-badge-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
       color: var(--color-primary);
-      animation: slideRight 2s infinite;
-    }
-    @keyframes slideRight { 
-      0% { transform: translateX(-10px); opacity: 0; }
-      50% { opacity: 1; }
-      100% { transform: translateX(10px); opacity: 0; }
-    }
-    [dir="rtl"] .swap-arrow { animation: slideLeft 2s infinite; }
-    @keyframes slideLeft { 
-      0% { transform: translateX(10px); opacity: 0; }
-      50% { opacity: 1; }
-      100% { transform: translateX(-10px); opacity: 0; }
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    /* Cost Breakdown */
+    /* Cost Breakdown Cards */
     .cost-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
+      margin-top: 3rem;
     }
     .cost-card {
       background: var(--color-surface);
       padding: 3rem 2rem;
-      border-radius: 12px;
+      border-radius: 16px;
       text-align: center;
       border: 1px solid var(--color-border);
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     .cost-card.highlight {
       border-color: var(--color-primary);
-      box-shadow: 0 10px 30px var(--color-primary-muted);
+      background: linear-gradient(180deg, var(--color-surface) 0%, rgba(242,106,33,0.04) 100%);
+      box-shadow: 0 15px 40px rgba(242, 106, 33, 0.15);
+      transform: scale(1.04);
     }
     .cost-card.highlight::before {
-      content: 'Best Value';
+      content: 'Recommended';
       position: absolute;
-      top: 20px; right: -30px;
+      top: 20px; right: -35px;
       background: var(--color-primary);
       color: #fff;
       font-size: 0.75rem;
       padding: 0.25rem 3rem;
       transform: rotate(45deg);
-      font-weight: 600;
+      font-weight: 700;
+      letter-spacing: 0.5px;
     }
-    .cost-num { font-size: 4rem; font-family: var(--font-heading); color: var(--color-text); margin: 1.5rem 0; }
+    .cost-num {
+      font-size: 3.5rem;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      color: var(--color-text);
+      margin: 1.5rem 0 0.5rem;
+      line-height: 1;
+    }
     .cost-card.highlight .cost-num { color: var(--color-primary); }
-
-    /* Testimonial */
-    .testimonial {
+    .cost-features {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0;
+      font-size: 0.875rem;
+      text-align: left;
+    }
+    .cost-features li {
+      padding: 0.4rem 0;
       display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--color-text);
+    }
+
+    /* Testimonial Section */
+    .testimonial {
       background: var(--color-surface);
-      border-radius: 20px;
+      border: 1px solid var(--color-border);
+      border-radius: 24px;
       overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.2fr 0.95fr;
       box-shadow: var(--shadow-lg);
+      transition: box-shadow var(--transition-normal);
+    }
+    .testimonial:hover {
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
     }
     .testi-content {
-      flex: 1;
-      padding: 4rem;
+      padding: 3.5rem 3.5rem 3.5rem 4rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
-    .testi-quote { font-size: 2rem; font-family: var(--font-heading); line-height: 1.4; margin-bottom: 2rem; }
-    .testi-img {
-      flex: 1;
-      background: url('assets/images/What Our Subscribers Say.png') center/cover;
+    .testi-stars {
+      display: flex;
+      gap: 4px;
+      color: #F59E0B;
+      font-size: 1.15rem;
+      margin-bottom: 1.25rem;
+      letter-spacing: 2px;
     }
-
-    /* Final CTA Studio */
-    .studio-cta {
-      background: #050505;
-      color: #fff;
-      text-align: center;
-      padding: 10rem 2rem;
+    .testi-quote {
+      font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+      line-height: 1.65;
+      font-family: var(--font-heading);
+      font-weight: 500;
+      color: var(--color-text);
+      margin: 0 0 2rem;
       position: relative;
-      overflow: hidden;
     }
-    .studio-cta::after {
-      content: '';
-      position: absolute;
-      bottom: -50%; left: 50%; transform: translateX(-50%);
-      width: 800px; height: 800px;
-      background: radial-gradient(circle, rgba(242,106,33,0.15) 0%, transparent 70%);
+    .testi-author-box {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+    }
+    .testi-avatar {
+      width: 52px;
+      height: 52px;
       border-radius: 50%;
-      pointer-events: none;
+      background: linear-gradient(135deg, var(--color-primary) 0%, #FF9F5A 100%);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.15rem;
+      font-family: var(--font-heading);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(242, 106, 33, 0.3);
     }
-    .studio-cta h2 { font-size: clamp(3rem, 5vw, 5rem); margin-bottom: 2rem; }
+    .testi-author-info strong {
+      font-size: 1.15rem;
+      font-family: var(--font-heading);
+      display: block;
+      color: var(--color-text);
+      line-height: 1.3;
+    }
+    .testi-author-meta {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.2rem;
+    }
+    .testi-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #10B981;
+      display: inline-block;
+    }
+    .testi-img {
+      position: relative;
+      min-height: 400px;
+      height: 100%;
+      background: url('assets/images/Customer Experience.png') center top / cover no-repeat;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.75rem;
+    }
+    .testi-img-badge {
+      background: rgba(18, 20, 24, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 12px;
+      padding: 0.75rem 1.15rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    }
+    .testi-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      flex-shrink: 0;
+    }
+    .testi-badge-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-primary);
+      line-height: 1.2;
+    }
+    .testi-badge-desc {
+      font-size: 0.85rem;
+      color: #F3F4F6;
+      font-family: var(--font-heading);
+      font-weight: 600;
+    }
 
+    /* Studio CTA Section */
+    .studio-cta {
+      padding: 6.5rem 0;
+      text-align: center;
+      background: var(--color-bg);
+      border-top: 1px solid var(--color-border);
+      position: relative;
+    }
+    .studio-cta-box {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .studio-cta .promo-badge {
+      background: rgba(242, 106, 33, 0.12);
+      color: var(--color-primary);
+      border: 1px solid rgba(242, 106, 33, 0.3);
+      padding: 0.45rem 1.25rem;
+      border-radius: 30px;
+      font-size: 0.825rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 1.25rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .studio-cta h2 {
+      font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+      font-family: var(--font-heading);
+      font-weight: 800;
+      color: var(--color-text);
+      line-height: 1.2;
+      margin: 0 0 1rem;
+      text-align: center;
+      letter-spacing: -0.02em;
+    }
+    .studio-cta p {
+      font-size: 1.15rem;
+      max-width: 620px;
+      margin: 0 auto 2.5rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      text-align: center;
+    }
+    .studio-cta .btn-group {
+      justify-content: center;
+      gap: 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .studio-cta .btn-primary {
+      padding: 1rem 2.25rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(242, 106, 33, 0.25);
+    }
+    .studio-cta .btn-secondary {
+      padding: 1rem 2.25rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      background: var(--color-surface);
+      color: var(--color-text);
+      border: 1.5px solid var(--color-border);
+      transition: all var(--transition-normal);
+    }
+    .studio-cta .btn-secondary:hover {
+      background: var(--color-surface-hover);
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      transform: translateY(-2px);
+    }
+    [data-theme="dark"] .studio-cta .btn-secondary {
+      background: #1e1e1e;
+      color: #fff;
+      border-color: #333333;
+    }
+    [data-theme="dark"] .studio-cta .btn-secondary:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    /* Responsive */
     @media (max-width: 1024px) {
-      .hero-split { flex-direction: column; height: auto; min-height: 100vh; }
-      .hero-split-img { min-height: 400px; width: 100%; flex: none; }
+      .hero-split { flex-direction: column; height: auto; min-height: auto; }
+      .hero-split-text { padding: 6rem 2rem 3rem; height: auto; }
+      .hero-split-img { min-height: 420px; }
+      .sub-pillars { grid-template-columns: repeat(2, 1fr); }
+      .swap-container { flex-direction: column; }
       .cost-grid { grid-template-columns: 1fr; }
-      .testimonial { flex-direction: column; }
-      .testi-img { min-height: 300px; }
+      .cost-card.highlight { transform: none; }
       .timeline-line { left: 0; transform: none; }
       .timeline-item, .timeline-item:nth-child(even) { flex-direction: column; align-items: flex-start; padding-left: 2rem; }
       .timeline-content { width: 100%; }
       .timeline-dot { left: 0; transform: translate(-50%, -50%); }
-      [dir="rtl"] .timeline-line { left: auto; right: 0; }
-      [dir="rtl"] .timeline-item, [dir="rtl"] .timeline-item:nth-child(even) { padding-left: 0; padding-right: 2rem; }
-      [dir="rtl"] .timeline-dot { left: auto; right: 0; transform: translate(50%, -50%); }
+      .testimonial { grid-template-columns: 1fr; border-radius: 20px; }
+      .testi-content { padding: 2.5rem 2rem; }
+      .testi-img { min-height: 300px; height: 300px; }
     }
-    @media (max-width: 576px) {
-      .swap-container { flex-direction: column; }
-      .swap-arrow { transform: rotate(90deg); animation: slideDown 2s infinite; }
-      @keyframes slideDown { 0% { transform: rotate(90deg) translateX(-10px); opacity: 0; } 50% { opacity: 1; } 100% { transform: rotate(90deg) translateX(10px); opacity: 0; } }
+    @media (max-width: 600px) {
+      .sub-pillars { grid-template-columns: 1fr; }
+      .swap-showcase-box { padding: 1.5rem; }
+      .testi-content { padding: 2rem 1.5rem; }
+      .testi-quote { font-size: 1.1rem; }
+      .studio-cta { padding: 4.5rem 0; }
+      .studio-cta h2 { font-size: 2rem; }
     }
   </style>
 </head>
@@ -235,8 +522,8 @@
   <!-- Navbar -->
   <nav class="navbar">
     <div class="container nav-container">
-      <a href="index.html" class="nav-logo">
-        <img src="assets/brand-mark.svg" alt="ORVEXA Logo">
+      <a href="index.html" class="nav-logo" aria-label="ORVEXA Home">
+        <img src="assets/brand-mark.svg" alt="ORVEXA Logo" height="38">
       </a>
       <ul class="nav-links">
         <li class="nav-dropdown">
@@ -272,21 +559,21 @@
   <div class="mobile-menu" id="mobile-menu">
     <button class="icon-btn" id="close-menu" style="position:absolute; top:2rem; right:2rem;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
     <ul class="nav-links">
-        <li class="nav-dropdown">
-          <a href="#" class="nav-link active" style="display: inline-flex; align-items: center; gap: 0.25rem;">Home <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
-          <div class="dropdown-menu">
-            <a href="index.html" class="dropdown-item">Home 1</a>
-            <a href="home-2.html" class="dropdown-item active">Home 2</a>
-          </div>
-        </li>
-        <li><a href="about.html" class="nav-link">About</a></li>
-        <li><a href="services.html" class="nav-link">Services</a></li>
-        <li><a href="fleet.html" class="nav-link">Fleet</a></li>
-        <li><a href="pricing.html" class="nav-link">Pricing</a></li>
-        <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
-        <li><a href="locations.html" class="nav-link">Locations</a></li>
-        <li><a href="contact.html" class="nav-link">Contact</a></li>
-        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+      <li class="nav-dropdown">
+        <a href="#" class="nav-link active" style="display: inline-flex; align-items: center; gap: 0.25rem;">Home <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="dropdown-menu">
+          <a href="index.html" class="dropdown-item">Home 1</a>
+          <a href="home-2.html" class="dropdown-item active">Home 2</a>
+        </div>
+      </li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="services.html" class="nav-link">Services</a></li>
+      <li><a href="fleet.html" class="nav-link">Fleet</a></li>
+      <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+      <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
+      <li><a href="locations.html" class="nav-link">Locations</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+      <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
     </ul>
     <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; margin-bottom: 2rem; width: 100%;">
       <button id="theme-toggle-mob" class="icon-btn" aria-label="Toggle Theme">
@@ -299,177 +586,320 @@
     <a href="login.html" class="btn btn-primary btn-full">Login</a>
   </div>
 
-  <!-- SECTION 1: AUTOMOTIVE EDITORIAL HERO -->
+  <!-- SECTION 1: EDITORIAL SPLIT HERO (Issues 2, 6, 7) -->
   <section class="hero-split">
     <div class="hero-split-text fade-up">
-      <div class="animated-line"></div>
-      <span class="eyebrow" style="margin-left: 1rem;">ORVEXA Experience</span>
-      <h1 class="heading-xl" style="margin-left: 1rem;">Ownership Isn't the Only Way Forward.</h1>
-      <p style="margin: 2rem 0 2rem 1rem; max-width: 500px; font-size: 1.125rem; color:var(--color-text-muted);">
-        A new era of mobility. Access premium vehicles on your terms, with zero long-term commitment and total transparency.
+      <span class="eyebrow">The Mobility Revolution</span>
+      <h1 class="hero-split-title">Ownership Isn't the Only Way Forward.</h1>
+      <p class="hero-split-desc">
+        Drive the world's most desired luxury vehicles on flexible 1 to 24 month subscription terms. Full insurance, concierge maintenance, and seasonal vehicle swapping are all bundled with $0 down payment.
       </p>
-      <div style="margin-left: 1rem;">
-        <a href="fleet.html" class="btn btn-primary">Explore Flexible Driving</a>
+      
+      <div class="btn-group" style="justify-content: flex-start; margin-bottom: 0.5rem;">
+        <a href="fleet.html" class="btn btn-primary" style="padding: 0.75rem 1.4rem; font-size: 0.925rem;">Explore Subscription Fleet</a>
+        <a href="pricing.html" class="btn btn-secondary" style="padding: 0.75rem 1.4rem; font-size: 0.925rem;">View Duration Plans</a>
+      </div>
+
+      <div class="sub-pillars">
+        <div class="pillar-item">
+          <strong>$0 Down</strong>
+          <span>Zero capital lock-in</span>
+        </div>
+        <div class="pillar-item">
+          <strong>1–24 Months</strong>
+          <span>Min 30-day term</span>
+        </div>
+        <div class="pillar-item">
+          <strong>Full Insurance</strong>
+          <span>Zero deductible option</span>
+        </div>
+        <div class="pillar-item">
+          <strong>Free Swaps</strong>
+          <span>Switch every season</span>
+        </div>
       </div>
     </div>
-    <div class="hero-split-img fade-up" style="transition-delay:0.2s;"></div>
+
+    <div class="hero-split-img fade-up" style="transition-delay:0.2s;">
+      <div class="hero-floating-badge">
+        <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--color-primary); font-weight: 700;">
+          Active Subscriber Handover
+        </div>
+        <div style="font-size: 1.1rem; font-weight: 700; margin: 0.25rem 0;">48-Hour White-Glove Handover</div>
+        <div style="font-size: 0.8rem; color: #d1d5db; line-height: 1.4;">
+          Your freshly detailed vehicle is delivered directly to your doorstep with digital orientation and a full battery charge/tank.
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- SECTION 2: LIFE CHANGES -->
-  <section class="fade-up">
+  <!-- SECTION 2: ADAPTS TO YOUR LIFE (Issue 6, 9) -->
+  <section class="fade-up" style="padding: 7rem 0 4rem; background: var(--color-surface); border-bottom: 1px solid var(--color-border);">
     <div class="container">
-    <div class="text-center" style="margin-bottom: 4rem;">
-      <h2 class="heading-lg">Adapts to Your Life</h2>
-      <p class="text-muted">As your circumstances change, so does your vehicle.</p>
-    </div>
-    
-    <div class="timeline-container">
-      <div class="timeline-line"></div>
-      
-      <div class="timeline-item fade-up">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <h3 style="font-family:var(--font-heading); color:var(--color-primary); margin-bottom:0.5rem;">New Job, New City</h3>
-          <p class="text-muted">Started your subscription with an agile premium compact car perfect for tight city parking.</p>
-        </div>
+      <div class="text-center" style="margin-bottom: 4rem;">
+        <span class="eyebrow">Life Changes &bull; Cars Should Too</span>
+        <h2 class="heading-lg">A Subscription Model Built Around Real Life.</h2>
+        <p class="text-muted" style="max-width: 600px; margin: 0.75rem auto 0;">
+          Traditional 4-year leases trap you in vehicles that no longer fit. ORVEXA adapts dynamically to your lifestyle milestones.
+        </p>
       </div>
       
-      <div class="timeline-item fade-up">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <h3 style="font-family:var(--font-heading); color:var(--color-primary); margin-bottom:0.5rem;">Growing Family</h3>
-          <p class="text-muted">Swapped to a spacious luxury SUV directly through the app. Handled in 48 hours.</p>
+      <div class="timeline-container">
+        <div class="timeline-line"></div>
+        
+        <div class="timeline-item fade-up">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span style="font-size: 0.75rem; color: var(--color-primary); font-weight: 700; text-transform: uppercase;">Months 1–3</span>
+            <h3 style="font-family:var(--font-heading); margin: 0.25rem 0 0.5rem;">New City & Urban Relocation</h3>
+            <p class="text-muted" style="font-size: 0.9rem; line-height: 1.5;">
+              Begin your subscription with an agile Audi A3 or Mini Cooper S, perfectly proportioned for navigating downtown traffic and parking structures.
+            </p>
+          </div>
+        </div>
+        
+        <div class="timeline-item fade-up">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span style="font-size: 0.75rem; color: var(--color-primary); font-weight: 700; text-transform: uppercase;">Months 4–6</span>
+            <h3 style="font-family:var(--font-heading); margin: 0.25rem 0 0.5rem;">Winter Mountain Getaway</h3>
+            <p class="text-muted" style="font-size: 0.9rem; line-height: 1.5;">
+              Swap seamlessly into a Range Rover Velar AWD or BMW X5 with roof rack capability for family ski trips, scheduled directly from your phone.
+            </p>
+          </div>
+        </div>
+        
+        <div class="timeline-item fade-up">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span style="font-size: 0.75rem; color: var(--color-primary); font-weight: 700; text-transform: uppercase;">Months 7–10</span>
+            <h3 style="font-family:var(--font-heading); margin: 0.25rem 0 0.5rem;">The Electric Performance Shift</h3>
+            <p class="text-muted" style="font-size: 0.9rem; line-height: 1.5;">
+              Test-drive the EV future with a Porsche Taycan 4S or Tesla Model 3 Long Range without the depreciation anxiety of buying new technology.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-up">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span style="font-size: 0.75rem; color: var(--color-primary); font-weight: 700; text-transform: uppercase;">Months 11–12</span>
+            <h3 style="font-family:var(--font-heading); margin: 0.25rem 0 0.5rem;">Summer Coastal Touring</h3>
+            <p class="text-muted" style="font-size: 0.9rem; line-height: 1.5;">
+              Transition to a Toyota GR Supra or Porsche 911 for scenic coastal road trips. Return or extend anytime with 7 days notice.
+            </p>
+          </div>
         </div>
       </div>
-      
-      <div class="timeline-item fade-up">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <h3 style="font-family:var(--font-heading); color:var(--color-primary); margin-bottom:0.5rem;">The Electric Switch</h3>
-          <p class="text-muted">Curious about EVs? Try a Tesla Model 3 for a few months without the anxiety of purchasing.</p>
-        </div>
-      </div>
-    </div>
     </div>
   </section>
 
-  <!-- SECTION 3: VEHICLE SWAP EXPERIENCE -->
-  <section style="background-color: var(--color-surface); padding: 8rem 0;">
+  <!-- SECTION 3: VEHICLE SWAP EXPERIENCE (Issues 2, 4, 7) -->
+  <section style="background-color: var(--color-bg); padding: 7rem 0;">
     <div class="container fade-up">
-      <div class="text-center" style="margin-bottom: 4rem;">
-        <span class="eyebrow">Seamless Transition</span>
-        <h2 class="heading-lg">The Swap Experience</h2>
+      <div class="text-center" style="margin-bottom: 3.5rem;">
+        <span class="eyebrow">Zero Exit Penalties</span>
+        <h2 class="heading-lg">The Seamless ORVEXA Swap Experience.</h2>
+        <p class="text-muted" style="max-width: 650px; margin: 0.75rem auto 0;">
+          Request a swap with one tap in your subscriber dashboard. Our concierge arrives at your home with the new vehicle and drives the previous one away.
+        </p>
       </div>
       
-      <div class="swap-container">
-        <!-- Before Card -->
-        <div class="swap-card">
-          <img src="assets/images/Premium Compact.png" alt="Compact">
-          <div style="padding: 2rem;">
-            <div class="eyebrow" style="color:var(--color-text-muted);">Current Vehicle</div>
-            <h3>Premium Compact</h3>
-            <p class="text-muted" style="margin-top:1rem;">Perfect for daily urban commuting.</p>
+      <!-- Swap 1: Executive Sedan to Luxury SUV -->
+      <div class="swap-showcase-box">
+        <div class="swap-container">
+          <!-- Current Card -->
+          <div class="swap-card">
+            <div class="swap-card-img-wrap">
+              <img src="assets/images/BMW 5 Series (2025).png" alt="2025 BMW 5 Series">
+            </div>
+            <div class="swap-card-info">
+              <div style="font-size:0.75rem; color:var(--color-text-muted); font-weight:700; text-transform:uppercase;">Spring &bull; Daily Commute</div>
+              <h3 style="font-size: 1.3rem; margin: 0.25rem 0 0.5rem;">2025 BMW 5 Series</h3>
+              <p class="text-muted" style="font-size:0.875rem;">Executive comfort, 375 HP hybrid efficiency, 1,200 mi/mo.</p>
+              <div style="margin-top:0.75rem; font-weight:700; color:var(--color-primary);">$899/mo all-inclusive</div>
+            </div>
           </div>
-        </div>
-        
-        <!-- Arrow -->
-        <div class="swap-arrow">→</div>
-        
-        <!-- After Card -->
-        <div class="swap-card" style="border-color:var(--color-primary);">
-          <img src="assets/images/Luxury SUV.png" alt="SUV">
-          <div style="padding: 2rem;">
-            <div class="eyebrow">Next Vehicle</div>
-            <h3>Luxury SUV</h3>
-            <p class="text-muted" style="margin-top:1rem;">Ready for the winter mountain trip.</p>
+          
+          <!-- Swap Arrow -->
+          <div class="swap-divider">
+            <div class="swap-arrow-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 3h5v5"/><path d="M4 20L21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
+            </div>
+            <div class="swap-badge-tag">1-Click Swap</div>
+            <span style="font-size: 0.75rem; color: var(--color-text-muted);">48h Doorstep Handover</span>
+          </div>
+          
+          <!-- Next Card -->
+          <div class="swap-card" style="border-color:var(--color-primary);">
+            <div class="swap-card-img-wrap">
+              <img src="assets/images/Range Rover Velar (2025).png" alt="2025 Range Rover Velar">
+            </div>
+            <div class="swap-card-info">
+              <div style="font-size:0.75rem; color:var(--color-primary); font-weight:700; text-transform:uppercase;">Winter &bull; Mountain Escapes</div>
+              <h3 style="font-size: 1.3rem; margin: 0.25rem 0 0.5rem;">2025 Range Rover Velar</h3>
+              <p class="text-muted" style="font-size:0.875rem;">AWD capability, luxury panoramic roof, 673L cargo volume.</p>
+              <div style="margin-top:0.75rem; font-weight:700; color:var(--color-primary);">$1,199/mo all-inclusive</div>
+            </div>
           </div>
         </div>
       </div>
-      
-      <!-- Second Swap Example -->
-      <div class="swap-container" style="margin-top: 4rem;">
-        <!-- Before Card -->
-        <div class="swap-card">
-          <img src="assets/images/Sports Coupe.png" alt="Sports Car">
-          <div style="padding: 2rem;">
-            <div class="eyebrow" style="color:var(--color-text-muted);">Current Vehicle</div>
-            <h3>Sports Coupe</h3>
-            <p class="text-muted" style="margin-top:1rem;">Thrilling weekend drives and dynamic handling.</p>
+
+      <!-- Swap 2: Daily EV to Track Performance -->
+      <div class="swap-showcase-box" style="margin-top: 2.5rem;">
+        <div class="swap-container">
+          <!-- Current Card -->
+          <div class="swap-card">
+            <div class="swap-card-img-wrap">
+              <img src="assets/images/Model 3 Long Range.png" alt="Tesla Model 3 Long Range">
+            </div>
+            <div class="swap-card-info">
+              <div style="font-size:0.75rem; color:var(--color-text-muted); font-weight:700; text-transform:uppercase;">Weekday &bull; Tech Commute</div>
+              <h3 style="font-size: 1.3rem; margin: 0.25rem 0 0.5rem;">Tesla Model 3 Long Range</h3>
+              <p class="text-muted" style="font-size:0.875rem;">358 mi EV range, dual motor AWD, Supercharging enabled.</p>
+              <div style="margin-top:0.75rem; font-weight:700; color:var(--color-primary);">$799/mo all-inclusive</div>
+            </div>
+          </div>
+          
+          <!-- Swap Arrow -->
+          <div class="swap-divider">
+            <div class="swap-arrow-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 3h5v5"/><path d="M4 20L21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
+            </div>
+            <div class="swap-badge-tag">Summer Upgrade</div>
+            <span style="font-size: 0.75rem; color: var(--color-text-muted);">$0 Exit Penalty</span>
+          </div>
+          
+          <!-- Next Card -->
+          <div class="swap-card" style="border-color:var(--color-primary);">
+            <div class="swap-card-img-wrap">
+              <img src="assets/images/Taycan 4S.png" alt="Porsche Taycan 4S">
+            </div>
+            <div class="swap-card-info">
+              <div style="font-size:0.75rem; color:var(--color-primary); font-weight:700; text-transform:uppercase;">Summer &bull; Coastal Grand Tour</div>
+              <h3 style="font-size: 1.3rem; margin: 0.25rem 0 0.5rem;">Porsche Taycan 4S</h3>
+              <p class="text-muted" style="font-size:0.875rem;">530 HP electric acceleration, 800V fast charging, pure handling.</p>
+              <div style="margin-top:0.75rem; font-weight:700; color:var(--color-primary);">$1,899/mo all-inclusive</div>
+            </div>
           </div>
         </div>
-        
-        <!-- Arrow -->
-        <div class="swap-arrow">→</div>
-        
-        <!-- After Card -->
-        <div class="swap-card" style="border-color:var(--color-primary);">
-          <img src="assets/images/Electric Sedan.png" alt="Electric">
-          <div style="padding: 2rem;">
-            <div class="eyebrow">Next Vehicle</div>
-            <h3>Electric Sedan</h3>
-            <p class="text-muted" style="margin-top:1rem;">Zero emissions, instant torque for the daily commute.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 4: TRUE COST OF MOBILITY (Issue 6, 8) -->
+  <section class="fade-up" style="padding: 7rem 0; background: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: 3.5rem;">
+        <span class="eyebrow">Financial Transparency</span>
+        <h2 class="heading-lg">True Cost Comparison Over 12 Months.</h2>
+        <p class="text-muted" style="max-width: 650px; margin: 0.75rem auto 0;">
+          Traditional car financing hides thousands in down payments, insurance markups, sales taxes, and repair surprises.
+        </p>
+      </div>
+      
+      <div class="cost-grid">
+        <!-- Card 1: Traditional Financing -->
+        <div class="cost-card">
+          <div>
+            <h3 style="font-size: 1.3rem;">Traditional Purchase</h3>
+            <div class="cost-num">$1,450</div>
+            <p class="text-muted" style="font-size: 0.85rem;">Effective monthly cost including down payment amortization, interest & taxes.</p>
+            <ul class="cost-features">
+              <li>❌ $6,000–$10,000 initial down payment</li>
+              <li>❌ $240/mo separate insurance premium</li>
+              <li>❌ $150/mo out-of-pocket maintenance & tires</li>
+              <li>❌ 100% depreciation loss on vehicle owner</li>
+              <li>❌ Stuck with 1 car for 48–60 months</li>
+            </ul>
           </div>
+          <div style="font-size: 0.8rem; color: var(--color-text-muted);">High capital liability</div>
+        </div>
+
+        <!-- Card 2: ORVEXA Subscription (Recommended) -->
+        <div class="cost-card highlight">
+          <div>
+            <h3 style="font-size: 1.3rem; color: var(--color-primary);">ORVEXA Subscription</h3>
+            <div class="cost-num">$899</div>
+            <p class="text-muted" style="font-size: 0.85rem;">Flat all-inclusive monthly fee. No down payment, no surprise invoices.</p>
+            <ul class="cost-features">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <strong>$0 Capital Down Payment</strong></li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <strong>Full Insurance Coverage Included</strong></li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <strong>$0 Maintenance & Routine Repairs</strong></li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <strong>Free Seasonal Vehicle Swaps</strong></li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <strong>Flexible 1 to 24 Month Terms</strong></li>
+            </ul>
+          </div>
+          <a href="fleet.html" class="btn btn-primary btn-full">Choose Your Vehicle &rarr;</a>
+        </div>
+
+        <!-- Card 3: Dealership Lease -->
+        <div class="cost-card">
+          <div>
+            <h3 style="font-size: 1.3rem;">Dealer 36-Mo Lease</h3>
+            <div class="cost-num">$1,150</div>
+            <p class="text-muted" style="font-size: 0.85rem;">Effective monthly rate with upfront cash due at signing & separate fees.</p>
+            <ul class="cost-features">
+              <li>❌ $3,500–$5,000 cash due at signing</li>
+              <li>❌ $240/mo separate insurance premium</li>
+              <li>❌ Mandatory dealer scheduled maintenance</li>
+              <li>❌ $0.25/mile penalty for excess driving</li>
+              <li>❌ Thousands in lease-end disposition charges</li>
+            </ul>
+          </div>
+          <div style="font-size: 0.8rem; color: var(--color-text-muted);">Rigid 36-month legal lock-in</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 4: COST BREAKDOWN -->
-  <section class="fade-up">
+  <!-- SECTION 5: SUBSCRIBER TESTIMONIAL & APP (Issue 2, 7) -->
+  <section class="fade-up" style="padding: 7rem 0; background: var(--color-bg);">
     <div class="container">
-    <div class="text-center" style="margin-bottom: 4rem;">
-      <h2 class="heading-lg">True Cost Comparison</h2>
-      <p class="text-muted">Based on average monthly expenditure including insurance and maintenance.</p>
-    </div>
-    
-    <div class="cost-grid">
-      <div class="cost-card">
-        <h3>Traditional Finance</h3>
-        <div class="cost-num">$1,450</div>
-        <p class="text-muted">Includes down payment amortization, insurance, and out-of-pocket maintenance.</p>
-      </div>
-      <div class="cost-card highlight">
-        <h3>ORVEXA Subscription</h3>
-        <div class="cost-num">$899</div>
-        <p class="text-muted">All-inclusive. Vehicle, maintenance, insurance, and complete flexibility.</p>
-      </div>
-      <div class="cost-card">
-        <h3>Long-term Lease</h3>
-        <div class="cost-num">$1,100</div>
-        <p class="text-muted">Locked in for 36 months. Rigid mileage caps and hidden return fees.</p>
-      </div>
-    </div>
-    </div>
-  </section>
-
-  <!-- SECTION 5: CUSTOMER EXPERIENCE -->
-  <section class="fade-up" style="margin-bottom: 8rem;">
-    <div class="container">
-      <div class="text-center" style="margin-bottom: 4rem;">
-        <h2 class="heading-lg">What Our Subscribers Say</h2>
-        <p class="text-muted">Hear from drivers who have already made the switch to ORVEXA.</p>
-      </div>
       <div class="testimonial">
-      <div class="testi-content">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="var(--color-primary)" opacity="0.2" style="margin-bottom:2rem;"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
-        <p class="testi-quote">"ORVEXA completely changed my perspective on having a car. I swap between a sedan for work and an SUV for weekends with zero hassle."</p>
-        <div>
-          <h4 style="font-family:var(--font-heading);">Sarah Jenkins</h4>
-          <span class="text-muted">Subscriber since 2024 &bull; 12,000 miles driven</span>
+        <div class="testi-content">
+          <span class="eyebrow" style="margin-bottom: 0.5rem;">Verified Subscriber Story</span>
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-quote">
+            &ldquo;I used to spend $1,400 a month between financing, insurance, and routine Audi dealer visits. With ORVEXA, I pay a single flat fee of $899, have zero down payment tied up, and swap to an SUV whenever my family heads to the mountains.&rdquo;
+          </div>
+          <div class="testi-author-box">
+            <div class="testi-avatar">MV</div>
+            <div class="testi-author-info">
+              <strong>Marcus Vance</strong>
+              <div class="testi-author-meta">
+                <span class="testi-status-dot"></span> Active Member since 2024 &bull; New York Hub
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-img">
+          <div class="testi-img-badge">
+            <span class="testi-badge-dot"></span>
+            <div>
+              <div class="testi-badge-title">Swap Fulfilled</div>
+              <div class="testi-badge-desc">Audi Sedan &rarr; Lincoln Aviator</div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="testi-img"></div>
-    </div>
     </div>
   </section>
 
-  <!-- SECTION 6: FINAL CTA -->
+  <!-- SECTION 6: STUDIO CTA (Issue 8, 10) -->
   <section class="studio-cta fade-up">
-    <div class="container relative" style="z-index:2;">
-      <h2>Ready to change the way you drive?</h2>
-      <div class="btn-group" style="margin-top:3rem;">
-        <a href="fleet.html" class="btn btn-glass">Browse Fleet</a>
-        <a href="register.html" class="btn btn-primary">Start Subscription</a>
+    <div class="container relative" style="z-index: 5;">
+      <div class="studio-cta-box">
+        <span class="promo-badge">Limited Offer &bull; Code: FLEXDRIVE</span>
+        <h2>Start Driving on Your Terms Today.</h2>
+        <p>
+          Pick your car, select your commitment (1 to 24 months), and receive white-glove doorstep delivery within 48 hours. Fast 2-minute digital approval.
+        </p>
+        <div class="btn-group">
+          <a href="fleet.html" class="btn btn-primary">Explore 18 Available Cars</a>
+          <a href="pricing.html" class="btn btn-secondary">Compare All Subscription Plans</a>
+        </div>
       </div>
     </div>
   </section>
@@ -479,8 +909,8 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="assets/brand-mark.svg" alt="ORVEXA">
-          <p>The premium car subscription service designed for modern flexibility. Drive more, commit less.</p>
+          <img src="assets/brand-mark.svg" alt="ORVEXA" height="34">
+          <p>The premium car subscription and flexible leasing service. Drive the world's finest vehicles on your terms.</p>
           <div class="social-links">
             <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
             <a href="#" aria-label="X (Twitter)"><svg width="18" height="18" viewBox="-1.5 -1.5 27 27" fill="currentColor" stroke="none"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
@@ -510,17 +940,16 @@
           <div class="footer-links">
             <a href="#">Terms & Conditions</a>
             <a href="#">Privacy Policy</a>
-            <a href="#">Cookie Policy</a>
+            <a href="#">Subscription Agreement</a>
           </div>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 ORVEXA Mobility. All rights reserved.</p>
-        <p>Designed for Flexibility.</p>
+        <p>&copy; 2026 ORVEXA Mobility Inc. All rights reserved.</p>
+        <p>Car Subscription &bull; Flexible Leasing &bull; $0 Down</p>
       </div>
     </div>
     
-    <!-- Scroll to Top Button -->
     <button id="scroll-to-top" class="scroll-to-top" aria-label="Scroll to top">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
     </button>

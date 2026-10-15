@@ -110,6 +110,309 @@
       color: rgba(255,255,255,0.7);
     }
 
+    /* Additional Sections Styling */
+    .hiw-promo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, rgba(242,106,33,0.12) 0%, rgba(217,56,30,0.08) 100%);
+      border: 1px solid rgba(242,106,33,0.35);
+      border-radius: 30px;
+      padding: 0.4rem 1.25rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-top: 1.5rem;
+    }
+    .hiw-promo-code {
+      font-family: monospace;
+      color: var(--color-primary);
+      font-weight: 700;
+      background: var(--color-surface);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      border: 1px dashed var(--color-primary);
+    }
+    .hiw-stats-ribbon {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2rem;
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+    .hiw-stats-ribbon span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    /* Car Types Section */
+    .types-section {
+      padding: 6.5rem 0;
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .types-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.75rem;
+      margin-top: 3.5rem;
+    }
+    .type-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+    }
+    .type-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(242,106,33,0.4);
+    }
+    .type-img-wrap {
+      width: 100%;
+      height: 190px;
+      overflow: hidden;
+      background: var(--color-surface);
+      position: relative;
+    }
+    .type-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform var(--transition-slow);
+    }
+    .type-card:hover .type-img-wrap img {
+      transform: scale(1.06);
+    }
+    .type-badge {
+      position: absolute;
+      top: 0.75rem; right: 0.75rem;
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .type-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .type-title {
+      font-size: 1.2rem;
+      font-family: var(--font-heading);
+      margin-bottom: 0.35rem;
+    }
+    .type-price {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--color-primary);
+      margin-bottom: 0.75rem;
+    }
+    .type-price span {
+      font-size: 0.85rem;
+      font-weight: normal;
+      color: var(--color-text-muted);
+    }
+    .type-desc {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+      flex: 1;
+    }
+    .type-models {
+      font-size: 0.8rem;
+      color: var(--color-text);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      padding: 0.4rem 0.65rem;
+      border-radius: 6px;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Duration Matrix on HIW */
+    .durations-section {
+      padding: 6.5rem 0;
+      background: var(--color-bg);
+    }
+    .durations-rule-box {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      padding: 1.5rem 2rem;
+      margin: 2.5rem 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      text-align: center;
+    }
+    .rule-item strong {
+      display: block;
+      font-size: 1.15rem;
+      color: var(--color-primary);
+      margin-bottom: 0.25rem;
+    }
+    .rule-item span {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+    .durations-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    .d-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 2.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all var(--transition-normal);
+    }
+    .d-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(242,106,33,0.4);
+    }
+    .d-card.featured {
+      border: 2px solid var(--color-primary);
+      box-shadow: 0 10px 30px rgba(242,106,33,0.15);
+    }
+    .d-badge {
+      position: absolute;
+      top: -12px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.25rem 0.85rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .d-time {
+      font-size: 2.2rem;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      color: var(--color-text);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .d-card.featured .d-time { color: var(--color-primary); }
+    .d-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      margin-bottom: 0.75rem;
+    }
+    .d-desc {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+    .d-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      font-size: 0.825rem;
+    }
+    .d-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .d-list li svg {
+      stroke: #10B981;
+      flex-shrink: 0;
+    }
+
+    /* Inclusions Section */
+    .inclusions-section {
+      padding: 6.5rem 0;
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .inclusions-grid-hiw {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3.5rem;
+    }
+    .inc-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 2.25rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    }
+    .inc-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(242,106,33,0.3);
+    }
+    .inc-icon-wrap {
+      width: 54px; height: 54px;
+      border-radius: 14px;
+      background: rgba(242,106,33,0.1);
+      border: 1px solid rgba(242,106,33,0.25);
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inc-card h3 {
+      font-size: 1.25rem;
+      margin: 0;
+    }
+    .inc-card p {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Special Offer HIW Box */
+    .hiw-special-box {
+      background: linear-gradient(135deg, rgba(242,106,33,0.15) 0%, rgba(217,56,30,0.08) 100%);
+      border: 1px solid rgba(242,106,33,0.35);
+      border-radius: 18px;
+      padding: 2rem 2.5rem;
+      margin: 4rem auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      max-width: 950px;
+    }
+
     @media (max-width: 1024px) {
       .sticky-card, .sticky-card:nth-child(n+3) {
         flex-direction: column;
@@ -127,6 +430,18 @@
         gap: 4rem;
         text-align: center;
       }
+      .types-grid { grid-template-columns: repeat(2, 1fr); }
+      .durations-grid { grid-template-columns: repeat(2, 1fr); }
+      .durations-rule-box { grid-template-columns: repeat(2, 1fr); }
+      .inclusions-grid-hiw { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 650px) {
+      .types-grid { grid-template-columns: 1fr; }
+      .durations-grid { grid-template-columns: 1fr; }
+      .durations-rule-box { grid-template-columns: 1fr; }
+      .inclusions-grid-hiw { grid-template-columns: 1fr; }
+      .hiw-stats-ribbon { flex-direction: column; align-items: center; gap: 0.75rem; }
+      .hiw-special-box { flex-direction: column; text-align: center; justify-content: center; }
     }
   </style>
 </head>
@@ -202,11 +517,25 @@
   <!-- Hero -->
   <header class="hiw-hero fade-up">
     <div class="container">
-      <span class="eyebrow">The Journey</span>
-      <h1 class="heading-xl">Four Steps to Freedom.</h1>
-      <p style="margin: 2rem auto; max-width: 500px; font-size:1.125rem; color:var(--color-text-muted);">
-        A seamless digital process designed to get you on the road in 48 hours without the traditional dealership hassle.
+      <span class="eyebrow">The Complete Subscription Guide</span>
+      <h1 class="heading-xl">Four Simple Steps to Modern Driving.</h1>
+      <p style="margin: 1.5rem auto 1rem; max-width: 620px; font-size:1.15rem; color:var(--color-text-muted); line-height: 1.6;">
+        Skip dealer markups, long-term loan debt, and DMV waiting lines. Drive luxury sedans, SUVs, and high-performance EVs with 1 to 24 month flexible terms, $0 down, and all-inclusive coverage.
       </p>
+
+      <!-- Special Offer Pill in Hero -->
+      <div class="hiw-promo-badge">
+        <span style="background: var(--color-primary); color: #fff; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 20px; text-transform: uppercase;">Special Offer</span>
+        <span>Get $150 off first 3 months with code <span class="hiw-promo-code">FLEXDRIVE</span> &bull; $0 Down</span>
+      </div>
+
+      <!-- Quick Key Stats Strip -->
+      <div class="hiw-stats-ribbon">
+        <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Min. 30 Days Commitment</span>
+        <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Max. 24 Months Rollover</span>
+        <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Full Insurance & Maintenance</span>
+        <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 48-Hour Doorstep Delivery</span>
+      </div>
     </div>
   </header>
 
@@ -218,8 +547,11 @@
       <div class="sticky-card" style="--i: 0;">
         <div class="sc-content">
           <div class="sc-num">01</div>
-          <h2 class="sc-title">Browse the Collection</h2>
-          <p class="sc-desc">Explore our curated fleet of premium sedans, SUVs, and electric vehicles. Compare features, mileage allowances, and select the exact vehicle that fits your current lifestyle without pressure.</p>
+          <h2 class="sc-title">Browse & Select Vehicle</h2>
+          <p class="sc-desc">Explore our curated fleet of 18 executive sedans, luxury SUVs, 100% electric models, and sports performance cars. Compare features, mileage packages (800 to 1,500 mi/mo with rollover), and pick the exact model tailored to your lifestyle.</p>
+          <div style="margin-top: 1.5rem;">
+            <a href="fleet.html" class="btn btn-secondary" style="padding: 0.65rem 1.4rem; font-size: 0.875rem;">Explore Full Fleet &rarr;</a>
+          </div>
         </div>
         <div class="sc-img" style="background-image: url('assets/images/Browse the Collection.png');"></div>
       </div>
@@ -228,8 +560,11 @@
       <div class="sticky-card" style="--i: 1;">
         <div class="sc-content">
           <div class="sc-num">02</div>
-          <h2 class="sc-title">Subscribe in Minutes</h2>
-          <p class="sc-desc">Select your tier, mileage, and duration. Upload your license and securely complete your profile directly from your device. No credit hits, no endless dealership paperwork.</p>
+          <h2 class="sc-title">Subscribe in 2 Minutes</h2>
+          <p class="sc-desc">Choose your commitment duration: 1, 3, 6, or 12–24 months. Upload your valid driver's license directly through your phone. Our 100% digital platform conducts an instant soft credit verification with zero impact to your personal credit score and $0 down payment.</p>
+          <div style="margin-top: 1.5rem;">
+            <a href="register.html" class="btn btn-secondary" style="padding: 0.65rem 1.4rem; font-size: 0.875rem;">Get Instant Pre-Approval &rarr;</a>
+          </div>
         </div>
         <div class="sc-img" style="background-image: url('assets/images/Subscribe in Minutes.png');"></div>
       </div>
@@ -238,8 +573,11 @@
       <div class="sticky-card" style="--i: 2;">
         <div class="sc-content">
           <div class="sc-num">03</div>
-          <h2 class="sc-title">White-Glove Delivery</h2>
-          <p class="sc-desc">We deliver your vehicle to your door fully detailed, charged, or fueled. Enjoy the drive with the peace of mind that maintenance, insurance, and roadside assistance are completely covered.</p>
+          <h2 class="sc-title">White-Glove Doorstep Delivery</h2>
+          <p class="sc-desc">Within 48 hours of approval, an ORVEXA mobility concierge delivers your vehicle detailed, sanitized, and fully fueled or 100% battery-charged. Every subscription includes premium insurance, factory maintenance, and 24/7 roadside assistance at zero extra cost.</p>
+          <div style="margin-top: 1.5rem;">
+            <a href="pricing.html" class="btn btn-secondary" style="padding: 0.65rem 1.4rem; font-size: 0.875rem;">Review Included Benefits &rarr;</a>
+          </div>
         </div>
         <div class="sc-img" style="background-image: url('assets/images/White-Glove Delivery.png');"></div>
       </div>
@@ -248,12 +586,263 @@
       <div class="sticky-card" style="--i: 3;">
         <div class="sc-content">
           <div class="sc-num">04</div>
-          <h2 class="sc-title">Swap or Renew</h2>
-          <p class="sc-desc">When your term is up, or if your plan allows mid-term swaps, simply tap the app to schedule your next vehicle. We'll drop off the new one and take the old one back seamlessly.</p>
+          <h2 class="sc-title">Drive, Swap or Return Anytime</h2>
+          <p class="sc-desc">Experience complete automotive freedom. When your driving needs shift (e.g. winter mountain trips or summer convertibles), request a seasonal vehicle swap in the app with 1 tap. When your term concludes, easily renew, upgrade, or return with just 7 days notice and zero penalty.</p>
+          <div style="margin-top: 1.5rem;">
+            <a href="dashboard.html" class="btn btn-secondary" style="padding: 0.65rem 1.4rem; font-size: 0.875rem;">Preview Subscriber App &rarr;</a>
+          </div>
         </div>
         <div class="sc-img" style="background-image: url('assets/images/Swap or Renew.png');"></div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- SECTION: WHICH TYPES OF CARS ARE AVAILABLE FOR SUBSCRIPTION -->
+  <section class="types-section">
+    <div class="container">
+      <div class="text-center fade-up">
+        <span class="eyebrow">Curated Fleet Categories</span>
+        <h2 class="heading-lg">Which Types of Cars Can You Subscribe To?</h2>
+        <p class="text-muted" style="max-width: 650px; margin: 1rem auto 0;">
+          From daily city commuting to off-road expeditions and electric supercars, choose from 4 distinct vehicle classes ready for 48-hour delivery.
+        </p>
+      </div>
+
+      <div class="types-grid">
+        <!-- Category 1: Executive Sedans -->
+        <div class="type-card fade-up">
+          <div class="type-img-wrap">
+            <span class="type-badge">Sedan Class</span>
+            <img src="assets/images/BMW 5 Series (2025).png" alt="Executive Sedans" loading="lazy">
+          </div>
+          <div class="type-body">
+            <h3 class="type-title">Executive Sedans</h3>
+            <div class="type-price">$699<span>/mo starting ($0 down)</span></div>
+            <div class="type-models">BMW 5 Series &bull; Audi A3 &bull; Mercedes C300</div>
+            <p class="type-desc">Sophisticated executive comfort, whisper-quiet hybrid powertrains, premium leather cabins, and seamless city agility.</p>
+            <a href="fleet.html?type=sedan" class="btn btn-secondary btn-full">Browse Sedans</a>
+          </div>
+        </div>
+
+        <!-- Category 2: Luxury SUVs -->
+        <div class="type-card fade-up" style="transition-delay: 0.1s;">
+          <div class="type-img-wrap">
+            <span class="type-badge">SUV Class</span>
+            <img src="assets/images/Range Rover Velar (2025).png" alt="Luxury SUVs" loading="lazy">
+          </div>
+          <div class="type-body">
+            <h3 class="type-title">Luxury SUVs & Crossovers</h3>
+            <div class="type-price">$850<span>/mo starting ($0 down)</span></div>
+            <div class="type-models">Velar &bull; BMW X5 &bull; Audi Q5 &bull; Rivian R1S</div>
+            <p class="type-desc">Commanding high seating position, intelligent all-weather AWD, generous cargo volume, and panoramic sunroofs for family getaways.</p>
+            <a href="fleet.html?type=suv" class="btn btn-secondary btn-full">Browse SUVs</a>
+          </div>
+        </div>
+
+        <!-- Category 3: 100% Electric -->
+        <div class="type-card fade-up" style="transition-delay: 0.2s;">
+          <div class="type-img-wrap">
+            <span class="type-badge" style="background:#10B981;">100% Electric</span>
+            <img src="assets/images/Taycan 4S.png" alt="Electric Vehicles" loading="lazy">
+          </div>
+          <div class="type-body">
+            <h3 class="type-title">Electric Performance & EVs</h3>
+            <div class="type-price">$799<span>/mo starting ($0 down)</span></div>
+            <div class="type-models">Porsche Taycan 4S &bull; Tesla Model 3 &bull; Polestar 2</div>
+            <p class="type-desc">Instant torque, 300+ mile ranges, DC ultra-fast charging capabilities, and the latest autonomous driver-assistance tech.</p>
+            <a href="fleet.html?type=electric" class="btn btn-secondary btn-full">Browse EVs</a>
+          </div>
+        </div>
+
+        <!-- Category 4: High Performance -->
+        <div class="type-card fade-up" style="transition-delay: 0.3s;">
+          <div class="type-img-wrap">
+            <span class="type-badge" style="background: linear-gradient(135deg, #FF6B00 0%, #D9381E 100%);">Sports Class</span>
+            <img src="assets/images/911 Carrera S.png" alt="High Performance Sports" loading="lazy">
+          </div>
+          <div class="type-body">
+            <h3 class="type-title">Sports & Performance</h3>
+            <div class="type-price">$1,699<span>/mo starting ($0 down)</span></div>
+            <div class="type-models">Porsche 911 Carrera &bull; Toyota GR Supra &bull; Golf R</div>
+            <p class="type-desc">Pure adrenaline engineering, track-tuned sport suspension, twin-turbo exhausts, and iconic supercar styling for weekend thrills.</p>
+            <a href="fleet.html?type=performance" class="btn btn-secondary btn-full">Browse Sports</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center" style="margin-top: 3rem;">
+        <a href="fleet.html" class="btn btn-primary" style="padding: 1rem 2.5rem; font-size: 1.05rem;">Explore All 18 Vehicles in Fleet &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: AVAILABLE SUBSCRIPTION DURATIONS & LEASE PERIODS -->
+  <section class="durations-section">
+    <div class="container">
+      <div class="text-center fade-up">
+        <span class="eyebrow">Commitment Flexibility</span>
+        <h2 class="heading-lg">Available Subscription Durations & Lease Periods.</h2>
+        <p class="text-muted" style="max-width: 650px; margin: 1rem auto 0;">
+          Whether you need a car for an extended summer road trip or an executive 2-year term, select the exact commitment that fits your calendar.
+        </p>
+      </div>
+
+      <!-- Minimum & Maximum Lease Rule Box -->
+      <div class="durations-rule-box fade-up">
+        <div class="rule-item">
+          <strong>30 Days (1 Month)</strong>
+          <span>Minimum Lease Period</span>
+        </div>
+        <div class="rule-item">
+          <strong>24 Months</strong>
+          <span>Maximum Lease (Auto-Rollover)</span>
+        </div>
+        <div class="rule-item">
+          <strong style="color: #10B981;">$0 Down</strong>
+          <span>Zero Initial Capital Outlay</span>
+        </div>
+        <div class="rule-item">
+          <strong>7 Calendar Days</strong>
+          <span>Notice to Cancel or Return</span>
+        </div>
+      </div>
+
+      <!-- 4 Duration Tiers Grid -->
+      <div class="durations-grid">
+        <!-- 1 Month -->
+        <div class="d-card fade-up">
+          <div class="d-time">1 Mo</div>
+          <div class="d-name">Tier 1: Ultra-Flex</div>
+          <p class="d-desc">True month-to-month freedom. Keep the car for 30 days and renew or cancel anytime with 7 days notice.</p>
+          <ul class="d-list">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Minimum term: 30 days</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Full insurance & maintenance</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 1,000 miles/month</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Cancel anytime with 7 days notice</li>
+          </ul>
+          <a href="pricing.html" class="btn btn-secondary btn-full">Choose 1-Mo Flex</a>
+        </div>
+
+        <!-- 3 Months -->
+        <div class="d-card fade-up" style="transition-delay: 0.1s;">
+          <div class="d-time">3 Mo</div>
+          <div class="d-name">Tier 2: Seasonal Mobility</div>
+          <p class="d-desc">Tailored for temporary relocations, winter ski getaways, or summer coastal touring with discounted rates.</p>
+          <ul class="d-list">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> ~8% rate discount vs monthly</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Eligible for code FLEXDRIVE</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 1,200 miles/month (Rollover)</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Full insurance & roadside</li>
+          </ul>
+          <a href="pricing.html" class="btn btn-secondary btn-full">Choose 3-Mo Plan</a>
+        </div>
+
+        <!-- 6 Months -->
+        <div class="d-card featured fade-up" style="transition-delay: 0.2s;">
+          <div class="d-badge">Most Popular</div>
+          <div class="d-time">6 Mo</div>
+          <div class="d-name">Tier 3: Best Value Balance</div>
+          <p class="d-desc">The sweet spot between cost savings and lifestyle flexibility, including a free vehicle swap.</p>
+          <ul class="d-list">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 15% rate discount vs monthly</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 1 Free Vehicle Swap included</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 1,200 miles/month (Rollover)</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Waived security deposit</li>
+          </ul>
+          <a href="pricing.html" class="btn btn-primary btn-full">Choose 6-Mo Plan</a>
+        </div>
+
+        <!-- 12-24 Months -->
+        <div class="d-card fade-up" style="transition-delay: 0.3s;">
+          <div class="d-time">12–24 Mo</div>
+          <div class="d-name">Tier 4: Long-Term Executive</div>
+          <p class="d-desc">Lowest monthly fees with maximum executive perks, multiple free seasonal swaps, and priority upgrades.</p>
+          <ul class="d-list">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Up to 22% rate savings</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 2 Free Vehicle Swaps / year</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 1,500 miles/month</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Auto-rollover or swap at term</li>
+          </ul>
+          <a href="pricing.html" class="btn btn-secondary btn-full">Choose 12–24 Mo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: WHAT'S INCLUDED IN EVERY SUBSCRIPTION -->
+  <section class="inclusions-section">
+    <div class="container">
+      <div class="text-center fade-up">
+        <span class="eyebrow">Comprehensive Coverage</span>
+        <h2 class="heading-lg">Everything Included in One Monthly Fee: Zero Surprises.</h2>
+        <p class="text-muted" style="max-width: 650px; margin: 1rem auto 0;">
+          Traditional leasing charges extra for insurance, maintenance, tire wear, and dealer fees. With ORVEXA, one predictable fee handles everything.
+        </p>
+      </div>
+
+      <div class="inclusions-grid-hiw">
+        <div class="inc-card fade-up">
+          <div class="inc-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3>Full Comprehensive Insurance</h3>
+          <p>Complete collision, liability, and comprehensive coverage included for all approved drivers with zero stress and optional zero-deductible coverage.</p>
+        </div>
+
+        <div class="inc-card fade-up" style="transition-delay: 0.1s;">
+          <div class="inc-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </div>
+          <h3>$0 Routine Maintenance & Service</h3>
+          <p>Scheduled factory services, oil changes, brake pads, fluids, wiper blades, and mechanical diagnostics are 100% covered with free loaner pickup.</p>
+        </div>
+
+        <div class="inc-card fade-up" style="transition-delay: 0.2s;">
+          <div class="inc-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="M4.93 4.93l4.24 4.24"/><path d="M14.83 14.83l4.24 4.24"/><path d="M14.83 9.17l4.24-4.24"/><path d="M4.93 19.07l4.24-4.24"/></svg>
+          </div>
+          <h3>Tire Replacements & Wear</h3>
+          <p>Normal wear and tear tire changes, pressure calibrations, and seasonal tire rotations are handled seamlessly without extra charges.</p>
+        </div>
+
+        <div class="inc-card fade-up">
+          <div class="inc-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 17h4V5H2v12h3"/><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5"/><path d="M14 17h1"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
+          </div>
+          <h3>24/7 Nationwide Roadside Assistance</h3>
+          <p>Immediate towing, flat tire roadside repair, dead battery jumpstarts, emergency charging, and lockout assistance via single-tap in the mobile app.</p>
+        </div>
+
+        <div class="inc-card fade-up" style="transition-delay: 0.1s;">
+          <div class="inc-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 10h14l-4-4"/><path d="M17 14H3l4 4"/></svg>
+          </div>
+          <h3>Free Seasonal Vehicle Swaps</h3>
+          <p>Switch models as your lifestyle shifts. Drop off an executive sedan and transition into an AWD SUV for winter, or a sports convertible for summer.</p>
+        </div>
+
+        <div class="inc-card fade-up" style="transition-delay: 0.2s;">
+          <div class="inc-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="14" x2="8" y2="14"/><line x1="12" y1="14" x2="16" y2="14"/></svg>
+          </div>
+          <h3>$0 Capital Down Payment</h3>
+          <p>Keep your savings in your pocket. No thousands of dollars in capitalized cost reduction or dealer acquisition fees. Transparent pricing only.</p>
+        </div>
+      </div>
+
+      <!-- Special Offer Banner -->
+      <div class="hiw-special-box fade-up">
+        <div>
+          <span style="background: var(--color-primary); color: #fff; font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 20px; text-transform: uppercase;">Limited-Time Promo</span>
+          <h3 style="margin: 0.75rem 0 0.25rem; font-size: 1.4rem;">Get $150 Off First 3 Months + Free Delivery</h3>
+          <p class="text-muted" style="margin: 0; font-size: 0.9rem;">Use promo code <span class="hiw-promo-code">FLEXDRIVE</span> at checkout. Valid on any 3+ month subscription.</p>
+        </div>
+        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+          <a href="pricing.html" class="btn btn-primary" style="padding: 0.85rem 1.75rem;">View Pricing Plans</a>
+          <a href="fleet.html" class="btn btn-secondary" style="padding: 0.85rem 1.75rem;">Browse Vehicles</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -285,10 +874,16 @@
   </section>
 
   <!-- CTA -->
-  <section class="container" style="padding: 6rem 0 10rem; text-align: center;">
+  <section class="container" style="padding: 6rem 0 8rem; text-align: center;">
     <div class="fade-up">
-      <h2 class="heading-lg" style="margin-bottom: 2rem;">Ready to take the wheel?</h2>
-      <a href="pricing.html" class="btn btn-primary" style="font-size: 1.25rem; padding: 1.5rem 3rem;">Build Your Subscription</a>
+      <h2 class="heading-lg" style="margin-bottom: 1.25rem;">Ready to take the wheel?</h2>
+      <p class="text-muted" style="max-width: 550px; margin: 0 auto 2.5rem; font-size: 1.1rem;">
+        Select your vehicle, choose your flexible term (1 to 24 months), and enjoy white-glove doorstep delivery within 48 hours.
+      </p>
+      <div class="btn-group" style="justify-content: center; gap: 1rem;">
+        <a href="fleet.html" class="btn btn-primary" style="font-size: 1.1rem; padding: 1.25rem 2.5rem;">Explore All 18 Vehicles</a>
+        <a href="pricing.html" class="btn btn-secondary" style="font-size: 1.1rem; padding: 1.25rem 2.5rem;">Compare Plans & Rates</a>
+      </div>
     </div>
   </section>
 

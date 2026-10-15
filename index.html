@@ -3,206 +3,671 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flexible Car Subscription & Leasing</title>
-  <meta name="description" content="Premium cars, flexible monthly subscriptions, and the freedom to change your vehicle when life changes.">
+  <title>ORVEXA | Premium Car Subscription & Flexible Leasing</title>
+  <meta name="description" content="Experience car subscription reimagined. Drive luxury sedans, SUVs, and high-performance EVs with flexible 1 to 24 month terms, $0 down, full insurance, zero maintenance, and free vehicle swaps.">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <style>
     /* Hero Section */
     .hero {
-      height: 100vh;
+      min-height: 100vh;
       position: relative;
       display: flex;
       align-items: center;
       overflow: hidden;
-      background-color: #111;
+      background-color: #0c0d0e;
+      padding: 85px 0 45px;
+      box-sizing: border-box;
     }
     .hero-bg {
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: url('https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?q=80&w=2000&auto=format&fit=crop') center/cover;
-      opacity: 0.6;
-      transform: scale(1.05);
-      animation: heroZoom 20s infinite alternate linear;
+      background: linear-gradient(90deg, rgba(12,13,14,0.92) 0%, rgba(12,13,14,0.7) 50%, rgba(12,13,14,0.4) 100%),
+                  url('assets/images/home_hero_subscription.jpg') center/cover no-repeat;
+      transform: scale(1.02);
+      animation: heroZoom 25s infinite alternate linear;
     }
     @keyframes heroZoom {
       from { transform: scale(1); }
-      to { transform: scale(1.1); }
+      to { transform: scale(1.06); }
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 2.5rem;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+      width: 100%;
     }
     .hero-content {
-      position: relative;
-      z-index: 10;
       color: #fff;
-      max-width: 800px;
     }
-    .hero-glass-card {
-      position: absolute;
-      bottom: 10%;
-      right: 5%;
-      background: rgba(20,20,20,0.6);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 2rem;
-      border-radius: 12px;
-      width: 350px;
-      color: #fff;
-      z-index: 10;
-      animation: float 6s ease-in-out infinite;
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(242, 106, 33, 0.15);
+      border: 1px solid rgba(242, 106, 33, 0.4);
+      color: var(--color-primary);
+      padding: 0.3rem 0.85rem;
+      border-radius: 30px;
+      font-size: 0.775rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 0.85rem;
     }
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-      100% { transform: translateY(0); }
+    .hero-title {
+      font-size: clamp(2.2rem, 3.8vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.12;
+      margin-bottom: 0.85rem;
+      letter-spacing: -0.5px;
     }
-    .hero-glass-card .price { font-size: 2rem; font-family: var(--font-heading); color: var(--color-primary); font-weight: 700; margin-bottom: 1rem; }
-    .hero-glass-card ul { list-style: none; margin: 0; padding: 0; }
-    .hero-glass-card ul li { padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; }
-    .hero-glass-card ul li:last-child { border-bottom: none; }
+    .hero-desc {
+      font-size: 1.05rem;
+      color: #d1d5db;
+      line-height: 1.5;
+      margin-bottom: 1.35rem;
+      max-width: 520px;
+    }
 
-    /* Comparison Section */
-    .comparison-wrapper {
-      display: flex;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid var(--color-border);
-      box-shadow: var(--shadow-lg);
+    /* Hero Quick Finder Widget */
+    .hero-finder-card {
+      background: rgba(24, 26, 29, 0.75);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      padding: 1.4rem 1.6rem;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+      color: #fff;
     }
-    .comp-col { flex: 1; padding: 4rem; }
-    .comp-left { background-color: var(--color-surface); }
-    .comp-right { background-color: var(--color-primary); color: #fff; }
-    .comp-list li { padding: 1rem 0; border-bottom: 1px solid var(--color-border); display: flex; justify-content: space-between; }
-    .comp-right .comp-list li { border-color: rgba(255,255,255,0.2); }
-    .comp-list li:last-child { border-bottom: none; }
-    
-    /* Fleet Showcase */
-    .fleet-scroll {
+    .finder-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.85rem;
       display: flex;
-      gap: 2rem;
-      overflow-x: auto;
-      padding: 2rem 0;
-      scrollbar-width: none; /* Firefox */
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
+      align-items: center;
+      justify-content: space-between;
     }
-    .fleet-scroll::-webkit-scrollbar { display: none; } /* Chrome */
-    .fleet-card {
-      flex: 0 0 calc((100% - 4rem) / 3);
-      scroll-snap-align: start;
+    .finder-title span:last-child {
+      font-size: 0.75rem;
+      background: rgba(16, 185, 129, 0.2);
+      color: #10B981;
+      padding: 0.2rem 0.5rem;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    .finder-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .finder-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .finder-label {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .finder-select {
+      background: rgba(15, 17, 20, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 0.55rem 0.85rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      width: 100%;
+      outline: none;
+      transition: border-color var(--transition-fast);
+    }
+    .finder-select:focus {
+      border-color: var(--color-primary);
+    }
+    .finder-live-preview {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 0.5rem 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.25rem;
+    }
+    .finder-live-preview small {
+      color: #9ca3af;
+      font-size: 0.7rem;
+      display: block;
+    }
+    .finder-live-preview strong {
+      color: var(--color-primary);
+      font-size: 1.1rem;
+    }
+
+    /* Key Inclusions Ribbon */
+    .inclusions-ribbon {
       background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: 12px;
-      overflow: hidden;
-      transition: transform 0.3s;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1.5rem 0;
     }
-    .fleet-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-md); border-color: var(--color-primary); }
-    .fleet-img { height: 200px; background: #ddd; overflow: hidden; }
-    .fleet-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-    .fleet-card:hover .fleet-img img { transform: scale(1.1); }
-    .fleet-info { padding: 1.5rem; }
-    .fleet-title { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .fleet-price { color: var(--color-primary); font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
-    
-    /* Flexibility Engine */
-    .flex-engine {
-      position: relative;
-      height: 600px;
+    .inclusions-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .inclusion-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .inclusion-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: rgba(242, 106, 33, 0.08);
+      border: 1px solid rgba(242, 106, 33, 0.2);
+      color: var(--color-primary);
       display: flex;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(circle, var(--color-surface) 0%, var(--color-bg) 100%);
+      flex-shrink: 0;
+      transition: all var(--transition-fast);
+      box-shadow: 0 2px 6px rgba(242, 106, 33, 0.06);
     }
-    .flex-center {
+    .inclusion-item:hover .inclusion-icon {
+      background: rgba(242, 106, 33, 0.15);
+      border-color: rgba(242, 106, 33, 0.4);
+      transform: translateY(-2px);
+    }
+    .inclusion-text strong {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--color-text);
+      line-height: 1.2;
+    }
+    .inclusion-text span {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Special Promo Banner */
+    .special-offer-banner {
+      background: linear-gradient(135deg, rgba(242,106,33,0.15) 0%, rgba(217,56,30,0.1) 100%);
+      border: 1px solid rgba(242, 106, 33, 0.35);
+      border-radius: 16px;
+      padding: 1.5rem 2rem;
+      margin: 3.5rem auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .promo-badge {
+      background: var(--color-primary);
+      color: #fff;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .promo-code {
+      display: inline-block;
+      background: var(--color-surface);
+      border: 1px dashed var(--color-primary);
+      color: var(--color-primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-left: 0.5rem;
+    }
+
+    /* 4-Step User Journey Stepper */
+    .journey-section {
+      padding: 7rem 0 5rem;
+      background: var(--color-bg);
+    }
+    .journey-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+      position: relative;
+    }
+    .journey-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      overflow: hidden;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    }
+    .journey-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(242, 106, 33, 0.4);
+    }
+    .journey-card-img {
+      width: 100%;
+      height: 190px;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      display: block;
+      background-color: var(--color-surface);
+    }
+    .journey-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      margin: 0;
+      padding: 0;
+      transition: transform var(--transition-slow);
+    }
+    .journey-card:hover .journey-card-img img {
+      transform: scale(1.05);
+    }
+    .journey-card-body {
+      padding: 1.5rem 1.4rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .journey-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.65rem;
+      color: var(--color-text);
+    }
+    .journey-desc {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      line-height: 1.55;
+    }
+    .journey-tag {
+      margin-top: auto;
+      padding-top: 0.85rem;
+      font-size: 0.75rem;
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    /* Duration Matrix Section */
+    .duration-section {
+      padding: 6rem 0;
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .duration-matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+      align-items: stretch;
+    }
+    .duration-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 2.25rem 1.4rem 2rem;
       text-align: center;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-sizing: border-box;
+    }
+    .duration-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: rgba(242, 106, 33, 0.4);
+    }
+    .duration-card.recommended {
+      border: 2px solid var(--color-primary);
+      box-shadow: 0 10px 30px rgba(242, 106, 33, 0.18);
+      background: linear-gradient(180deg, rgba(242, 106, 33, 0.04) 0%, var(--color-bg) 100%);
+    }
+    .duration-badge-top {
+      position: absolute;
+      top: -12px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.25rem 0.85rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
       z-index: 2;
     }
-    .flex-center h2 { font-size: 2.5rem; color: var(--color-primary); }
-    .flex-orbit {
-      position: absolute;
-      width: 450px; height: 450px;
-      border: 1px dashed var(--color-border);
-      border-radius: 50%;
-      animation: spin 30s linear infinite;
+    .duration-time {
+      font-size: 2.2rem;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      color: var(--color-text);
+      margin: 0 0 0.5rem;
+      line-height: 1.1;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    @keyframes spin { 100% { transform: rotate(360deg); } }
-    .orbit-item {
-      position: absolute;
-      width: 100px; height: 100px;
-      background: var(--color-surface);
-      border: 2px solid var(--color-primary);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 600; font-size: 0.875rem;
-      box-shadow: var(--shadow-sm);
-      animation: anti-spin 30s linear infinite;
+    .duration-card.recommended .duration-time {
+      color: var(--color-primary);
     }
-    @keyframes anti-spin { 100% { transform: rotate(-360deg); } }
-    .orbit-item:nth-child(1) { top: -50px; left: 175px; } /* Subscribe */
-    .orbit-item:nth-child(2) { top: 175px; right: -50px; } /* Drive */
-    .orbit-item:nth-child(3) { bottom: -50px; left: 175px; } /* Swap */
-    .orbit-item:nth-child(4) { top: 175px; left: -50px; } /* Renew */
+    .duration-subtitle {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      margin-bottom: 0.5rem;
+      min-height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .duration-desc {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      margin-bottom: 1.5rem;
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.4;
+      text-align: center;
+    }
+    .duration-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.75rem;
+      font-size: 0.825rem;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      flex: 1;
+    }
+    .duration-features li {
+      padding: 0;
+      margin: 0;
+      color: var(--color-text);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: 42px;
+      line-height: 1.35;
+      box-sizing: border-box;
+    }
+    .duration-features li svg {
+      stroke: #10B981;
+      flex-shrink: 0;
+    }
+    .duration-card .btn {
+      margin-top: auto;
+      font-size: 0.85rem;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 44px;
+      box-sizing: border-box;
+    }
 
-    /* Why Subscribe */
-    .stats-layout {
+    /* Featured Fleet Section */
+    .featured-fleet-section {
+      padding: 7rem 0;
+      background: var(--color-bg);
+    }
+    .fleet-grid-home {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .h-fleet-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+    }
+    .h-fleet-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(242, 106, 33, 0.3);
+    }
+    .h-fleet-img {
+      width: 100%;
+      height: 230px;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      display: block;
+      position: relative;
+      background-color: var(--color-surface);
+    }
+    .h-fleet-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      margin: 0;
+      padding: 0;
+      transition: transform var(--transition-slow);
+    }
+    .h-fleet-card:hover .h-fleet-img img {
+      transform: scale(1.05);
+    }
+    .h-fleet-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .h-fleet-body .btn {
+      margin-top: auto;
+    }
+    .h-fleet-brand {
+      font-size: 0.75rem;
+      color: var(--color-primary);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .h-fleet-title {
+      font-size: 1.25rem;
+      font-family: var(--font-heading);
+      margin: 0.25rem 0 0.75rem;
+    }
+    .h-fleet-price {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--color-primary);
+      margin-bottom: 0.75rem;
+    }
+    .h-fleet-price span {
+      font-size: 0.9rem;
+      font-weight: normal;
+      color: var(--color-text-muted);
+    }
+    .h-fleet-inclusions {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 6px;
+      padding: 0.35rem 0.6rem;
+      font-size: 0.75rem;
+      color: #10B981;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .home-cat-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      align-items: center;
+    }
+    .home-cat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 30px;
+      padding: 0.45rem 1.15rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-text);
+      transition: all var(--transition-fast);
+      box-shadow: var(--shadow-sm);
+    }
+    .home-cat-pill:hover {
+      background: var(--color-primary);
+      color: #fff;
+      border-color: var(--color-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(242, 106, 33, 0.3);
+    }
+
+    /* Comparison Table Section */
+    .comparison-section {
+      padding: 7rem 0;
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+    }
+    .comp-table-wrap {
+      margin-top: 3rem;
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--color-bg);
+      box-shadow: var(--shadow-md);
+    }
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    .comp-table th, .comp-table td {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .comp-table th {
+      background: var(--color-surface);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+    .comp-table th.highlight-col, .comp-table td.highlight-col {
+      background: rgba(242, 106, 33, 0.05);
+      border-left: 2px solid var(--color-primary);
+      border-right: 2px solid var(--color-primary);
+    }
+    .comp-table th.highlight-col {
+      background: rgba(242, 106, 33, 0.12);
+      color: var(--color-primary);
+      font-size: 1.05rem;
+    }
+    .comp-table tr:last-child td { border-bottom: none; }
+
+    /* Dashboard UI Callout Section */
+    .portal-section {
+      padding: 7rem 0;
+      background: var(--color-bg);
+    }
+    .portal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
       gap: 4rem;
       align-items: center;
     }
-    .stat-item { margin-bottom: 3rem; }
-    .stat-num { font-size: 4rem; font-family: var(--font-heading); color: var(--color-primary); line-height: 1; margin-bottom: 0.5rem; }
-    .stat-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
-    .stat-desc { color: var(--color-text-muted); }
-    .stats-img img { border-radius: 20px; box-shadow: var(--shadow-lg); }
+    .portal-img-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+      border: 1px solid var(--color-border);
+    }
+    .portal-img-wrap img {
+      width: 100%;
+      display: block;
+      height: auto;
+    }
+    .portal-section .btn-group {
+      justify-content: flex-start;
+    }
 
-    /* CTA Section */
+    /* Final CTA Section */
     .cta-section {
-      background: linear-gradient(135deg, var(--color-primary) 0%, #111 100%);
-      color: #fff;
+      padding: 6rem 0;
       text-align: center;
-      padding: 8rem 2rem;
+      background: var(--color-bg);
     }
-    .cta-section h2 { font-size: 4rem; margin-bottom: 1.5rem; }
-    .cta-section p { font-size: 1.25rem; margin-bottom: 3rem; opacity: 0.9; }
+    .cta-section .heading-lg {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .cta-section p {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-section .btn-primary {
+      color: #111215 !important;
+      font-weight: 700;
+    }
+    .cta-section .btn-glass {
+      color: #111215 !important;
+      border: 1.5px solid rgba(17, 18, 21, 0.25);
+      background: rgba(255, 255, 255, 0.7);
+      font-weight: 700;
+    }
+    .cta-section .btn-glass:hover {
+      background: rgba(255, 255, 255, 0.95);
+      border-color: rgba(17, 18, 21, 0.5);
+      color: #111215 !important;
+    }
 
-
+    /* Responsive */
     @media (max-width: 1024px) {
-      .hero { height: auto; padding: 180px 0 100px 0; }
-      .hero-content {
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 0 auto;
-      }
-      .hero-desc, .hero-content .eyebrow {
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-      }
-      .hero-glass-card { 
-        position: relative; 
-        bottom: auto; 
-        right: auto; 
-        width: 100%; 
-        max-width: 450px;
-        margin: 3rem auto 0 auto; 
-      }
+      .hero { min-height: auto; padding: 100px 0 50px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .inclusions-grid { grid-template-columns: repeat(2, 1fr); }
+      .journey-grid { grid-template-columns: repeat(2, 1fr); }
+      .duration-matrix-grid { grid-template-columns: repeat(2, 1fr); }
+      .fleet-grid-home { grid-template-columns: repeat(2, 1fr); }
+      .portal-grid { grid-template-columns: 1fr; }
     }
-    @media (max-width: 768px) {
-      .comparison-wrapper { flex-direction: column; }
-      .hero-glass-card { max-width: 100%; margin-top: 2rem; }
-      .fleet-card { flex: 0 0 calc((100% - 2rem) / 2); }
-      .stats-layout { grid-template-columns: 1fr; }
-      .flex-engine { height: 400px; }
-      .flex-orbit { width: 300px; height: 300px; }
-      .orbit-item:nth-child(1) { top: -40px; left: 110px; }
-      .orbit-item:nth-child(2) { top: 110px; right: -40px; }
-      .orbit-item:nth-child(3) { bottom: -40px; left: 110px; }
-      .orbit-item:nth-child(4) { top: 110px; left: -40px; }
-      .orbit-item { width: 80px; height: 80px; font-size: 0.75rem; }
-    }
-    @media (max-width: 576px) {
-      .fleet-card { flex: 0 0 100%; }
+    @media (max-width: 650px) {
+      .inclusions-grid { grid-template-columns: 1fr; }
+      .journey-grid { grid-template-columns: 1fr; }
+      .duration-matrix-grid { grid-template-columns: 1fr; }
+      .fleet-grid-home { grid-template-columns: 1fr; }
+      .duration-card.recommended { transform: none; }
+      .comp-table-wrap { overflow-x: auto; }
+      .comp-table { min-width: 600px; }
     }
   </style>
 </head>
@@ -212,10 +677,10 @@
   <div class="overlay" id="overlay"></div>
 
   <!-- Navbar -->
-  <nav class="navbar">
+  <nav class="navbar" id="navbar">
     <div class="container nav-container">
-      <a href="index.html" class="nav-logo">
-        <img src="assets/brand-mark.svg" alt="ORVEXA Logo">
+      <a href="index.html" class="nav-logo" aria-label="ORVEXA Home">
+        <img src="assets/brand-mark.svg" alt="ORVEXA Logo" height="38">
       </a>
       
       <ul class="nav-links">
@@ -258,21 +723,21 @@
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
     <ul class="nav-links">
-        <li class="nav-dropdown">
-          <a href="#" class="nav-link active" style="display: inline-flex; align-items: center; gap: 0.25rem;">Home <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
-          <div class="dropdown-menu">
-            <a href="index.html" class="dropdown-item active">Home 1</a>
-            <a href="home-2.html" class="dropdown-item">Home 2</a>
-          </div>
-        </li>
-        <li><a href="about.html" class="nav-link">About</a></li>
-        <li><a href="services.html" class="nav-link">Services</a></li>
-        <li><a href="fleet.html" class="nav-link">Fleet</a></li>
-        <li><a href="pricing.html" class="nav-link">Pricing</a></li>
-        <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
-        <li><a href="locations.html" class="nav-link">Locations</a></li>
-        <li><a href="contact.html" class="nav-link">Contact</a></li>
-        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+      <li class="nav-dropdown">
+        <a href="#" class="nav-link active" style="display: inline-flex; align-items: center; gap: 0.25rem;">Home <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="dropdown-menu">
+          <a href="index.html" class="dropdown-item active">Home 1</a>
+          <a href="home-2.html" class="dropdown-item">Home 2</a>
+        </div>
+      </li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="services.html" class="nav-link">Services</a></li>
+      <li><a href="fleet.html" class="nav-link">Fleet</a></li>
+      <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+      <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
+      <li><a href="locations.html" class="nav-link">Locations</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+      <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
     </ul>
     <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; margin-bottom: 2rem; width: 100%;">
       <button id="theme-toggle-mob" class="icon-btn" aria-label="Toggle Theme">
@@ -285,239 +750,566 @@
     <a href="login.html" class="btn btn-primary btn-full">Login</a>
   </div>
 
-  <!-- SECTION 1: HERO -->
+  <!-- SECTION 1: HERO (Issues 2, 6, 7) -->
   <header class="hero">
     <div class="hero-bg"></div>
     <div class="container relative">
-      <div class="hero-content fade-up">
-        <span class="eyebrow">Premium Car Subscription</span>
-        <h1 class="heading-xl">Drive More.<br>Commit Less.</h1>
-        <p class="hero-desc" style="font-size: 1.25rem; margin: 2rem 0; max-width: 500px; opacity: 0.9;">Premium cars, flexible monthly subscriptions, and the freedom to change your vehicle when life changes.</p>
-        <div class="btn-group">
-          <a href="fleet.html" class="btn btn-primary">Explore the Fleet</a>
-          <a href="pricing.html" class="btn btn-glass">Build My Subscription</a>
+      <div class="hero-grid">
+        
+        <!-- Hero Text -->
+        <div class="hero-content fade-up">
+          <div class="hero-eyebrow">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Car Subscription &bull; Flexible Leasing
+          </div>
+          <h1 class="hero-title">Drive Luxury.<br>Commit on Your Terms.</h1>
+          <p class="hero-desc">
+            Skip dealer down payments and long-term debt. Choose from 1 to 24 month flexible terms with insurance, routine maintenance, and seasonal vehicle swapping bundled into one monthly fee.
+          </p>
+          <div class="btn-group" style="margin-bottom: 1.15rem; justify-content: flex-start;">
+            <a href="fleet.html" class="btn btn-primary" style="padding: 0.75rem 1.5rem; font-size: 0.95rem;">Explore 18 Vehicles</a>
+            <a href="pricing.html" class="btn btn-glass" style="padding: 0.75rem 1.5rem; font-size: 0.95rem;">Compare Subscription Plans</a>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1.5rem; font-size: 0.85rem; color: #9ca3af;">
+            <span style="display: flex; align-items: center; gap: 0.4rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              $0 Capital Down
+            </span>
+            <span style="display: flex; align-items: center; gap: 0.4rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Min. 30 Days Commitment
+            </span>
+            <span style="display: flex; align-items: center; gap: 0.4rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Doorstep Handover
+            </span>
+          </div>
         </div>
-      </div>
-      
-      <div class="hero-glass-card fade-up" style="transition-delay: 0.2s;">
-        <div style="font-size:0.875rem; text-transform:uppercase; letter-spacing:1px; color:#aaa;">Starting From</div>
-        <div class="price">$899 <span style="font-size:1rem; font-weight:400; color:#ccc;">/ month</span></div>
-        <ul>
-          <li><span>BMW 5 Series or similar</span> <span>★</span></li>
-          <li><span>Flexible mileage</span> <span>✓</span></li>
-          <li><span>Maintenance included</span> <span>✓</span></li>
-          <li><span>Insurance coverage</span> <span>✓</span></li>
-        </ul>
+
+        <!-- Hero Quick Subscription Finder Widget -->
+        <div class="hero-finder-card fade-up" style="transition-delay: 0.15s;">
+          <div class="finder-title">
+            <span>Find Your Subscription</span>
+            <span>Fast 2-Min Approval</span>
+          </div>
+          <form class="finder-form" action="fleet.html" method="GET">
+            <div class="finder-group">
+              <label class="finder-label">Vehicle Type</label>
+              <select name="type" class="finder-select" id="quickFinderType">
+                <option value="all">All Fleet (Sedans, SUVs, EVs)</option>
+                <option value="suv">Luxury SUVs (Velar, G-Class, X5, R1S)</option>
+                <option value="electric">100% Electric (Tesla, Taycan, Lucid)</option>
+                <option value="sedan">Executive Sedans (BMW 5, Audi A3)</option>
+                <option value="performance">Performance & Sports (911, Supra)</option>
+              </select>
+            </div>
+            <div class="finder-group">
+              <label class="finder-label">Commitment Duration</label>
+              <select name="duration" class="finder-select" id="quickFinderDuration">
+                <option value="6">6 Months (Most Popular &bull; 15% Off)</option>
+                <option value="1">1 Month (Ultra-Flex &bull; 30-Day Min)</option>
+                <option value="3">3 Months (Seasonal &bull; Summer/Winter)</option>
+                <option value="12">12–24 Months (Max Value &bull; Up to 22% Off)</option>
+              </select>
+            </div>
+            <div class="finder-group">
+              <label class="finder-label">Monthly Budget</label>
+              <select name="budget" class="finder-select" id="quickFinderBudget">
+                <option value="all">Any Monthly Rate ($599 - $2,499)</option>
+                <option value="under-800">Under $800 / month ($0 down)</option>
+                <option value="800-1500">$800 - $1,500 / month (Premium Tier)</option>
+                <option value="over-1500">Over $1,500 / month (VIP Performance)</option>
+              </select>
+            </div>
+            <div class="finder-live-preview">
+              <div>
+                <small>Average Starting Subscription</small>
+                <span id="previewText" style="font-weight: 600; font-size: 0.95rem;">BMW 5 Series &bull; 6 Mo Plan</span>
+              </div>
+              <strong id="previewPrice">$899/mo</strong>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full" style="padding: 0.75rem; font-size: 0.9rem; margin-top: 0.25rem;">
+              Find Matching Vehicles &rarr;
+            </button>
+          </form>
+        </div>
+
       </div>
     </div>
   </header>
 
-  <!-- SECTION 2: SUBSCRIPTION VS OWNERSHIP -->
-  <section class="container" style="padding-top:10rem;">
-    <div class="text-center fade-up" style="margin-bottom: 4rem;">
-      <span class="eyebrow">A Smarter Way</span>
-      <h2 class="heading-lg">Subscription vs. Ownership</h2>
-    </div>
-    
-    <div class="comparison-wrapper fade-up">
-      <div class="comp-col comp-left">
-        <h3 style="font-size:2rem; margin-bottom:2rem; color:var(--color-text-muted);">Traditional Ownership</h3>
-        <ul class="comp-list">
-          <li><span>Upfront Costs</span> <strong>High Down Payment</strong></li>
-          <li><span>Commitment</span> <strong>36-60 Months</strong></li>
-          <li><span>Maintenance</span> <strong>Out of Pocket</strong></li>
-          <li><span>Insurance</span> <strong>Separate Cost</strong></li>
-          <li><span>Vehicle Changes</span> <strong>Trade-in Hassle</strong></li>
-          <li><span>Depreciation</span> <strong>Your Risk</strong></li>
-        </ul>
-      </div>
-      <div class="comp-col comp-right">
-        <h3 style="font-size:2rem; margin-bottom:2rem;">ORVEXA Subscription</h3>
-        <ul class="comp-list">
-          <li><span>Upfront Costs</span> <strong>$0 Down Options</strong></li>
-          <li><span>Commitment</span> <strong>Monthly Flexibility</strong></li>
-          <li><span>Maintenance</span> <strong>Fully Included</strong></li>
-          <li><span>Insurance</span> <strong>Included in Plan</strong></li>
-          <li><span>Vehicle Changes</span> <strong>Swap Anytime</strong></li>
-          <li><span>Depreciation</span> <strong>Not Your Problem</strong></li>
-        </ul>
+  <!-- KEY INCLUSIONS RIBBON (Issue 6, 8) -->
+  <section class="inclusions-ribbon">
+    <div class="container">
+      <div class="inclusions-grid">
+        <div class="inclusion-item">
+          <div class="inclusion-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+          </div>
+          <div class="inclusion-text">
+            <strong>Full Insurance</strong>
+            <span>Comprehensive & Collision</span>
+          </div>
+        </div>
+        <div class="inclusion-item">
+          <div class="inclusion-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 10h3v-3l-3.5-3.5a6 6 0 0 1 8 8l6 6a2 2 0 0 1-3 3l-6-6a6 6 0 0 1-8-8l3.5 3.5"/>
+            </svg>
+          </div>
+          <div class="inclusion-text">
+            <strong>$0 Maintenance</strong>
+            <span>Tires, Brakes & Service</span>
+          </div>
+        </div>
+        <div class="inclusion-item">
+          <div class="inclusion-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 10h14l-4-4"/>
+              <path d="M17 14H3l4 4"/>
+            </svg>
+          </div>
+          <div class="inclusion-text">
+            <strong>Vehicle Swaps</strong>
+            <span>Switch Models Seasonally</span>
+          </div>
+        </div>
+        <div class="inclusion-item">
+          <div class="inclusion-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/>
+              <path d="M15 18H9"/>
+              <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/>
+              <circle cx="17" cy="18" r="2"/>
+              <circle cx="7" cy="18" r="2"/>
+            </svg>
+          </div>
+          <div class="inclusion-text">
+            <strong>48-Hr Delivery</strong>
+            <span>Direct to Home or Office</span>
+          </div>
+        </div>
+        <div class="inclusion-item">
+          <div class="inclusion-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="5" width="20" height="14" rx="2"/>
+              <line x1="2" y1="10" x2="22" y2="10"/>
+              <line x1="6" y1="14" x2="8" y2="14"/>
+              <line x1="12" y1="14" x2="16" y2="14"/>
+            </svg>
+          </div>
+          <div class="inclusion-text">
+            <strong>$0 Capital Down</strong>
+            <span>No Heavy Initial Outlay</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 3: FEATURED FLEET -->
-  <section style="background-color: var(--color-surface); margin-top:6rem; overflow:hidden;">
+  <!-- SPECIAL OFFER BANNER (Issue 6, 8) -->
+  <div class="container">
+    <div class="special-offer-banner fade-up">
+      <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+        <span class="promo-badge">Limited-Time Offer</span>
+        <div>
+          <strong style="font-size: 1.1rem; display: block; color: var(--color-text);">Get $150 Off First 3 Months + Free Valet Handover</strong>
+          <span style="font-size: 0.85rem; color: var(--color-text-muted);">Applicable to all 3+ month subscriptions for new ORVEXA members.</span>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <div>Use Code: <span class="promo-code">FLEXDRIVE</span></div>
+        <a href="fleet.html" class="btn btn-primary" style="padding: 0.6rem 1.25rem; font-size: 0.875rem;">Claim Offer</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: 4-STEP USER JOURNEY (Issues 2, 6, 7, 9) -->
+  <section class="journey-section">
+    <div class="container">
+      <div class="text-center fade-up">
+        <span class="eyebrow">Clear User Journey</span>
+        <h2 class="heading-lg">How Car Subscription Works in 4 Steps.</h2>
+        <p class="text-muted" style="max-width: 620px; margin: 1rem auto 0;">
+          Experience modern personal mobility without dealership haggling, financing contracts, or DMV lines.
+        </p>
+      </div>
+
+      <div class="journey-grid">
+        <!-- Step 1 -->
+        <div class="journey-card fade-up">
+          <div class="journey-card-img">
+            <img src="assets/images/Choose Vehicle & Term.png" alt="Choose Vehicle &amp; Term" loading="lazy">
+          </div>
+          <div class="journey-card-body">
+            <h3 class="journey-title">Choose Vehicle &amp; Term</h3>
+            <p class="journey-desc">Select from 18 pristine sedans, SUVs, or high-performance EVs. Pick your commitment: 1, 3, 6, or 12–24 months.</p>
+            <div class="journey-tag">✓ 1 to 24 mo flexible terms</div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="journey-card fade-up" style="transition-delay: 0.1s;">
+          <div class="journey-card-img">
+            <img src="assets/images/2-Min Digital Approval.png" alt="2-Min Digital Approval" loading="lazy">
+          </div>
+          <div class="journey-card-body">
+            <h3 class="journey-title">2-Min Digital Approval</h3>
+            <p class="journey-desc">Upload your valid driver's license. Our automated system performs an instant soft credit check with zero credit impact.</p>
+            <div class="journey-tag">✓ 100% paperless verification</div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="journey-card fade-up" style="transition-delay: 0.2s;">
+          <div class="journey-card-img">
+            <img src="assets/images/White-Glove Delivery-1.png" alt="White-Glove Delivery" loading="lazy">
+          </div>
+          <div class="journey-card-body">
+            <h3 class="journey-title">White-Glove Delivery</h3>
+            <p class="journey-desc">A mobility concierge details your vehicle, completes digital orientation, and delivers it to your doorstep in 48 hours.</p>
+            <div class="journey-tag">✓ Full tank / 100% EV battery</div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="journey-card fade-up" style="transition-delay: 0.3s;">
+          <div class="journey-card-img">
+            <img src="assets/images/Drive, Swap or Return.png" alt="Drive, Swap or Return" loading="lazy">
+          </div>
+          <div class="journey-card-body">
+            <h3 class="journey-title">Drive, Swap or Return</h3>
+            <p class="journey-desc">Enjoy covered driving. When your needs change, swap into an SUV or sports car, pause your term, or return with no penalties.</p>
+            <div class="journey-tag">✓ Complimentary seasonal swap</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: SUBSCRIPTION DURATION & LEASE PERIODS (Issue 6, 8) -->
+  <section class="duration-section">
+    <div class="container">
+      <div class="text-center fade-up">
+        <span class="eyebrow">Duration Matrix</span>
+        <h2 class="heading-lg">Available Subscription Durations & Inclusions.</h2>
+        <p class="text-muted" style="max-width: 650px; margin: 1rem auto 0;">
+          Transparent commitments designed around your lifestyle. Minimum lease period is 30 days; maximum is 24 months with automatic rollover.
+        </p>
+      </div>
+
+      <div class="duration-matrix-grid">
+        <!-- 1 Month -->
+        <div class="duration-card fade-up">
+          <div class="duration-subtitle">Tier 1: Maximum Freedom</div>
+          <div class="duration-time">1 Mo</div>
+          <p class="duration-desc">Month-to-month freedom. Min lease: 30 days.</p>
+          <ul class="duration-features">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Cancel anytime (7 days notice)</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Full insurance included</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> $0 Routine maintenance</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 1,000 miles/month</li>
+          </ul>
+          <a href="fleet.html" class="btn btn-secondary btn-full">View 1-Mo Rates</a>
+        </div>
+
+        <!-- 3 Months -->
+        <div class="duration-card fade-up" style="transition-delay: 0.1s;">
+          <div class="duration-subtitle">Tier 2: Seasonal Mobility</div>
+          <div class="duration-time">3 Mo</div>
+          <p class="duration-desc">Ideal for seasonal projects or trial runs.</p>
+          <ul class="duration-features">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> ~8% rate discount vs 1-mo</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Full insurance & roadside</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 1,200 miles/month</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Eligible for FLEXDRIVE promo</li>
+          </ul>
+          <a href="fleet.html" class="btn btn-secondary btn-full">View 3-Mo Rates</a>
+        </div>
+
+        <!-- 6 Months -->
+        <div class="duration-card recommended fade-up" style="transition-delay: 0.2s;">
+          <div class="duration-badge-top">Most Popular</div>
+          <div class="duration-subtitle">Tier 3: Best Balance</div>
+          <div class="duration-time">6 Mo</div>
+          <p class="duration-desc">The sweet spot of flexibility and savings.</p>
+          <ul class="duration-features">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 15% rate discount</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 1 Free Vehicle Swap included</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 1,200 miles/month (Rollover)</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Waived security deposit</li>
+          </ul>
+          <a href="fleet.html" class="btn btn-primary btn-full">View 6-Mo Rates</a>
+        </div>
+
+        <!-- 12-24 Months -->
+        <div class="duration-card fade-up" style="transition-delay: 0.3s;">
+          <div class="duration-subtitle">Tier 4: Maximum Savings</div>
+          <div class="duration-time">12–24 Mo</div>
+          <p class="duration-desc">Lowest monthly rates with max perks.</p>
+          <ul class="duration-features">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Up to 22% rate discount</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 2 Free Vehicle Swaps / year</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 1,500 miles/month</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Annual upgrade priority</li>
+          </ul>
+          <a href="fleet.html" class="btn btn-secondary btn-full">View 12-Mo Rates</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: FEATURED SUBSCRIPTION FLEET (Issues 2, 4, 7) -->
+  <section class="featured-fleet-section">
     <div class="container">
       <div class="section-header-flex fade-up">
         <div>
-          <span class="eyebrow">Our Vehicles</span>
-          <h2 class="heading-lg">Featured Fleet</h2>
+          <span class="eyebrow">Subscription Fleet</span>
+          <h2 class="heading-lg">Featured Vehicles Ready in 48 Hours.</h2>
         </div>
-        <div style="display:flex; align-items:center; gap: 1rem;">
-          <div class="slider-arrows" style="display:flex; gap: 0.5rem;">
-            <button id="fleet-prev" class="icon-btn" aria-label="Previous" style="border:1px solid var(--color-border); background:var(--color-surface); width:40px; height:40px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
-            <button id="fleet-next" class="icon-btn" aria-label="Next" style="border:1px solid var(--color-border); background:var(--color-surface); width:40px; height:40px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
-          </div>
-          <a href="fleet.html" class="btn btn-secondary">View All Vehicles</a>
+        <div>
+          <a href="fleet.html" class="btn btn-primary">Browse All 18 Vehicles &rarr;</a>
         </div>
       </div>
-      
-      <div class="fleet-scroll fade-up">
-        <!-- Vehicle 1 -->
-        <div class="fleet-card">
-          <div class="fleet-img">
-            <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=800&auto=format&fit=crop" alt="Luxury Sedan">
+
+      <!-- Vehicle Types Available Strip -->
+      <div class="home-cat-strip fade-up">
+        <span style="font-size: 0.825rem; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-right: 0.35rem;">Types Available:</span>
+        <a href="fleet.html" class="home-cat-pill">Executive Sedans (from $699/mo)</a>
+        <a href="fleet.html" class="home-cat-pill">Luxury SUVs (from $850/mo)</a>
+        <a href="fleet.html" class="home-cat-pill">100% Electric (from $799/mo)</a>
+        <a href="fleet.html" class="home-cat-pill">Sports & Performance (from $1,699/mo)</a>
+      </div>
+
+      <div class="fleet-grid-home">
+
+        <!-- Vehicle 1: BMW 5 Series -->
+        <div class="h-fleet-card fade-up">
+          <div class="h-fleet-img">
+            <img src="assets/images/BMW 5 Series (2025).png" alt="2025 BMW 5 Series M-Sport" loading="lazy">
           </div>
-          <div class="fleet-info">
-            <div style="color:var(--color-text-muted); font-size:0.875rem; margin-bottom:0.25rem;">Luxury Sedan</div>
-            <div class="fleet-title">BMW 5 Series</div>
-            <div class="fleet-price">$899<span style="font-size:1rem; font-weight:400; color:var(--color-text-muted)">/mo</span></div>
-            <div class="spec-row">
-              <span>Automatic</span>
-              <span>Hybrid</span>
-              <span>1,200 mi/mo</span>
+          <div class="h-fleet-body">
+            <span class="h-fleet-brand">BMW &bull; Min 1 mo &bull; Max 24 mo</span>
+            <h3 class="h-fleet-title">2025 BMW 5 Series M-Sport</h3>
+            <div class="h-fleet-price">$899<span>/mo (6-mo term)</span></div>
+            <div class="h-fleet-inclusions">✓ Full Insurance + $0 Maintenance Included</div>
+            <div style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">
+              375 HP Turbo Hybrid &bull; 8-Spd Auto &bull; 1.2k mi/mo
             </div>
+            <a href="fleet.html" class="btn btn-secondary btn-full">Configure Subscription</a>
           </div>
         </div>
-        <!-- Vehicle 2 -->
-        <div class="fleet-card">
-          <div class="fleet-img">
-            <img src="assets/images/Range Rover Velar.png" alt="Premium SUV">
+
+        <!-- Vehicle 2: Range Rover Velar -->
+        <div class="h-fleet-card fade-up" style="transition-delay: 0.1s;">
+          <div class="h-fleet-img">
+            <img src="assets/images/Range Rover Velar (2025).png" alt="2025 Range Rover Velar" loading="lazy">
           </div>
-          <div class="fleet-info">
-            <div style="color:var(--color-text-muted); font-size:0.875rem; margin-bottom:0.25rem;">Premium SUV</div>
-            <div class="fleet-title">Range Rover Velar</div>
-            <div class="fleet-price">$1,199<span style="font-size:1rem; font-weight:400; color:var(--color-text-muted)">/mo</span></div>
-            <div class="spec-row">
-              <span>Automatic</span>
-              <span>Gasoline</span>
-              <span>1,200 mi/mo</span>
+          <div class="h-fleet-body">
+            <span class="h-fleet-brand">Land Rover &bull; Min 1 mo &bull; Max 24 mo</span>
+            <h3 class="h-fleet-title">2025 Range Rover Velar</h3>
+            <div class="h-fleet-price">$1,199<span>/mo (6-mo term)</span></div>
+            <div class="h-fleet-inclusions">✓ Full Insurance + $0 Maintenance Included</div>
+            <div style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">
+              395 HP Twin-Turbo AWD &bull; 8-Spd Auto &bull; 1.2k mi/mo
             </div>
+            <a href="fleet.html" class="btn btn-secondary btn-full">Configure Subscription</a>
           </div>
         </div>
-        <!-- Vehicle 3 -->
-        <div class="fleet-card">
-          <div class="fleet-img">
-            <img src="assets/images/Tesla Model 3.png" alt="Electric">
+
+        <!-- Vehicle 3: Tesla Model 3 Long Range -->
+        <div class="h-fleet-card fade-up" style="transition-delay: 0.2s;">
+          <div class="h-fleet-img">
+            <img src="assets/images/Model 3 Long Range.png" alt="2025 Tesla Model 3 Long Range" loading="lazy">
           </div>
-          <div class="fleet-info">
-            <div style="color:var(--color-text-muted); font-size:0.875rem; margin-bottom:0.25rem;">Electric</div>
-            <div class="fleet-title">Tesla Model 3</div>
-            <div class="fleet-price">$799<span style="font-size:1rem; font-weight:400; color:var(--color-text-muted)">/mo</span></div>
-            <div class="spec-row">
-              <span>Automatic</span>
-              <span>Electric</span>
-              <span>1,000 mi/mo</span>
+          <div class="h-fleet-body">
+            <span class="h-fleet-brand">Tesla &bull; Min 1 mo &bull; Max 24 mo</span>
+            <h3 class="h-fleet-title">Tesla Model 3 Long Range</h3>
+            <div class="h-fleet-price">$799<span>/mo (6-mo term)</span></div>
+            <div class="h-fleet-inclusions">✓ Supercharging Credits + Full Insurance</div>
+            <div style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">
+              358 mi EV Dual Motor &bull; Direct Drive &bull; 1.2k mi/mo
             </div>
+            <a href="fleet.html" class="btn btn-secondary btn-full">Configure Subscription</a>
           </div>
         </div>
-        <!-- Vehicle 4 -->
-        <div class="fleet-card">
-          <div class="fleet-img">
-            <img src="assets/images/Porsche 911.png" alt="Performance">
+
+        <!-- Vehicle 4: Porsche Taycan 4S -->
+        <div class="h-fleet-card fade-up">
+          <div class="h-fleet-img">
+            <img src="assets/images/Taycan 4S.png" alt="2025 Porsche Taycan 4S" loading="lazy">
           </div>
-          <div class="fleet-info">
-            <div style="color:var(--color-text-muted); font-size:0.875rem; margin-bottom:0.25rem;">Performance</div>
-            <div class="fleet-title">Porsche 911</div>
-            <div class="fleet-price">$2,499<span style="font-size:1rem; font-weight:400; color:var(--color-text-muted)">/mo</span></div>
-            <div class="spec-row">
-              <span>PDK</span>
-              <span>Gasoline</span>
-              <span>800 mi/mo</span>
+          <div class="h-fleet-body">
+            <span class="h-fleet-brand">Porsche &bull; Min 1 mo &bull; Max 24 mo</span>
+            <h3 class="h-fleet-title">Porsche Taycan 4S</h3>
+            <div class="h-fleet-price">$1,899<span>/mo (6-mo term)</span></div>
+            <div class="h-fleet-inclusions">✓ High-Voltage Fast Charging + Full Insurance</div>
+            <div style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">
+              530 HP Dual EV &bull; 2-Spd EV &bull; 1.0k mi/mo
             </div>
+            <a href="fleet.html" class="btn btn-secondary btn-full">Configure Subscription</a>
           </div>
         </div>
-        <!-- Vehicle 5 -->
-        <div class="fleet-card">
-          <div class="fleet-img" style="background: #fff; padding-top: 1rem;">
-            <img src="assets/images/Audi A3.png" alt="Premium Compact" style="object-fit: contain;">
+
+        <!-- Vehicle 5: Audi Q5 Premium Plus -->
+        <div class="h-fleet-card fade-up" style="transition-delay: 0.1s;">
+          <div class="h-fleet-img">
+            <img src="assets/images/Q5 Premium Plus.png" alt="Audi Q5 Premium Plus" loading="lazy">
           </div>
-          <div class="fleet-info">
-            <div style="color:var(--color-text-muted); font-size:0.875rem; margin-bottom:0.25rem;">Premium Compact</div>
-            <div class="fleet-title">Audi A3</div>
-            <div class="fleet-price">$699<span style="font-size:1rem; font-weight:400; color:var(--color-text-muted)">/mo</span></div>
-            <div class="spec-row">
-              <span>Automatic</span>
-              <span>Gasoline</span>
+          <div class="h-fleet-body">
+            <span class="h-fleet-brand">Audi &bull; Min 1 mo &bull; Max 24 mo</span>
+            <h3 class="h-fleet-title">Audi Q5 Premium Plus</h3>
+            <div class="h-fleet-price">$850<span>/mo (6-mo term)</span></div>
+            <div class="h-fleet-inclusions">✓ Routine Service + Full Insurance Included</div>
+            <div style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">
+              261 HP Turbo quattro &bull; 7-Spd S tronic &bull; 1.2k mi/mo
             </div>
+            <a href="fleet.html" class="btn btn-secondary btn-full">Configure Subscription</a>
           </div>
         </div>
-        <!-- Vehicle 6 -->
-        <div class="fleet-card">
-          <div class="fleet-img">
-            <img src="assets/images/Polestar 2.png" alt="Electric Fastback">
+
+        <!-- Vehicle 6: Mini Cooper S -->
+        <div class="h-fleet-card fade-up" style="transition-delay: 0.2s;">
+          <div class="h-fleet-img">
+            <img src="assets/images/Cooper S.png" alt="Mini Cooper S" loading="lazy">
           </div>
-          <div class="fleet-info">
-            <div style="color:var(--color-text-muted); font-size:0.875rem; margin-bottom:0.25rem;">Electric Fastback</div>
-            <div class="fleet-title">Polestar 2</div>
-            <div class="fleet-price">$849<span style="font-size:1rem; font-weight:400; color:var(--color-text-muted)">/mo</span></div>
-            <div class="spec-row">
-              <span>Automatic</span>
-              <span>Gasoline</span>
-              <span>1,200 mi/mo</span>
+          <div class="h-fleet-body">
+            <span class="h-fleet-brand">Mini &bull; Min 1 mo &bull; Max 24 mo</span>
+            <h3 class="h-fleet-title">Mini Cooper S Hardtop</h3>
+            <div class="h-fleet-price">$599<span>/mo (6-mo term)</span></div>
+            <div class="h-fleet-inclusions">✓ All-Inclusive &bull; Brakes, Tires & Roadside</div>
+            <div style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">
+              189 HP TwinPower &bull; 7-Spd Dual-Clutch &bull; 1.2k mi/mo
             </div>
+            <a href="fleet.html" class="btn btn-secondary btn-full">Configure Subscription</a>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- SECTION 4: FLEXIBILITY ENGINE -->
-  <section class="flex-engine fade-up">
-    <div class="flex-orbit">
-      <div class="orbit-item">SUBSCRIBE</div>
-      <div class="orbit-item">DRIVE</div>
-      <div class="orbit-item">SWAP</div>
-      <div class="orbit-item">RENEW</div>
-    </div>
-    <div class="flex-center">
-      <h2 style="font-family:var(--font-heading); margin-bottom:1rem;">Your Drive.<br>Your Rules.</h2>
-      <p style="max-width:300px; margin:0 auto; color:var(--color-text-muted);">Flexible terms, vehicle swaps, and all-inclusive maintenance.</p>
-    </div>
-  </section>
-
-  <!-- SECTION 5: WHY SUBSCRIBE -->
-  <section class="container">
-    <div class="stats-layout">
-      <div class="stats-text fade-up">
-        <span class="eyebrow">The ORVEXA Advantage</span>
-        <h2 class="heading-lg" style="margin-bottom:3rem;">Mobility Reimagined.</h2>
-        
-        <div class="stat-item">
-          <div class="stat-num">01</div>
-          <div class="stat-title">Flexible monthly terms</div>
-          <div class="stat-desc">Commit to a month, or stay for a year. It's entirely up to you.</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">02</div>
-          <div class="stat-title">Vehicle swap options</div>
-          <div class="stat-desc">Need an SUV for the winter and a convertible for the summer? Swap easily through the app.</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">03</div>
-          <div class="stat-title">Maintenance included</div>
-          <div class="stat-desc">We handle all routine maintenance, tire changes, and unexpected repairs.</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">04</div>
-          <div class="stat-title">Digital account management</div>
-          <div class="stat-desc">Control your subscription, schedule swaps, and track mileage entirely from your dashboard.</div>
-        </div>
-      </div>
-      <div class="stats-img fade-up" style="transition-delay: 0.2s;">
-        <img src="assets/images/Mobility Reimagined.png" alt="Mobility Reimagined" style="width: 100%; height: auto;">
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 6: CTA -->
-  <section class="cta-section fade-up">
+  <!-- SECTION 5: TRANSPARENT COMPARISON TABLE (Issue 6, 8) -->
+  <section class="comparison-section">
     <div class="container">
-      <h2 class="heading-lg">Your next car should fit your life.</h2>
-      <p>Explore available vehicles and build a subscription that works around you.</p>
-      <div class="btn-group">
-        <a href="fleet.html" class="btn btn-primary">Explore Available Cars</a>
-        <a href="pricing.html" class="btn btn-glass">Compare Plans</a>
+      <div class="text-center fade-up">
+        <span class="eyebrow">Cost & Value Comparison</span>
+        <h2 class="heading-lg">Why Subscription Beats Buying and Traditional Leases.</h2>
+        <p class="text-muted" style="max-width: 650px; margin: 1rem auto 0;">
+          A transparent look at real costs over 12 months with no hidden dealership fees.
+        </p>
+      </div>
+
+      <div class="comp-table-wrap fade-up">
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>Feature & Cost Breakdown</th>
+              <th>Traditional Purchase</th>
+              <th>Dealership Lease</th>
+              <th class="highlight-col">ORVEXA Subscription</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Upfront Down Payment</strong></td>
+              <td>$5,000 – $10,000 capital lost</td>
+              <td>$3,000 – $6,000 due at signing</td>
+              <td class="highlight-col"><strong style="color:#10B981;">$0 Down Payment</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Commitment Duration</strong></td>
+              <td>48 – 72 months of loan debt</td>
+              <td>36 – 48 months rigid contract</td>
+              <td class="highlight-col"><strong>1 to 24 Months (Flexible)</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Comprehensive Insurance</strong></td>
+              <td>$180 – $300/mo extra out-of-pocket</td>
+              <td>$180 – $300/mo extra out-of-pocket</td>
+              <td class="highlight-col"><strong style="color:#10B981;">100% Included in Monthly Fee</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Routine Maintenance & Tires</strong></td>
+              <td>$100 – $250/mo out-of-pocket</td>
+              <td>Customer responsibility</td>
+              <td class="highlight-col"><strong style="color:#10B981;">$0 Cost &bull; Concierge Handled</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Vehicle Swapping</strong></td>
+              <td>Negative equity / sales loss</td>
+              <td>Heavy early termination penalty</td>
+              <td class="highlight-col"><strong style="color:#10B981;">Free Seasonal Swaps via App</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Depreciation Risk</strong></td>
+              <td>100% on vehicle owner</td>
+              <td>Disposal risk at lease-end</td>
+              <td class="highlight-col"><strong style="color:#10B981;">Zero Risk &bull; Hand Keys Back</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Doorstep Handover</strong></td>
+              <td>DMV lines & dealer waitrooms</td>
+              <td>In-person showroom visit</td>
+              <td class="highlight-col"><strong>Delivered to You in 48 Hours</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: SUBSCRIBER PORTAL & MANAGEMENT APP (Issue 4, 6, 7) -->
+  <section class="portal-section">
+    <div class="container portal-grid">
+      <div class="fade-up">
+        <span class="eyebrow">Digital Command Center</span>
+        <h2 class="heading-lg" style="margin-bottom: 1.5rem;">Your Garage in Your Pocket.</h2>
+        <p class="text-muted" style="line-height: 1.7; margin-bottom: 1.5rem;">
+          From mileage tracking to scheduling your next seasonal vehicle swap, the ORVEXA Subscriber Portal provides effortless control over your automotive life from desktop or mobile.
+        </p>
+        <ul style="list-style: none; padding: 0; margin-bottom: 2rem;">
+          <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; font-weight: 500;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Live real-time mileage tracker with automatic rollover
+          </li>
+          <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; font-weight: 500;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Schedule vehicle swaps with 1 click &bull; 48-hour delivery
+          </li>
+          <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; font-weight: 500;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            $0 maintenance concierge service booking
+          </li>
+          <li style="display: flex; align-items: center; gap: 0.75rem; font-weight: 500;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Digital key handover & roadside emergency dispatch
+          </li>
+        </ul>
+        <div class="btn-group" style="justify-content: flex-start;">
+          <a href="dashboard.html" class="btn btn-primary">Preview Subscriber Portal</a>
+          <a href="register.html" class="btn btn-secondary">Get Pre-Approved</a>
+        </div>
+      </div>
+      <div class="fade-up portal-img-wrap" style="transition-delay: 0.15s;">
+        <img src="assets/images/Your Garage in Your Pocket.png" alt="Your Garage in Your Pocket - ORVEXA Subscriber Portal" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: FINAL CTA (Issue 8) -->
+  <section class="cta-section fade-up">
+    <div class="container text-center">
+      <h2 class="heading-lg" style="margin-bottom: 1rem; text-align: center;">Ready for Driving Freedom?</h2>
+      <p style="max-width: 600px; margin: 0 auto 2.5rem; opacity: 0.95; text-align: center;">
+        Join thousands of drivers enjoying luxury vehicles with $0 down, full insurance, and month-to-month flexibility. Fast 2-minute digital approval.
+      </p>
+      <div class="btn-group" style="justify-content: center;">
+        <a href="fleet.html" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.05rem; color: #111215; font-weight: 700;">Explore Available Vehicles</a>
+        <a href="pricing.html" class="btn btn-glass" style="padding: 1rem 2rem; font-size: 1.05rem; color: #111215; font-weight: 700; border: 1.5px solid rgba(17,18,21,0.25); background: rgba(255,255,255,0.7);">Compare Plans & Terms</a>
       </div>
     </div>
   </section>
@@ -527,8 +1319,8 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="assets/brand-mark.svg" alt="ORVEXA">
-          <p>The premium car subscription service designed for modern flexibility. Drive more, commit less.</p>
+          <img src="assets/brand-mark.svg" alt="ORVEXA" height="34">
+          <p>The premium car subscription and flexible leasing service. Drive the world's finest vehicles on your terms.</p>
           <div class="social-links">
             <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
             <a href="#" aria-label="X (Twitter)"><svg width="18" height="18" viewBox="-1.5 -1.5 27 27" fill="currentColor" stroke="none"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
@@ -558,22 +1350,58 @@
           <div class="footer-links">
             <a href="#">Terms & Conditions</a>
             <a href="#">Privacy Policy</a>
-            <a href="#">Cookie Policy</a>
+            <a href="#">Subscription Agreement</a>
           </div>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 ORVEXA Mobility. All rights reserved.</p>
-        <p>Designed for Flexibility.</p>
+        <p>&copy; 2026 ORVEXA Mobility Inc. All rights reserved.</p>
+        <p>Car Subscription &bull; Flexible Leasing &bull; $0 Down</p>
       </div>
     </div>
     
-    <!-- Scroll to Top Button -->
     <button id="scroll-to-top" class="scroll-to-top" aria-label="Scroll to top">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
     </button>
   </footer>
 
   <script src="assets/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Dynamic live preview in Quick Finder
+      const typeSelect = document.getElementById('quickFinderType');
+      const durationSelect = document.getElementById('quickFinderDuration');
+      const previewText = document.getElementById('previewText');
+      const previewPrice = document.getElementById('previewPrice');
+
+      const updatePreview = () => {
+        const type = typeSelect.value;
+        const duration = durationSelect.value;
+
+        let carName = 'BMW 5 Series';
+        let basePrice = 899;
+
+        if (type === 'suv') { carName = 'Range Rover Velar'; basePrice = 1199; }
+        else if (type === 'electric') { carName = 'Tesla Model 3 LR'; basePrice = 799; }
+        else if (type === 'sedan') { carName = 'Audi A3 Premium'; basePrice = 699; }
+        else if (type === 'performance') { carName = 'Porsche 911'; basePrice = 2499; }
+
+        let multiplier = 1;
+        let termLabel = '6 Mo Plan';
+        if (duration === '1') { multiplier = 1.1; termLabel = '1 Mo Flex'; }
+        else if (duration === '3') { multiplier = 1.05; termLabel = '3 Mo Plan'; }
+        else if (duration === '12') { multiplier = 0.9; termLabel = '12 Mo Plan'; }
+
+        const calculated = Math.round(basePrice * multiplier);
+        previewText.textContent = `${carName} • ${termLabel}`;
+        previewPrice.textContent = `$${calculated}/mo`;
+      };
+
+      if (typeSelect && durationSelect) {
+        typeSelect.addEventListener('change', updatePreview);
+        durationSelect.addEventListener('change', updatePreview);
+      }
+    });
+  </script>
 </body>
 </html>

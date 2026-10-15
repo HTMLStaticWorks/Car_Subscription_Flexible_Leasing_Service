@@ -125,6 +125,64 @@
       .pricing-grid { grid-template-columns: 1fr; }
       .included-grid { grid-template-columns: 1fr; }
     }
+
+    /* FAQ Accordion */
+    .faq-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .faq-item {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .faq-item:hover {
+      border-color: rgba(242, 106, 33, 0.4);
+      box-shadow: var(--shadow-sm);
+    }
+    .faq-btn {
+      width: 100%;
+      text-align: left;
+      padding: 1.35rem 1.75rem;
+      background: none;
+      border: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-text);
+      gap: 1rem;
+    }
+    .faq-icon {
+      transition: transform var(--transition-fast);
+      color: var(--color-primary);
+      flex-shrink: 0;
+    }
+    .faq-btn.active .faq-icon {
+      transform: rotate(180deg);
+    }
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease-out, padding 0.3s ease;
+      padding: 0 1.75rem;
+    }
+    .faq-btn.active + .faq-content {
+      max-height: 350px;
+      padding: 0 1.75rem 1.5rem;
+    }
+    .faq-content p {
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      margin: 0;
+    }
   </style>
 </head>
 <body>
@@ -208,6 +266,15 @@
         </div>
         <span class="toggle-label" id="label-annual">12-Month Commitment (Save 15%)</span>
       </div>
+
+      <!-- Special Offer Banner -->
+      <div style="background: linear-gradient(135deg, rgba(242,106,33,0.12) 0%, rgba(217,56,30,0.08) 100%); border: 1px solid rgba(242,106,33,0.3); border-radius: 12px; padding: 1rem 1.5rem; max-width: 750px; margin: 1.5rem auto 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span style="background: var(--color-primary); color: #fff; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 20px; text-transform: uppercase;">Promo</span>
+          <span style="font-size: 0.9rem; font-weight: 600; color: var(--color-text);">Get $150 off first 3 months with code <span style="font-family: monospace; background: var(--color-surface); border: 1px dashed var(--color-primary); color: var(--color-primary); padding: 0.2rem 0.5rem; border-radius: 4px;">FLEXDRIVE</span></span>
+        </div>
+        <span style="font-size: 0.8rem; color: #10B981; font-weight: 600;">✓ $0 Down Payment Guaranteed</span>
+      </div>
     </div>
   </header>
 
@@ -225,7 +292,7 @@
           <li><span class="p-icon">✓</span> Compact & Midsize Sedans</li>
           <li><span class="p-icon">✓</span> 800 miles / month</li>
           <li><span class="p-icon">✓</span> Basic Maintenance</li>
-          <li><span class="p-icon">âœ—</span> Vehicle Swaps</li>
+          <li><span style="color:var(--color-text-muted); margin-right: 0.5rem;">✕</span> <span style="color:var(--color-text-muted);">Vehicle Swaps</span></li>
           <li><span class="p-icon">✓</span> Standard Support</li>
         </ul>
         <a href="register.html" class="btn btn-secondary btn-full">Choose Essential</a>
@@ -389,350 +456,142 @@
     </div>
   </section>
 
-
-  <!-- FOOTER -->
-  <footer class="footer">
+  <!-- Section: Durations & Eligibility (Issues 6, 8) -->
+  <section style="padding: 6rem 0; background: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
     <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <img src="assets/brand-mark.svg" alt="ORVEXA">
-          <p>The premium car subscription service designed for modern flexibility. Drive more, commit less.</p>
-          <div class="social-links">
-            <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-            <a href="#" aria-label="X (Twitter)"><svg width="18" height="18" viewBox="-1.5 -1.5 27 27" fill="currentColor" stroke="none"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
-            <a href="#" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
-          </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;" class="comp-grid-custom">
+        <div class="fade-up">
+          <span class="eyebrow">Commitment Flexibility</span>
+          <h2 class="heading-lg" style="margin-bottom: 1.5rem;">Subscription Durations & Lease Periods.</h2>
+          <p class="text-muted" style="line-height: 1.7; margin-bottom: 1.5rem;">
+            Whether you need a car for an extended summer getaway or a full two-year executive term, our subscription model scales around your exact timeframe.
+          </p>
+          <ul style="list-style: none; padding: 0;">
+            <li style="display: flex; justify-content: space-between; padding: 0.85rem 0; border-bottom: 1px solid var(--color-border);">
+              <span>Minimum Lease Period:</span>
+              <strong style="color: var(--color-primary);">30 Days (1 Month)</strong>
+            </li>
+            <li style="display: flex; justify-content: space-between; padding: 0.85rem 0; border-bottom: 1px solid var(--color-border);">
+              <span>Maximum Lease Period:</span>
+              <strong>24 Months (Auto-Rollover)</strong>
+            </li>
+            <li style="display: flex; justify-content: space-between; padding: 0.85rem 0; border-bottom: 1px solid var(--color-border);">
+              <span>Down Payment / Upfront Fee:</span>
+              <strong style="color: #10B981;">$0 Capital Down</strong>
+            </li>
+            <li style="display: flex; justify-content: space-between; padding: 0.85rem 0; border-bottom: 1px solid var(--color-border);">
+              <span>Notice to Cancel or Return:</span>
+              <strong>7 Calendar Days</strong>
+            </li>
+            <li style="display: flex; justify-content: space-between; padding: 0.85rem 0;">
+              <span>Mileage Options:</span>
+              <strong>1,000 to 1,500 mi/mo (Rollover)</strong>
+            </li>
+          </ul>
         </div>
-        <div>
-          <h4 class="footer-heading">Company</h4>
-          <div class="footer-links">
-            <a href="about.html">About Us</a>
-            <a href="how-it-works.html">How It Works</a>
-            <a href="locations.html">Locations</a>
-            <a href="contact.html">Contact</a>
+
+        <div class="fade-up" style="background: var(--color-bg); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--color-border);">
+          <span class="eyebrow" style="color: var(--color-primary);">Fast 2-Min Approval</span>
+          <h3 style="margin: 0.5rem 0 1.25rem;">Member Eligibility Checklist</h3>
+          <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
+            <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" style="margin-top:2px; flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>
+                <strong>Age Requirement:</strong>
+                <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.2rem;">21+ for Essential & Flex tiers; 25+ for Performance & VIP models.</p>
+              </div>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" style="margin-top:2px; flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>
+                <strong>Valid Driver's License:</strong>
+                <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.2rem;">US, Canadian, or valid International Driver's Permit with at least 1 year driving history.</p>
+              </div>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" style="margin-top:2px; flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>
+                <strong>Instant Soft Credit Check:</strong>
+                <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.2rem;">100% digital verification with zero impact to your personal credit score.</p>
+              </div>
+            </div>
           </div>
+          <a href="register.html" class="btn btn-primary btn-full">Apply for Instant Pre-Approval &rarr;</a>
         </div>
-        <div>
-          <h4 class="footer-heading">Services</h4>
-          <div class="footer-links">
-            <a href="fleet.html">Our Fleet</a>
-            <a href="pricing.html">Pricing Plans</a>
-            <a href="services.html">Maintenance</a>
-            <a href="dashboard.html">Subscriber Portal</a>
-          </div>
-        </div>
-        <div>
-          <h4 class="footer-heading">Legal</h4>
-          <div class="footer-links">
-            <a href="#">Terms & Conditions</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Cookie Policy</a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 ORVEXA Mobility. All rights reserved.</p>
-        <p>Designed for Flexibility.</p>
       </div>
     </div>
-    
-    <!-- Scroll to Top Button -->
-    <button id="scroll-to-top" class="scroll-to-top" aria-label="Scroll to top">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
-    </button>
-  </footer>
+  </section>
 
-  <script src="assets/js/main.js"></script>
-  <script>
-    // Pricing Toggle Logic
-    document.addEventListener('DOMContentLoaded', () => {
-      const toggleBtn = document.getElementById('billingToggle');
-      const labelMonthly = document.getElementById('label-monthly');
-      const labelAnnual = document.getElementById('label-annual');
-      const priceVals = document.querySelectorAll('.price-val');
-      
-      let isAnnual = false;
-
-      toggleBtn.addEventListener('click', () => {
-        isAnnual = !isAnnual;
-        if(isAnnual) {
-          toggleBtn.classList.add('annual');
-          labelAnnual.classList.add('active');
-          labelMonthly.classList.remove('active');
-          priceVals.forEach(p => {
-            p.textContent = p.getAttribute('data-annual');
-          });
-        } else {
-          toggleBtn.classList.remove('annual');
-          labelMonthly.classList.add('active');
-          labelAnnual.classList.remove('active');
-          priceVals.forEach(p => {
-            p.textContent = p.getAttribute('data-monthly');
-          });
-        }
-      });
-
-      <!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pricing Plans</title>
-  <meta name="description" content="Flexible car subscription plans built around your driving.">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <style>
-    .pricing-hero {
-      padding: 10rem 0 4rem;
-      text-align: center;
-      background: var(--color-surface);
-    }
-    
-    .pricing-plans-section {
-      padding: 8rem 0;
-      background: var(--color-bg);
-    }
-    
-    /* Toggle */
-    .billing-toggle {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      margin: 3rem 0;
-    }
-    .toggle-label { font-weight: 500; color: var(--color-text-muted); transition: color var(--transition-fast); }
-    .toggle-label.active { color: var(--color-text); }
-    .toggle-switch {
-      width: 60px; height: 32px;
-      background: var(--color-primary);
-      border-radius: 16px;
-      position: relative;
-      cursor: pointer;
-    }
-    .toggle-circle {
-      width: 24px; height: 24px;
-      background: #fff;
-      border-radius: 50%;
-      position: absolute;
-      top: 4px; left: 4px;
-      transition: transform var(--transition-normal);
-    }
-    .toggle-switch.annual .toggle-circle { transform: translateX(28px); }
-
-    /* Pricing Cards */
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
-      margin-bottom: 6rem;
-    }
-    .p-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: 12px;
-      padding: 3rem 2rem;
-      display: flex;
-      flex-direction: column;
-      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-    }
-    .p-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
-    .p-card.highlight {
-      border-color: var(--color-primary);
-      box-shadow: 0 10px 30px var(--color-primary-muted);
-      position: relative;
-    }
-    .p-badge {
-      position: absolute;
-      top: -12px; left: 50%;
-      transform: translateX(-50%);
-      background: var(--color-primary);
-      color: #fff;
-      padding: 0.25rem 1rem;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-    
-    .p-tier { font-family: var(--font-heading); font-size: 1.25rem; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--color-primary); }
-    .p-price { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; line-height: 1; display: flex; align-items: baseline; }
-    .p-price .price-val { font-size: 3.5rem; margin: 0 0.1rem; }
-    .p-price span:last-child { font-size: 1rem; color: var(--color-text-muted); font-weight: 400; }
-    
-    .p-features {
-      list-style: none;
-      margin: 2rem 0;
-      flex: 1;
-    }
-    .p-features li {
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--color-border);
-      font-size: 0.875rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .p-features li:last-child { border-bottom: none; }
-    .p-icon { color: var(--color-primary); }
-
-        @media (max-width: 1200px) {
-      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 768px) {
-      .pricing-grid { grid-template-columns: 1fr; }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="container nav-container">
-      <a href="index.html" class="nav-logo"><img src="assets/brand-mark.svg" alt="ORVEXA Logo"></a>
-      <ul class="nav-links">
-        <li class="nav-dropdown">
-          <a href="#" class="nav-link" style="display: inline-flex; align-items: center; gap: 0.25rem;">Home <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
-          <div class="dropdown-menu">
-            <a href="index.html" class="dropdown-item">Home 1</a>
-            <a href="home-2.html" class="dropdown-item">Home 2</a>
-          </div>
-        </li>
-        <li><a href="about.html" class="nav-link">About</a></li>
-        <li><a href="services.html" class="nav-link">Services</a></li>
-        <li><a href="fleet.html" class="nav-link">Fleet</a></li>
-        <li><a href="pricing.html" class="nav-link active">Pricing</a></li>
-        <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
-        <li><a href="locations.html" class="nav-link">Locations</a></li>
-        <li><a href="contact.html" class="nav-link">Contact</a></li>
-        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
-      </ul>
-      <div class="nav-actions">
-        <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
-        </button>
-        <button id="rtl-toggle" class="icon-btn" aria-label="Toggle RTL">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 9H3m14-4l4 4-4 4M3 15h18M7 11l-4 4 4 4"/></svg>
-        </button>
-        <a href="login.html" class="btn btn-primary">Login</a>
+  <!-- Section: FAQ & Common Questions -->
+  <section class="faq-section" style="padding: 7rem 0; background: var(--color-bg); border-top: 1px solid var(--color-border);">
+    <div class="container" style="max-width: 860px;">
+      <div class="text-center fade-up" style="margin-bottom: 3.5rem;">
+        <span class="eyebrow">Clear Answers</span>
+        <h2 class="heading-lg">Frequently Asked Questions</h2>
+        <p class="text-muted" style="margin-top: 0.75rem;">Everything you need to know about our subscription tiers, lease periods, and all-inclusive benefits.</p>
       </div>
-      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
-    </div>
-  </nav>
 
-    <div class="mobile-menu" id="mobile-menu">
-    <button class="icon-btn" id="close-menu" style="position:absolute; top:2rem; right:2rem;">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-    </button>
-    <ul class="nav-links">
-        <li class="nav-dropdown">
-          <a href="#" class="nav-link" style="display: inline-flex; align-items: center; gap: 0.25rem;">Home <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
-          <div class="dropdown-menu">
-            <a href="index.html" class="dropdown-item">Home 1</a>
-            <a href="home-2.html" class="dropdown-item">Home 2</a>
+      <div class="faq-accordion fade-up">
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">
+            <span>What types of vehicles are available in each subscription plan?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-content">
+            <p>Our fleet spans compact city cars (Mini Cooper S), executive sedans (BMW 5 Series, Audi A3), luxury family SUVs (Range Rover Velar, BMW X5, Audi Q5), high-performance EVs (Porsche Taycan 4S, Tesla Model 3 Long Range), and sports icons (Porsche 911, Toyota GR Supra). Essential tier covers compact/midsize sedans; Flex tier covers crossovers and SUVs; Premium tier unlocks luxury sedans and EVs; Performance tier unlocks sports exotics.</p>
           </div>
-        </li>
-        <li><a href="about.html" class="nav-link">About</a></li>
-        <li><a href="services.html" class="nav-link">Services</a></li>
-        <li><a href="fleet.html" class="nav-link">Fleet</a></li>
-        <li><a href="pricing.html" class="nav-link">Pricing</a></li>
-        <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
-        <li><a href="locations.html" class="nav-link">Locations</a></li>
-        <li><a href="contact.html" class="nav-link">Contact</a></li>
-        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
-    </ul>
-    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; margin-bottom: 2rem; width: 100%;">
-      <button id="theme-toggle-mob" class="icon-btn" aria-label="Toggle Theme">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
-      </button>
-      <button id="rtl-toggle-mob" class="icon-btn" aria-label="Toggle RTL">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 9H3m14-4l4 4-4 4M3 15h18M7 11l-4 4 4 4"/></svg>
-      </button>
-    </div>
-    <a href="login.html" class="btn btn-primary btn-full">Login</a>
-  </div>
-  <div class="overlay" id="overlay"></div>
-
-  <!-- Hero -->
-  <header class="pricing-hero fade-up">
-    <div class="container">
-      <h1 class="heading-xl">Flexible plans built around your driving.</h1>
-      
-      <div class="billing-toggle">
-        <span class="toggle-label active" id="label-monthly">Monthly Flexibility</span>
-        <div class="toggle-switch" id="billingToggle">
-          <div class="toggle-circle"></div>
         </div>
-        <span class="toggle-label" id="label-annual">12-Month Commitment (Save 15%)</span>
-      </div>
-    </div>
-  </header>
 
-  <!-- Pricing Grid -->
-  <section class="pricing-plans-section">
-    <div class="container">
-      <div class="pricing-grid">
-      
-      <!-- Essential -->
-      <div class="p-card fade-up">
-        <div class="p-tier">Essential</div>
-        <div class="p-price">$<span class="price-val" data-monthly="699" data-annual="599">699</span><span>/mo</span></div>
-        <p class="text-muted" style="font-size:0.875rem;">Perfect for everyday city commuting.</p>
-        <ul class="p-features">
-          <li><span class="p-icon">✓</span> Compact & Midsize Sedans</li>
-          <li><span class="p-icon">✓</span> 800 miles / month</li>
-          <li><span class="p-icon">✓</span> Basic Maintenance</li>
-          <li><span class="p-icon">âœ—</span> Vehicle Swaps</li>
-          <li><span class="p-icon">✓</span> Standard Support</li>
-        </ul>
-        <a href="register.html" class="btn btn-secondary btn-full">Choose Essential</a>
-      </div>
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">
+            <span>What are the minimum and maximum lease periods?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-content">
+            <p>Our minimum lease period is 30 days (1 month). The maximum continuous lease period is 24 months with automatic rollover. You can choose from 1, 3, 6, or 12–24 month commitments. With month-to-month plans, you can cancel or return the car with just 7 calendar days' written notice and zero exit penalties.</p>
+          </div>
+        </div>
 
-      <!-- Flex -->
-      <div class="p-card fade-up" style="transition-delay: 0.1s;">
-        <div class="p-tier">Flex</div>
-        <div class="p-price">$<span class="price-val" data-monthly="899" data-annual="759">899</span><span>/mo</span></div>
-        <p class="text-muted" style="font-size:0.875rem;">Great for families and road trips.</p>
-        <ul class="p-features">
-          <li><span class="p-icon">✓</span> SUVs & Crossovers</li>
-          <li><span class="p-icon">✓</span> 1,200 miles / month</li>
-          <li><span class="p-icon">✓</span> Full Maintenance</li>
-          <li><span class="p-icon">✓</span> 1 Swap / Year</li>
-          <li><span class="p-icon">✓</span> Priority Support</li>
-        </ul>
-        <a href="register.html" class="btn btn-secondary btn-full">Choose Flex</a>
-      </div>
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">
+            <span>What benefits and services are included in the monthly price?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-content">
+            <p>Every ORVEXA subscription is 100% all-inclusive: comprehensive insurance with collision coverage, all scheduled factory maintenance (oil, brakes, wiper blades, fluids), tire replacement for normal wear and tear, 24/7 roadside assistance, digital concierge management, doorstep delivery within 48 hours, and complimentary vehicle swaps on qualified plans.</p>
+          </div>
+        </div>
 
-      <!-- Premium -->
-      <div class="p-card highlight fade-up" style="transition-delay: 0.2s;">
-        <div class="p-badge">Most Popular</div>
-        <div class="p-tier">Premium</div>
-        <div class="p-price">$<span class="price-val" data-monthly="1299" data-annual="1099">1,299</span><span>/mo</span></div>
-        <p class="text-muted" style="font-size:0.875rem;">Ultimate comfort and luxury.</p>
-        <ul class="p-features">
-          <li><span class="p-icon">✓</span> Luxury Sedans & EVs</li>
-          <li><span class="p-icon">✓</span> 1,500 miles / month</li>
-          <li><span class="p-icon">✓</span> Full Maintenance & Tires</li>
-          <li><span class="p-icon">✓</span> 4 Swaps / Year</li>
-          <li><span class="p-icon">✓</span> Concierge Delivery</li>
-        </ul>
-        <a href="register.html" class="btn btn-primary btn-full">Choose Premium</a>
-      </div>
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">
+            <span>Is there an upfront down payment or deposit?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-content">
+            <p>No. Unlike traditional dealership leasing requiring $3,000 to $6,000 cash due at signing, ORVEXA guarantees $0 capital down payment. You only pay your transparent first-month subscription fee and a refundable security deposit (waived on 6+ month plans).</p>
+          </div>
+        </div>
 
-      <!-- Performance -->
-      <div class="p-card fade-up" style="transition-delay: 0.3s;">
-        <div class="p-tier">Performance</div>
-        <div class="p-price">$<span class="price-val" data-monthly="2499" data-annual="2129">2,499</span><span>/mo</span></div>
-        <p class="text-muted" style="font-size:0.875rem;">For those who demand the thrill.</p>
-        <ul class="p-features">
-          <li><span class="p-icon">✓</span> Sports & Performance</li>
-          <li><span class="p-icon">✓</span> 1,000 miles / month</li>
-          <li><span class="p-icon">✓</span> Premium Maintenance</li>
-          <li><span class="p-icon">✓</span> Unlimited Swaps</li>
-          <li><span class="p-icon">✓</span> Dedicated Account Manager</li>
-        </ul>
-        <a href="register.html" class="btn btn-secondary btn-full">Choose Performance</a>
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">
+            <span>How does the special promo offer (code FLEXDRIVE) work?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-content">
+            <p>New members can enter promo code <strong>FLEXDRIVE</strong> during checkout or digital onboarding to automatically receive $150 off each of their first 3 billing cycles ($450 total savings), plus complimentary white-glove doorstep delivery.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">
+            <span>How does seasonal vehicle swapping work?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-content">
+            <p>Whenever your seasonal needs change (e.g., swapping a summer convertible for a winter AWD SUV), simply select your next car in the ORVEXA subscriber app. A concierge will deliver your fresh car and pick up your current vehicle with seamless key handover in 48 hours.</p>
+          </div>
+        </div>
       </div>
-      
     </div>
   </section>
 
@@ -799,33 +658,39 @@
       
       let isAnnual = false;
 
-      toggleBtn.addEventListener('click', () => {
-        isAnnual = !isAnnual;
-        if(isAnnual) {
-          toggleBtn.classList.add('annual');
-          labelAnnual.classList.add('active');
-          labelMonthly.classList.remove('active');
-          priceVals.forEach(p => {
-            p.textContent = p.getAttribute('data-annual');
-          });
-        } else {
-          toggleBtn.classList.remove('annual');
-          labelMonthly.classList.add('active');
-          labelAnnual.classList.remove('active');
-          priceVals.forEach(p => {
-            p.textContent = p.getAttribute('data-monthly');
-          });
-        }
-      });
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          isAnnual = !isAnnual;
+          if (isAnnual) {
+            toggleBtn.classList.add('annual');
+            labelAnnual.classList.add('active');
+            labelMonthly.classList.remove('active');
+            priceVals.forEach(p => {
+              p.textContent = p.getAttribute('data-annual');
+            });
+          } else {
+            toggleBtn.classList.remove('annual');
+            labelMonthly.classList.add('active');
+            labelAnnual.classList.remove('active');
+            priceVals.forEach(p => {
+              p.textContent = p.getAttribute('data-monthly');
+            });
+          }
+        });
+      }
 
       // FAQ Accordion Logic
       const faqBtns = document.querySelectorAll('.faq-btn');
       faqBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           const isActive = btn.classList.contains('active');
-          faqBtns.forEach(b => b.classList.remove('active'));
-          if(!isActive) {
+          faqBtns.forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-expanded', 'false');
+          });
+          if (!isActive) {
             btn.classList.add('active');
+            btn.setAttribute('aria-expanded', 'true');
           }
         });
       });

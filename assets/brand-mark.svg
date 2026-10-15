@@ -1,8 +1,43 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 100" fill="none" width="450" height="100">
-  <!-- Symbol: Abstract geometric car / motion -->
-  <!-- Shifted slightly down to align better with larger text -->
-  <path d="M 10 55 L 30 25 L 60 25 L 70 40 L 50 75 Z" fill="#F26A21" />
-  <path d="M 35 75 L 55 40 L 85 40 L 75 75 Z" fill="currentColor" opacity="0.8" />
-  <!-- Wordmark -->
-  <text x="100" y="78" font-family="'Space Grotesk', 'Sora', sans-serif" font-size="72" font-weight="700" letter-spacing="2" fill="currentColor">ORVEXA</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 110" fill="none" width="520" height="110">
+  <defs>
+    <linearGradient id="orvexa-accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF7A2F" />
+      <stop offset="100%" stop-color="#F26A21" />
+    </linearGradient>
+    <linearGradient id="orvexa-accent-subtle" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F26A21" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#FF8A3D" stop-opacity="0.2" />
+    </linearGradient>
+  </defs>
+
+  <!-- Emblem: Aerodynamic Car Silhouette + Continuous Subscription Loop -->
+  <g transform="translate(8, 12)">
+    <!-- Outer Mobility Ring / Loop -->
+    <path d="M 44 14 C 64 14 80 30 80 48 C 80 62 70 74 56 79 L 52 71 C 62 67 69 58 69 48 C 69 35 58 24 44 24 C 34 24 25 30 21 39 L 12 35 C 18 22 30 14 44 14 Z" fill="url(#orvexa-accent)" />
+    
+    <!-- Aerodynamic Fastback Car Roofline & Bonnet flowing into loop -->
+    <path d="M 6 62 C 14 62 22 56 26 48 L 34 32 C 37 26 43 22 50 22 L 62 22 C 70 22 76 28 77 36 L 82 54 C 84 62 80 70 72 74 C 66 77 58 78 50 78 L 18 78 C 10 78 4 72 4 64 Z" fill="#111111" opacity="0.92" />
+    
+    <!-- Speed Wing Cutout / Dynamic Window & Subscription Cycle Arrow -->
+    <path d="M 33 42 L 48 30 L 60 30 L 64 42 Z" fill="#FFFFFF" />
+    <path d="M 38 48 L 66 48 C 68 48 70 50 70 52 C 70 54 68 56 66 56 L 38 56 C 36 56 34 54 34 52 C 34 50 36 48 38 48 Z" fill="url(#orvexa-accent)" />
+    
+    <!-- Wheels as precision metallic loop nodes -->
+    <circle cx="24" cy="74" r="10" fill="#111111" stroke="#FFFFFF" stroke-width="3" />
+    <circle cx="24" cy="74" r="4" fill="url(#orvexa-accent)" />
+    <circle cx="66" cy="74" r="10" fill="#111111" stroke="#FFFFFF" stroke-width="3" />
+    <circle cx="66" cy="74" r="4" fill="url(#orvexa-accent)" />
+  </g>
+
+  <!-- Brand Typography -->
+  <g transform="translate(112, 0)">
+    <!-- Primary Logotype -->
+    <text x="0" y="62" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif" font-size="54" font-weight="800" letter-spacing="3" fill="#111111">ORVEXA</text>
+    
+    <!-- Tagline: subscription badge & descriptor -->
+    <rect x="1" y="74" width="388" height="2" fill="url(#orvexa-accent-subtle)" />
+    <text x="1" y="93" font-family="'Inter', -apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700" letter-spacing="3.8" fill="#F26A21">CAR SUBSCRIPTION</text>
+    <circle cx="198" cy="89" r="2.5" fill="#111111" opacity="0.4" />
+    <text x="210" y="93" font-family="'Inter', -apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" letter-spacing="3.8" fill="#555555">FLEXIBLE LEASING</text>
+  </g>
 </svg>

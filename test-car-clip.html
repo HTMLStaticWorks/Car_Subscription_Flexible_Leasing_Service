@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      background: #111;
+      color: #fff;
+      font-family: sans-serif;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .preview-wrap {
+      position: relative;
+      width: 380px;
+      height: 220px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .base-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .car-body-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      -webkit-mask-image: radial-gradient(ellipse 92% 58% at 50% 68%, black 45%, rgba(0, 0, 0, 0) 82%);
+      mask-image: radial-gradient(ellipse 92% 58% at 50% 68%, black 45%, rgba(0, 0, 0, 0) 82%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .car-body-layer img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: filter 0.4s ease;
+    }
+
+    .btn-group {
+      margin-top: 20px;
+      display: flex;
+      gap: 12px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Feathered Car Mask Test (380x220 - Exact Card Size)</h2>
+  <div class="preview-wrap">
+    <img src="assets/images/BMW 5 Series (2025).png" class="base-img">
+    <div class="car-body-layer" id="carLayer">
+      <img src="assets/images/BMW 5 Series (2025).png" id="carOverlay">
+    </div>
+  </div>
+
+  <div class="btn-group">
+    <button style="background: #f8f9fa; color: #111;" onclick="setColor('white')">Alpine White</button>
+    <button style="background: #5a6268; color: #fff;" onclick="setColor('grey')">Mineral Grey</button>
+    <button style="background: #1a1a1a; color: #fff; border: 1px solid #444;" onclick="setColor('black')">Black
+      Sapphire</button>
+    <button style="background: #1746a2; color: #fff;" onclick="setColor('blue')">Phytonic Blue</button>
+  </div>
+
+  <script>
+    const overlay = document.getElementById('carOverlay');
+    const layer = document.getElementById('carLayer');
+
+    function setColor(color) {
+      if (color === 'white') {
+        layer.style.opacity = '0';
+        overlay.style.filter = 'none';
+      } else {
+        layer.style.opacity = '1';
+        if (color === 'black') {
+          overlay.style.filter = 'grayscale(1) brightness(0.42) contrast(1.4)';
+        } else if (color === 'grey') {
+          overlay.style.filter = 'grayscale(1) brightness(0.82) contrast(1.2)';
+        } else if (color === 'blue') {
+          overlay.style.filter = 'sepia(0.7) hue-rotate(185deg) saturate(3.2) brightness(0.92)';
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

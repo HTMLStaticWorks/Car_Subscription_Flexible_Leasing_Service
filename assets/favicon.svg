@@ -1,9 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 15 95 70" fill="none" width="100" height="100">
-  <path d="M 10 55 L 30 25 L 60 25 L 70 40 L 50 75 Z" fill="#F26A21" />
-  <path d="M 35 75 L 55 40 L 85 40 L 75 75 Z" fill="#111111" opacity="0.8" />
-  <style>
-    @media (prefers-color-scheme: dark) {
-      path:nth-of-type(2) { fill: #FFFFFF; }
-    }
-  </style>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" width="100" height="100">
+  <defs>
+    <linearGradient id="fav-accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF7A2F" />
+      <stop offset="100%" stop-color="#F26A21" />
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="22" fill="#111111" />
+  <g transform="translate(6, 6) scale(0.95)">
+    <!-- Mobility Ring -->
+    <path d="M 46 16 C 66 16 82 32 82 50 C 82 64 72 76 58 81 L 54 73 C 64 69 71 60 71 50 C 71 37 60 26 46 26 C 36 26 27 32 23 41 L 14 37 C 20 24 32 16 46 16 Z" fill="url(#fav-accent)" />
+    <!-- Car silhouette -->
+    <path d="M 8 64 C 16 64 24 58 28 50 L 36 34 C 39 28 45 24 52 24 L 64 24 C 72 24 78 30 79 38 L 84 56 C 86 64 82 72 74 76 C 68 79 60 80 52 80 L 20 80 C 12 80 6 74 6 66 Z" fill="#FFFFFF" />
+    <!-- Window Cutout -->
+    <path d="M 35 44 L 50 32 L 62 32 L 66 44 Z" fill="#111111" />
+    <path d="M 40 50 L 68 50 C 70 50 72 52 72 54 C 72 56 70 58 68 58 L 40 58 C 38 58 36 56 36 54 C 36 52 38 50 40 50 Z" fill="url(#fav-accent)" />
+    <!-- Wheels -->
+    <circle cx="26" cy="76" r="9" fill="#111111" stroke="#FFFFFF" stroke-width="2.5" />
+    <circle cx="26" cy="76" r="3.5" fill="url(#fav-accent)" />
+    <circle cx="68" cy="76" r="9" fill="#111111" stroke="#FFFFFF" stroke-width="2.5" />
+    <circle cx="68" cy="76" r="3.5" fill="url(#fav-accent)" />
+  </g>
 </svg>

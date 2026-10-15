@@ -3,33 +3,165 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fleet Discovery</title>
-  <meta name="description" content="Choose the car. We'll handle the commitment. Explore the ORVEXA fleet.">
+  <title>Subscription Fleet & Flexible Plans | ORVEXA Mobility</title>
+  <meta name="description" content="Explore ORVEXA's curated subscription fleet. Drive premium sedans, luxury SUVs, and high-performance EVs with 1 to 24 month flexible terms, $0 down, full insurance, and zero maintenance.">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <style>
     .fleet-hero {
-      padding: 10rem 0 4rem;
-      background: var(--color-surface);
+      padding: 9rem 0 3.5rem;
+      background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-bg) 100%);
       text-align: center;
       border-bottom: 1px solid var(--color-border);
+      position: relative;
     }
+    .fleet-hero .eyebrow {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    /* Subscription Guide Banner */
+    .sub-guide-banner {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin: -2rem auto 3rem;
+      max-width: 1200px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      z-index: 5;
+    }
+    .sub-guide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .sub-guide-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .sub-terms-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+    @media (max-width: 900px) {
+      .sub-terms-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 550px) {
+      .sub-terms-grid { grid-template-columns: 1fr; }
+    }
+    .sub-term-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      transition: all var(--transition-fast);
+      position: relative;
+    }
+    .sub-term-card.featured {
+      border-color: var(--color-primary);
+      background: rgba(242, 106, 33, 0.04);
+    }
+    .sub-term-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-primary);
+      margin-bottom: 0.25rem;
+    }
+    .sub-term-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+    .sub-term-desc {
+      font-size: 0.825rem;
+      color: var(--color-text-muted);
+      line-height: 1.4;
+    }
+
+    /* Duration Selector Interactive Bar */
+    .duration-control-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+      padding: 1rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 50px;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .duration-label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      padding: 0 0.5rem;
+    }
+    .duration-btn-group {
+      display: inline-flex;
+      background: var(--color-bg);
+      border-radius: 30px;
+      padding: 4px;
+      border: 1px solid var(--color-border);
+    }
+    .duration-pill {
+      border: none;
+      background: transparent;
+      padding: 0.5rem 1.25rem;
+      border-radius: 25px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .duration-pill.active {
+      background: var(--color-primary);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(242, 106, 33, 0.4);
+    }
+    .duration-pill:hover:not(.active) {
+      color: var(--color-primary);
+    }
+
+    /* Category & Filter Bar */
     .filter-bar {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1rem;
-      margin: 3rem 0 2rem;
-      align-items: center;
+      gap: 0.75rem;
+      margin: 1.5rem 0 1.5rem;
     }
     .filter-btn {
-      padding: 0.5rem 1.5rem;
+      padding: 0.5rem 1.25rem;
       border-radius: 30px;
       border: 1px solid var(--color-border);
       background: var(--color-surface);
       color: var(--color-text);
       cursor: pointer;
-      font-weight: 500;
+      font-weight: 600;
+      font-size: 0.875rem;
       transition: all var(--transition-fast);
     }
     .filter-btn.active, .filter-btn:hover {
@@ -37,14 +169,14 @@
       color: #fff;
       border-color: var(--color-primary);
     }
-    
+
     .advanced-filters {
       display: flex;
       justify-content: center;
       gap: 1rem;
       flex-wrap: wrap;
-      margin-bottom: 3rem;
-      padding-bottom: 2rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
       border-bottom: 1px solid var(--color-border);
     }
     .advanced-filters select {
@@ -54,56 +186,98 @@
       background: var(--color-surface);
       color: var(--color-text);
       font-family: var(--font-body);
-      min-width: 150px;
+      min-width: 160px;
+      font-size: 0.875rem;
     }
 
+    /* Vehicle Grid & Cards */
     .vehicle-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
       gap: 2rem;
       margin-bottom: 6rem;
+    }
+    @media (max-width: 450px) {
+      .vehicle-grid { grid-template-columns: 1fr; }
     }
 
     .v-card {
       background: var(--color-surface);
       border: 1px solid var(--color-border);
-      border-radius: 12px;
+      border-radius: 16px;
       overflow: hidden;
-      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
       display: flex;
       flex-direction: column;
+      position: relative;
     }
     .v-card:hover {
-      transform: translateY(-8px);
+      transform: translateY(-6px);
       box-shadow: var(--shadow-lg);
+      border-color: rgba(242, 106, 33, 0.3);
     }
     .v-img {
       height: 220px;
       position: relative;
       overflow: hidden;
+      background: var(--color-surface);
+      display: block;
+      padding: 0;
+      margin: 0;
+    }
+    [data-theme="dark"] .v-img {
+      background: var(--color-surface);
     }
     .v-img img {
-      width: 100%; height: 100%; object-fit: cover;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      margin: 0;
+      padding: 0;
       transition: transform var(--transition-slow);
     }
-    .v-card:hover .v-img img { transform: scale(1.05); }
-    
+    .v-card:hover .v-img img { transform: scale(1.06); }
+
     .v-badge {
       position: absolute;
       top: 1rem; right: 1rem;
       background: var(--color-primary);
       color: #fff;
-      padding: 0.25rem 0.75rem;
+      padding: 0.3rem 0.8rem;
       border-radius: 20px;
       font-size: 0.75rem;
-      font-weight: 600;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      z-index: 2;
     }
-    
-    .v-compare-checkbox {
+    .v-badge.special {
+      background: linear-gradient(135deg, #FF6B00 0%, #D9381E 100%);
+    }
+    .v-badge.waitlist {
+      background: #333333;
+      color: #ccc;
+    }
+
+    .v-compare-checkbox-wrap {
       position: absolute;
       top: 1rem; left: 1rem;
       z-index: 10;
-      width: 24px; height: 24px;
+      background: rgba(var(--color-surface), 0.85);
+      backdrop-filter: blur(4px);
+      border-radius: 6px;
+      padding: 4px 8px;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      border: 1px solid var(--color-border);
+    }
+    .v-compare-checkbox {
+      width: 16px; height: 16px;
       cursor: pointer;
     }
 
@@ -113,23 +287,134 @@
       display: flex;
       flex-direction: column;
     }
-    .v-brand { font-size: 0.875rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 1px; }
-    .v-title { font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem; }
-    .v-price { font-size: 1.75rem; color: var(--color-primary); font-family: var(--font-heading); font-weight: 700; margin-bottom: 1rem; }
-    .v-price span { font-size: 1rem; color: var(--color-text-muted); font-weight: 400; }
-    
+    .v-meta-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.35rem;
+    }
+    .v-brand {
+      font-size: 0.8rem;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+    }
+    .v-term-range {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+    .v-title {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-text);
+    }
+
+    /* Color Swatches */
+    .v-colors {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .v-colors-label {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      margin-right: 0.25rem;
+    }
+    .color-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid var(--color-border);
+      cursor: pointer;
+      transition: transform var(--transition-fast), border-color var(--transition-fast);
+      position: relative;
+    }
+    .color-dot:hover, .color-dot.active {
+      transform: scale(1.25);
+      border-color: var(--color-primary);
+    }
+
+    /* Pricing Display */
+    .v-pricing-wrap {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .v-price {
+      font-size: 1.85rem;
+      color: var(--color-primary);
+      font-family: var(--font-heading);
+      font-weight: 800;
+      line-height: 1;
+    }
+    .v-price span {
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+      font-weight: 500;
+      font-family: var(--font-body);
+    }
+    .v-price-note {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      text-align: right;
+    }
+    .v-price-note strong {
+      color: #10B981;
+    }
+
+    /* Inclusions tag */
+    .v-inclusions {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 6px;
+      padding: 0.4rem 0.6rem;
+      font-size: 0.775rem;
+      color: #10B981;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* Specs Grid with Clean Icons */
     .v-specs {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0.5rem;
-      font-size: 0.875rem;
+      gap: 0.6rem;
+      font-size: 0.85rem;
       color: var(--color-text-muted);
-      margin-bottom: 1.5rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 1.25rem;
       flex: 1;
     }
-    .v-specs div { display: flex; align-items: center; gap: 0.5rem; }
+    .v-spec-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .v-spec-item svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--color-primary);
+      flex-shrink: 0;
+    }
+
+    .v-actions {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.75rem;
+    }
 
     /* Comparison Drawer */
     .compare-drawer {
@@ -138,48 +423,136 @@
       left: 0; width: 100%;
       background: var(--color-surface);
       border-top: 2px solid var(--color-primary);
-      box-shadow: 0 -10px 40px rgba(0,0,0,0.1);
+      box-shadow: 0 -10px 40px rgba(0,0,0,0.15);
       z-index: 1000;
       transition: bottom var(--transition-normal);
-      padding: 2rem 0;
+      padding: 1.5rem 0;
     }
-    [data-theme="dark"] .compare-drawer { box-shadow: 0 -10px 40px rgba(0,0,0,0.5); }
+    [data-theme="dark"] .compare-drawer { box-shadow: 0 -10px 40px rgba(0,0,0,0.6); }
     .compare-drawer.active { bottom: 0; }
     
-    .drawer-content { display: flex; justify-content: space-between; align-items: center; }
-    .selected-vehicles { display: flex; gap: 1rem; flex: 1; }
+    .drawer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .selected-vehicles { display: flex; gap: 1rem; flex: 1; overflow-x: auto; }
     .selected-v {
-      display: flex; align-items: center; gap: 1rem;
-      background: var(--color-bg); padding: 0.5rem; border-radius: 8px; border: 1px solid var(--color-border);
+      display: flex; align-items: center; gap: 0.75rem;
+      background: var(--color-bg); padding: 0.5rem 0.75rem; border-radius: 8px; border: 1px solid var(--color-border);
+      min-width: 180px;
     }
-    .selected-v img { width: 60px; height: 40px; object-fit: cover; border-radius: 4px; }
-    .drawer-actions { display: flex; gap: 1rem; margin-left: 2rem; }
+    .selected-v img { width: 50px; height: 35px; object-fit: contain; }
+    .drawer-actions { display: flex; gap: 0.75rem; }
+
+    /* Modal for Vehicle Subscription Details */
+    .v-modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .v-modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .v-modal {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 850px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-xl);
+      position: relative;
+      padding: 2.5rem;
+    }
+    .v-modal-close {
+      position: absolute;
+      top: 1.5rem; right: 1.5rem;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 50%;
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      color: var(--color-text);
+      transition: all var(--transition-fast);
+    }
+    .v-modal-close:hover {
+      background: var(--color-primary);
+      color: #fff;
+    }
+    .v-modal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+    @media (max-width: 768px) {
+      .v-modal-grid { grid-template-columns: 1fr; }
+      .v-modal { padding: 1.5rem; }
+    }
+    .v-modal-img {
+      width: 100%;
+      max-height: 260px;
+      object-fit: contain;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.06) 0%, rgba(0,0,0,0.05) 100%);
+      padding: 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--color-border);
+    }
+    .v-modal-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .v-modal-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--color-text);
+    }
+    .v-modal-list li svg {
+      stroke: #10B981;
+      flex-shrink: 0;
+    }
+    .eligibility-box {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 1rem;
+      margin: 1.25rem 0;
+      font-size: 0.85rem;
+    }
+    .eligibility-box strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--color-primary);
+    }
 
     .delivery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
     .flex-cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-
-    @media (min-width: 1328px) {
-      .orphan-card { grid-column: 2; }
-    }
-    @media (max-width: 768px) {
-      .vehicle-grid { grid-template-columns: repeat(2, 1fr); }
-      .delivery-grid { grid-template-columns: 1fr; }
-      .flex-cards-grid { grid-template-columns: repeat(2, 1fr); }
-      .flex-cards-grid > div:last-child { grid-column: 1 / -1; width: calc(50% - 1rem); margin: 0 auto; }
-    }
-    @media (max-width: 576px) {
-      .vehicle-grid { grid-template-columns: 1fr; }
-      .flex-cards-grid { grid-template-columns: 1fr; }
-      .flex-cards-grid > div:last-child { grid-column: 1; width: 100%; margin: 0; }
+    @media (max-width: 900px) {
+      .delivery-grid, .flex-cards-grid { grid-template-columns: 1fr; gap: 2rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar">
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
     <div class="container nav-container">
-      <a href="index.html" class="nav-logo"><img src="assets/brand-mark.svg" alt="ORVEXA Logo"></a>
+      <a href="index.html" class="nav-logo" aria-label="ORVEXA Home">
+        <img src="assets/brand-mark.svg" alt="ORVEXA Logo" height="38">
+      </a>
       <ul class="nav-links">
         <li class="nav-dropdown">
           <a href="#" class="nav-link" style="display: inline-flex; align-items: center; gap: 0.25rem;">Home <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
@@ -211,26 +584,26 @@
   </nav>
 
   <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu" id="mobile-menu">
     <button class="icon-btn" id="close-menu" style="position:absolute; top:2rem; right:2rem;">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
     <ul class="nav-links">
-        <li class="nav-dropdown">
-          <a href="#" class="nav-link" style="display: inline-flex; align-items: center; gap: 0.25rem;">Home <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
-          <div class="dropdown-menu">
-            <a href="index.html" class="dropdown-item">Home 1</a>
-            <a href="home-2.html" class="dropdown-item">Home 2</a>
-          </div>
-        </li>
-        <li><a href="about.html" class="nav-link">About</a></li>
-        <li><a href="services.html" class="nav-link">Services</a></li>
-        <li><a href="fleet.html" class="nav-link active">Fleet</a></li>
-        <li><a href="pricing.html" class="nav-link">Pricing</a></li>
-        <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
-        <li><a href="locations.html" class="nav-link">Locations</a></li>
-        <li><a href="contact.html" class="nav-link">Contact</a></li>
-        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+      <li class="nav-dropdown">
+        <a href="#" class="nav-link" style="display: inline-flex; align-items: center; gap: 0.25rem;">Home <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="dropdown-menu">
+          <a href="index.html" class="dropdown-item">Home 1</a>
+          <a href="home-2.html" class="dropdown-item">Home 2</a>
+        </div>
+      </li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="services.html" class="nav-link">Services</a></li>
+      <li><a href="fleet.html" class="nav-link active">Fleet</a></li>
+      <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+      <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
+      <li><a href="locations.html" class="nav-link">Locations</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+      <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
     </ul>
     <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; margin-bottom: 2rem; width: 100%;">
       <button id="theme-toggle-mob" class="icon-btn" aria-label="Toggle Theme">
@@ -247,15 +620,66 @@
   <!-- HERO -->
   <header class="fleet-hero fade-up">
     <div class="container">
-      <span class="eyebrow">The Collection</span>
-      <h1 class="heading-lg">Choose the car.<br>We'll handle the commitment.</h1>
+      <span class="eyebrow">The Subscription Fleet</span>
+      <h1 class="heading-lg" style="margin-bottom: 1rem;">Choose Your Car.<br>Enjoy 100% Commitment-Free Driving.</h1>
+      <p class="text-muted" style="max-width: 650px; margin: 0 auto;">
+        No dealer negotiations, no depreciating assets, and $0 down. Every subscription bundles comprehensive insurance, zero maintenance, and seasonal vehicle swapping into a single monthly fee.
+      </p>
     </div>
   </header>
 
-  <!-- FILTERS & GRID -->
+  <!-- SUBSCRIPTION GUIDE BANNER (Issues 4, 6, 8) -->
+  <div class="container">
+    <div class="sub-guide-banner fade-up">
+      <div class="sub-guide-header">
+        <div class="sub-guide-title">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Available Subscription Durations & Flexibility Tiers
+        </div>
+        <div style="font-size: 0.85rem; color: var(--color-text-muted);">
+          <strong>Min Lease Period:</strong> 30 Days (1 Month) &bull; <strong>Max Period:</strong> 24 Months
+        </div>
+      </div>
+      <div class="sub-terms-grid">
+        <div class="sub-term-card">
+          <div class="sub-term-tag">Tier 1: Maximum Freedom</div>
+          <div class="sub-term-name">1-Month Ultra-Flex</div>
+          <div class="sub-term-desc">Month-to-month commitment. Renew, switch vehicles, or cancel anytime with 7 days notice.</div>
+        </div>
+        <div class="sub-term-card">
+          <div class="sub-term-tag">Tier 2: Seasonal Mobility</div>
+          <div class="sub-term-name">3-Month Seasonal</div>
+          <div class="sub-term-desc">Ideal for summer convertibles or winter AWDs. Save ~8% compared to month-to-month flex.</div>
+        </div>
+        <div class="sub-term-card featured">
+          <div class="sub-term-tag">Tier 3: Most Popular</div>
+          <div class="sub-term-name">6-Month Standard</div>
+          <div class="sub-term-desc">Includes 1 complimentary vehicle swap + 15% rate savings. Full concierge maintenance included.</div>
+        </div>
+        <div class="sub-term-card">
+          <div class="sub-term-tag">Tier 4: Maximum Savings</div>
+          <div class="sub-term-name">12–24 Month Long-Term</div>
+          <div class="sub-term-desc">Best value rate (save up to 22%). Includes 2 vehicle swaps per year and waived security deposit.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE DURATION PRICE SELECTOR & FILTERS -->
   <main class="container">
+    <div class="duration-control-bar fade-up">
+      <span class="duration-label">Select Commitment Term:</span>
+      <div class="duration-btn-group" id="globalDurationGroup">
+        <button class="duration-pill" data-term="1">1 Month (Flex)</button>
+        <button class="duration-pill" data-term="3">3 Months</button>
+        <button class="duration-pill active" data-term="6">6 Months (Popular)</button>
+        <button class="duration-pill" data-term="12">12+ Months (Save 15%)</button>
+      </div>
+    </div>
+
+    <!-- Category Filters -->
     <div class="filter-bar fade-up">
-      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn active" data-filter="all">All Fleet</button>
       <button class="filter-btn" data-filter="sedan">Sedan</button>
       <button class="filter-btn" data-filter="suv">SUV</button>
       <button class="filter-btn" data-filter="electric">Electric</button>
@@ -265,432 +689,941 @@
     </div>
 
     <div class="advanced-filters fade-up">
-      <select id="priceFilter" aria-label="Price">
-        <option value="">Price (Any)</option>
-        <option value="under-800">Under $800</option>
-        <option value="800-1500">$800 - $1,500</option>
-        <option value="over-1500">Over $1,500</option>
+      <select id="priceFilter" aria-label="Price Filter">
+        <option value="">Budget (All Ranges)</option>
+        <option value="under-800">Under $800 / month</option>
+        <option value="800-1500">$800 - $1,500 / month</option>
+        <option value="over-1500">Over $1,500 / month</option>
       </select>
-      <select id="fuelFilter" aria-label="Fuel">
-        <option value="">Fuel Type</option>
-        <option value="electric">Electric</option>
-        <option value="hybrid">Hybrid</option>
-        <option value="gasoline">Gasoline</option>
+      <select id="fuelFilter" aria-label="Fuel / Powertrain">
+        <option value="">Powertrain (All)</option>
+        <option value="electric">100% Electric (EV)</option>
+        <option value="hybrid">Plug-in / Mild Hybrid</option>
+        <option value="gasoline">Twin-Turbo Gasoline</option>
       </select>
       <select id="transFilter" aria-label="Transmission">
-        <option value="">Transmission</option>
+        <option value="">Transmission (All)</option>
         <option value="auto">Automatic</option>
         <option value="manual">Manual</option>
       </select>
     </div>
 
+    <!-- VEHICLE GRID (18 Curated Vehicles with Full Subscription Specs) -->
     <div class="vehicle-grid" id="vehicleGrid">
-      <div class="v-card fade-up vehicle-item" data-category="all sedan luxury" data-price="800-1500" data-fuel="hybrid" data-transmission="auto">
+
+      <!-- 1. BMW 5 Series -->
+      <div class="v-card fade-up vehicle-item" data-category="all sedan luxury" data-price="800-1500" data-fuel="hybrid" data-transmission="auto"
+           data-p1="989" data-p3="939" data-p6="899" data-p12="819"
+           data-name="2025 BMW 5 Series M-Sport" data-img="assets/images/BMW 5 Series (2025).png"
+           data-power="375 HP Turbo Hybrid" data-trans="8-Spd Steptronic" data-miles="1,200 mi/mo" data-seats="5 Seats • 520L Trunk">
         <div class="v-img">
-          <input type="checkbox" class="v-compare-checkbox" aria-label="Compare BMW BMW 5 Series (2025)" data-name="BMW BMW 5 Series (2025)" data-img="assets/images/BMW 5 Series (2025).png">
-          <span class="v-badge">Available Now</span>
-          <img src="assets/images/BMW 5 Series (2025).png" alt="BMW BMW 5 Series (2025)" loading="lazy">
+          <label class="v-compare-checkbox-wrap">
+            <input type="checkbox" class="v-compare-checkbox" aria-label="Compare BMW 5 Series" data-name="BMW 5 Series" data-img="assets/images/BMW 5 Series (2025).png">
+            Compare
+          </label>
+          <span class="v-badge">Available Now &bull; 48h Delivery</span>
+          <img src="assets/images/BMW 5 Series (2025).png" alt="2025 BMW 5 Series M-Sport" loading="lazy">
         </div>
         <div class="v-body">
-          <div class="v-brand">BMW</div>
-          <h2 class="v-title">BMW 5 Series (2025)</h2>
-          <div class="v-price">$899<span>/mo</span></div>
-          <div class="v-specs">
-            <div>âš™ï¸ Auto</div>
-            <div>â›½ Hybrid</div>
-            <div>ðŸ›£ï¸ 1.2k mi/mo</div>
-            <div>ðŸ’º 5 Seats</div>
+          <div class="v-meta-top">
+            <span class="v-brand">BMW</span>
+            <span class="v-term-range">Min: 1 mo &bull; Max: 24 mo</span>
           </div>
-          <button class="btn btn-secondary btn-full">View Vehicle</button>
+          <h2 class="v-title">2025 BMW 5 Series M-Sport</h2>
+          <div class="v-colors">
+            <span class="v-colors-label">Colors:</span>
+            <span class="color-dot active" style="background:#f8f9fa;" title="Alpine White"></span>
+            <span class="color-dot" style="background:#5a6268;" title="Mineral Grey"></span>
+            <span class="color-dot" style="background:#1a1a1a;" title="Black Sapphire"></span>
+            <span class="color-dot" style="background:#1746a2;" title="Phytonic Blue"></span>
+          </div>
+          <div class="v-pricing-wrap">
+            <div class="v-price"><span class="price-val">$899</span><span>/mo</span></div>
+            <div class="v-price-note"><strong>$0 Down</strong><br><span class="term-text">on 6-mo term</span></div>
+          </div>
+          <div class="v-inclusions">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Full Insurance + $0 Maintenance + Free Swap
+          </div>
+          <div class="v-specs">
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> 375 HP Hybrid</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> 8-Spd Auto</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 1.2k mi/mo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 5 Seats</div>
+          </div>
+          <div class="v-actions">
+            <button class="btn btn-primary btn-full subscribe-btn">Subscribe Plan</button>
+            <button class="btn btn-secondary details-btn" style="padding: 0.75rem 1rem;">Specs</button>
+          </div>
         </div>
       </div>
-      <div class="v-card fade-up vehicle-item" data-category="all suv luxury" data-price="800-1500" data-fuel="gasoline" data-transmission="auto">
+
+      <!-- 2. Range Rover Velar -->
+      <div class="v-card fade-up vehicle-item" data-category="all suv luxury" data-price="800-1500" data-fuel="gasoline" data-transmission="auto"
+           data-p1="1349" data-p3="1269" data-p6="1199" data-p12="1089"
+           data-name="2025 Range Rover Velar Dynamic" data-img="assets/images/Range Rover Velar (2025).png"
+           data-power="395 HP Twin-Turbo AWD" data-trans="8-Spd Auto AWD" data-miles="1,200 mi/mo" data-seats="5 Seats • 673L Cargo">
         <div class="v-img">
-          <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Land Rover Range Rover Velar (2025)" data-name="Land Rover Range Rover Velar (2025)" data-img="assets/images/Range Rover Velar (2025).png">
-          
-          <img src="assets/images/Range Rover Velar (2025).png" alt="Land Rover Range Rover Velar (2025)" loading="lazy">
+          <label class="v-compare-checkbox-wrap">
+            <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Range Rover Velar" data-name="Range Rover Velar" data-img="assets/images/Range Rover Velar (2025).png">
+            Compare
+          </label>
+          <span class="v-badge special">🔥 Special: $100 Off 1st Mo</span>
+          <img src="assets/images/Range Rover Velar (2025).png" alt="2025 Range Rover Velar Dynamic" loading="lazy">
         </div>
         <div class="v-body">
-          <div class="v-brand">Land Rover</div>
-          <h2 class="v-title">Range Rover Velar (2025)</h2>
-          <div class="v-price">$1,199<span>/mo</span></div>
-          <div class="v-specs">
-            <div>âš™ï¸ Auto</div>
-            <div>â›½ Gasoline</div>
-            <div>ðŸ›£ï¸ 1.2k mi/mo</div>
-            <div>ðŸ’º 5 Seats</div>
+          <div class="v-meta-top">
+            <span class="v-brand">Land Rover</span>
+            <span class="v-term-range">Min: 1 mo &bull; Max: 24 mo</span>
           </div>
-          <button class="btn btn-secondary btn-full">View Vehicle</button>
+          <h2 class="v-title">2025 Range Rover Velar</h2>
+          <div class="v-colors">
+            <span class="v-colors-label">Colors:</span>
+            <span class="color-dot active" style="background:#f5f5f5;" title="Fuji White"></span>
+            <span class="color-dot" style="background:#111111;" title="Santorini Black"></span>
+            <span class="color-dot" style="background:#8c9297;" title="Silicon Silver"></span>
+            <span class="color-dot" style="background:#2c3e50;" title="Byron Blue"></span>
+          </div>
+          <div class="v-pricing-wrap">
+            <div class="v-price"><span class="price-val">$1,199</span><span>/mo</span></div>
+            <div class="v-price-note"><strong>$0 Down</strong><br><span class="term-text">on 6-mo term</span></div>
+          </div>
+          <div class="v-inclusions">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Full Insurance + $0 Maintenance + Free Swap
+          </div>
+          <div class="v-specs">
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> 395 HP Twin-Turbo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> 8-Spd AWD</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 1.2k mi/mo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 5 Seats</div>
+          </div>
+          <div class="v-actions">
+            <button class="btn btn-primary btn-full subscribe-btn">Subscribe Plan</button>
+            <button class="btn btn-secondary details-btn" style="padding: 0.75rem 1rem;">Specs</button>
+          </div>
         </div>
       </div>
-      <div class="v-card fade-up vehicle-item" data-category="all sedan electric" data-price="under-800" data-fuel="electric" data-transmission="auto">
+
+      <!-- 3. Tesla Model 3 Long Range -->
+      <div class="v-card fade-up vehicle-item" data-category="all sedan electric" data-price="under-800" data-fuel="electric" data-transmission="auto"
+           data-p1="899" data-p3="849" data-p6="799" data-p12="729"
+           data-name="2025 Tesla Model 3 Long Range" data-img="assets/images/Model 3 Long Range.png"
+           data-power="358 mi Range Dual EV" data-trans="Direct EV" data-miles="1,200 mi/mo" data-seats="5 Seats • 594L Frunk+Trunk">
         <div class="v-img">
-          <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Tesla Model 3 Long Range" data-name="Tesla Model 3 Long Range" data-img="assets/images/Model 3 Long Range.png">
-          <span class="v-badge" style="background:#222;">Waitlist (2 weeks)</span>
-          <img src="assets/images/Model 3 Long Range.png" alt="Tesla Model 3 Long Range" loading="lazy">
+          <label class="v-compare-checkbox-wrap">
+            <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Tesla Model 3" data-name="Tesla Model 3" data-img="assets/images/Model 3 Long Range.png">
+            Compare
+          </label>
+          <span class="v-badge">Available Now &bull; 48h Delivery</span>
+          <img src="assets/images/Model 3 Long Range.png" alt="2025 Tesla Model 3 Long Range" loading="lazy">
         </div>
         <div class="v-body">
-          <div class="v-brand">Tesla</div>
-          <h2 class="v-title">Model 3 Long Range</h2>
-          <div class="v-price">$799<span>/mo</span></div>
-          <div class="v-specs">
-            <div>âš™ï¸ Direct</div>
-            <div>âš¡ Electric</div>
-            <div>ðŸ›£ï¸ 1.0k mi/mo</div>
-            <div>ðŸ’º 5 Seats</div>
+          <div class="v-meta-top">
+            <span class="v-brand">Tesla</span>
+            <span class="v-term-range">Min: 1 mo &bull; Max: 24 mo</span>
           </div>
-          <button class="btn btn-secondary btn-full">View Vehicle</button>
+          <h2 class="v-title">Model 3 Long Range AWD</h2>
+          <div class="v-colors">
+            <span class="v-colors-label">Colors:</span>
+            <span class="color-dot active" style="background:#f4f4f4;" title="Pearl White"></span>
+            <span class="color-dot" style="background:#151515;" title="Solid Black"></span>
+            <span class="color-dot" style="background:#4b4e54;" title="Midnight Silver"></span>
+            <span class="color-dot" style="background:#1b3b6f;" title="Deep Blue"></span>
+          </div>
+          <div class="v-pricing-wrap">
+            <div class="v-price"><span class="price-val">$799</span><span>/mo</span></div>
+            <div class="v-price-note"><strong>$0 Down</strong><br><span class="term-text">on 6-mo term</span></div>
+          </div>
+          <div class="v-inclusions">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Supercharging Credits + Full Insurance
+          </div>
+          <div class="v-specs">
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> 358 mi EV Dual Motor</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> Direct Drive</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 1.2k mi/mo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 5 Seats</div>
+          </div>
+          <div class="v-actions">
+            <button class="btn btn-primary btn-full subscribe-btn">Subscribe Plan</button>
+            <button class="btn btn-secondary details-btn" style="padding: 0.75rem 1rem;">Specs</button>
+          </div>
         </div>
       </div>
-      <div class="v-card fade-up vehicle-item" data-category="all performance luxury" data-price="over-1500" data-fuel="gasoline" data-transmission="auto">
+
+      <!-- 4. Porsche 911 Carrera S -->
+      <div class="v-card fade-up vehicle-item" data-category="all performance luxury" data-price="over-1500" data-fuel="gasoline" data-transmission="auto"
+           data-p1="2799" data-p3="2599" data-p6="2499" data-p12="2299"
+           data-name="2025 Porsche 911 Carrera S" data-img="assets/images/911 Carrera S.png"
+           data-power="443 HP Twin-Turbo Flat-6" data-trans="8-Spd PDK" data-miles="1,000 mi/mo" data-seats="2+2 Seats">
         <div class="v-img">
-          <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Porsche 911 Carrera S" data-name="Porsche 911 Carrera S" data-img="assets/images/911 Carrera S.png">
-          
-          <img src="assets/images/911 Carrera S.png" alt="Porsche 911 Carrera S" loading="lazy">
+          <label class="v-compare-checkbox-wrap">
+            <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Porsche 911" data-name="Porsche 911 Carrera S" data-img="assets/images/911 Carrera S.png">
+            Compare
+          </label>
+          <span class="v-badge">VIP Performance Fleet</span>
+          <img src="assets/images/911 Carrera S.png" alt="2025 Porsche 911 Carrera S" loading="lazy">
         </div>
         <div class="v-body">
-          <div class="v-brand">Porsche</div>
-          <h2 class="v-title">911 Carrera S</h2>
-          <div class="v-price">$2,499<span>/mo</span></div>
-          <div class="v-specs">
-            <div>âš™ï¸ PDK</div>
-            <div>â›½ Gasoline</div>
-            <div>ðŸ›£ï¸ 800 mi/mo</div>
-            <div>ðŸ’º 2 Seats</div>
+          <div class="v-meta-top">
+            <span class="v-brand">Porsche</span>
+            <span class="v-term-range">Min: 1 mo &bull; Max: 12 mo</span>
           </div>
-          <button class="btn btn-secondary btn-full">View Vehicle</button>
+          <h2 class="v-title">911 Carrera S Coupe</h2>
+          <div class="v-colors">
+            <span class="v-colors-label">Colors:</span>
+            <span class="color-dot active" style="background:#cc1111;" title="Guards Red"></span>
+            <span class="color-dot" style="background:#fafafa;" title="Carrara White"></span>
+            <span class="color-dot" style="background:#0d0d0d;" title="Jet Black"></span>
+            <span class="color-dot" style="background:#162b4d;" title="Gentian Blue"></span>
+          </div>
+          <div class="v-pricing-wrap">
+            <div class="v-price"><span class="price-val">$2,499</span><span>/mo</span></div>
+            <div class="v-price-note"><strong>$0 Down</strong><br><span class="term-text">on 6-mo term</span></div>
+          </div>
+          <div class="v-inclusions">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Tire Wear Shield + Full Insurance + Valet Swaps
+          </div>
+          <div class="v-specs">
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> 443 HP Twin-Turbo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> 8-Spd PDK</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 1.0k mi/mo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 2+2 Seats</div>
+          </div>
+          <div class="v-actions">
+            <button class="btn btn-primary btn-full subscribe-btn">Subscribe Plan</button>
+            <button class="btn btn-secondary details-btn" style="padding: 0.75rem 1rem;">Specs</button>
+          </div>
         </div>
       </div>
-      <div class="v-card fade-up vehicle-item" data-category="all compact sedan luxury" data-price="under-800" data-fuel="gasoline" data-transmission="auto">
+
+      <!-- 5. Audi A3 Premium -->
+      <div class="v-card fade-up vehicle-item" data-category="all compact sedan luxury" data-price="under-800" data-fuel="gasoline" data-transmission="auto"
+           data-p1="779" data-p3="739" data-p6="699" data-p12="639"
+           data-name="2025 Audi A3 Premium quattro" data-img="assets/images/A3 Premium (2024).png"
+           data-power="201 HP Turbo quattro" data-trans="7-Spd S tronic" data-miles="1,200 mi/mo" data-seats="5 Seats • Compact Luxury">
         <div class="v-img">
-          <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Audi A3 Premium (2024)" data-name="Audi A3 Premium (2024)" data-img="assets/images/A3 Premium (2024).png">
-          <span class="v-badge">Available Now</span>
-          <img src="assets/images/A3 Premium (2024).png" alt="Audi A3 Premium (2024)" loading="lazy">
+          <label class="v-compare-checkbox-wrap">
+            <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Audi A3" data-name="Audi A3 Premium" data-img="assets/images/A3 Premium (2024).png">
+            Compare
+          </label>
+          <span class="v-badge">Available Now &bull; 48h Delivery</span>
+          <img src="assets/images/A3 Premium (2024).png" alt="2025 Audi A3 Premium quattro" loading="lazy">
         </div>
         <div class="v-body">
-          <div class="v-brand">Audi</div>
-          <h2 class="v-title">A3 Premium (2024)</h2>
-          <div class="v-price">$699<span>/mo</span></div>
-          <div class="v-specs">
-            <div>âš™ï¸ Auto</div>
-            <div>â›½ Gasoline</div>
-            <div>ðŸ›£ï¸ 1.2k mi/mo</div>
-            <div>ðŸ’º 5 Seats</div>
+          <div class="v-meta-top">
+            <span class="v-brand">Audi</span>
+            <span class="v-term-range">Min: 1 mo &bull; Max: 24 mo</span>
           </div>
-          <button class="btn btn-secondary btn-full">View Vehicle</button>
+          <h2 class="v-title">Audi A3 Premium quattro</h2>
+          <div class="v-colors">
+            <span class="v-colors-label">Colors:</span>
+            <span class="color-dot active" style="background:#f9f9f9;" title="Ibis White"></span>
+            <span class="color-dot" style="background:#1a1a1a;" title="Mythos Black"></span>
+            <span class="color-dot" style="background:#4a4e51;" title="Daytona Grey"></span>
+            <span class="color-dot" style="background:#b31e28;" title="Tango Red"></span>
+          </div>
+          <div class="v-pricing-wrap">
+            <div class="v-price"><span class="price-val">$699</span><span>/mo</span></div>
+            <div class="v-price-note"><strong>$0 Down</strong><br><span class="term-text">on 6-mo term</span></div>
+          </div>
+          <div class="v-inclusions">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Full Insurance + $0 Maintenance Included
+          </div>
+          <div class="v-specs">
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> 201 HP Turbo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> 7-Spd S tronic</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 1.2k mi/mo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 5 Seats</div>
+          </div>
+          <div class="v-actions">
+            <button class="btn btn-primary btn-full subscribe-btn">Subscribe Plan</button>
+            <button class="btn btn-secondary details-btn" style="padding: 0.75rem 1rem;">Specs</button>
+          </div>
         </div>
       </div>
-      <div class="v-card fade-up vehicle-item" data-category="all suv luxury performance" data-price="over-1500" data-fuel="gasoline" data-transmission="auto">
+
+      <!-- 6. Mercedes G-Class 550 -->
+      <div class="v-card fade-up vehicle-item" data-category="all suv luxury performance" data-price="over-1500" data-fuel="gasoline" data-transmission="auto"
+           data-p1="2399" data-p3="2249" data-p6="2100" data-p12="1950"
+           data-name="2025 Mercedes-Benz G 550" data-img="assets/images/G-Class 550.png"
+           data-power="416 HP Biturbo V8" data-trans="9G-TRONIC 4MATIC" data-miles="1,000 mi/mo" data-seats="5 Seats • Iconic SUV">
         <div class="v-img">
-          <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Mercedes-Benz G-Class 550" data-name="Mercedes-Benz G-Class 550" data-img="assets/images/G-Class 550.png">
-          
-          <img src="assets/images/G-Class 550.png" alt="Mercedes-Benz G-Class 550" loading="lazy">
+          <label class="v-compare-checkbox-wrap">
+            <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Mercedes-Benz G-Class" data-name="Mercedes-Benz G 550" data-img="assets/images/G-Class 550.png">
+            Compare
+          </label>
+          <span class="v-badge special">Iconic Status Fleet</span>
+          <img src="assets/images/G-Class 550.png" alt="2025 Mercedes-Benz G 550" loading="lazy">
         </div>
         <div class="v-body">
-          <div class="v-brand">Mercedes-Benz</div>
-          <h2 class="v-title">G-Class 550</h2>
-          <div class="v-price">$2,100<span>/mo</span></div>
-          <div class="v-specs">
-            <div>âš™ï¸ Auto</div>
-            <div>â›½ Gasoline</div>
-            <div>ðŸ›£ï¸ 1.0k mi/mo</div>
-            <div>ðŸ’º 5 Seats</div>
+          <div class="v-meta-top">
+            <span class="v-brand">Mercedes-Benz</span>
+            <span class="v-term-range">Min: 3 mo &bull; Max: 24 mo</span>
           </div>
-          <button class="btn btn-secondary btn-full">View Vehicle</button>
+          <h2 class="v-title">Mercedes-Benz G 550</h2>
+          <div class="v-colors">
+            <span class="v-colors-label">Colors:</span>
+            <span class="color-dot active" style="background:#141414;" title="Obsidian Black"></span>
+            <span class="color-dot" style="background:#f6f6f6;" title="Polar White"></span>
+            <span class="color-dot" style="background:#4e5357;" title="Selenite Grey"></span>
+            <span class="color-dot" style="background:#163e2d;" title="Emerald Green"></span>
+          </div>
+          <div class="v-pricing-wrap">
+            <div class="v-price"><span class="price-val">$2,100</span><span>/mo</span></div>
+            <div class="v-price-note"><strong>$0 Down</strong><br><span class="term-text">on 6-mo term</span></div>
+          </div>
+          <div class="v-inclusions">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Full Insurance + $0 Maintenance + Valet Swap
+          </div>
+          <div class="v-specs">
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> 416 HP Biturbo V8</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> 9G 4MATIC</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 1.0k mi/mo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 5 Seats</div>
+          </div>
+          <div class="v-actions">
+            <button class="btn btn-primary btn-full subscribe-btn">Subscribe Plan</button>
+            <button class="btn btn-secondary details-btn" style="padding: 0.75rem 1rem;">Specs</button>
+          </div>
         </div>
       </div>
-      <div class="v-card fade-up vehicle-item" data-category="all sedan electric compact" data-price="under-800" data-fuel="electric" data-transmission="auto">
+
+      <!-- 7. Polestar 2 -->
+      <div class="v-card fade-up vehicle-item" data-category="all sedan electric compact" data-price="under-800" data-fuel="electric" data-transmission="auto"
+           data-p1="849" data-p3="799" data-p6="749" data-p12="689"
+           data-name="2025 Polestar 2 Long Range Dual Motor" data-img="assets/images/Polestar 2.png"
+           data-power="421 HP Dual Motor EV" data-trans="Direct Drive EV" data-miles="1,200 mi/mo" data-seats="5 Seats • 276 mi Range">
         <div class="v-img">
-          <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Polestar Polestar 2" data-name="Polestar Polestar 2" data-img="assets/images/Polestar 2.png">
-          
-          <img src="assets/images/Polestar 2.png" alt="Polestar Polestar 2" loading="lazy">
+          <label class="v-compare-checkbox-wrap">
+            <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Polestar 2" data-name="Polestar 2" data-img="assets/images/Polestar 2.png">
+            Compare
+          </label>
+          <span class="v-badge">Available Now &bull; 48h Delivery</span>
+          <img src="assets/images/Polestar 2.png" alt="2025 Polestar 2 Long Range Dual Motor" loading="lazy">
         </div>
         <div class="v-body">
-          <div class="v-brand">Polestar</div>
-          <h2 class="v-title">Polestar 2</h2>
-          <div class="v-price">$749<span>/mo</span></div>
-          <div class="v-specs">
-            <div>âš™ï¸ Direct</div>
-            <div>âš¡ Electric</div>
-            <div>ðŸ›£ï¸ 1.0k mi/mo</div>
-            <div>ðŸ’º 5 Seats</div>
+          <div class="v-meta-top">
+            <span class="v-brand">Polestar</span>
+            <span class="v-term-range">Min: 1 mo &bull; Max: 24 mo</span>
           </div>
-          <button class="btn btn-secondary btn-full">View Vehicle</button>
+          <h2 class="v-title">Polestar 2 Dual Motor AWD</h2>
+          <div class="v-colors">
+            <span class="v-colors-label">Colors:</span>
+            <span class="color-dot active" style="background:#f7f7f7;" title="Snow"></span>
+            <span class="color-dot" style="background:#121212;" title="Space Black"></span>
+            <span class="color-dot" style="background:#787b80;" title="Magnesium"></span>
+            <span class="color-dot" style="background:#484e55;" title="Thunder"></span>
+          </div>
+          <div class="v-pricing-wrap">
+            <div class="v-price"><span class="price-val">$749</span><span>/mo</span></div>
+            <div class="v-price-note"><strong>$0 Down</strong><br><span class="term-text">on 6-mo term</span></div>
+          </div>
+          <div class="v-inclusions">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Zero Maintenance + Full EV Battery Coverage
+          </div>
+          <div class="v-specs">
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> 421 HP / 276 mi EV</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> Direct Drive</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 1.2k mi/mo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 5 Seats</div>
+          </div>
+          <div class="v-actions">
+            <button class="btn btn-primary btn-full subscribe-btn">Subscribe Plan</button>
+            <button class="btn btn-secondary details-btn" style="padding: 0.75rem 1rem;">Specs</button>
+          </div>
         </div>
       </div>
-      <div class="v-card fade-up vehicle-item" data-category="all sedan electric performance luxury" data-price="over-1500" data-fuel="electric" data-transmission="auto">
+
+      <!-- 8. Porsche Taycan 4S -->
+      <div class="v-card fade-up vehicle-item" data-category="all sedan electric performance luxury" data-price="over-1500" data-fuel="electric" data-transmission="auto"
+           data-p1="2149" data-p3="1999" data-p6="1899" data-p12="1749"
+           data-name="2025 Porsche Taycan 4S" data-img="assets/images/Taycan 4S.png"
+           data-power="530 HP Dual EV AWD" data-trans="2-Speed Rear EV" data-miles="1,000 mi/mo" data-seats="4 Seats • 280 mi Range">
         <div class="v-img">
-          <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Porsche Taycan 4S" data-name="Porsche Taycan 4S" data-img="assets/images/Taycan 4S.png">
-          <span class="v-badge">Limited Availability</span>
-          <img src="assets/images/Taycan 4S.png" alt="Porsche Taycan 4S" loading="lazy">
+          <label class="v-compare-checkbox-wrap">
+            <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Porsche Taycan 4S" data-name="Porsche Taycan 4S" data-img="assets/images/Taycan 4S.png">
+            Compare
+          </label>
+          <span class="v-badge special">🔥 $150 Off First 3 Months</span>
+          <img src="assets/images/Taycan 4S.png" alt="2025 Porsche Taycan 4S" loading="lazy">
         </div>
         <div class="v-body">
-          <div class="v-brand">Porsche</div>
-          <h2 class="v-title">Taycan 4S</h2>
-          <div class="v-price">$1,899<span>/mo</span></div>
-          <div class="v-specs">
-            <div>âš™ï¸ Direct</div>
-            <div>âš¡ Electric</div>
-            <div>ðŸ›£ï¸ 1.0k mi/mo</div>
-            <div>ðŸ’º 4 Seats</div>
+          <div class="v-meta-top">
+            <span class="v-brand">Porsche</span>
+            <span class="v-term-range">Min: 1 mo &bull; Max: 24 mo</span>
           </div>
-          <button class="btn btn-secondary btn-full">View Vehicle</button>
+          <h2 class="v-title">Porsche Taycan 4S</h2>
+          <div class="v-colors">
+            <span class="v-colors-label">Colors:</span>
+            <span class="color-dot active" style="background:#4d7ea8;" title="Frozen Blue"></span>
+            <span class="color-dot" style="background:#cfd2d6;" title="Chalk"></span>
+            <span class="color-dot" style="background:#3c4046;" title="Volcano Grey"></span>
+            <span class="color-dot" style="background:#a6192e;" title="Carmine Red"></span>
+          </div>
+          <div class="v-pricing-wrap">
+            <div class="v-price"><span class="price-val">$1,899</span><span>/mo</span></div>
+            <div class="v-price-note"><strong>$0 Down</strong><br><span class="term-text">on 6-mo term</span></div>
+          </div>
+          <div class="v-inclusions">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Includes 800V DC Charging + Full Insurance
+          </div>
+          <div class="v-specs">
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> 530 HP / 280 mi EV</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> 2-Spd EV</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 1.0k mi/mo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 4 Seats</div>
+          </div>
+          <div class="v-actions">
+            <button class="btn btn-primary btn-full subscribe-btn">Subscribe Plan</button>
+            <button class="btn btn-secondary details-btn" style="padding: 0.75rem 1rem;">Specs</button>
+          </div>
         </div>
       </div>
-      <div class="v-card fade-up vehicle-item" data-category="all suv luxury" data-price="800-1500" data-fuel="hybrid" data-transmission="auto">
+
+      <!-- 9. Audi Q5 Premium Plus -->
+      <div class="v-card fade-up vehicle-item" data-category="all suv luxury" data-price="800-1500" data-fuel="hybrid" data-transmission="auto"
+           data-p1="950" data-p3="899" data-p6="850" data-p12="779"
+           data-name="2025 Audi Q5 Premium Plus quattro" data-img="assets/images/Q5 Premium Plus.png"
+           data-power="261 HP Turbo quattro" data-trans="7-Spd S tronic" data-miles="1,200 mi/mo" data-seats="5 Seats • 720L Cargo">
         <div class="v-img">
-          <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Audi Q5 Premium Plus" data-name="Audi Q5 Premium Plus" data-img="assets/images/Q5 Premium Plus.png">
-          <span class="v-badge">Available Now</span>
-          <img src="assets/images/Q5 Premium Plus.png" alt="Audi Q5 Premium Plus" loading="lazy">
+          <label class="v-compare-checkbox-wrap">
+            <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Audi Q5" data-name="Audi Q5 Premium Plus" data-img="assets/images/Q5 Premium Plus.png">
+            Compare
+          </label>
+          <span class="v-badge">Available Now &bull; 48h Delivery</span>
+          <img src="assets/images/Q5 Premium Plus.png" alt="2025 Audi Q5 Premium Plus" loading="lazy">
         </div>
         <div class="v-body">
-          <div class="v-brand">Audi</div>
-          <h2 class="v-title">Q5 Premium Plus</h2>
-          <div class="v-price">$850<span>/mo</span></div>
-          <div class="v-specs">
-            <div>âš™ï¸ Auto</div>
-            <div>â›½ Hybrid</div>
-            <div>ðŸ›£ï¸ 1.2k mi/mo</div>
-            <div>ðŸ’º 5 Seats</div>
+          <div class="v-meta-top">
+            <span class="v-brand">Audi</span>
+            <span class="v-term-range">Min: 1 mo &bull; Max: 24 mo</span>
           </div>
-          <button class="btn btn-secondary btn-full">View Vehicle</button>
+          <h2 class="v-title">Audi Q5 Premium Plus</h2>
+          <div class="v-colors">
+            <span class="v-colors-label">Colors:</span>
+            <span class="color-dot active" style="background:#f0f2f5;" title="Glacier White"></span>
+            <span class="color-dot" style="background:#111111;" title="Mythos Black"></span>
+            <span class="color-dot" style="background:#636b73;" title="Chronos Grey"></span>
+            <span class="color-dot" style="background:#1a2d4b;" title="Navarra Blue"></span>
+          </div>
+          <div class="v-pricing-wrap">
+            <div class="v-price"><span class="price-val">$850</span><span>/mo</span></div>
+            <div class="v-price-note"><strong>$0 Down</strong><br><span class="term-text">on 6-mo term</span></div>
+          </div>
+          <div class="v-inclusions">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Full Insurance + Routine Service + Concierge Delivery
+          </div>
+          <div class="v-specs">
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> 261 HP Turbo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> 7-Spd quattro</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 1.2k mi/mo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 5 Seats</div>
+          </div>
+          <div class="v-actions">
+            <button class="btn btn-primary btn-full subscribe-btn">Subscribe Plan</button>
+            <button class="btn btn-secondary details-btn" style="padding: 0.75rem 1rem;">Specs</button>
+          </div>
         </div>
       </div>
-      <div class="v-card fade-up vehicle-item" data-category="all compact performance" data-price="under-800" data-fuel="gasoline" data-transmission="manual">
+
+      <!-- 10. Volkswagen Golf R -->
+      <div class="v-card fade-up vehicle-item" data-category="all compact performance" data-price="under-800" data-fuel="gasoline" data-transmission="manual"
+           data-p1="849" data-p3="799" data-p6="750" data-p12="689"
+           data-name="2025 Volkswagen Golf R" data-img="assets/images/Golf R.png"
+           data-power="315 HP Turbo 4MOTION" data-trans="6-Spd Manual" data-miles="1,000 mi/mo" data-seats="5 Seats • Hot Hatch">
         <div class="v-img">
-          <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Volkswagen Golf R" data-name="Volkswagen Golf R" data-img="assets/images/Golf R.png">
-          
-          <img src="assets/images/Golf R.png" alt="Volkswagen Golf R" loading="lazy">
+          <label class="v-compare-checkbox-wrap">
+            <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Golf R" data-name="Volkswagen Golf R" data-img="assets/images/Golf R.png">
+            Compare
+          </label>
+          <span class="v-badge">Manual Enthusiast Tier</span>
+          <img src="assets/images/Golf R.png" alt="2025 Volkswagen Golf R" loading="lazy">
         </div>
         <div class="v-body">
-          <div class="v-brand">Volkswagen</div>
-          <h2 class="v-title">Golf R</h2>
-          <div class="v-price">$750<span>/mo</span></div>
-          <div class="v-specs">
-            <div>âš™ï¸ Manual</div>
-            <div>â›½ Gasoline</div>
-            <div>ðŸ›£ï¸ 1.0k mi/mo</div>
-            <div>ðŸ’º 5 Seats</div>
+          <div class="v-meta-top">
+            <span class="v-brand">Volkswagen</span>
+            <span class="v-term-range">Min: 1 mo &bull; Max: 24 mo</span>
           </div>
-          <button class="btn btn-secondary btn-full">View Vehicle</button>
+          <h2 class="v-title">Volkswagen Golf R</h2>
+          <div class="v-colors">
+            <span class="v-colors-label">Colors:</span>
+            <span class="color-dot active" style="background:#1e4bb5;" title="Lapiz Blue"></span>
+            <span class="color-dot" style="background:#fcfcfc;" title="Pure White"></span>
+            <span class="color-dot" style="background:#121212;" title="Deep Black Pearl"></span>
+          </div>
+          <div class="v-pricing-wrap">
+            <div class="v-price"><span class="price-val">$750</span><span>/mo</span></div>
+            <div class="v-price-note"><strong>$0 Down</strong><br><span class="term-text">on 6-mo term</span></div>
+          </div>
+          <div class="v-inclusions">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Full Insurance + Performance Brake Coverage
+          </div>
+          <div class="v-specs">
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> 315 HP 4MOTION</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> 6-Spd Manual</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 1.0k mi/mo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 5 Seats</div>
+          </div>
+          <div class="v-actions">
+            <button class="btn btn-primary btn-full subscribe-btn">Subscribe Plan</button>
+            <button class="btn btn-secondary details-btn" style="padding: 0.75rem 1rem;">Specs</button>
+          </div>
         </div>
       </div>
-      <div class="v-card fade-up vehicle-item" data-category="all suv luxury" data-price="800-1500" data-fuel="gasoline" data-transmission="auto">
+
+      <!-- 11. BMW X5 xDrive40i -->
+      <div class="v-card fade-up vehicle-item" data-category="all suv luxury" data-price="800-1500" data-fuel="gasoline" data-transmission="auto"
+           data-p1="1249" data-p3="1169" data-p6="1099" data-p12="999"
+           data-name="2025 BMW X5 xDrive40i" data-img="assets/images/X5 xDrive40i.png"
+           data-power="375 HP TwinPower Turbo" data-trans="8-Spd Sport Auto" data-miles="1,200 mi/mo" data-seats="5 Seats • 920L Cargo">
         <div class="v-img">
-          <input type="checkbox" class="v-compare-checkbox" aria-label="Compare BMW X5 xDrive40i" data-name="BMW X5 xDrive40i" data-img="assets/images/X5 xDrive40i.png">
-          
-          <img src="assets/images/X5 xDrive40i.png" alt="BMW X5 xDrive40i" loading="lazy">
+          <label class="v-compare-checkbox-wrap">
+            <input type="checkbox" class="v-compare-checkbox" aria-label="Compare BMW X5" data-name="BMW X5 xDrive40i" data-img="assets/images/X5 xDrive40i.png">
+            Compare
+          </label>
+          <span class="v-badge">Available Now &bull; 48h Delivery</span>
+          <img src="assets/images/X5 xDrive40i.png" alt="2025 BMW X5 xDrive40i" loading="lazy">
         </div>
         <div class="v-body">
-          <div class="v-brand">BMW</div>
-          <h2 class="v-title">X5 xDrive40i</h2>
-          <div class="v-price">$1,099<span>/mo</span></div>
-          <div class="v-specs">
-            <div>âš™ï¸ Auto</div>
-            <div>â›½ Gasoline</div>
-            <div>ðŸ›£ï¸ 1.2k mi/mo</div>
-            <div>ðŸ’º 5 Seats</div>
+          <div class="v-meta-top">
+            <span class="v-brand">BMW</span>
+            <span class="v-term-range">Min: 1 mo &bull; Max: 24 mo</span>
           </div>
-          <button class="btn btn-secondary btn-full">View Vehicle</button>
+          <h2 class="v-title">BMW X5 xDrive40i</h2>
+          <div class="v-colors">
+            <span class="v-colors-label">Colors:</span>
+            <span class="color-dot active" style="background:#f2f3f5;" title="Mineral White"></span>
+            <span class="color-dot" style="background:#151515;" title="Black Sapphire"></span>
+            <span class="color-dot" style="background:#37463b;" title="Manhattan Green"></span>
+            <span class="color-dot" style="background:#162744;" title="Tanzanite Blue"></span>
+          </div>
+          <div class="v-pricing-wrap">
+            <div class="v-price"><span class="price-val">$1,099</span><span>/mo</span></div>
+            <div class="v-price-note"><strong>$0 Down</strong><br><span class="term-text">on 6-mo term</span></div>
+          </div>
+          <div class="v-inclusions">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Full Insurance + $0 Maintenance + Complimentary Seasonal Swap
+          </div>
+          <div class="v-specs">
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> 375 HP TwinPower</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> 8-Spd Sport</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 1.2k mi/mo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 5 Seats</div>
+          </div>
+          <div class="v-actions">
+            <button class="btn btn-primary btn-full subscribe-btn">Subscribe Plan</button>
+            <button class="btn btn-secondary details-btn" style="padding: 0.75rem 1rem;">Specs</button>
+          </div>
         </div>
       </div>
-      <div class="v-card fade-up vehicle-item" data-category="all compact" data-price="under-800" data-fuel="gasoline" data-transmission="auto">
+
+      <!-- 12. Mini Cooper S -->
+      <div class="v-card fade-up vehicle-item" data-category="all compact" data-price="under-800" data-fuel="gasoline" data-transmission="auto"
+           data-p1="689" data-p3="639" data-p6="599" data-p12="549"
+           data-name="2025 Mini Cooper S Hardtop" data-img="assets/images/Cooper S.png"
+           data-power="189 HP TwinPower Turbo" data-trans="7-Spd Dual-Clutch" data-miles="1,200 mi/mo" data-seats="4 Seats • Urban Agility">
         <div class="v-img">
-          <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Mini Cooper S" data-name="Mini Cooper S" data-img="assets/images/Cooper S.png">
-          <span class="v-badge">Available Now</span>
-          <img src="assets/images/Cooper S.png" alt="Mini Cooper S" loading="lazy">
+          <label class="v-compare-checkbox-wrap">
+            <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Mini Cooper S" data-name="Mini Cooper S" data-img="assets/images/Cooper S.png">
+            Compare
+          </label>
+          <span class="v-badge">Available Now &bull; 48h Delivery</span>
+          <img src="assets/images/Cooper S.png" alt="2025 Mini Cooper S" loading="lazy">
         </div>
         <div class="v-body">
-          <div class="v-brand">Mini</div>
-          <h2 class="v-title">Cooper S</h2>
-          <div class="v-price">$599<span>/mo</span></div>
-          <div class="v-specs">
-            <div>âš™ï¸ Auto</div>
-            <div>â›½ Gasoline</div>
-            <div>ðŸ›£ï¸ 1.2k mi/mo</div>
-            <div>ðŸ’º 4 Seats</div>
+          <div class="v-meta-top">
+            <span class="v-brand">Mini</span>
+            <span class="v-term-range">Min: 1 mo &bull; Max: 24 mo</span>
           </div>
-          <button class="btn btn-secondary btn-full">View Vehicle</button>
+          <h2 class="v-title">Mini Cooper S Hardtop</h2>
+          <div class="v-colors">
+            <span class="v-colors-label">Colors:</span>
+            <span class="color-dot active" style="background:#d0202e;" title="Chili Red"></span>
+            <span class="color-dot" style="background:#194129;" title="British Racing Green"></span>
+            <span class="color-dot" style="background:#2b6fa8;" title="Island Blue"></span>
+            <span class="color-dot" style="background:#101010;" title="Midnight Black"></span>
+          </div>
+          <div class="v-pricing-wrap">
+            <div class="v-price"><span class="price-val">$599</span><span>/mo</span></div>
+            <div class="v-price-note"><strong>$0 Down</strong><br><span class="term-text">on 6-mo term</span></div>
+          </div>
+          <div class="v-inclusions">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            All-Inclusive &bull; Tires, Oil, Insurance & Roadside
+          </div>
+          <div class="v-specs">
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> 189 HP Turbo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> 7-Spd Dual-Clutch</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 1.2k mi/mo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 4 Seats</div>
+          </div>
+          <div class="v-actions">
+            <button class="btn btn-primary btn-full subscribe-btn">Subscribe Plan</button>
+            <button class="btn btn-secondary details-btn" style="padding: 0.75rem 1rem;">Specs</button>
+          </div>
         </div>
       </div>
-      <div class="v-card fade-up vehicle-item" data-category="all suv electric" data-price="800-1500" data-fuel="electric" data-transmission="auto">
+
+      <!-- 13. Rivian R1S Adventure -->
+      <div class="v-card fade-up vehicle-item" data-category="all suv electric" data-price="800-1500" data-fuel="electric" data-transmission="auto"
+           data-p1="1449" data-p3="1369" data-p6="1299" data-p12="1199"
+           data-name="2025 Rivian R1S Adventure" data-img="assets/images/R1S Adventure.png"
+           data-power="835 HP Quad-Motor EV" data-trans="Quad Direct EV" data-miles="1,000 mi/mo" data-seats="7 Seats • 321 mi Range">
         <div class="v-img">
-          <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Rivian R1S Adventure" data-name="Rivian R1S Adventure" data-img="assets/images/R1S Adventure.png">
-          <span class="v-badge" style="background:#222;">Waitlist (4 weeks)</span>
-          <img src="assets/images/R1S Adventure.png" alt="Rivian R1S Adventure" loading="lazy">
+          <label class="v-compare-checkbox-wrap">
+            <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Rivian R1S" data-name="Rivian R1S Adventure" data-img="assets/images/R1S Adventure.png">
+            Compare
+          </label>
+          <span class="v-badge waitlist">Waitlist (2 weeks)</span>
+          <img src="assets/images/R1S Adventure.png" alt="2025 Rivian R1S Adventure" loading="lazy">
         </div>
         <div class="v-body">
-          <div class="v-brand">Rivian</div>
-          <h2 class="v-title">R1S Adventure</h2>
-          <div class="v-price">$1,299<span>/mo</span></div>
-          <div class="v-specs">
-            <div>âš™ï¸ Direct</div>
-            <div>âš¡ Electric</div>
-            <div>ðŸ›£ï¸ 1.0k mi/mo</div>
-            <div>ðŸ’º 7 Seats</div>
+          <div class="v-meta-top">
+            <span class="v-brand">Rivian</span>
+            <span class="v-term-range">Min: 1 mo &bull; Max: 24 mo</span>
           </div>
-          <button class="btn btn-secondary btn-full">View Vehicle</button>
+          <h2 class="v-title">Rivian R1S Adventure AWD</h2>
+          <div class="v-colors">
+            <span class="v-colors-label">Colors:</span>
+            <span class="color-dot active" style="background:#8b939c;" title="LA Silver"></span>
+            <span class="color-dot" style="background:#294334;" title="Forest Green"></span>
+            <span class="color-dot" style="background:#2d70b7;" title="Rivian Blue"></span>
+            <span class="color-dot" style="background:#f5f5f5;" title="Glacier White"></span>
+          </div>
+          <div class="v-pricing-wrap">
+            <div class="v-price"><span class="price-val">$1,299</span><span>/mo</span></div>
+            <div class="v-price-note"><strong>$0 Down</strong><br><span class="term-text">on 6-mo term</span></div>
+          </div>
+          <div class="v-inclusions">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Off-Road Coverage + Full Insurance + 7-Passenger
+          </div>
+          <div class="v-specs">
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> 835 HP Quad EV</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> Quad Direct</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 1.0k mi/mo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 7 Seats</div>
+          </div>
+          <div class="v-actions">
+            <button class="btn btn-primary btn-full subscribe-btn">Subscribe Plan</button>
+            <button class="btn btn-secondary details-btn" style="padding: 0.75rem 1rem;">Specs</button>
+          </div>
         </div>
       </div>
-      <div class="v-card fade-up vehicle-item" data-category="all performance compact" data-price="800-1500" data-fuel="gasoline" data-transmission="manual">
+
+      <!-- 14. Toyota GR Supra -->
+      <div class="v-card fade-up vehicle-item" data-category="all performance compact" data-price="800-1500" data-fuel="gasoline" data-transmission="manual"
+           data-p1="950" data-p3="899" data-p6="850" data-p12="779"
+           data-name="2025 Toyota GR Supra 3.0" data-img="assets/images/GR Supra.png"
+           data-power="382 HP 3.0L Turbo 6" data-trans="6-Spd iMT Manual" data-miles="800 mi/mo" data-seats="2 Seats • Pure Sport">
         <div class="v-img">
-          <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Toyota GR Supra" data-name="Toyota GR Supra" data-img="assets/images/GR Supra.png">
-          
-          <img src="assets/images/GR Supra.png" alt="Toyota GR Supra" loading="lazy">
+          <label class="v-compare-checkbox-wrap">
+            <input type="checkbox" class="v-compare-checkbox" aria-label="Compare GR Supra" data-name="Toyota GR Supra" data-img="assets/images/GR Supra.png">
+            Compare
+          </label>
+          <span class="v-badge">Track-Tuned Sport</span>
+          <img src="assets/images/GR Supra.png" alt="2025 Toyota GR Supra 3.0" loading="lazy">
         </div>
         <div class="v-body">
-          <div class="v-brand">Toyota</div>
-          <h2 class="v-title">GR Supra</h2>
-          <div class="v-price">$850<span>/mo</span></div>
-          <div class="v-specs">
-            <div>âš™ï¸ Manual</div>
-            <div>â›½ Gasoline</div>
-            <div>ðŸ›£ï¸ 800 mi/mo</div>
-            <div>ðŸ’º 2 Seats</div>
+          <div class="v-meta-top">
+            <span class="v-brand">Toyota Gazoo</span>
+            <span class="v-term-range">Min: 1 mo &bull; Max: 12 mo</span>
           </div>
-          <button class="btn btn-secondary btn-full">View Vehicle</button>
+          <h2 class="v-title">Toyota GR Supra 3.0 MT</h2>
+          <div class="v-colors">
+            <span class="v-colors-label">Colors:</span>
+            <span class="color-dot active" style="background:#c9182b;" title="Renaissance Red"></span>
+            <span class="color-dot" style="background:#0f0f10;" title="Nocturnal Black"></span>
+            <span class="color-dot" style="background:#f8f8f8;" title="Absolute Zero White"></span>
+            <span class="color-dot" style="background:#193e75;" title="Stratosphere Blue"></span>
+          </div>
+          <div class="v-pricing-wrap">
+            <div class="v-price"><span class="price-val">$850</span><span>/mo</span></div>
+            <div class="v-price-note"><strong>$0 Down</strong><br><span class="term-text">on 6-mo term</span></div>
+          </div>
+          <div class="v-inclusions">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Tire Protection + Full Insurance + $0 Maintenance
+          </div>
+          <div class="v-specs">
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> 382 HP Turbo 6</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> 6-Spd Manual</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 800 mi/mo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 2 Seats</div>
+          </div>
+          <div class="v-actions">
+            <button class="btn btn-primary btn-full subscribe-btn">Subscribe Plan</button>
+            <button class="btn btn-secondary details-btn" style="padding: 0.75rem 1rem;">Specs</button>
+          </div>
         </div>
       </div>
-      <div class="v-card fade-up vehicle-item" data-category="all sedan luxury electric performance" data-price="over-1500" data-fuel="electric" data-transmission="auto">
+
+      <!-- 15. Lucid Air Grand Touring -->
+      <div class="v-card fade-up vehicle-item" data-category="all sedan luxury electric performance" data-price="over-1500" data-fuel="electric" data-transmission="auto"
+           data-p1="1899" data-p3="1789" data-p6="1699" data-p12="1549"
+           data-name="2025 Lucid Air Grand Touring" data-img="assets/images/Air Grand Touring.png"
+           data-power="819 HP Dual EV / 516 mi" data-trans="Direct Drive EV" data-miles="1,000 mi/mo" data-seats="5 Seats • Ultra Luxury">
         <div class="v-img">
-          <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Lucid Air Grand Touring" data-name="Lucid Air Grand Touring" data-img="assets/images/Air Grand Touring.png">
-          
-          <img src="assets/images/Air Grand Touring.png" alt="Lucid Air Grand Touring" loading="lazy">
+          <label class="v-compare-checkbox-wrap">
+            <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Lucid Air" data-name="Lucid Air Grand Touring" data-img="assets/images/Air Grand Touring.png">
+            Compare
+          </label>
+          <span class="v-badge special">516-Mile Range Leader</span>
+          <img src="assets/images/Air Grand Touring.png" alt="2025 Lucid Air Grand Touring" loading="lazy">
         </div>
         <div class="v-body">
-          <div class="v-brand">Lucid</div>
-          <h2 class="v-title">Air Grand Touring</h2>
-          <div class="v-price">$1,699<span>/mo</span></div>
-          <div class="v-specs">
-            <div>âš™ï¸  Direct</div>
-            <div>âš¡ Electric</div>
-            <div>ðŸ›£ï¸  1.0k mi/mo</div>
-            <div>ðŸ’º 5 Seats</div>
+          <div class="v-meta-top">
+            <span class="v-brand">Lucid</span>
+            <span class="v-term-range">Min: 1 mo &bull; Max: 24 mo</span>
           </div>
-          <button class="btn btn-secondary btn-full">View Vehicle</button>
+          <h2 class="v-title">Lucid Air Grand Touring</h2>
+          <div class="v-colors">
+            <span class="v-colors-label">Colors:</span>
+            <span class="color-dot active" style="background:#f5f6f8;" title="Stellar White"></span>
+            <span class="color-dot" style="background:#0b0b0c;" title="Infinite Black"></span>
+            <span class="color-dot" style="background:#777c85;" title="Cosmos Silver"></span>
+            <span class="color-dot" style="background:#7e1c25;" title="Zenith Red"></span>
+          </div>
+          <div class="v-pricing-wrap">
+            <div class="v-price"><span class="price-val">$1,699</span><span>/mo</span></div>
+            <div class="v-price-note"><strong>$0 Down</strong><br><span class="term-text">on 6-mo term</span></div>
+          </div>
+          <div class="v-inclusions">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Full Insurance + Complimentary Fast Charging + White-Glove Handover
+          </div>
+          <div class="v-specs">
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> 819 HP / 516 mi EV</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> Direct Drive</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 1.0k mi/mo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 5 Seats</div>
+          </div>
+          <div class="v-actions">
+            <button class="btn btn-primary btn-full subscribe-btn">Subscribe Plan</button>
+            <button class="btn btn-secondary details-btn" style="padding: 0.75rem 1rem;">Specs</button>
+          </div>
         </div>
       </div>
-      <div class="v-card fade-up vehicle-item" data-category="all suv compact electric" data-price="under-800" data-fuel="electric" data-transmission="auto">
+
+      <!-- 16. Volvo XC40 Recharge -->
+      <div class="v-card fade-up vehicle-item" data-category="all suv compact electric" data-price="under-800" data-fuel="electric" data-transmission="auto"
+           data-p1="899" data-p3="849" data-p6="799" data-p12="729"
+           data-name="2025 Volvo XC40 Recharge AWD" data-img="assets/images/XC40 Recharge.png"
+           data-power="402 HP Twin Motor EV" data-trans="Direct Drive EV" data-miles="1,200 mi/mo" data-seats="5 Seats • 293 mi Range">
         <div class="v-img">
-          <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Volvo XC40 Recharge" data-name="Volvo XC40 Recharge" data-img="assets/images/XC40 Recharge.png">
-          <span class="v-badge">Available Now</span>
-          <img src="assets/images/XC40 Recharge.png" alt="Volvo XC40 Recharge" loading="lazy">
+          <label class="v-compare-checkbox-wrap">
+            <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Volvo XC40" data-name="Volvo XC40 Recharge" data-img="assets/images/XC40 Recharge.png">
+            Compare
+          </label>
+          <span class="v-badge">Available Now &bull; 48h Delivery</span>
+          <img src="assets/images/XC40 Recharge.png" alt="2025 Volvo XC40 Recharge AWD" loading="lazy">
         </div>
         <div class="v-body">
-          <div class="v-brand">Volvo</div>
-          <h2 class="v-title">XC40 Recharge</h2>
-          <div class="v-price">$799<span>/mo</span></div>
-          <div class="v-specs">
-            <div>âš™ï¸  Direct</div>
-            <div>âš¡ Electric</div>
-            <div>ðŸ›£ï¸  1.2k mi/mo</div>
-            <div>ðŸ’º 5 Seats</div>
+          <div class="v-meta-top">
+            <span class="v-brand">Volvo</span>
+            <span class="v-term-range">Min: 1 mo &bull; Max: 24 mo</span>
           </div>
-          <button class="btn btn-secondary btn-full">View Vehicle</button>
+          <h2 class="v-title">Volvo XC40 Recharge AWD</h2>
+          <div class="v-colors">
+            <span class="v-colors-label">Colors:</span>
+            <span class="color-dot active" style="background:#f4f4f4;" title="Crystal White"></span>
+            <span class="color-dot" style="background:#171717;" title="Onyx Black"></span>
+            <span class="color-dot" style="background:#2a4e6c;" title="Fjord Blue"></span>
+            <span class="color-dot" style="background:#4c5a4d;" title="Sage Green"></span>
+          </div>
+          <div class="v-pricing-wrap">
+            <div class="v-price"><span class="price-val">$799</span><span>/mo</span></div>
+            <div class="v-price-note"><strong>$0 Down</strong><br><span class="term-text">on 6-mo term</span></div>
+          </div>
+          <div class="v-inclusions">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Scandinavian Safety Suite + Full Insurance Included
+          </div>
+          <div class="v-specs">
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> 402 HP / 293 mi EV</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> Direct Drive</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 1.2k mi/mo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 5 Seats</div>
+          </div>
+          <div class="v-actions">
+            <button class="btn btn-primary btn-full subscribe-btn">Subscribe Plan</button>
+            <button class="btn btn-secondary details-btn" style="padding: 0.75rem 1rem;">Specs</button>
+          </div>
         </div>
       </div>
-      <!-- New Card 1 -->
-      <div class="v-card fade-up vehicle-item" data-category="all" data-price="under-800" data-fuel="gas" data-transmission="auto">
+
+      <!-- 17. Tesla Model Y Long Range AWD -->
+      <div class="v-card fade-up vehicle-item" data-category="all suv electric luxury" data-price="800-1500" data-fuel="electric" data-transmission="auto"
+           data-p1="949" data-p3="899" data-p6="849" data-p12="779"
+           data-name="2025 Tesla Model Y Long Range AWD" data-img="assets/images/Tesla Model Y.png"
+           data-power="384 HP Dual Motor EV" data-trans="Direct Drive EV" data-miles="1,200 mi/mo" data-seats="5 Seats • 330 mi Range">
         <div class="v-img">
-          <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Audi A3" data-name="Audi A3" data-img="assets/images/Audi A3.png">
-          <img src="assets/images/Audi A3.png" alt="Audi A3" loading="lazy">
+          <label class="v-compare-checkbox-wrap">
+            <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Tesla Model Y" data-name="Tesla Model Y Long Range" data-img="assets/images/Tesla Model Y.png">
+            Compare
+          </label>
+          <span class="v-badge">Available Now &bull; 48h Delivery</span>
+          <img src="assets/images/Tesla Model Y.png" alt="2025 Tesla Model Y Long Range AWD" loading="lazy">
         </div>
         <div class="v-body">
-          <div class="v-brand">Audi</div>
-          <h2 class="v-title">A3</h2>
-          <div class="v-price">$599<span>/mo</span></div>
-          <div class="v-specs">
-            <div>⚙️ Auto</div>
-            <div>⛽ Gas</div>
-            <div>🧳 1.0k mi/mo</div>
-            <div>💺 5 Seats</div>
+          <div class="v-meta-top">
+            <span class="v-brand">Tesla</span>
+            <span class="v-term-range">Min: 1 mo &bull; Max: 24 mo</span>
           </div>
-          <button class="btn btn-secondary btn-full">View Vehicle</button>
+          <h2 class="v-title">Tesla Model Y Long Range AWD</h2>
+          <div class="v-colors">
+            <span class="v-colors-label">Colors:</span>
+            <span class="color-dot active" style="background:#f5f6f8;" title="Pearl White Multi-Coat"></span>
+            <span class="color-dot" style="background:#111111;" title="Solid Black"></span>
+            <span class="color-dot" style="background:#1d3b70;" title="Deep Blue Metallic"></span>
+            <span class="color-dot" style="background:#555a60;" title="Midnight Silver Metallic"></span>
+          </div>
+          <div class="v-pricing-wrap">
+            <div class="v-price"><span class="price-val">$849</span><span>/mo</span></div>
+            <div class="v-price-note"><strong>$0 Down</strong><br><span class="term-text">on 6-mo term</span></div>
+          </div>
+          <div class="v-inclusions">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Supercharging Network Access + Full Insurance Included
+          </div>
+          <div class="v-specs">
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> 384 HP / 330 mi EV</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> Direct Drive</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 1.2k mi/mo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 5 Seats</div>
+          </div>
+          <div class="v-actions">
+            <button class="btn btn-primary btn-full subscribe-btn">Subscribe Plan</button>
+            <button class="btn btn-secondary details-btn" style="padding: 0.75rem 1rem;">Specs</button>
+          </div>
         </div>
       </div>
-      <!-- New Card 2 -->
-      <div class="v-card fade-up vehicle-item" data-category="all" data-price="over-1200" data-fuel="gas" data-transmission="auto">
+
+      <!-- 18. Porsche Macan GTS -->
+      <div class="v-card fade-up vehicle-item" data-category="all suv luxury performance" data-price="800-1500" data-fuel="gasoline" data-transmission="auto"
+           data-p1="1199" data-p3="1149" data-p6="1099" data-p12="999"
+           data-name="2025 Porsche Macan GTS" data-img="assets/images/Porsche Macan.png"
+           data-power="434 HP Twin-Turbo V6" data-trans="7-Spd PDK Auto" data-miles="1,000 mi/mo" data-seats="5 Seats • Sport Chrono">
         <div class="v-img">
-          <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Porsche 911" data-name="Porsche 911" data-img="assets/images/Porsche 911.png">
-          <span class="v-badge">Waitlist</span>
-          <img src="assets/images/Porsche 911.png" alt="Porsche 911" loading="lazy">
+          <label class="v-compare-checkbox-wrap">
+            <input type="checkbox" class="v-compare-checkbox" aria-label="Compare Porsche Macan" data-name="Porsche Macan GTS" data-img="assets/images/Porsche Macan.png">
+            Compare
+          </label>
+          <span class="v-badge">Available Now &bull; 48h Delivery</span>
+          <img src="assets/images/Porsche Macan.png" alt="2025 Porsche Macan GTS" loading="lazy">
         </div>
         <div class="v-body">
-          <div class="v-brand">Porsche</div>
-          <h2 class="v-title">911</h2>
-          <div class="v-price">$1,499<span>/mo</span></div>
-          <div class="v-specs">
-            <div>⚙️ Auto</div>
-            <div>⛽ Gas</div>
-            <div>🧳 0.8k mi/mo</div>
-            <div>💺 4 Seats</div>
+          <div class="v-meta-top">
+            <span class="v-brand">Porsche</span>
+            <span class="v-term-range">Min: 1 mo &bull; Max: 24 mo</span>
           </div>
-          <button class="btn btn-secondary btn-full">View Vehicle</button>
+          <h2 class="v-title">Porsche Macan GTS</h2>
+          <div class="v-colors">
+            <span class="v-colors-label">Colors:</span>
+            <span class="color-dot active" style="background:#f0f2f5;" title="Carrara White"></span>
+            <span class="color-dot" style="background:#0a0a0a;" title="Jet Black Metallic"></span>
+            <span class="color-dot" style="background:#99141f;" title="Carmine Red"></span>
+            <span class="color-dot" style="background:#3e4348;" title="Volcano Grey"></span>
+          </div>
+          <div class="v-pricing-wrap">
+            <div class="v-price"><span class="price-val">$1,099</span><span>/mo</span></div>
+            <div class="v-price-note"><strong>$0 Down</strong><br><span class="term-text">on 6-mo term</span></div>
+          </div>
+          <div class="v-inclusions">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Sport Chrono Package + Full Maintenance &amp; Insurance
+          </div>
+          <div class="v-specs">
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> 434 HP V6</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> 7-Spd PDK</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> 1.0k mi/mo</div>
+            <div class="v-spec-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 5 Seats</div>
+          </div>
+          <div class="v-actions">
+            <button class="btn btn-primary btn-full subscribe-btn">Subscribe Plan</button>
+            <button class="btn btn-secondary details-btn" style="padding: 0.75rem 1rem;">Specs</button>
+          </div>
         </div>
       </div>
+
     </div>
   </main>
 
-    <!-- Section: Delivery Experience -->
-  <section class="delivery-section" style="padding: 8rem 0; background: var(--color-bg); border-top: 1px solid var(--color-border);">
+  <!-- Section: Delivery Experience -->
+  <section class="delivery-section" style="padding: 6rem 0; background: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
     <div class="container delivery-grid">
       <div class="fade-up">
-        <div style="border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-lg);">
-          <img src="assets/images/White-Glove Delivery to Your Door..png" alt="White-Glove Delivery" style="width: 100%; display: block; object-fit: cover; height: 500px;">
+        <div style="border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-xl); border: 1px solid var(--color-border);">
+          <img src="assets/images/about_hero_handover.jpg" alt="White-Glove Vehicle Handover" style="width: 100%; display: block; object-fit: cover; height: 460px;">
         </div>
       </div>
-      <div class="fade-up" style="transition-delay: 0.2s;">
-        <span class="eyebrow">The Experience</span>
-        <h2 class="heading-lg" style="margin-bottom: 2rem;">White-Glove Delivery to Your Door.</h2>
-        <p class="text-muted" style="margin-bottom: 2rem;">
-          Skip the dealership entirely. Once you select your vehicle, our concierges prepare it to pristine condition and deliver it directly to your home or office. We handle the paperwork digitally and walk you through every feature of your new car.
+      <div class="fade-up">
+        <span class="eyebrow">Seamless Handover</span>
+        <h2 class="heading-lg" style="margin-bottom: 1.5rem;">White-Glove Doorstep Delivery in 48 Hours.</h2>
+        <p class="text-muted" style="margin-bottom: 1.5rem; line-height: 1.7;">
+          Skip dealer waitrooms and paperwork marathons. Once your digital subscription is verified, an ORVEXA Mobility Concierge cleans, inspects, and delivers your freshly detailed vehicle straight to your driveway or workplace.
         </p>
         <ul style="list-style: none; padding: 0; margin-bottom: 2rem;">
-          <li style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            Contactless digital handover available
+          <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.85rem; font-weight: 500;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            100% digital key handover or physical fob delivery
           </li>
-          <li style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            Comprehensive vehicle orientation
+          <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.85rem; font-weight: 500;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Personalized cockpit orientation and digital app sync
           </li>
-          <li style="display: flex; align-items: center; gap: 1rem;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            Delivery within 48 hours for available inventory
+          <li style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.85rem; font-weight: 500;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Full tank of fuel or 100% battery charge on arrival
+          </li>
+          <li style="display: flex; align-items: center; gap: 0.75rem; font-weight: 500;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Doorstep swap service when you change cars
           </li>
         </ul>
+        <a href="register.html" class="btn btn-primary">Start Your Fast 2-Min Approval</a>
       </div>
     </div>
   </section>
 
-  <!-- Section: Unmatched Flexibility -->
-  <section class="flex-section" style="padding: 8rem 0; background: var(--color-surface);">
-    <div class="container text-center fade-up" style="margin-bottom: 4rem;">
-      <span class="eyebrow">Core Benefits</span>
-      <h2 class="heading-lg">Unmatched Flexibility.</h2>
-      <p class="text-muted" style="max-width: 600px; margin: 1rem auto 0;">Your life doesn't stand still, and neither should your car. Control your subscription terms directly from the app.</p>
+  <!-- Section: Subscription Flexibility Guarantees -->
+  <section class="flex-section" style="padding: 6rem 0; background: var(--color-bg);">
+    <div class="container text-center fade-up" style="margin-bottom: 3.5rem;">
+      <span class="eyebrow">True Flexibility</span>
+      <h2 class="heading-lg">Why Car Subscription Outperforms Traditional Buying.</h2>
+      <p class="text-muted" style="max-width: 650px; margin: 1rem auto 0;">Experience the best aspects of car ownership with zero of the financial anchors.</p>
     </div>
     <div class="container flex-cards-grid">
-      <div class="fade-up" style="background: var(--color-bg); padding: 3rem 2rem; border-radius: 12px; border: 1px solid var(--color-border); text-align: center;">
-        <div style="width: 60px; height: 60px; background: var(--color-primary-muted); color: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+      <div class="fade-up" style="background: var(--color-surface); padding: 2.5rem 2rem; border-radius: 16px; border: 1px solid var(--color-border); text-align: left;">
+        <div style="width: 52px; height: 52px; background: rgba(242, 106, 33, 0.12); color: var(--color-primary); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
         </div>
-        <h3 style="margin-bottom: 1rem;">Pause Anytime</h3>
-        <p class="text-muted">Traveling abroad? Pause your subscription for up to 3 months without losing your membership status.</p>
+        <h3 style="margin-bottom: 0.75rem; font-size: 1.25rem;">$0 Capital Tied Up</h3>
+        <p class="text-muted" style="font-size: 0.9rem; line-height: 1.6;">No $5,000–$10,000 down payment. Keep your liquidity working for you in investments or business instead of sinking into a rapidly depreciating metal asset.</p>
       </div>
-      <div class="fade-up" style="transition-delay: 0.1s; background: var(--color-bg); padding: 3rem 2rem; border-radius: 12px; border: 1px solid var(--color-border); text-align: center;">
-        <div style="width: 60px; height: 60px; background: var(--color-primary-muted); color: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5"></path><path d="M4 20L21 3"></path><path d="M21 16v5h-5"></path><path d="M15 15l6 6"></path><path d="M4 4l5 5"></path></svg>
+      <div class="fade-up" style="background: var(--color-surface); padding: 2.5rem 2rem; border-radius: 16px; border: 1px solid var(--color-border); text-align: left;">
+        <div style="width: 52px; height: 52px; background: rgba(242, 106, 33, 0.12); color: var(--color-primary); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5"></path><path d="M4 20L21 3"></path><path d="M21 16v5h-5"></path><path d="M15 15l6 6"></path><path d="M4 4l5 5"></path></svg>
         </div>
-        <h3 style="margin-bottom: 1rem;">Vehicle Swaps</h3>
-        <p class="text-muted">Swap an SUV for a winter trip, then switch to a sports car for the summer. Seamlessly transition between vehicles.</p>
+        <h3 style="margin-bottom: 0.75rem; font-size: 1.25rem;">Switch Every Season</h3>
+        <p class="text-muted" style="font-size: 0.9rem; line-height: 1.6;">Drive a high-performance EV coupe for summer road trips, then swap to an AWD 7-passenger SUV for winter ski getaways. One app manages your entire multi-car garage.</p>
       </div>
-      <div class="fade-up" style="transition-delay: 0.2s; background: var(--color-bg); padding: 3rem 2rem; border-radius: 12px; border: 1px solid var(--color-border); text-align: center;">
-        <div style="width: 60px; height: 60px; background: var(--color-primary-muted); color: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+      <div class="fade-up" style="background: var(--color-surface); padding: 2.5rem 2rem; border-radius: 16px; border: 1px solid var(--color-border); text-align: left;">
+        <div style="width: 52px; height: 52px; background: rgba(242, 106, 33, 0.12); color: var(--color-primary); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
-        <h3 style="margin-bottom: 1rem;">No Hidden Costs</h3>
-        <p class="text-muted">Insurance, maintenance, roadside assistance, and registration are completely bundled into one flat monthly fee.</p>
+        <h3 style="margin-bottom: 0.75rem; font-size: 1.25rem;">Zero Surprise Invoices</h3>
+        <p class="text-muted" style="font-size: 0.9rem; line-height: 1.6;">Brakes worn out? Scheduled 20k service due? Windshield cracked? Our comprehensive coverage and maintenance shield takes care of it all at $0 out-of-pocket expense.</p>
       </div>
     </div>
   </section>
@@ -698,27 +1631,90 @@
   <!-- Comparison Drawer -->
   <div class="compare-drawer" id="compareDrawer">
     <div class="container drawer-content">
-      <div style="margin-right: 2rem;">
+      <div>
         <h3 style="margin-bottom:0.25rem;">Compare Vehicles</h3>
-        <p class="text-muted" style="font-size:0.875rem;"><span id="compareCount">0</span>/3 selected</p>
+        <p class="text-muted" style="font-size:0.875rem;"><span id="compareCount">0</span>/3 selected for side-by-side comparison</p>
       </div>
       <div class="selected-vehicles" id="selectedVehicles">
-        <!-- JS will populate this -->
+        <!-- JS will populate -->
       </div>
       <div class="drawer-actions">
-        <button class="btn btn-secondary" id="clearCompare">Clear</button>
-        <button class="btn btn-primary">Compare Now</button>
+        <button class="btn btn-secondary" id="clearCompare">Clear All</button>
+        <button class="btn btn-primary" id="openCompareModal">Compare Side-by-Side</button>
       </div>
     </div>
   </div>
 
-  <!-- FOOTER omitted for brevity but keeping standard structure -->
+  <!-- VEHICLE SUBSCRIPTION DETAILS MODAL (Issues 6, 8, 9) -->
+  <div class="v-modal-overlay" id="vehicleModal">
+    <div class="v-modal">
+      <button class="v-modal-close" id="closeVehicleModal" aria-label="Close modal">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="v-modal-grid">
+        <div>
+          <img src="" alt="" id="modalImg" class="v-modal-img">
+          <div style="margin-top: 1.5rem;">
+            <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">All ORVEXA Subscriptions Include:</h4>
+            <ul class="v-modal-list">
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Comprehensive Insurance & $0 Deductible</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> $0 Routine Service & Wear-and-Tear Shield</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 24/7 Roadside Assistance & Concierge Pickup</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Doorstep Delivery in 48 Hours</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <span class="v-brand" id="modalBrand">BMW</span>
+          <h2 id="modalTitle" style="font-size: 1.6rem; margin: 0.35rem 0 1rem;">Vehicle Name</h2>
+          
+          <div style="background: var(--color-bg); padding: 1rem; border-radius: 12px; border: 1px solid var(--color-border); margin-bottom: 1.25rem;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.85rem; color: var(--color-text-muted);">Subscription Fee:</span>
+              <span id="modalPrice" style="font-size: 1.75rem; font-weight: 800; color: var(--color-primary);">$899<small style="font-size: 0.9rem; color: var(--color-text-muted); font-weight: normal;">/mo</small></span>
+            </div>
+            <div style="font-size: 0.8rem; color: #10B981; font-weight: 600;">✓ $0 Down Payment &bull; Tax Included &bull; Rollover Mileage</div>
+          </div>
+
+          <div style="margin-bottom: 1.25rem;">
+            <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">Choose Subscription Duration:</label>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem;" id="modalTermButtons">
+              <button class="btn btn-secondary modal-term-btn" data-mterm="1" style="padding: 0.5rem; font-size: 0.8rem;">1 Mo</button>
+              <button class="btn btn-secondary modal-term-btn" data-mterm="3" style="padding: 0.5rem; font-size: 0.8rem;">3 Mo</button>
+              <button class="btn btn-primary modal-term-btn active" data-mterm="6" style="padding: 0.5rem; font-size: 0.8rem;">6 Mo</button>
+              <button class="btn btn-secondary modal-term-btn" data-mterm="12" style="padding: 0.5rem; font-size: 0.8rem;">12+ Mo</button>
+            </div>
+          </div>
+
+          <!-- Eligibility Checklist -->
+          <div class="eligibility-box">
+            <strong>Eligibility Requirements:</strong>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem; margin-top: 0.35rem; color: var(--color-text-muted);">
+              <span>&bull; Age 21+ (25+ for Performance)</span>
+              <span>&bull; Valid US or Intl Driver's License</span>
+              <span>&bull; Instant Soft Credit Check</span>
+              <span>&bull; Clean 3-Year Driving Record</span>
+            </div>
+          </div>
+
+          <a href="register.html" id="modalBookingBtn" class="btn btn-primary btn-full" style="padding: 0.9rem; font-size: 1rem; text-align: center; display: block;">
+            Proceed to Fast 2-Min Approval &rarr;
+          </a>
+          <p style="text-align: center; font-size: 0.775rem; color: var(--color-text-muted); margin-top: 0.5rem;">
+            No commitment until your identity is verified and vehicle is dispatched.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="assets/brand-mark.svg" alt="ORVEXA">
-          <p>The premium car subscription service designed for modern flexibility. Drive more, commit less.</p>
+          <img src="assets/brand-mark.svg" alt="ORVEXA" height="34">
+          <p>The premium car subscription and flexible leasing service. Drive the world's finest vehicles on your terms.</p>
           <div class="social-links">
             <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
             <a href="#" aria-label="X (Twitter)"><svg width="18" height="18" viewBox="-1.5 -1.5 27 27" fill="currentColor" stroke="none"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
@@ -748,17 +1744,16 @@
           <div class="footer-links">
             <a href="#">Terms & Conditions</a>
             <a href="#">Privacy Policy</a>
-            <a href="#">Cookie Policy</a>
+            <a href="#">Subscription Agreement</a>
           </div>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 ORVEXA Mobility. All rights reserved.</p>
-        <p>Designed for Flexibility.</p>
+        <p>&copy; 2026 ORVEXA Mobility Inc. All rights reserved.</p>
+        <p>Car Subscription &bull; Flexible Leasing &bull; $0 Down</p>
       </div>
     </div>
     
-    <!-- Scroll to Top Button -->
     <button id="scroll-to-top" class="scroll-to-top" aria-label="Scroll to top">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
     </button>
@@ -766,14 +1761,57 @@
 
   <script src="assets/js/main.js"></script>
   <script>
-    // Comparison Logic
     document.addEventListener('DOMContentLoaded', () => {
+      // 1. Duration Pricing Selector Logic
+      let currentTerm = '6';
+      const durationPills = document.querySelectorAll('#globalDurationGroup .duration-pill');
+      const vehicleItems = document.querySelectorAll('.vehicle-item');
+
+      const updateCardPrices = (term) => {
+        currentTerm = term;
+        durationPills.forEach(p => {
+          if (p.dataset.term === term) p.classList.add('active');
+          else p.classList.remove('active');
+        });
+
+        vehicleItems.forEach(card => {
+          const price = card.dataset['p' + term] || card.dataset.p6;
+          const priceEl = card.querySelector('.price-val');
+          const termEl = card.querySelector('.term-text');
+          if (priceEl) priceEl.textContent = '$' + Number(price).toLocaleString();
+          if (termEl) {
+            let label = 'on 6-mo term';
+            if (term === '1') label = 'on 1-mo flex';
+            else if (term === '3') label = 'on 3-mo term';
+            else if (term === '12') label = 'on 12-mo term';
+            termEl.textContent = label;
+          }
+        });
+      };
+
+      durationPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          updateCardPrices(pill.dataset.term);
+        });
+      });
+
+      // 2. Interactive Color Dots
+      document.querySelectorAll('.v-card').forEach(card => {
+        const dots = card.querySelectorAll('.color-dot');
+        dots.forEach(dot => {
+          dot.addEventListener('click', () => {
+            dots.forEach(d => d.classList.remove('active'));
+            dot.classList.add('active');
+          });
+        });
+      });
+
+      // 3. Comparison Logic
       const checkboxes = document.querySelectorAll('.v-compare-checkbox');
       const drawer = document.getElementById('compareDrawer');
       const countSpan = document.getElementById('compareCount');
       const container = document.getElementById('selectedVehicles');
       const clearBtn = document.getElementById('clearCompare');
-      
       let selected = [];
 
       const updateDrawer = () => {
@@ -783,23 +1821,19 @@
           container.innerHTML += `
             <div class="selected-v">
               <img src="${v.img}" alt="${v.name}">
-              <span style="font-weight:600; font-size:0.875rem;">${v.name}</span>
+              <span style="font-weight:600; font-size:0.8rem;">${v.name}</span>
             </div>
           `;
         });
-        
-        if (selected.length > 0) {
-          drawer.classList.add('active');
-        } else {
-          drawer.classList.remove('active');
-        }
+        if (selected.length > 0) drawer.classList.add('active');
+        else drawer.classList.remove('active');
       };
 
       checkboxes.forEach(cb => {
         cb.addEventListener('change', (e) => {
           if (e.target.checked) {
             if (selected.length >= 3) {
-              alert('You can only compare up to 3 vehicles.');
+              alert('You can compare up to 3 vehicles at a time.');
               e.target.checked = false;
               return;
             }
@@ -815,57 +1849,112 @@
         });
       });
 
-      clearBtn.addEventListener('click', () => {
-        selected.forEach(v => v.cb.checked = false);
-        selected = [];
-        updateDrawer();
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          selected.forEach(v => v.cb.checked = false);
+          selected = [];
+          updateDrawer();
+        });
+      }
+
+      // 4. Modal Booking Logic
+      const modal = document.getElementById('vehicleModal');
+      const closeModal = document.getElementById('closeVehicleModal');
+      const modalImg = document.getElementById('modalImg');
+      const modalBrand = document.getElementById('modalBrand');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalPrice = document.getElementById('modalPrice');
+      const modalBookingBtn = document.getElementById('modalBookingBtn');
+      const modalTermBtns = document.querySelectorAll('.modal-term-btn');
+      let activeCard = null;
+
+      const openModalForCard = (card) => {
+        activeCard = card;
+        const name = card.dataset.name || 'Vehicle';
+        const img = card.dataset.img || '';
+        const brand = card.querySelector('.v-brand')?.textContent || 'ORVEXA';
+        const price = card.dataset['p' + currentTerm] || card.dataset.p6;
+
+        modalTitle.textContent = name;
+        modalBrand.textContent = brand;
+        modalImg.src = img;
+        modalImg.alt = name;
+        modalPrice.innerHTML = '$' + Number(price).toLocaleString() + '<small style="font-size:0.9rem; color:var(--color-text-muted); font-weight:normal;">/mo</small>';
+        
+        modalTermBtns.forEach(b => {
+          if (b.dataset.mterm === currentTerm) {
+            b.classList.remove('btn-secondary');
+            b.classList.add('btn-primary', 'active');
+          } else {
+            b.classList.remove('btn-primary', 'active');
+            b.classList.add('btn-secondary');
+          }
+        });
+
+        modalBookingBtn.href = 'register.html?car=' + encodeURIComponent(name) + '&term=' + currentTerm;
+        modal.classList.add('active');
+      };
+
+      document.querySelectorAll('.subscribe-btn, .details-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const card = e.target.closest('.v-card');
+          if (card) openModalForCard(card);
+        });
       });
-      
-      // Fleet Filtering Logic
+
+      modalTermBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const term = btn.dataset.mterm;
+          modalTermBtns.forEach(b => {
+            b.classList.remove('btn-primary', 'active');
+            b.classList.add('btn-secondary');
+          });
+          btn.classList.remove('btn-secondary');
+          btn.classList.add('btn-primary', 'active');
+
+          if (activeCard) {
+            const price = activeCard.dataset['p' + term] || activeCard.dataset.p6;
+            modalPrice.innerHTML = '$' + Number(price).toLocaleString() + '<small style="font-size:0.9rem; color:var(--color-text-muted); font-weight:normal;">/mo</small>';
+            modalBookingBtn.href = 'register.html?car=' + encodeURIComponent(activeCard.dataset.name) + '&term=' + term;
+          }
+        });
+      });
+
+      if (closeModal) {
+        closeModal.addEventListener('click', () => modal.classList.remove('active'));
+      }
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.classList.remove('active');
+      });
+
+      // 5. Category & Advanced Filters
       const filterBtns = document.querySelectorAll('.filter-btn');
       const priceFilter = document.getElementById('priceFilter');
       const fuelFilter = document.getElementById('fuelFilter');
       const transFilter = document.getElementById('transFilter');
-      const vehicleItems = document.querySelectorAll('.vehicle-item');
-      
       let currentCategory = 'all';
-      
+
       const filterVehicles = () => {
         const priceVal = priceFilter.value;
         const fuelVal = fuelFilter.value;
         const transVal = transFilter.value;
-        
-        let visibleItems = [];
-        
+
         vehicleItems.forEach(item => {
           const cat = item.dataset.category || '';
           const price = item.dataset.price || '';
           const fuel = item.dataset.fuel || '';
           const trans = item.dataset.transmission || '';
-          
+
           let show = true;
-          
           if (currentCategory !== 'all' && !cat.includes(currentCategory)) show = false;
           if (priceVal && price !== priceVal) show = false;
           if (fuelVal && fuel !== fuelVal) show = false;
           if (transVal && trans !== transVal) show = false;
-          
-          item.classList.remove('orphan-card');
-          if (show) {
-            item.style.display = 'flex';
-            visibleItems.push(item);
-          } else {
-            item.style.display = 'none';
-          }
+
+          item.style.display = show ? 'flex' : 'none';
         });
-        
-        if (visibleItems.length % 3 === 1) {
-          visibleItems[visibleItems.length - 1].classList.add('orphan-card');
-        }
       };
-      
-      filterVehicles();
-      
+
       filterBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
           filterBtns.forEach(b => b.classList.remove('active'));
@@ -874,10 +1963,23 @@
           filterVehicles();
         });
       });
-      
+
       priceFilter.addEventListener('change', filterVehicles);
       fuelFilter.addEventListener('change', filterVehicles);
       transFilter.addEventListener('change', filterVehicles);
+
+      // Support URL query parameters (e.g. ?type=sedan, ?type=suv, ?type=electric, ?type=performance)
+      const urlParams = new URLSearchParams(window.location.search);
+      const typeParam = urlParams.get('type');
+      if (typeParam) {
+        const matchingBtn = document.querySelector(`.filter-btn[data-filter="${typeParam}"]`);
+        if (matchingBtn) {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          matchingBtn.classList.add('active');
+          currentCategory = typeParam;
+          filterVehicles();
+        }
+      }
     });
   </script>
 </body>

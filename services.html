@@ -97,21 +97,34 @@
     }
     .m-feature {
       background: var(--color-bg);
-      border-radius: 12px;
+      border-radius: 14px;
       border: 1px solid var(--color-border);
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+    }
+    .m-feature:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(242, 106, 33, 0.35);
     }
     .m-feature img {
       width: 100%;
       height: 200px;
       object-fit: cover;
+      object-position: center;
       display: block;
+      transition: transform var(--transition-slow);
+    }
+    .m-feature:hover img {
+      transform: scale(1.04);
     }
     .m-feature-content {
-      padding: 2rem;
+      padding: 1.75rem 1.6rem;
       flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     /* Section 4: Mileage & Billing */
@@ -128,20 +141,204 @@
     .billing-visual {
       flex: 1;
       position: relative;
+      width: 100%;
     }
-    .progress-circle {
-      width: 300px; height: 300px;
-      margin: 0 auto;
-      border-radius: 50%;
-      background: conic-gradient(var(--color-primary) 70%, var(--color-border) 0);
-      display: flex; align-items: center; justify-content: center;
-      position: relative;
-    }
-    .progress-inner {
-      width: 260px; height: 260px;
+    .telemetry-card {
       background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      padding: 2.25rem 2rem;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    }
+    .telemetry-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+    }
+    .telemetry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.75rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--color-border);
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .telemetry-vehicle-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-text);
+      background: var(--color-bg);
+      padding: 0.4rem 0.85rem;
+      border-radius: 20px;
+      border: 1px solid var(--color-border);
+    }
+    .telemetry-live-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.775rem;
+      font-weight: 600;
+      color: #2e7d32;
+      background: rgba(46, 125, 50, 0.1);
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: #2e7d32;
       border-radius: 50%;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.7);
+      animation: pulse-green 2s infinite;
+    }
+    @keyframes pulse-green {
+      0% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.7); }
+      70% { box-shadow: 0 0 0 6px rgba(46, 125, 50, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0); }
+    }
+    .telemetry-gauge-container {
+      position: relative;
+      width: 250px;
+      height: 250px;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .telemetry-svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+    .telemetry-center-content {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      padding: 1.25rem;
+    }
+    .telemetry-label {
+      font-size: 0.675rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 0.2rem;
+    }
+    .telemetry-val-wrapper {
+      display: inline-flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 3px;
+      margin: 0.1rem 0;
+    }
+    .telemetry-val {
+      font-family: var(--font-heading);
+      font-size: 2.85rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--color-primary);
+      text-align: center;
+    }
+    .telemetry-unit {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+    }
+    .telemetry-subtext {
+      font-size: 0.775rem;
+      color: var(--color-text-muted);
+      margin-top: 0.15rem;
+    }
+    .rollover-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.725rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      background: var(--color-primary-muted);
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      margin-top: 0.35rem;
+    }
+    .telemetry-cycle-bar {
+      margin-bottom: 1.5rem;
+    }
+    .telemetry-cycle-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      margin-bottom: 0.4rem;
+    }
+    .telemetry-progress-track {
+      width: 100%;
+      height: 6px;
+      background: var(--color-bg);
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+    }
+    .telemetry-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-primary) 0%, #ff8c42 100%);
+      border-radius: 4px;
+    }
+    .telemetry-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .telemetry-stat-box {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 0.85rem 0.65rem;
+      text-align: center;
+    }
+    .telemetry-stat-label {
+      font-size: 0.7rem;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.25rem;
+      font-weight: 500;
+    }
+    .telemetry-stat-num {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+    .telemetry-stat-note {
+      font-size: 0.7rem;
+      color: #2e7d32;
+      font-weight: 600;
+      margin-top: 0.15rem;
+    }
+    .telemetry-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--color-border);
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      flex-wrap: wrap;
+      gap: 0.75rem;
     }
 
     @media (max-width: 1024px) {
@@ -239,105 +436,243 @@
   <section class="swap-section">
     <div class="container">
       <div class="dashboard-mockup fade-up" style="margin-top: 0; margin-bottom: 6rem;">
-        <!-- Placeholder for a dashboard UI image -->
-        <img src="assets/images/service.png" alt="Dashboard Interface">
+        <img src="assets/images/dashboard_ui_mockup.jpg" alt="ORVEXA Active Subscription Dashboard Interface" style="width:100%; height:auto; display:block;">
       </div>
     </div>
     <div class="container swap-layout">
       <div class="fade-up">
-        <span class="eyebrow">Maximum Flexibility</span>
-        <h2 class="heading-lg" style="margin-bottom: 2rem;">The ORVEXA Swap.</h2>
-        <p class="text-muted" style="margin-bottom: 2rem;">
-          Life changes, and so should your vehicle. Request a swap in the app and we'll deliver your new car right to your driveway while taking the old one back.
+        <span class="eyebrow">Flexible Car Subscription &amp; Leasing</span>
+        <h2 class="heading-lg" style="margin-bottom: 1.5rem;">Seasonal Vehicle Swapping &amp; Doorstep Exchange.</h2>
+        <p class="text-muted" style="margin-bottom: 1.75rem; font-size: 1.05rem; line-height: 1.6;">
+          Never be locked into one vehicle for years again. With ORVEXA's all-inclusive car subscription, switch seamlessly between electric sedans, luxury SUVs, and sports coupes whenever your lifestyle or seasonal needs change. Book in your subscriber app, and our concierge delivers your freshly detailed vehicle right to your driveway while collecting your current one.
         </p>
-        <ul style="list-style: none; padding: 0;">
-          <li style="margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            Up to 4 swaps per year on Premium plans
+        <ul style="list-style: none; padding: 0; margin-bottom: 2rem;">
+          <li style="margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 0.875rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2.2" style="flex-shrink:0; margin-top:0.2rem;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <div><strong>Multi-Category Freedom:</strong> Drive an electric fastback for city commutes, a luxury SUV for winter trips, or a performance coupe for weekends.</div>
           </li>
-          <li style="margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            White-glove delivery and pickup
+          <li style="margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 0.875rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2.2" style="flex-shrink:0; margin-top:0.2rem;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <div><strong>White-Glove Flatbed Handover:</strong> Enclosed transport delivers your sanitized, fully charged or fueled vehicle directly to your residence or workplace.</div>
           </li>
-          <li style="margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            No hidden exchange fees
+          <li style="margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 0.875rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2.2" style="flex-shrink:0; margin-top:0.2rem;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <div><strong>Zero Transfer Paperwork:</strong> Comprehensive insurance, registration, and routine maintenance roll over automatically with zero hidden exchange fees.</div>
+          </li>
+          <li style="margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 0.875rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2.2" style="flex-shrink:0; margin-top:0.2rem;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <div><strong>Up to 4 Swaps Per Year:</strong> Available on Select &amp; Premium tiers, backed by flexible 30-day minimum commitments.</div>
           </li>
         </ul>
-        <a href="dashboard.html" class="btn btn-secondary" style="margin-top: 2rem;">View Swap Process</a>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="fleet.html" class="btn btn-primary">Explore Swappable Fleet</a>
+          <a href="how-it-works.html" class="btn btn-secondary">How Swapping Works</a>
+        </div>
       </div>
       <div class="swap-cards fade-up">
         <div class="s-card s-card-1">
-          <img src="assets/images/The ORVEXA Swap.png" alt="Car 1">
+          <img src="assets/images/Seasonal Vehicle Swapping &amp; Doorstep Exchange.png" alt="Seasonal Vehicle Swapping &amp; Doorstep Exchange" loading="lazy">
         </div>
         <div class="s-card s-card-2">
-          <img src="assets/images/The ORVEXA Swap2.png" alt="Car 2">
+          <img src="assets/images/Seasonal Vehicle Swapping &amp; Doorstep Exchange2.png" alt="Seasonal Vehicle Swapping &amp; Doorstep Exchange Handover" loading="lazy">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Section 3: Maintenance & Service -->
+  <!-- Section 3: Maintenance & Service (Zero Maintenance Charges) -->
   <section class="maint-section">
     <div class="container maint-grid">
       <div class="fade-up">
-        <span class="eyebrow">Included Support</span>
-        <h2 class="heading-lg" style="margin-bottom: 2rem;">Zero Maintenance Anxiety.</h2>
-        <p class="text-muted">
-          Say goodbye to unexpected repair bills and waiting rooms. Routine maintenance, tire wear, and unexpected repairs are 100% covered.
+        <span class="eyebrow">All-Inclusive Coverage</span>
+        <h2 class="heading-lg" style="margin-bottom: 1.5rem;">Zero Maintenance Charges.</h2>
+        <p class="text-muted" style="margin-bottom: 1.5rem; font-size:1.05rem;">
+          Say goodbye to unexpected repair bills, costly mechanic quotes, and tedious waiting rooms. With ORVEXA, routine factory servicing, high-performance brake wear, seasonal tire changes, and unforeseen mechanical repairs are <strong>100% covered</strong>.
         </p>
+        <div style="background:var(--color-bg); padding:1.5rem; border-radius:12px; border:1px solid var(--color-border); margin-bottom:1.5rem;">
+          <div style="font-size:1.75rem; font-family:var(--font-heading); color:var(--color-primary); font-weight:700;">$0 Out-of-Pocket</div>
+          <p class="text-muted" style="font-size:0.875rem; margin-top:0.25rem;">Included in your standard subscription. Never pay a service bill again.</p>
+        </div>
+        <a href="pricing.html" class="btn btn-primary">See All Inclusions</a>
       </div>
       <div class="maint-features fade-up" style="transition-delay:0.2s;">
         <div class="m-feature">
-          <img src="assets/images/Routine Service.png" alt="Routine Service">
+          <img src="assets/images/Routine Service Included.png" alt="Routine Service Included" loading="lazy">
           <div class="m-feature-content">
-            <h4>Routine Service</h4>
-            <p class="text-muted" style="font-size:0.875rem; margin-top:0.5rem;">Oil changes, fluids, and multipoint inspections handled automatically.</p>
+            <h4>Routine Service Included</h4>
+            <p class="text-muted" style="font-size:0.875rem; margin-top:0.5rem;">Full synthetic oil changes, fluid top-offs, micro-filters, and 120-point digital inspections performed on schedule.</p>
           </div>
         </div>
         <div class="m-feature">
-          <img src="assets/images/Tires & Wear.png" alt="Tires & Wear">
+          <img src="assets/images/Tires &amp; Brake Wear.png" alt="Tires &amp; Brake Wear" loading="lazy">
           <div class="m-feature-content">
-            <h4>Tires & Wear</h4>
-            <p class="text-muted" style="font-size:0.875rem; margin-top:0.5rem;">Brakes, wipers, and seasonal tire swaps are completely covered.</p>
+            <h4>Tires &amp; Brake Wear</h4>
+            <p class="text-muted" style="font-size:0.875rem; margin-top:0.5rem;">Premium brake pads, rotor replacements, seasonal tire rotations, and puncture repair completely covered with zero deductible.</p>
           </div>
         </div>
         <div class="m-feature">
-          <img src="assets/images/Concierge Pickup.png" alt="Concierge Pickup">
+          <img src="assets/images/Concierge Pickup &amp; Loaner.png" alt="Concierge Pickup &amp; Loaner" loading="lazy">
           <div class="m-feature-content">
-            <h4>Concierge Pickup</h4>
-            <p class="text-muted" style="font-size:0.875rem; margin-top:0.5rem;">We pick up your car for service and leave you with a premium loaner.</p>
+            <h4>Concierge Pickup &amp; Loaner</h4>
+            <p class="text-muted" style="font-size:0.875rem; margin-top:0.5rem;">We pick up your vehicle from your driveway for servicing and drop off a premium loaner so you never miss a beat.</p>
           </div>
         </div>
         <div class="m-feature">
-          <img src="assets/images/24 7 Roadside.png" alt="24/7 Roadside">
+          <img src="assets/images/24 7 Nationwide Roadside.png" onerror="this.onerror=null;this.src='assets/images/24/7 Nationwide Roadside.png';" alt="24/7 Nationwide Roadside" loading="lazy">
           <div class="m-feature-content">
-            <h4>24/7 Roadside</h4>
-            <p class="text-muted" style="font-size:0.875rem; margin-top:0.5rem;">Immediate assistance across the nation, included at no extra cost.</p>
+            <h4>24/7 Nationwide Roadside</h4>
+            <p class="text-muted" style="font-size:0.875rem; margin-top:0.5rem;">Emergency towing, flat-tire assistance, battery jump-starts, and emergency lockout coverage anywhere in the continental US.</p>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Zero Maintenance Inclusions Comparison Table -->
+    <div class="container fade-up" style="margin-top: 5rem;">
+      <div style="background:var(--color-bg); border:1px solid var(--color-border); border-radius:16px; padding:3rem 2.5rem; overflow-x:auto;">
+        <div style="text-align:center; max-width:650px; margin:0 auto 2.5rem;">
+          <span class="eyebrow">Transparent Coverage</span>
+          <h3 style="font-size:1.75rem; margin-bottom:0.5rem;">Maintenance & Coverage Breakdown</h3>
+          <p class="text-muted">Compare the real maintenance costs of vehicle ownership versus the ORVEXA Subscription Guarantee.</p>
+        </div>
+
+        <table style="width:100%; border-collapse:collapse; text-align:left; font-size:0.95rem;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--color-border);">
+              <th style="padding:1rem; font-family:var(--font-heading); color:var(--color-text);">Service Component</th>
+              <th style="padding:1rem; font-family:var(--font-heading); color:var(--color-text-muted);">Traditional Ownership</th>
+              <th style="padding:1rem; font-family:var(--font-heading); color:var(--color-text-muted);">Standard Lease</th>
+              <th style="padding:1rem; font-family:var(--font-heading); color:var(--color-primary); font-weight:700;">ORVEXA Subscription</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--color-border);">
+              <td style="padding:1rem; font-weight:600;">Engine Oil & Fluid Changes</td>
+              <td style="padding:1rem; color:#d32f2f;">$150 - $350 out-of-pocket</td>
+              <td style="padding:1rem; color:#d32f2f;">Lessee pays full cost</td>
+              <td style="padding:1rem; color:#2e7d32; font-weight:700;">✓ $0 Fully Included</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--color-border);">
+              <td style="padding:1rem; font-weight:600;">Brake Pads & Rotors</td>
+              <td style="padding:1rem; color:#d32f2f;">$800 - $1,500 wear fee</td>
+              <td style="padding:1rem; color:#d32f2f;">Lessee pays at return</td>
+              <td style="padding:1rem; color:#2e7d32; font-weight:700;">✓ $0 Fully Included</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--color-border);">
+              <td style="padding:1rem; font-weight:600;">Tire Replacement & Punctures</td>
+              <td style="padding:1rem; color:#d32f2f;">$1,000 - $2,000 per set</td>
+              <td style="padding:1rem; color:#d32f2f;">Must return with OEM tires</td>
+              <td style="padding:1rem; color:#2e7d32; font-weight:700;">✓ $0 Fully Included</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--color-border);">
+              <td style="padding:1rem; font-weight:600;">Full Comprehensive Insurance</td>
+              <td style="padding:1rem; color:#d32f2f;">$180 - $350/mo separate bill</td>
+              <td style="padding:1rem; color:#d32f2f;">Mandatory separate policy</td>
+              <td style="padding:1rem; color:#2e7d32; font-weight:700;">✓ Included in Monthly Fee</td>
+            </tr>
+            <tr>
+              <td style="padding:1rem; font-weight:600;">24/7 Concierge Loaner Vehicle</td>
+              <td style="padding:1rem; color:#d32f2f;">Subject to dealer waitlists</td>
+              <td style="padding:1rem; color:#d32f2f;">Rarely provided</td>
+              <td style="padding:1rem; color:#2e7d32; font-weight:700;">✓ Guaranteed Loaner</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </section>
 
-  <!-- Section 4: Mileage & Billing Management -->
+  <!-- Section 4: Mileage & Duration Management -->
   <section class="billing-section">
     <div class="container billing-layout">
       <div class="fade-up" style="flex:1;">
         <span class="eyebrow">Financial Clarity</span>
-        <h2 class="heading-lg" style="margin-bottom: 2rem;">Transparent Billing & Mileage.</h2>
-        <p class="text-muted" style="margin-bottom: 2rem;">
-          Track your mileage in real-time. Unused miles roll over, and you can easily adjust your allowance through the dashboard if your driving habits change.
+        <h2 class="heading-lg" style="margin-bottom: 1.5rem;">Transparent Billing, Durations & Mileage.</h2>
+        <p class="text-muted" style="margin-bottom: 1.5rem; font-size:1.05rem;">
+          Track your mileage in real-time. Unused miles roll over automatically into your next month. Choose flexible subscription terms from <strong>1 month to 24 months</strong>, with minimum lease commitment of only 30 days and the freedom to pause, extend, or return anytime.
         </p>
+        <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:2rem;">
+          <span style="background:var(--color-surface); border:1px solid var(--color-border); padding:0.5rem 1rem; border-radius:20px; font-size:0.875rem; font-weight:600;">Min Term: 1 Month</span>
+          <span style="background:var(--color-surface); border:1px solid var(--color-border); padding:0.5rem 1rem; border-radius:20px; font-size:0.875rem; font-weight:600;">Max Term: 24 Months</span>
+          <span style="background:var(--color-surface); border:1px solid var(--color-border); padding:0.5rem 1rem; border-radius:20px; font-size:0.875rem; font-weight:600;">Milage Rollover: Active</span>
+        </div>
         <a href="pricing.html" class="btn btn-primary">Explore Plans & Pricing</a>
       </div>
       
       <div class="billing-visual fade-up">
-        <div class="progress-circle">
-          <div class="progress-inner">
-            <span style="font-size: 0.875rem; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:1px;">Miles Remaining</span>
-            <span style="font-size: 4rem; font-family:var(--font-heading); font-weight:700; line-height:1; color:var(--color-primary); margin: 0.5rem 0;">842</span>
-            <span style="font-size: 0.875rem; color:var(--color-text-muted);">of 1,200 this month</span>
+        <div class="telemetry-card">
+          <!-- Card Header: Vehicle & Live Telemetry -->
+          <div class="telemetry-header">
+            <div class="telemetry-vehicle-badge">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 3.3C2 11.4 2 11.7 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+              <span>Active: BMW 5 Series / Taycan</span>
+            </div>
+            <div class="telemetry-live-status">
+              <span class="pulse-dot"></span>
+              <span>Live Telemetry Connected</span>
+            </div>
+          </div>
+
+          <!-- Gauge Container with SVG Progress Arc -->
+          <div class="telemetry-gauge-container">
+            <svg class="telemetry-svg" viewBox="0 0 240 240">
+              <defs>
+                <linearGradient id="telemetryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#F26A21"/>
+                  <stop offset="100%" stop-color="#FF944D"/>
+                </linearGradient>
+              </defs>
+              <circle cx="120" cy="120" r="98" fill="none" stroke="var(--color-bg)" stroke-width="12" stroke-opacity="0.9" />
+              <circle cx="120" cy="120" r="98" fill="none" stroke="url(#telemetryGrad)" stroke-width="12" stroke-dasharray="615.75" stroke-dashoffset="128" stroke-linecap="round" />
+            </svg>
+            <div class="telemetry-center-content">
+              <span class="telemetry-label">Miles Remaining</span>
+              <div class="telemetry-val-wrapper">
+                <span class="telemetry-val">950</span>
+                <span class="telemetry-unit">mi</span>
+              </div>
+              <span class="telemetry-subtext">of 1,200 monthly cap</span>
+              <div class="rollover-pill">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                <span>+150 mi Banked</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Billing Cycle Timeline -->
+          <div class="telemetry-cycle-bar">
+            <div class="telemetry-cycle-labels">
+              <span>Current Cycle: Day 16 of 30</span>
+              <span style="color:var(--color-primary); font-weight:600;">14 Days Remaining</span>
+            </div>
+            <div class="telemetry-progress-track">
+              <div class="telemetry-progress-fill" style="width: 53%;"></div>
+            </div>
+          </div>
+
+          <!-- Telemetry Stats Breakdown Grid -->
+          <div class="telemetry-grid">
+            <div class="telemetry-stat-box">
+              <div class="telemetry-stat-label">Monthly Plan</div>
+              <div class="telemetry-stat-num">1,200 mi</div>
+              <div class="telemetry-stat-note">Base Tier</div>
+            </div>
+            <div class="telemetry-stat-box">
+              <div class="telemetry-stat-label">Rollover Bank</div>
+              <div class="telemetry-stat-num">+150 mi</div>
+              <div class="telemetry-stat-note">Zero Expiry</div>
+            </div>
+            <div class="telemetry-stat-box">
+              <div class="telemetry-stat-label">Extra Rate</div>
+              <div class="telemetry-stat-num">$0.25</div>
+              <div class="telemetry-stat-note">Per Mile Flat</div>
+            </div>
+          </div>
+
+          <!-- Telemetry Card Footer -->
+          <div class="telemetry-footer">
+            <span>Need more allowance this cycle?</span>
+            <a href="dashboard.html" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.825rem;">Adjust in Portal →</a>
           </div>
         </div>
       </div>
