@@ -6,7 +6,8 @@
   <title>Login</title>
   <meta name="description" content="Login to your ORVEXA subscriber dashboard.">
   <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" href="assets/images/website-logo.png">
+  <link rel="apple-touch-icon" href="assets/images/website-logo.png">
   <style>
     /* Reset body background for auth pages */
     body { background-color: var(--color-bg); margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
@@ -138,8 +139,12 @@
     <div class="auth-form-wrapper">
       <div class="auth-card">
         <div style="text-align: center; margin-bottom: 2rem;">
-          <a href="index.html" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1rem; text-decoration: none;">
-            <img src="assets/brand-mark.svg" alt="ORVEXA Logo" style="height: 32px;">
+          <a href="index.html" class="nav-logo" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1.5rem; text-decoration: none;">
+            <img src="assets/images/website-logo.png" alt="ORVEXA Logo" class="brand-logo-img">
+            <span class="brand-text-wrap">
+              <span class="brand-logo-text">ORVEXA</span>
+              <span class="brand-logo-sub">CAR SUBSCRIPTION</span>
+            </span>
           </a>
           <h1 class="auth-title">Welcome Back</h1>
           <p class="auth-subtitle" style="margin-bottom:0;">Log in to manage your ORVEXA subscription.</p>

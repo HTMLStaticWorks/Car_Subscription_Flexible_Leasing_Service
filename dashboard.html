@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Subscriber Dashboard</title>
   <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" href="assets/images/website-logo.png">
+  <link rel="apple-touch-icon" href="assets/images/website-logo.png">
   <style>
     body { background-color: var(--color-bg); }
     
@@ -28,10 +29,10 @@
       transition: transform var(--transition-normal);
     }
     .sidebar-header {
-      padding: 2rem;
+      padding: 1.5rem 1.75rem;
       border-bottom: 1px solid var(--color-border);
     }
-    .sidebar-header img { height: 24px; }
+    .sidebar-header img { height: 42px; width: 42px; display: block; }
     
     .sidebar-nav {
       padding: 2rem 1rem;
@@ -134,9 +135,13 @@
     }
     
     @media (max-width: 768px) {
+      .summary-grid { grid-template-columns: repeat(2, 1fr); }
+      .v-stat { grid-template-columns: 1fr 1fr; }
+      .custom-form-row { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 575px) {
       .summary-grid { grid-template-columns: 1fr; }
       .v-stat { grid-template-columns: 1fr; }
-      .custom-form-row { grid-template-columns: 1fr !important; }
     }
   </style>
 </head>
@@ -147,7 +152,13 @@
     <!-- Sidebar -->
     <aside class="sidebar" id="dashSidebar">
       <div class="sidebar-header">
-        <a href="index.html"><img src="assets/brand-mark.svg" alt="ORVEXA"></a>
+        <a href="index.html" class="nav-logo" style="text-decoration: none;">
+          <img src="assets/images/website-logo.png" alt="ORVEXA Logo" class="brand-logo-img">
+          <span class="brand-text-wrap">
+            <span class="brand-logo-text">ORVEXA</span>
+            <span class="brand-logo-sub">CAR SUBSCRIPTION</span>
+          </span>
+        </a>
       </div>
       <nav class="sidebar-nav">
         <a href="#overview" class="dash-nav-item active">

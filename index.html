@@ -6,7 +6,8 @@
   <title>ORVEXA | Premium Car Subscription & Flexible Leasing</title>
   <meta name="description" content="Experience car subscription reimagined. Drive luxury sedans, SUVs, and high-performance EVs with flexible 1 to 24 month terms, $0 down, full insurance, zero maintenance, and free vehicle swaps.">
   <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" href="assets/images/website-logo.png">
+  <link rel="apple-touch-icon" href="assets/images/website-logo.png">
   <style>
     /* Hero Section */
     .hero {
@@ -72,6 +73,22 @@
       margin-bottom: 1.35rem;
       max-width: 520px;
     }
+    .hero-btn-group {
+      margin-bottom: 1.15rem;
+      justify-content: flex-start;
+    }
+    .hero-badges {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+    .hero-badge-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
 
     /* Hero Quick Finder Widget */
     .hero-finder-card {
@@ -130,24 +147,70 @@
     .finder-select:focus {
       border-color: var(--color-primary);
     }
+    .finder-preset-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.5rem;
+    }
+    .finder-preset-chip {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #e5e7eb;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      outline: none;
+      white-space: nowrap;
+    }
+    .finder-preset-chip:hover, .finder-preset-chip.active {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: #fff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(242, 106, 33, 0.35);
+    }
     .finder-live-preview {
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 8px;
-      padding: 0.5rem 0.85rem;
+      border-radius: 10px;
+      padding: 0.65rem 0.85rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-top: 0.25rem;
+      gap: 0.75rem;
+    }
+    .finder-preview-left {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      min-width: 0;
+    }
+    .finder-preview-thumb {
+      width: 44px;
+      height: 32px;
+      border-radius: 6px;
+      object-fit: cover;
+      background: #1e2024;
+      flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.15);
     }
     .finder-live-preview small {
       color: #9ca3af;
       font-size: 0.7rem;
       display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .finder-live-preview strong {
       color: var(--color-primary);
-      font-size: 1.1rem;
+      font-size: 1.15rem;
+      white-space: nowrap;
     }
 
     /* Key Inclusions Ribbon */
@@ -231,6 +294,20 @@
       font-size: 0.95rem;
       font-weight: 700;
       margin-left: 0.5rem;
+    }
+    .special-offer-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .special-offer-action {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .promo-code-wrap {
+      font-size: 0.95rem;
     }
 
     /* 4-Step User Journey Stepper */
@@ -653,21 +730,401 @@
     /* Responsive */
     @media (max-width: 1024px) {
       .hero { min-height: auto; padding: 100px 0 50px; }
-      .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .inclusions-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-btn-group { justify-content: center; align-items: center; }
+      .inclusions-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+      .inclusions-grid .inclusion-item:last-child { grid-column: span 2; justify-self: center; }
       .journey-grid { grid-template-columns: repeat(2, 1fr); }
       .duration-matrix-grid { grid-template-columns: repeat(2, 1fr); }
       .fleet-grid-home { grid-template-columns: repeat(2, 1fr); }
       .portal-grid { grid-template-columns: 1fr; }
     }
-    @media (max-width: 650px) {
-      .inclusions-grid { grid-template-columns: 1fr; }
-      .journey-grid { grid-template-columns: 1fr; }
-      .duration-matrix-grid { grid-template-columns: 1fr; }
-      .fleet-grid-home { grid-template-columns: 1fr; }
-      .duration-card.recommended { transform: none; }
-      .comp-table-wrap { overflow-x: auto; }
-      .comp-table { min-width: 600px; }
+    @media (max-width: 768px) {
+      /* Prevent horizontal overflow on mobile */
+      html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+      }
+      .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        padding-left: 1.25rem !important;
+        padding-right: 1.25rem !important;
+      }
+
+      /* Hero Section: Centered Card & Proper Alignment */
+      .hero {
+        min-height: auto !important;
+        height: auto !important;
+        padding: 90px 0 50px !important;
+        overflow: hidden !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        position: relative !important;
+      }
+      .hero-bg {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+      .hero-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        gap: 2.25rem !important;
+        box-sizing: border-box !important;
+      }
+      .hero-content {
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .hero-eyebrow {
+        margin: 0 auto 0.75rem !important;
+      }
+      .hero-title {
+        font-size: clamp(1.75rem, 6vw, 2.25rem) !important;
+        line-height: 1.2 !important;
+        text-align: center !important;
+        margin-bottom: 0.85rem !important;
+        word-break: normal !important;
+        overflow-wrap: break-word !important;
+        width: 100% !important;
+      }
+      .hero-desc {
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        margin-bottom: 1.25rem !important;
+        max-width: 440px !important;
+        font-size: 0.95rem !important;
+      }
+      .hero-btn-group {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        margin: 0 auto 1.15rem !important;
+        gap: 0.75rem !important;
+        text-align: center !important;
+      }
+      .hero-btn-group .btn {
+        width: 100% !important;
+        max-width: 320px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        text-align: center !important;
+        justify-content: center !important;
+        display: inline-flex !important;
+        box-sizing: border-box !important;
+      }
+      .hero-badges {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 0.5rem 1rem !important;
+        width: 100% !important;
+        text-align: center !important;
+        font-size: 0.8rem !important;
+      }
+      .hero-badge-item {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 0.35rem !important;
+        white-space: nowrap !important;
+      }
+      .hero-finder-card {
+        max-width: 440px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        margin: 0 auto !important;
+        padding: 1.25rem 1rem !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+      }
+      .finder-title {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        flex-wrap: wrap !important;
+        gap: 0.4rem !important;
+        margin-bottom: 0.75rem !important;
+        width: 100% !important;
+      }
+      .finder-title span:first-child {
+        font-size: 1.05rem !important;
+        font-weight: 700 !important;
+      }
+      .finder-title span:last-child {
+        font-size: 0.7rem !important;
+        padding: 0.2rem 0.5rem !important;
+        white-space: nowrap !important;
+      }
+      .finder-preset-row {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 0.35rem !important;
+        margin-bottom: 0.5rem !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .finder-preset-chip {
+        font-size: 0.7rem !important;
+        padding: 0.25rem 0.5rem !important;
+        box-sizing: border-box !important;
+      }
+      .finder-group {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+      }
+      .finder-select {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        font-size: 0.825rem !important;
+        padding: 0.55rem 0.65rem !important;
+        text-overflow: ellipsis !important;
+        overflow: hidden !important;
+        white-space: nowrap !important;
+      }
+      .finder-live-preview {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 0.55rem 0.65rem !important;
+        gap: 0.5rem !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
+      }
+      .finder-preview-left {
+        min-width: 0 !important;
+        flex: 1 1 auto !important;
+        overflow: hidden !important;
+      }
+      .finder-live-preview small {
+        font-size: 0.68rem !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        display: block !important;
+      }
+      .finder-live-preview strong {
+        font-size: 1.05rem !important;
+      }
+      #previewTitle {
+        font-size: 0.88rem !important;
+      }
+      .finder-form .btn,
+      #finderSubmitBtn {
+        white-space: normal !important;
+        word-break: normal !important;
+        font-size: 0.85rem !important;
+        line-height: 1.3 !important;
+        padding: 0.75rem 0.85rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        text-align: center !important;
+        justify-content: center !important;
+      }
+      .scroll-to-top {
+        bottom: 0.85rem !important;
+        right: 0.85rem !important;
+        width: 38px !important;
+        height: 38px !important;
+        z-index: 90 !important;
+      }
+
+      /* Special Offer Banner: One-by-One Center Alignment */
+      .special-offer-banner {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        justify-content: center !important;
+        padding: 1.5rem 1.25rem !important;
+        margin: 2.5rem auto 1.5rem !important;
+        gap: 1.25rem !important;
+        max-width: 520px !important;
+        box-sizing: border-box !important;
+      }
+      .special-offer-info {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        justify-content: center !important;
+        gap: 0.75rem !important;
+        width: 100% !important;
+      }
+      .special-offer-info div {
+        text-align: center !important;
+      }
+      .special-offer-action {
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        gap: 0.85rem !important;
+      }
+      .promo-code-wrap {
+        display: block !important;
+        text-align: center !important;
+        font-size: 0.95rem !important;
+      }
+      .special-offer-action .btn {
+        width: auto !important;
+        min-width: 220px !important;
+        max-width: 280px !important;
+        text-align: center !important;
+        justify-content: center !important;
+        margin: 0 auto !important;
+      }
+
+      /* Inclusions Ribbon: Orderly Centered Alignment in all Mobile Views */
+      .inclusions-ribbon {
+        padding: 2.25rem 0 !important;
+      }
+      .inclusions-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        max-width: 320px !important;
+        margin: 0 auto !important;
+        gap: 1.25rem !important;
+      }
+      .inclusion-item {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        width: 100% !important;
+        max-width: 300px !important;
+        box-sizing: border-box !important;
+        gap: 0.9rem !important;
+        text-align: left !important;
+        margin: 0 auto !important;
+      }
+      .inclusion-item:last-child {
+        grid-column: auto !important;
+        justify-self: auto !important;
+      }
+      .inclusion-icon {
+        width: 44px !important;
+        height: 44px !important;
+        min-width: 44px !important;
+        flex-shrink: 0 !important;
+        border-radius: 12px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      .inclusion-text {
+        text-align: left !important;
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+      }
+      .inclusion-text strong {
+        display: block !important;
+        font-size: 0.92rem !important;
+        line-height: 1.25 !important;
+        margin-bottom: 0.15rem !important;
+        color: var(--color-text) !important;
+      }
+      .inclusion-text span {
+        display: block !important;
+        font-size: 0.78rem !important;
+        line-height: 1.3 !important;
+        color: var(--color-text-muted) !important;
+      }
+      [dir="rtl"] .inclusion-item {
+        text-align: right !important;
+      }
+      [dir="rtl"] .inclusion-text {
+        text-align: right !important;
+      }
+      .journey-section {
+        padding: 4rem 0 3rem !important;
+      }
+      .journey-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.5rem !important;
+        margin-top: 2rem !important;
+      }
+
+      /* Duration & Fleet Grids - 2*2 on tablet */
+      .duration-section {
+        padding: 4rem 0 3rem !important;
+      }
+      .duration-matrix-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.5rem !important;
+        margin-top: 2rem !important;
+      }
+      .duration-card.recommended {
+        transform: none !important;
+      }
+      .featured-fleet-section {
+        padding: 4rem 0 3rem !important;
+      }
+      .fleet-grid-home {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.5rem !important;
+        margin-top: 2rem !important;
+      }
+
+      /* Comparison Table & Portal */
+      .comparison-section {
+        padding: 4rem 0 3rem !important;
+      }
+      .comp-table-wrap {
+        overflow-x: auto !important;
+        width: 100% !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+      .comp-table {
+        min-width: 560px !important;
+      }
+      .portal-section {
+        padding: 4rem 0 3rem !important;
+      }
+      .portal-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+      }
+      .portal-section .btn-group {
+        justify-content: center !important;
+      }
+      .cta-section {
+        padding: 4rem 0 3.5rem !important;
+    }
+    @media (max-width: 575px) {
+      .journey-grid,
+      .duration-matrix-grid,
+      .fleet-grid-home {
+        grid-template-columns: 1fr !important;
+      }
     }
   </style>
 </head>
@@ -680,7 +1137,11 @@
   <nav class="navbar" id="navbar">
     <div class="container nav-container">
       <a href="index.html" class="nav-logo" aria-label="ORVEXA Home">
-        <img src="assets/brand-mark.svg" alt="ORVEXA Logo" height="38">
+        <img src="assets/images/website-logo.png" alt="ORVEXA Logo" class="brand-logo-img">
+        <span class="brand-text-wrap">
+          <span class="brand-logo-text">ORVEXA</span>
+          <span class="brand-logo-sub">CAR SUBSCRIPTION</span>
+        </span>
       </a>
       
       <ul class="nav-links">
@@ -766,20 +1227,20 @@
           <p class="hero-desc">
             Skip dealer down payments and long-term debt. Choose from 1 to 24 month flexible terms with insurance, routine maintenance, and seasonal vehicle swapping bundled into one monthly fee.
           </p>
-          <div class="btn-group" style="margin-bottom: 1.15rem; justify-content: flex-start;">
+          <div class="btn-group hero-btn-group">
             <a href="fleet.html" class="btn btn-primary" style="padding: 0.75rem 1.5rem; font-size: 0.95rem;">Explore 18 Vehicles</a>
             <a href="pricing.html" class="btn btn-glass" style="padding: 0.75rem 1.5rem; font-size: 0.95rem;">Compare Subscription Plans</a>
           </div>
-          <div style="display: flex; align-items: center; gap: 1.5rem; font-size: 0.85rem; color: #9ca3af;">
-            <span style="display: flex; align-items: center; gap: 0.4rem;">
+          <div class="hero-badges">
+            <span class="hero-badge-item">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
               $0 Capital Down
             </span>
-            <span style="display: flex; align-items: center; gap: 0.4rem;">
+            <span class="hero-badge-item">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
               Min. 30 Days Commitment
             </span>
-            <span style="display: flex; align-items: center; gap: 0.4rem;">
+            <span class="hero-badge-item">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
               Doorstep Handover
             </span>
@@ -792,44 +1253,64 @@
             <span>Find Your Subscription</span>
             <span>Fast 2-Min Approval</span>
           </div>
-          <form class="finder-form" action="fleet.html" method="GET">
+
+          <div style="margin-bottom: 0.4rem;">
+            <span class="finder-label" style="display:block; margin-bottom: 0.3rem;">Quick Match by Driving Need:</span>
+            <div class="finder-preset-row">
+              <button type="button" class="finder-preset-chip active" data-need="all" data-type="all" data-dur="6" data-budget="all">All</button>
+              <button type="button" class="finder-preset-chip" data-need="commute" data-type="compact" data-dur="6" data-budget="under-800">🚗 Commuter</button>
+              <button type="button" class="finder-preset-chip" data-need="family" data-type="suv" data-dur="6" data-budget="800-1500">👨‍👩‍👧 Family AWD</button>
+              <button type="button" class="finder-preset-chip" data-need="ev" data-type="electric" data-dur="6" data-budget="800-1500">⚡ 100% EV</button>
+              <button type="button" class="finder-preset-chip" data-need="executive" data-type="sedan" data-dur="12" data-budget="800-1500">💼 Executive</button>
+              <button type="button" class="finder-preset-chip" data-need="sport" data-type="performance" data-dur="3" data-budget="over-1500">🏎️ Sports</button>
+            </div>
+          </div>
+
+          <form class="finder-form" id="quickFinderForm" action="fleet.html" method="GET">
+            <input type="hidden" name="need" id="quickFinderNeed" value="all">
             <div class="finder-group">
-              <label class="finder-label">Vehicle Type</label>
+              <label class="finder-label" for="quickFinderType">Vehicle Category</label>
               <select name="type" class="finder-select" id="quickFinderType">
-                <option value="all">All Fleet (Sedans, SUVs, EVs)</option>
-                <option value="suv">Luxury SUVs (Velar, G-Class, X5, R1S)</option>
-                <option value="electric">100% Electric (Tesla, Taycan, Lucid)</option>
-                <option value="sedan">Executive Sedans (BMW 5, Audi A3)</option>
-                <option value="performance">Performance & Sports (911, Supra)</option>
+                <option value="all">All Categories (Sedans, SUVs, EVs & Sports)</option>
+                <option value="compact">Compact City Cruisers (Mini Cooper, Golf R, A3)</option>
+                <option value="sedan">Executive Sedans (BMW 5, Audi A3, Lucid Air)</option>
+                <option value="suv">Luxury SUVs &amp; AWD (Velar, X5, Q5, R1S, Macan)</option>
+                <option value="electric">100% Electric EVs (Tesla, Taycan, Lucid, Polestar)</option>
+                <option value="performance">Sports &amp; Track (911, Supra, Golf R, Macan GTS)</option>
               </select>
             </div>
             <div class="finder-group">
-              <label class="finder-label">Commitment Duration</label>
+              <label class="finder-label" for="quickFinderDuration">Commitment Duration &amp; Discounts</label>
               <select name="duration" class="finder-select" id="quickFinderDuration">
-                <option value="6">6 Months (Most Popular &bull; 15% Off)</option>
-                <option value="1">1 Month (Ultra-Flex &bull; 30-Day Min)</option>
-                <option value="3">3 Months (Seasonal &bull; Summer/Winter)</option>
-                <option value="12">12–24 Months (Max Value &bull; Up to 22% Off)</option>
+                <option value="6" selected>6 Months (Most Popular &bull; 15% Discount + 1 Free Swap)</option>
+                <option value="1">1 Month (Ultra-Flex &bull; 30-Day Min &bull; Cancel Anytime)</option>
+                <option value="3">3 Months (Seasonal &bull; Summer/Winter &bull; 8% Off)</option>
+                <option value="12">12–24 Months (Max Value &bull; Up to 22% Off + 2 Swaps/Yr)</option>
               </select>
             </div>
             <div class="finder-group">
-              <label class="finder-label">Monthly Budget</label>
+              <label class="finder-label" for="quickFinderBudget">Monthly Budget Range</label>
               <select name="budget" class="finder-select" id="quickFinderBudget">
-                <option value="all">Any Monthly Rate ($599 - $2,499)</option>
-                <option value="under-800">Under $800 / month ($0 down)</option>
-                <option value="800-1500">$800 - $1,500 / month (Premium Tier)</option>
-                <option value="over-1500">Over $1,500 / month (VIP Performance)</option>
+                <option value="all">Any Monthly Budget ($599 &ndash; $2,499/mo)</option>
+                <option value="under-800">Under $800 / month ($0 down &bull; Value Tier)</option>
+                <option value="800-1500">$800 &ndash; $1,500 / month (Premium Tier)</option>
+                <option value="over-1500">Over $1,500 / month (VIP Luxury &amp; Performance)</option>
               </select>
             </div>
             <div class="finder-live-preview">
-              <div>
-                <small>Average Starting Subscription</small>
-                <span id="previewText" style="font-weight: 600; font-size: 0.95rem;">BMW 5 Series &bull; 6 Mo Plan</span>
+              <div class="finder-preview-left">
+                <img id="previewImg" class="finder-preview-thumb" src="assets/images/BMW 5 Series (2025).png" alt="BMW 5 Series">
+                <div style="min-width: 0;">
+                  <strong id="previewTitle" style="display:block; font-size: 0.95rem; color:#fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">BMW 5 Series M-Sport</strong>
+                  <small id="previewTermMeta" style="color: #9ca3af; font-size: 0.72rem;">6-Mo Plan &bull; 15% Off Applied &bull; $0 Down</small>
+                </div>
               </div>
-              <strong id="previewPrice">$899/mo</strong>
+              <div style="text-align: right; flex-shrink: 0;">
+                <strong id="previewPrice">$899<span style="font-size: 0.75rem; color: #9ca3af; font-weight: normal;">/mo</span></strong>
+              </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-full" style="padding: 0.75rem; font-size: 0.9rem; margin-top: 0.25rem;">
-              Find Matching Vehicles &rarr;
+            <button type="submit" class="btn btn-primary btn-full" id="finderSubmitBtn" style="padding: 0.75rem; font-size: 0.9rem; margin-top: 0.25rem; font-weight: 700;">
+              Find Matching Vehicles (<span id="finderCount">18</span> Available) &rarr;
             </button>
           </form>
         </div>
@@ -913,15 +1394,15 @@
   <!-- SPECIAL OFFER BANNER (Issue 6, 8) -->
   <div class="container">
     <div class="special-offer-banner fade-up">
-      <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+      <div class="special-offer-info">
         <span class="promo-badge">Limited-Time Offer</span>
         <div>
           <strong style="font-size: 1.1rem; display: block; color: var(--color-text);">Get $150 Off First 3 Months + Free Valet Handover</strong>
           <span style="font-size: 0.85rem; color: var(--color-text-muted);">Applicable to all 3+ month subscriptions for new ORVEXA members.</span>
         </div>
       </div>
-      <div style="display: flex; align-items: center; gap: 1rem;">
-        <div>Use Code: <span class="promo-code">FLEXDRIVE</span></div>
+      <div class="special-offer-action">
+        <div class="promo-code-wrap">Use Code: <span class="promo-code">FLEXDRIVE</span></div>
         <a href="fleet.html" class="btn btn-primary" style="padding: 0.6rem 1.25rem; font-size: 0.875rem;">Claim Offer</a>
       </div>
     </div>
@@ -990,7 +1471,8 @@
     </div>
   </section>
 
-  <!-- SECTION 3: SUBSCRIPTION DURATION & LEASE PERIODS (Issue 6, 8) -->
+
+  <!-- SECTION 4: SUBSCRIPTION DURATION & LEASE PERIODS (Issue 6, 8) -->
   <section class="duration-section">
     <div class="container">
       <div class="text-center fade-up">
@@ -1013,7 +1495,7 @@
             <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> $0 Routine maintenance</li>
             <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 1,000 miles/month</li>
           </ul>
-          <a href="fleet.html" class="btn btn-secondary btn-full">View 1-Mo Rates</a>
+          <a href="fleet.html?duration=1" class="btn btn-secondary btn-full">View 1-Mo Flex Rates</a>
         </div>
 
         <!-- 3 Months -->
@@ -1027,7 +1509,7 @@
             <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 1,200 miles/month</li>
             <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Eligible for FLEXDRIVE promo</li>
           </ul>
-          <a href="fleet.html" class="btn btn-secondary btn-full">View 3-Mo Rates</a>
+          <a href="fleet.html?duration=3" class="btn btn-secondary btn-full">View 3-Mo Seasonal Rates</a>
         </div>
 
         <!-- 6 Months -->
@@ -1042,7 +1524,7 @@
             <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 1,200 miles/month (Rollover)</li>
             <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Waived security deposit</li>
           </ul>
-          <a href="fleet.html" class="btn btn-primary btn-full">View 6-Mo Rates</a>
+          <a href="fleet.html?duration=6" class="btn btn-primary btn-full">View 6-Mo Popular Rates</a>
         </div>
 
         <!-- 12-24 Months -->
@@ -1056,7 +1538,7 @@
             <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 1,500 miles/month</li>
             <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Annual upgrade priority</li>
           </ul>
-          <a href="fleet.html" class="btn btn-secondary btn-full">View 12-Mo Rates</a>
+          <a href="fleet.html?duration=12" class="btn btn-secondary btn-full">View 12-Mo Rates</a>
         </div>
       </div>
     </div>
@@ -1078,10 +1560,10 @@
       <!-- Vehicle Types Available Strip -->
       <div class="home-cat-strip fade-up">
         <span style="font-size: 0.825rem; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-right: 0.35rem;">Types Available:</span>
-        <a href="fleet.html" class="home-cat-pill">Executive Sedans (from $699/mo)</a>
-        <a href="fleet.html" class="home-cat-pill">Luxury SUVs (from $850/mo)</a>
-        <a href="fleet.html" class="home-cat-pill">100% Electric (from $799/mo)</a>
-        <a href="fleet.html" class="home-cat-pill">Sports & Performance (from $1,699/mo)</a>
+        <a href="fleet.html?type=sedan" class="home-cat-pill">Executive Sedans (from $699/mo)</a>
+        <a href="fleet.html?type=suv" class="home-cat-pill">Luxury SUVs (from $850/mo)</a>
+        <a href="fleet.html?type=electric" class="home-cat-pill">100% Electric (from $749/mo)</a>
+        <a href="fleet.html?type=performance" class="home-cat-pill">Sports &amp; Performance (from $750/mo)</a>
       </div>
 
       <div class="fleet-grid-home">
@@ -1099,7 +1581,7 @@
             <div style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">
               375 HP Turbo Hybrid &bull; 8-Spd Auto &bull; 1.2k mi/mo
             </div>
-            <a href="fleet.html" class="btn btn-secondary btn-full">Configure Subscription</a>
+            <a href="fleet.html?type=sedan&search=BMW" class="btn btn-secondary btn-full">Configure Subscription</a>
           </div>
         </div>
 
@@ -1116,7 +1598,7 @@
             <div style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">
               395 HP Twin-Turbo AWD &bull; 8-Spd Auto &bull; 1.2k mi/mo
             </div>
-            <a href="fleet.html" class="btn btn-secondary btn-full">Configure Subscription</a>
+            <a href="fleet.html?type=suv&search=Velar" class="btn btn-secondary btn-full">Configure Subscription</a>
           </div>
         </div>
 
@@ -1133,7 +1615,7 @@
             <div style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">
               358 mi EV Dual Motor &bull; Direct Drive &bull; 1.2k mi/mo
             </div>
-            <a href="fleet.html" class="btn btn-secondary btn-full">Configure Subscription</a>
+            <a href="fleet.html?type=electric&search=Tesla" class="btn btn-secondary btn-full">Configure Subscription</a>
           </div>
         </div>
 
@@ -1150,7 +1632,7 @@
             <div style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">
               530 HP Dual EV &bull; 2-Spd EV &bull; 1.0k mi/mo
             </div>
-            <a href="fleet.html" class="btn btn-secondary btn-full">Configure Subscription</a>
+            <a href="fleet.html?type=electric&search=Taycan" class="btn btn-secondary btn-full">Configure Subscription</a>
           </div>
         </div>
 
@@ -1167,7 +1649,7 @@
             <div style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">
               261 HP Turbo quattro &bull; 7-Spd S tronic &bull; 1.2k mi/mo
             </div>
-            <a href="fleet.html" class="btn btn-secondary btn-full">Configure Subscription</a>
+            <a href="fleet.html?type=suv&search=Q5" class="btn btn-secondary btn-full">Configure Subscription</a>
           </div>
         </div>
 
@@ -1180,11 +1662,11 @@
             <span class="h-fleet-brand">Mini &bull; Min 1 mo &bull; Max 24 mo</span>
             <h3 class="h-fleet-title">Mini Cooper S Hardtop</h3>
             <div class="h-fleet-price">$599<span>/mo (6-mo term)</span></div>
-            <div class="h-fleet-inclusions">✓ All-Inclusive &bull; Brakes, Tires & Roadside</div>
+            <div class="h-fleet-inclusions">✓ All-Inclusive &bull; Brakes, Tires &amp; Roadside</div>
             <div style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">
               189 HP TwinPower &bull; 7-Spd Dual-Clutch &bull; 1.2k mi/mo
             </div>
-            <a href="fleet.html" class="btn btn-secondary btn-full">Configure Subscription</a>
+            <a href="fleet.html?type=compact&search=Cooper" class="btn btn-secondary btn-full">Configure Subscription</a>
           </div>
         </div>
 
@@ -1319,7 +1801,13 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="assets/brand-mark.svg" alt="ORVEXA" height="34">
+          <a href="index.html" class="nav-logo" aria-label="ORVEXA Home" style="margin-bottom: 1.5rem; display: inline-flex;">
+            <img src="assets/images/website-logo.png" alt="ORVEXA Logo" class="brand-logo-img">
+            <span class="brand-text-wrap">
+              <span class="brand-logo-text">ORVEXA</span>
+              <span class="brand-logo-sub">CAR SUBSCRIPTION</span>
+            </span>
+          </a>
           <p>The premium car subscription and flexible leasing service. Drive the world's finest vehicles on your terms.</p>
           <div class="social-links">
             <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
@@ -1368,39 +1856,110 @@
   <script src="assets/js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Dynamic live preview in Quick Finder
+      // 1. Hero Quick Finder Logic
       const typeSelect = document.getElementById('quickFinderType');
       const durationSelect = document.getElementById('quickFinderDuration');
-      const previewText = document.getElementById('previewText');
+      const budgetSelect = document.getElementById('quickFinderBudget');
+      const needInput = document.getElementById('quickFinderNeed');
+      const presetChips = document.querySelectorAll('.finder-preset-chip');
+      
+      const previewTitle = document.getElementById('previewTitle');
+      const previewImg = document.getElementById('previewImg');
+      const previewTermMeta = document.getElementById('previewTermMeta');
       const previewPrice = document.getElementById('previewPrice');
+      const finderCount = document.getElementById('finderCount');
 
-      const updatePreview = () => {
-        const type = typeSelect.value;
-        const duration = durationSelect.value;
-
-        let carName = 'BMW 5 Series';
-        let basePrice = 899;
-
-        if (type === 'suv') { carName = 'Range Rover Velar'; basePrice = 1199; }
-        else if (type === 'electric') { carName = 'Tesla Model 3 LR'; basePrice = 799; }
-        else if (type === 'sedan') { carName = 'Audi A3 Premium'; basePrice = 699; }
-        else if (type === 'performance') { carName = 'Porsche 911'; basePrice = 2499; }
-
-        let multiplier = 1;
-        let termLabel = '6 Mo Plan';
-        if (duration === '1') { multiplier = 1.1; termLabel = '1 Mo Flex'; }
-        else if (duration === '3') { multiplier = 1.05; termLabel = '3 Mo Plan'; }
-        else if (duration === '12') { multiplier = 0.9; termLabel = '12 Mo Plan'; }
-
-        const calculated = Math.round(basePrice * multiplier);
-        previewText.textContent = `${carName} • ${termLabel}`;
-        previewPrice.textContent = `$${calculated}/mo`;
+      const carRecommendations = {
+        'all': { name: 'BMW 5 Series M-Sport', img: 'assets/images/BMW 5 Series (2025).png', p6: 899, total: 18 },
+        'compact': { name: 'Mini Cooper S Hardtop', img: 'assets/images/Cooper S.png', p6: 599, total: 4 },
+        'sedan': { name: 'BMW 5 Series M-Sport', img: 'assets/images/BMW 5 Series (2025).png', p6: 899, total: 5 },
+        'suv': { name: 'Range Rover Velar Dynamic', img: 'assets/images/Range Rover Velar (2025).png', p6: 1199, total: 7 },
+        'electric': { name: 'Tesla Model 3 Long Range', img: 'assets/images/Model 3 Long Range.png', p6: 799, total: 7 },
+        'performance': { name: 'Porsche 911 Carrera S', img: 'assets/images/911 Carrera S.png', p6: 2499, total: 5 }
       };
 
-      if (typeSelect && durationSelect) {
-        typeSelect.addEventListener('change', updatePreview);
-        durationSelect.addEventListener('change', updatePreview);
-      }
+      const updatePreview = () => {
+        const type = typeSelect ? typeSelect.value : 'all';
+        const duration = durationSelect ? durationSelect.value : '6';
+        const budget = budgetSelect ? budgetSelect.value : 'all';
+
+        let base = carRecommendations[type] || carRecommendations['all'];
+        let carName = base.name;
+        let carImg = base.img;
+        let basePrice = base.p6;
+
+        // Budget override recommendations
+        if (budget === 'under-800') {
+          if (type === 'suv') { carName = 'Volvo XC40 Recharge'; carImg = 'assets/images/XC40 Recharge.png'; basePrice = 799; }
+          else if (type === 'electric') { carName = 'Polestar 2 Dual Motor'; carImg = 'assets/images/Polestar 2.png'; basePrice = 749; }
+          else { carName = 'Mini Cooper S'; carImg = 'assets/images/Cooper S.png'; basePrice = 599; }
+        } else if (budget === 'over-1500') {
+          if (type === 'electric') { carName = 'Porsche Taycan 4S'; carImg = 'assets/images/Taycan 4S.png'; basePrice = 1899; }
+          else if (type === 'suv') { carName = 'Mercedes-Benz G 550'; carImg = 'assets/images/G-Class 550.png'; basePrice = 2100; }
+          else { carName = 'Porsche 911 Carrera S'; carImg = 'assets/images/911 Carrera S.png'; basePrice = 2499; }
+        }
+
+        let multiplier = 1;
+        let termLabel = '6-Mo Plan • 15% Off Applied • $0 Down';
+        if (duration === '1') {
+          multiplier = 1.1;
+          termLabel = '1-Mo Ultra-Flex • 30-Day Min • Cancel Anytime';
+        } else if (duration === '3') {
+          multiplier = 1.05;
+          termLabel = '3-Mo Seasonal • Summer/Winter • 8% Off';
+        } else if (duration === '12') {
+          multiplier = 0.88;
+          termLabel = '12–24 Mo Plan • Max Savings 22% Off + 2 Swaps';
+        }
+
+        const calculated = Math.round(basePrice * multiplier);
+        if (previewTitle) previewTitle.textContent = carName;
+        if (previewImg) { previewImg.src = carImg; previewImg.alt = carName; }
+        if (previewTermMeta) previewTermMeta.textContent = termLabel;
+        if (previewPrice) previewPrice.innerHTML = `$${calculated.toLocaleString()}<span style="font-size:0.75rem; color:#9ca3af; font-weight:normal;">/mo</span>`;
+
+        // Calculate matching count
+        let count = base.total;
+        if (budget === 'under-800') count = Math.min(count, 5);
+        else if (budget === 'over-1500') count = Math.min(count, 4);
+        if (type === 'all' && budget === 'all') count = 18;
+        if (finderCount) finderCount.textContent = count;
+      };
+
+      presetChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          presetChips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+
+          const need = chip.dataset.need || 'all';
+          const type = chip.dataset.type || 'all';
+          const dur = chip.dataset.dur || '6';
+          const budget = chip.dataset.budget || 'all';
+
+          if (needInput) needInput.value = need;
+          if (typeSelect) typeSelect.value = type;
+          if (durationSelect) durationSelect.value = dur;
+          if (budgetSelect) budgetSelect.value = budget;
+
+          updatePreview();
+        });
+      });
+
+      if (typeSelect) typeSelect.addEventListener('change', () => {
+        if (needInput) needInput.value = 'custom';
+        presetChips.forEach(c => c.classList.remove('active'));
+        updatePreview();
+      });
+      if (durationSelect) durationSelect.addEventListener('change', updatePreview);
+      if (budgetSelect) budgetSelect.addEventListener('change', () => {
+        if (needInput) needInput.value = 'custom';
+        presetChips.forEach(c => c.classList.remove('active'));
+        updatePreview();
+      });
+
+      // Initial calculation
+      updatePreview();
+
     });
   </script>
 </body>

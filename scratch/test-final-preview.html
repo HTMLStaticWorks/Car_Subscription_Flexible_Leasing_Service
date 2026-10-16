@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Logo Comparison: Light (White BG) vs Dark (Black BG)</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0d0e12;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      align-items: center;
+    }
+    .card {
+      padding: 24px 36px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      min-width: 480px;
+    }
+    .card-light {
+      background: #ffffff;
+      color: #111111;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    .card-dark {
+      background: #111111;
+      color: #ffffff;
+      border: 1px solid #222222;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .brand-logo-img {
+      height: 46px;
+      width: 46px;
+      border-radius: 8px;
+      object-fit: contain;
+      display: block;
+    }
+    .brand-logo-text {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+    .brand-sub {
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      color: #F26A21;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>ORVEXA: Light Mode (White BG) & Dark Mode (Black BG)</h2>
+
+  <!-- LIGHT THEME -->
+  <div class="card card-light">
+    <a href="#" class="nav-logo">
+      <img src="../assets/images/website-logo.png" alt="ORVEXA Logo" class="brand-logo-img">
+      <div>
+        <div class="brand-logo-text">ORVEXA</div>
+        <div class="brand-sub">CAR SUBSCRIPTION • FLEXIBLE LEASING</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- DARK THEME -->
+  <div class="card card-dark">
+    <a href="#" class="nav-logo">
+      <img src="../assets/images/website-logo-dark.png" alt="ORVEXA Logo" class="brand-logo-img">
+      <div>
+        <div class="brand-logo-text">ORVEXA</div>
+        <div class="brand-sub">CAR SUBSCRIPTION • FLEXIBLE LEASING</div>
+      </div>
+    </a>
+  </div>
+
+</body>
+</html>

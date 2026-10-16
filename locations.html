@@ -6,12 +6,59 @@
   <title>Locations</title>
   <meta name="description" content="Flexible driving, wherever you are. Explore ORVEXA service areas.">
   <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" href="assets/images/website-logo.png">
+  <link rel="apple-touch-icon" href="assets/images/website-logo.png">
   <style>
+    /* Unified Hero Standard */
     .locations-hero {
-      padding: 10rem 0 4rem;
-      background: var(--color-surface);
+      min-height: 450px;
+      padding: 9.5rem 0 4.5rem;
+      background-image: linear-gradient(180deg, rgba(15, 17, 21, 0.72) 0%, rgba(15, 17, 21, 0.88) 100%), url('assets/images/locations.png');
+      background-size: cover;
+      background-position: center 40%;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
+      border-bottom: 1px solid var(--color-border);
+      position: relative;
+      box-sizing: border-box;
+    }
+    .locations-hero .eyebrow {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: 0.85rem;
+    }
+    .locations-hero h1 {
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: #FFFFFF;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+      margin-bottom: 1rem;
+      max-width: 850px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.18;
+    }
+    .locations-hero p {
+      font-size: 1.1rem;
+      line-height: 1.65;
+      color: #E2E8F0;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.35);
+      max-width: 650px;
+      margin: 0 auto;
+    }
+    @media (max-width: 768px) {
+      .locations-hero {
+        padding: 8rem 0 3.5rem;
+        min-height: 360px;
+      }
     }
 
     .map-container {
@@ -259,7 +306,13 @@
   <!-- Navbar -->
   <nav class="navbar">
     <div class="container nav-container">
-      <a href="index.html" class="nav-logo"><img src="assets/brand-mark.svg" alt="ORVEXA Logo"></a>
+      <a href="index.html" class="nav-logo" aria-label="ORVEXA Home">
+        <img src="assets/images/website-logo.png" alt="ORVEXA Logo" class="brand-logo-img">
+        <span class="brand-text-wrap">
+          <span class="brand-logo-text">ORVEXA</span>
+          <span class="brand-logo-sub">CAR SUBSCRIPTION</span>
+        </span>
+      </a>
       <ul class="nav-links">
         <li class="nav-dropdown">
           <a href="#" class="nav-link" style="display: inline-flex; align-items: center; gap: 0.25rem;">Home <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
@@ -327,7 +380,10 @@
   <header class="locations-hero fade-up">
     <div class="container">
       <span class="eyebrow">Service Areas</span>
-      <h1 class="heading-lg">Flexible driving,<br>wherever you are.</h1>
+      <h1>Flexible driving,<br>wherever you are.</h1>
+      <p>
+        White-glove doorstep vehicle delivery within 48 hours across major metropolitan regions nationwide.
+      </p>
     </div>
   </header>
 
@@ -613,7 +669,13 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="assets/brand-mark.svg" alt="ORVEXA">
+          <a href="index.html" class="nav-logo" aria-label="ORVEXA Home" style="margin-bottom: 1.5rem; display: inline-flex;">
+            <img src="assets/images/website-logo.png" alt="ORVEXA Logo" class="brand-logo-img">
+            <span class="brand-text-wrap">
+              <span class="brand-logo-text">ORVEXA</span>
+              <span class="brand-logo-sub">CAR SUBSCRIPTION</span>
+            </span>
+          </a>
           <p>The premium car subscription service designed for modern flexibility. Drive more, commit less.</p>
           <div class="social-links">
             <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>

@@ -6,12 +6,66 @@
   <title>Pricing Plans</title>
   <meta name="description" content="Flexible car subscription plans built around your driving.">
   <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" href="assets/images/website-logo.png">
+  <link rel="apple-touch-icon" href="assets/images/website-logo.png">
   <style>
+    /* Unified Hero Standard */
     .pricing-hero {
-      padding: 10rem 0 4rem;
+      min-height: 450px;
+      padding: 9.5rem 0 4.5rem;
+      background-image: linear-gradient(180deg, rgba(15, 17, 21, 0.72) 0%, rgba(15, 17, 21, 0.88) 100%), url('assets/images/pricing.png');
+      background-size: cover;
+      background-position: center 30%;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      position: relative;
+      box-sizing: border-box;
+    }
+    .pricing-hero .eyebrow {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: 0.85rem;
+    }
+    .pricing-hero h1 {
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: #FFFFFF;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+      margin-bottom: 1rem;
+      max-width: 850px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.18;
+    }
+    .pricing-hero p {
+      font-size: 1.1rem;
+      line-height: 1.65;
+      color: #E2E8F0;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.35);
+      max-width: 650px;
+      margin: 0 auto;
+    }
+    .pricing-hero .toggle-label {
+      color: #cbd5e1;
+    }
+    .pricing-hero .toggle-label.active {
+      color: #FFFFFF;
+      font-weight: 700;
+    }
+    @media (max-width: 768px) {
+      .pricing-hero {
+        padding: 8rem 0 3.5rem;
+        min-height: 360px;
+      }
     }
     
     .pricing-plans-section {
@@ -126,6 +180,301 @@
       .included-grid { grid-template-columns: 1fr; }
     }
 
+    /* Plan Recommender Quiz */
+    .recommender-section {
+      padding: 6rem 0;
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .quiz-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      padding: 2.75rem;
+      box-shadow: var(--shadow-md);
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .quiz-step-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-primary);
+      margin-bottom: 0.5rem;
+    }
+    .quiz-options-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .quiz-btn {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+      padding: 0.6rem 1.15rem;
+      border-radius: 25px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .quiz-btn:hover {
+      border-color: rgba(242, 106, 33, 0.5);
+      color: var(--color-primary);
+    }
+    .quiz-btn.active {
+      background: var(--color-primary);
+      color: #fff;
+      border-color: var(--color-primary);
+      box-shadow: 0 4px 12px rgba(242, 106, 33, 0.35);
+    }
+    .quiz-result-box {
+      background: var(--color-surface);
+      border: 2px solid var(--color-primary);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(242, 106, 33, 0.12);
+      text-align: center;
+    }
+    .quiz-rec-badge {
+      display: inline-block;
+      background: rgba(242, 106, 33, 0.15);
+      color: var(--color-primary);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      margin-bottom: 0.75rem;
+    }
+    .quiz-rec-plan {
+      font-size: 1.8rem;
+      font-family: var(--font-heading);
+      margin-bottom: 0.35rem;
+    }
+    .quiz-rec-price {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--color-primary);
+      margin-bottom: 1rem;
+    }
+    .quiz-rec-price span {
+      font-size: 0.9rem;
+      font-weight: normal;
+      color: var(--color-text-muted);
+    }
+    .quiz-rec-cars-title {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    .quiz-rec-cars {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--color-text);
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      padding: 0.75rem;
+      border-radius: 8px;
+    }
+    @media (max-width: 900px) {
+      .quiz-card { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    @media (max-width: 768px) {
+      /* Mobile Plan Recommender Quiz - Prevent Card Going Out and Keep in Center Alignment */
+      .recommender-section {
+        padding: 3.5rem 0 !important;
+      }
+      .quiz-card {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        max-width: 440px !important;
+        box-sizing: border-box !important;
+        padding: 1.5rem 1rem !important;
+        margin: 0 auto !important;
+        gap: 2rem !important;
+        overflow: hidden !important;
+        border-radius: 16px !important;
+      }
+      .quiz-questions {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        text-align: center !important;
+      }
+      .quiz-step-title {
+        text-align: center !important;
+        font-size: 0.85rem !important;
+      }
+      .quiz-options-group {
+        justify-content: center !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 0.5rem !important;
+        margin-bottom: 1.25rem !important;
+      }
+      .quiz-btn {
+        padding: 0.5rem 0.9rem !important;
+        font-size: 0.8rem !important;
+      }
+      .quiz-result-box {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 1.5rem 1rem !important;
+        margin: 0 auto !important;
+        border-radius: 14px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+      }
+      .quiz-rec-plan {
+        font-size: 1.5rem !important;
+        text-align: center !important;
+      }
+      .quiz-rec-price {
+        font-size: 1.85rem !important;
+        text-align: center !important;
+      }
+      .quiz-rec-cars-title {
+        text-align: center !important;
+      }
+      .quiz-rec-cars {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 0.75rem 0.6rem !important;
+        margin-bottom: 1.25rem !important;
+        text-align: center !important;
+      }
+      .quiz-rec-cars div {
+        font-size: 0.8rem !important;
+        line-height: 1.45 !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        text-align: center !important;
+      }
+      .quiz-result-box > div[style*="display:flex"] {
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .quiz-result-box .btn {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        text-align: center !important;
+        justify-content: center !important;
+      }
+
+      /* Durations & Lease Periods - Centered & Good Looking Mobile Alignment */
+      .durations-eligibility-section {
+        padding: 3.5rem 0 !important;
+      }
+      .durations-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 2.5rem !important;
+        width: 100% !important;
+        max-width: 480px !important;
+        margin: 0 auto !important;
+      }
+      .durations-left-col {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .durations-left-col .eyebrow {
+        text-align: center !important;
+        margin: 0 auto 0.75rem !important;
+      }
+      .durations-left-col h2 {
+        text-align: center !important;
+        margin: 0 auto 1.25rem !important;
+        max-width: 420px !important;
+      }
+      .durations-left-col p {
+        text-align: center !important;
+        margin: 0 auto 1.75rem !important;
+        max-width: 420px !important;
+      }
+      .durations-list {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.65rem !important;
+        width: 100% !important;
+        max-width: 420px !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+      }
+      .durations-item {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        background: var(--color-bg) !important;
+        border: 1px solid var(--color-border) !important;
+        border-radius: 12px !important;
+        padding: 0.9rem 1rem !important;
+        gap: 0.25rem !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+      }
+      .dur-label {
+        font-size: 0.8rem !important;
+        color: var(--color-text-muted) !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+        font-weight: 600 !important;
+        text-align: center !important;
+      }
+      .dur-val {
+        font-size: 1.05rem !important;
+        font-weight: 700 !important;
+        text-align: center !important;
+      }
+      .eligibility-card {
+        width: 100% !important;
+        max-width: 420px !important;
+        box-sizing: border-box !important;
+        padding: 1.75rem 1.25rem !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+      }
+      .eligibility-card .eyebrow {
+        margin: 0 auto 0.5rem !important;
+        text-align: center !important;
+      }
+      .eligibility-card h3 {
+        text-align: center !important;
+      }
+      .scroll-to-top {
+        bottom: 1rem !important;
+        right: 1rem !important;
+        width: 38px !important;
+        height: 38px !important;
+        z-index: 90 !important;
+      }
+    }
+
     /* FAQ Accordion */
     .faq-accordion {
       display: flex;
@@ -190,7 +539,13 @@
   <!-- Navbar -->
   <nav class="navbar">
     <div class="container nav-container">
-      <a href="index.html" class="nav-logo"><img src="assets/brand-mark.svg" alt="ORVEXA Logo"></a>
+      <a href="index.html" class="nav-logo" aria-label="ORVEXA Home">
+        <img src="assets/images/website-logo.png" alt="ORVEXA Logo" class="brand-logo-img">
+        <span class="brand-text-wrap">
+          <span class="brand-logo-text">ORVEXA</span>
+          <span class="brand-logo-sub">CAR SUBSCRIPTION</span>
+        </span>
+      </a>
       <ul class="nav-links">
         <li class="nav-dropdown">
           <a href="#" class="nav-link" style="display: inline-flex; align-items: center; gap: 0.25rem;">Home <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
@@ -257,26 +612,33 @@
   <!-- Hero -->
   <header class="pricing-hero fade-up">
     <div class="container">
-      <h1 class="heading-xl">Flexible plans built around your driving.</h1>
-      
-      <div class="billing-toggle">
-        <span class="toggle-label active" id="label-monthly">Monthly Flexibility</span>
-        <div class="toggle-switch" id="billingToggle">
-          <div class="toggle-circle"></div>
-        </div>
-        <span class="toggle-label" id="label-annual">12-Month Commitment (Save 15%)</span>
-      </div>
-
-      <!-- Special Offer Banner -->
-      <div style="background: linear-gradient(135deg, rgba(242,106,33,0.12) 0%, rgba(217,56,30,0.08) 100%); border: 1px solid rgba(242,106,33,0.3); border-radius: 12px; padding: 1rem 1.5rem; max-width: 750px; margin: 1.5rem auto 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
-        <div style="display: flex; align-items: center; gap: 0.75rem;">
-          <span style="background: var(--color-primary); color: #fff; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 20px; text-transform: uppercase;">Promo</span>
-          <span style="font-size: 0.9rem; font-weight: 600; color: var(--color-text);">Get $150 off first 3 months with code <span style="font-family: monospace; background: var(--color-surface); border: 1px dashed var(--color-primary); color: var(--color-primary); padding: 0.2rem 0.5rem; border-radius: 4px;">FLEXDRIVE</span></span>
-        </div>
-        <span style="font-size: 0.8rem; color: #10B981; font-weight: 600;">✓ $0 Down Payment Guaranteed</span>
-      </div>
+      <span class="eyebrow">All-Inclusive Subscriptions</span>
+      <h1>Flexible plans built around your driving.</h1>
+      <p>
+        One flat monthly fee covers insurance, factory maintenance, roadside assistance, and seasonal swaps. Cancel or switch anytime.
+      </p>
     </div>
   </header>
+
+  <!-- Pricing Controls & Promo Banner -->
+  <div class="container fade-up" style="margin-top: 2.5rem; margin-bottom: 1.5rem;">
+    <div class="billing-toggle" style="margin: 0 auto 1.5rem;">
+      <span class="toggle-label active" id="label-monthly">1-Month Ultra-Flex</span>
+      <div class="toggle-switch" id="billingToggle">
+        <div class="toggle-circle"></div>
+      </div>
+      <span class="toggle-label" id="label-annual">12-Month Commitment (Save 15%)</span>
+    </div>
+
+    <!-- Special Offer Banner -->
+    <div style="background: linear-gradient(135deg, rgba(242,106,33,0.12) 0%, rgba(217,56,30,0.08) 100%); border: 1px solid rgba(242,106,33,0.3); border-radius: 12px; padding: 1rem 1.5rem; max-width: 750px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span style="background: var(--color-primary); color: #fff; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 20px; text-transform: uppercase;">Promo</span>
+        <span style="font-size: 0.9rem; font-weight: 600; color: var(--color-text);">Get $150 off first 3 months with code <span style="font-family: monospace; background: var(--color-surface); border: 1px dashed var(--color-primary); color: var(--color-primary); padding: 0.2rem 0.5rem; border-radius: 4px;">FLEXDRIVE</span></span>
+      </div>
+      <span style="font-size: 0.8rem; color: #10B981; font-weight: 600;">✓ $0 Down Payment Guaranteed</span>
+    </div>
+  </div>
 
   <!-- Pricing Grid -->
   <section class="pricing-plans-section">
@@ -289,13 +651,14 @@
         <div class="p-price">$<span class="price-val" data-monthly="699" data-annual="599">699</span><span>/mo</span></div>
         <p class="text-muted" style="font-size:0.875rem;">Perfect for everyday city commuting.</p>
         <ul class="p-features">
-          <li><span class="p-icon">✓</span> Compact & Midsize Sedans</li>
+          <li><span class="p-icon">✓</span> Compact &amp; Midsize Sedans</li>
           <li><span class="p-icon">✓</span> 800 miles / month</li>
           <li><span class="p-icon">✓</span> Basic Maintenance</li>
           <li><span style="color:var(--color-text-muted); margin-right: 0.5rem;">✕</span> <span style="color:var(--color-text-muted);">Vehicle Swaps</span></li>
           <li><span class="p-icon">✓</span> Standard Support</li>
         </ul>
-        <a href="register.html" class="btn btn-secondary btn-full">Choose Essential</a>
+        <a href="register.html?plan=essential&term=1&price=699" class="btn btn-secondary btn-full plan-book-btn" data-plan="essential">Choose Essential</a>
+        <a href="fleet.html?budget=under-800" style="display:block; text-align:center; margin-top:0.75rem; font-size:0.8rem; color:var(--color-primary); font-weight:600;">Explore Essential Vehicles (from $599) &rarr;</a>
       </div>
 
       <!-- Flex -->
@@ -304,13 +667,14 @@
         <div class="p-price">$<span class="price-val" data-monthly="899" data-annual="759">899</span><span>/mo</span></div>
         <p class="text-muted" style="font-size:0.875rem;">Great for families and road trips.</p>
         <ul class="p-features">
-          <li><span class="p-icon">✓</span> SUVs & Crossovers</li>
+          <li><span class="p-icon">✓</span> SUVs &amp; Crossovers</li>
           <li><span class="p-icon">✓</span> 1,200 miles / month</li>
           <li><span class="p-icon">✓</span> Full Maintenance</li>
           <li><span class="p-icon">✓</span> 1 Swap / Year</li>
           <li><span class="p-icon">✓</span> Priority Support</li>
         </ul>
-        <a href="register.html" class="btn btn-secondary btn-full">Choose Flex</a>
+        <a href="register.html?plan=flex&term=1&price=899" class="btn btn-secondary btn-full plan-book-btn" data-plan="flex">Choose Flex</a>
+        <a href="fleet.html?type=suv&budget=800-1500" style="display:block; text-align:center; margin-top:0.75rem; font-size:0.8rem; color:var(--color-primary); font-weight:600;">Explore Flex SUVs &amp; Crossovers &rarr;</a>
       </div>
 
       <!-- Premium -->
@@ -320,13 +684,14 @@
         <div class="p-price">$<span class="price-val" data-monthly="1299" data-annual="1099">1,299</span><span>/mo</span></div>
         <p class="text-muted" style="font-size:0.875rem;">Ultimate comfort and luxury.</p>
         <ul class="p-features">
-          <li><span class="p-icon">✓</span> Luxury Sedans & EVs</li>
+          <li><span class="p-icon">✓</span> Luxury Sedans &amp; EVs</li>
           <li><span class="p-icon">✓</span> 1,500 miles / month</li>
-          <li><span class="p-icon">✓</span> Full Maintenance & Tires</li>
+          <li><span class="p-icon">✓</span> Full Maintenance &amp; Tires</li>
           <li><span class="p-icon">✓</span> 4 Swaps / Year</li>
           <li><span class="p-icon">✓</span> Concierge Delivery</li>
         </ul>
-        <a href="register.html" class="btn btn-primary btn-full">Choose Premium</a>
+        <a href="register.html?plan=premium&term=1&price=1299" class="btn btn-primary btn-full plan-book-btn" data-plan="premium">Choose Premium</a>
+        <a href="fleet.html?type=luxury" style="display:block; text-align:center; margin-top:0.75rem; font-size:0.8rem; color:var(--color-primary); font-weight:600;">Explore Premium Luxury &amp; EVs &rarr;</a>
       </div>
 
       <!-- Performance -->
@@ -335,15 +700,83 @@
         <div class="p-price">$<span class="price-val" data-monthly="2499" data-annual="2129">2,499</span><span>/mo</span></div>
         <p class="text-muted" style="font-size:0.875rem;">For those who demand the thrill.</p>
         <ul class="p-features">
-          <li><span class="p-icon">✓</span> Sports & Performance</li>
+          <li><span class="p-icon">✓</span> Sports &amp; Performance</li>
           <li><span class="p-icon">✓</span> 1,000 miles / month</li>
           <li><span class="p-icon">✓</span> Premium Maintenance</li>
           <li><span class="p-icon">✓</span> Unlimited Swaps</li>
           <li><span class="p-icon">✓</span> Dedicated Account Manager</li>
         </ul>
-        <a href="register.html" class="btn btn-secondary btn-full">Choose Performance</a>
+        <a href="register.html?plan=performance&term=1&price=2499" class="btn btn-secondary btn-full plan-book-btn" data-plan="performance">Choose Performance</a>
+        <a href="fleet.html?type=performance" style="display:block; text-align:center; margin-top:0.75rem; font-size:0.8rem; color:var(--color-primary); font-weight:600;">Explore Sports &amp; Track Fleet &rarr;</a>
       </div>
-      
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: INTERACTIVE PLAN & CAR RECOMMENDER (3-QUESTION SELECTOR) -->
+  <section class="recommender-section">
+    <div class="container">
+      <div class="text-center fade-up" style="max-width: 700px; margin: 0 auto 3rem;">
+        <span class="eyebrow">Plan Selector Guide</span>
+        <h2 class="heading-lg">Not Sure Which Plan Fits Your Driving?</h2>
+        <p class="text-muted" style="margin-top: 0.75rem;">Answer 3 quick lifestyle questions to get an instant tailored plan and vehicle recommendation.</p>
+      </div>
+
+      <div class="quiz-card fade-up">
+        <div class="quiz-questions">
+          <!-- Step 1 -->
+          <div>
+            <div class="quiz-step-title">1. What is your primary driving situation?</div>
+            <div class="quiz-options-group" id="quizLifestyleGroup">
+              <button type="button" class="quiz-btn active" data-style="commute">🚗 City Commuter</button>
+              <button type="button" class="quiz-btn" data-style="family">🏔️ Family &amp; Road Trips</button>
+              <button type="button" class="quiz-btn" data-style="luxury">⚡ Executive &amp; EV Luxury</button>
+              <button type="button" class="quiz-btn" data-style="sport">🏎️ Weekend Sports Thrills</button>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div>
+            <div class="quiz-step-title">2. Preferred Commitment Flexibility?</div>
+            <div class="quiz-options-group" id="quizTermGroup">
+              <button type="button" class="quiz-btn" data-term="1">1-Month Ultra-Flex</button>
+              <button type="button" class="quiz-btn" data-term="6">6-Month Best Value</button>
+              <button type="button" class="quiz-btn active" data-term="12">12-Month Max Savings (15% Off)</button>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div>
+            <div class="quiz-step-title">3. Monthly Mileage Expected?</div>
+            <div class="quiz-options-group" id="quizMilesGroup">
+              <button type="button" class="quiz-btn active" data-miles="800">800 mi/mo (Standard)</button>
+              <button type="button" class="quiz-btn" data-miles="1200">1,200 mi/mo (Road Trips)</button>
+              <button type="button" class="quiz-btn" data-miles="1500">1,500+ mi/mo (High Commute)</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-result-box">
+          <span class="quiz-rec-badge">Recommended Match</span>
+          <h3 class="quiz-rec-plan" id="quizRecPlan">Essential Tier</h3>
+          <div class="quiz-rec-price" id="quizRecPrice">$599<span>/mo (12-mo plan)</span></div>
+          <p id="quizRecDesc" style="font-size:0.875rem; color:var(--color-text-muted); margin-bottom: 1.25rem;">
+            Perfect for urban commuting with compact sedans, 800 mi/mo, and $0 maintenance.
+          </p>
+
+          <div class="quiz-rec-cars-title">Top Vehicles Included in this Plan:</div>
+          <div class="quiz-rec-cars" id="quizRecCars">
+            <div>&bull; Mini Cooper S Hardtop ($599/mo)</div>
+            <div>&bull; Audi A3 Premium quattro ($699/mo)</div>
+            <div>&bull; Polestar 2 Dual Motor ($749/mo)</div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:0.5rem;">
+            <a href="register.html?plan=essential&term=12&price=599" id="quizRecApplyBtn" class="btn btn-primary btn-full">Choose this Plan &rarr;</a>
+            <a href="fleet.html?budget=under-800" id="quizRecFleetBtn" class="btn btn-secondary btn-full" style="font-size:0.825rem;">View Matching Fleet</a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -457,40 +890,40 @@
   </section>
 
   <!-- Section: Durations & Eligibility (Issues 6, 8) -->
-  <section style="padding: 6rem 0; background: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+  <section class="durations-eligibility-section" style="padding: 6rem 0; background: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
     <div class="container">
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;" class="comp-grid-custom">
-        <div class="fade-up">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;" class="comp-grid-custom durations-grid">
+        <div class="fade-up durations-left-col">
           <span class="eyebrow">Commitment Flexibility</span>
           <h2 class="heading-lg" style="margin-bottom: 1.5rem;">Subscription Durations & Lease Periods.</h2>
           <p class="text-muted" style="line-height: 1.7; margin-bottom: 1.5rem;">
             Whether you need a car for an extended summer getaway or a full two-year executive term, our subscription model scales around your exact timeframe.
           </p>
-          <ul style="list-style: none; padding: 0;">
-            <li style="display: flex; justify-content: space-between; padding: 0.85rem 0; border-bottom: 1px solid var(--color-border);">
-              <span>Minimum Lease Period:</span>
-              <strong style="color: var(--color-primary);">30 Days (1 Month)</strong>
+          <ul class="durations-list" style="list-style: none; padding: 0;">
+            <li class="durations-item" style="display: flex; justify-content: space-between; padding: 0.85rem 0; border-bottom: 1px solid var(--color-border);">
+              <span class="dur-label">Minimum Lease Period:</span>
+              <strong class="dur-val" style="color: var(--color-primary);">30 Days (1 Month)</strong>
             </li>
-            <li style="display: flex; justify-content: space-between; padding: 0.85rem 0; border-bottom: 1px solid var(--color-border);">
-              <span>Maximum Lease Period:</span>
-              <strong>24 Months (Auto-Rollover)</strong>
+            <li class="durations-item" style="display: flex; justify-content: space-between; padding: 0.85rem 0; border-bottom: 1px solid var(--color-border);">
+              <span class="dur-label">Maximum Lease Period:</span>
+              <strong class="dur-val">24 Months (Auto-Rollover)</strong>
             </li>
-            <li style="display: flex; justify-content: space-between; padding: 0.85rem 0; border-bottom: 1px solid var(--color-border);">
-              <span>Down Payment / Upfront Fee:</span>
-              <strong style="color: #10B981;">$0 Capital Down</strong>
+            <li class="durations-item" style="display: flex; justify-content: space-between; padding: 0.85rem 0; border-bottom: 1px solid var(--color-border);">
+              <span class="dur-label">Down Payment / Upfront Fee:</span>
+              <strong class="dur-val" style="color: #10B981;">$0 Capital Down</strong>
             </li>
-            <li style="display: flex; justify-content: space-between; padding: 0.85rem 0; border-bottom: 1px solid var(--color-border);">
-              <span>Notice to Cancel or Return:</span>
-              <strong>7 Calendar Days</strong>
+            <li class="durations-item" style="display: flex; justify-content: space-between; padding: 0.85rem 0; border-bottom: 1px solid var(--color-border);">
+              <span class="dur-label">Notice to Cancel or Return:</span>
+              <strong class="dur-val">7 Calendar Days</strong>
             </li>
-            <li style="display: flex; justify-content: space-between; padding: 0.85rem 0;">
-              <span>Mileage Options:</span>
-              <strong>1,000 to 1,500 mi/mo (Rollover)</strong>
+            <li class="durations-item" style="display: flex; justify-content: space-between; padding: 0.85rem 0;">
+              <span class="dur-label">Mileage Options:</span>
+              <strong class="dur-val">1,000 to 1,500 mi/mo (Rollover)</strong>
             </li>
           </ul>
         </div>
 
-        <div class="fade-up" style="background: var(--color-bg); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--color-border);">
+        <div class="fade-up eligibility-card" style="background: var(--color-bg); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--color-border);">
           <span class="eyebrow" style="color: var(--color-primary);">Fast 2-Min Approval</span>
           <h3 style="margin: 0.5rem 0 1.25rem;">Member Eligibility Checklist</h3>
           <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
@@ -600,7 +1033,13 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="assets/brand-mark.svg" alt="ORVEXA">
+          <a href="index.html" class="nav-logo" aria-label="ORVEXA Home" style="margin-bottom: 1.5rem; display: inline-flex;">
+            <img src="assets/images/website-logo.png" alt="ORVEXA Logo" class="brand-logo-img">
+            <span class="brand-text-wrap">
+              <span class="brand-logo-text">ORVEXA</span>
+              <span class="brand-logo-sub">CAR SUBSCRIPTION</span>
+            </span>
+          </a>
           <p>The premium car subscription service designed for modern flexibility. Drive more, commit less.</p>
           <div class="social-links">
             <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
@@ -649,14 +1088,26 @@
 
   <script src="assets/js/main.js"></script>
   <script>
-    // Pricing Toggle Logic
+    // Pricing Toggle & Recommender Logic
     document.addEventListener('DOMContentLoaded', () => {
       const toggleBtn = document.getElementById('billingToggle');
       const labelMonthly = document.getElementById('label-monthly');
       const labelAnnual = document.getElementById('label-annual');
       const priceVals = document.querySelectorAll('.price-val');
+      const planBookBtns = document.querySelectorAll('.plan-book-btn');
       
       let isAnnual = false;
+
+      function updatePlanBookLinks() {
+        planBookBtns.forEach(btn => {
+          const plan = btn.getAttribute('data-plan');
+          const term = isAnnual ? '12' : '1';
+          const card = btn.closest('.p-card');
+          const valEl = card ? card.querySelector('.price-val') : null;
+          const price = valEl ? (isAnnual ? valEl.getAttribute('data-annual') : valEl.getAttribute('data-monthly')) : '699';
+          btn.href = `register.html?plan=${encodeURIComponent(plan)}&term=${term}&price=${price}`;
+        });
+      }
 
       if (toggleBtn) {
         toggleBtn.addEventListener('click', () => {
@@ -676,6 +1127,7 @@
               p.textContent = p.getAttribute('data-monthly');
             });
           }
+          updatePlanBookLinks();
         });
       }
 
@@ -694,6 +1146,116 @@
           }
         });
       });
+
+      // 3-Question Plan Selector Recommender Logic
+      let quizState = {
+        style: 'commute',
+        term: '12',
+        miles: '800'
+      };
+
+      const quizRecPlan = document.getElementById('quizRecPlan');
+      const quizRecPrice = document.getElementById('quizRecPrice');
+      const quizRecDesc = document.getElementById('quizRecDesc');
+      const quizRecCars = document.getElementById('quizRecCars');
+      const quizRecApplyBtn = document.getElementById('quizRecApplyBtn');
+      const quizRecFleetBtn = document.getElementById('quizRecFleetBtn');
+
+      function calculateQuizRecommendation() {
+        if (!quizRecPlan) return;
+
+        let planName = 'Essential Tier';
+        let planKey = 'essential';
+        let baseMonthly = 699;
+        let annualMonthly = 599;
+        let sixMoMonthly = 649;
+        let desc = 'Optimal for urban commuting and city efficiency with compact sedans, zero down payment, and 100% covered routine service.';
+        let cars = [
+          '• Mini Cooper S Hardtop ($599/mo)',
+          '• Audi A3 Premium quattro ($699/mo)',
+          '• Polestar 2 Dual Motor ($749/mo)'
+        ];
+        let fleetQuery = 'budget=under-800';
+
+        if (quizState.style === 'sport') {
+          planName = 'Performance Tier';
+          planKey = 'performance';
+          baseMonthly = 2499;
+          annualMonthly = 2129;
+          sixMoMonthly = 2299;
+          desc = 'Tailored for sports car enthusiasts craving track-grade performance, unlimited swaps, and premium high-performance concierge support.';
+          cars = [
+            '• Porsche 911 Carrera ($2,499/mo)',
+            '• BMW M4 Competition Coupe ($2,199/mo)',
+            '• Mercedes-AMG C63 S Performance ($2,099/mo)'
+          ];
+          fleetQuery = 'type=performance';
+        } else if (quizState.style === 'luxury' || quizState.miles === '1500') {
+          planName = 'Premium Tier';
+          planKey = 'premium';
+          baseMonthly = 1299;
+          annualMonthly = 1099;
+          sixMoMonthly = 1199;
+          desc = 'Top-tier electric luxury and executive sedans featuring 1,500 miles/month, doorstep concierge handover, and up to 4 vehicle swaps yearly.';
+          cars = [
+            '• Porsche Taycan 4S Electric ($1,599/mo)',
+            '• BMW i4 eDrive40 Gran Coupe ($999/mo)',
+            '• Mercedes-Benz E-Class Sedan ($1,199/mo)'
+          ];
+          fleetQuery = 'type=luxury';
+        } else if (quizState.style === 'family' || quizState.miles === '1200') {
+          planName = 'Flex Tier';
+          planKey = 'flex';
+          baseMonthly = 899;
+          annualMonthly = 759;
+          sixMoMonthly = 829;
+          desc = 'Spacious all-wheel drive SUVs, extra cargo volume, 1,200 miles/month road trip headroom, and full tire replacement protection.';
+          cars = [
+            '• Volvo XC90 Recharge Plug-in ($1,149/mo)',
+            '• Tesla Model Y Long Range AWD ($899/mo)',
+            '• Genesis GV70 Electrified AWD ($1,049/mo)'
+          ];
+          fleetQuery = 'type=suv';
+        }
+
+        let chosenPrice = baseMonthly;
+        let termLabel = '1-mo flex';
+        if (quizState.term === '12') {
+          chosenPrice = annualMonthly;
+          termLabel = '12-mo plan (Save 15%)';
+        } else if (quizState.term === '6') {
+          chosenPrice = sixMoMonthly;
+          termLabel = '6-mo term';
+        }
+
+        quizRecPlan.textContent = planName;
+        quizRecPrice.innerHTML = `$${chosenPrice.toLocaleString()}<span>/mo (${termLabel})</span>`;
+        quizRecDesc.textContent = desc;
+
+        quizRecCars.innerHTML = cars.map(car => `<div>${car}</div>`).join('');
+        quizRecApplyBtn.href = `register.html?plan=${encodeURIComponent(planKey)}&term=${quizState.term}&price=${chosenPrice}`;
+        quizRecApplyBtn.textContent = `Choose ${planName} →`;
+        quizRecFleetBtn.href = `fleet.html?${fleetQuery}&duration=${quizState.term}`;
+        quizRecFleetBtn.textContent = `View Matching ${planName.replace(' Tier', '')} Fleet`;
+      }
+
+      function setupQuizGroup(groupId, stateKey) {
+        const group = document.getElementById(groupId);
+        if (!group) return;
+        const btns = group.querySelectorAll('.quiz-btn');
+        btns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            btns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            quizState[stateKey] = btn.getAttribute(`data-${stateKey}`);
+            calculateQuizRecommendation();
+          });
+        });
+      }
+
+      setupQuizGroup('quizLifestyleGroup', 'style');
+      setupQuizGroup('quizTermGroup', 'term');
+      setupQuizGroup('quizMilesGroup', 'miles');
     });
   </script>
 </body>

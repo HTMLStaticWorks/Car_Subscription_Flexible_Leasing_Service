@@ -6,7 +6,8 @@
   <title>Register</title>
   <meta name="description" content="Create your ORVEXA account to start your premium subscription.">
   <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" href="assets/images/website-logo.png">
+  <link rel="apple-touch-icon" href="assets/images/website-logo.png">
   <style>
     /* Reset body background for auth pages */
     body { background-color: var(--color-bg); margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
@@ -127,6 +128,84 @@
     }
     .divider:not(:empty)::before { margin-right: .5em; }
     .divider:not(:empty)::after { margin-left: .5em; }
+    .selected-sub-card {
+      background: linear-gradient(135deg, rgba(242,106,33,0.08) 0%, rgba(217,56,30,0.04) 100%);
+      border: 1px solid rgba(242,106,33,0.3);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+      display: none;
+      animation: fadeIn 0.4s ease-out;
+    }
+    .selected-sub-card.visible { display: block; }
+    .selected-sub-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: var(--color-primary);
+      color: #fff;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+    .selected-sub-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .selected-sub-name {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin: 0 0 0.25rem;
+    }
+    .selected-sub-meta {
+      font-size: 0.825rem;
+      color: var(--color-text-muted);
+    }
+    .selected-sub-price {
+      text-align: right;
+    }
+    .selected-sub-price strong {
+      font-size: 1.25rem;
+      color: var(--color-primary);
+      font-weight: 800;
+    }
+    .selected-sub-price span {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      display: block;
+    }
+    .selected-sub-perks {
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px dashed rgba(242,106,33,0.25);
+      font-size: 0.775rem;
+      color: var(--color-text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .selected-sub-perks span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      color: #10B981;
+      font-weight: 600;
+    }
+    .selected-sub-change {
+      color: var(--color-primary);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -138,11 +217,34 @@
     <div class="auth-form-wrapper">
       <div class="auth-card">
         <div style="text-align: center; margin-bottom: 2rem;">
-          <a href="index.html" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1rem; text-decoration: none;">
-            <img src="assets/brand-mark.svg" alt="ORVEXA Logo" style="height: 32px;">
+          <a href="index.html" class="nav-logo" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1.5rem; text-decoration: none;">
+            <img src="assets/images/website-logo.png" alt="ORVEXA Logo" class="brand-logo-img">
+            <span class="brand-text-wrap">
+              <span class="brand-logo-text">ORVEXA</span>
+              <span class="brand-logo-sub">CAR SUBSCRIPTION</span>
+            </span>
           </a>
-          <h1 class="auth-title">Create Account</h1>
-          <p class="auth-subtitle" style="margin-bottom:0;">Join ORVEXA and rethink your mobility.</p>
+          <h1 class="auth-title" id="authPageTitle">Create Account</h1>
+          <p class="auth-subtitle" id="authPageSubtitle" style="margin-bottom:0;">Join ORVEXA and rethink your mobility.</p>
+        </div>
+
+        <!-- Selected Vehicle & Subscription Summary Banner -->
+        <div class="selected-sub-card" id="selectedSubscriptionBanner">
+          <span class="selected-sub-badge" id="subBadgeText">Pre-Selected Subscription</span>
+          <div class="selected-sub-row">
+            <div>
+              <div class="selected-sub-name" id="subNameText">Vehicle / Plan Name</div>
+              <div class="selected-sub-meta" id="subMetaText">12-Month Plan • 1,200 mi/mo</div>
+            </div>
+            <div class="selected-sub-price">
+              <strong id="subPriceText">$699</strong>
+              <span>/ month ($0 down)</span>
+            </div>
+          </div>
+          <div class="selected-sub-perks">
+            <span>✓ Insurance, Maintenance &amp; 48h Delivery Included</span>
+            <a href="fleet.html" class="selected-sub-change" id="subChangeLink">Change Selection</a>
+          </div>
         </div>
 
         <form id="registerForm" onsubmit="event.preventDefault(); window.location.href='dashboard.html';">
@@ -178,7 +280,7 @@
             <span>I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a>.</span>
           </label>
 
-          <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+          <button type="submit" class="btn btn-primary btn-full" id="submitBtn">Create Account &amp; Proceed</button>
         </form>
 
         <div class="divider">or continue with</div>
@@ -200,5 +302,54 @@
   </div>
 
   <script src="assets/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const car = params.get('car');
+      const plan = params.get('plan');
+      const term = params.get('term') || '1';
+      const price = params.get('price');
+
+      const banner = document.getElementById('selectedSubscriptionBanner');
+      const badge = document.getElementById('subBadgeText');
+      const name = document.getElementById('subNameText');
+      const meta = document.getElementById('subMetaText');
+      const priceEl = document.getElementById('subPriceText');
+      const changeLink = document.getElementById('subChangeLink');
+      const authTitle = document.getElementById('authPageTitle');
+      const authSub = document.getElementById('authPageSubtitle');
+      const submitBtn = document.getElementById('submitBtn');
+
+      let termLabel = term === '1' ? '1-Month Ultra-Flex' :
+                       term === '3' ? '3-Month Plan (~8% discount)' :
+                       term === '6' ? '6-Month Best Value (~15% discount)' :
+                       term === '12' ? '12-Month Plan (~22% discount)' : `${term}-Month Commitment`;
+
+      if (car) {
+        banner.classList.add('visible');
+        badge.textContent = 'Selected Vehicle Reservation';
+        name.textContent = decodeURIComponent(car);
+        meta.textContent = `${termLabel} • Complimentary Swaps on 6+ mo`;
+        priceEl.textContent = price ? `$${parseInt(price, 10).toLocaleString()}` : 'Custom';
+        changeLink.href = 'fleet.html';
+        changeLink.textContent = 'Change Car';
+        authTitle.textContent = 'Reserve Your Vehicle';
+        authSub.textContent = 'Complete your profile to proceed to digital identity & driver verification.';
+        submitBtn.textContent = `Reserve ${decodeURIComponent(car)} →`;
+      } else if (plan) {
+        banner.classList.add('visible');
+        badge.textContent = 'Selected Subscription Tier';
+        const planName = plan.charAt(0).toUpperCase() + plan.slice(1);
+        name.textContent = `${planName} Tier`;
+        meta.textContent = `${termLabel} • 800 - 1,500 mi/mo included`;
+        priceEl.textContent = price ? `$${parseInt(price, 10).toLocaleString()}` : 'Custom';
+        changeLink.href = 'pricing.html';
+        changeLink.textContent = 'Change Plan';
+        authTitle.textContent = 'Activate Subscription';
+        authSub.textContent = 'Create your member credentials to configure your vehicle allocation.';
+        submitBtn.textContent = `Activate ${planName} Plan →`;
+      }
+    });
+  </script>
 </body>
 </html>

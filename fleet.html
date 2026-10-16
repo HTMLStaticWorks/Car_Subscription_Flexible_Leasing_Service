@@ -6,14 +6,24 @@
   <title>Subscription Fleet & Flexible Plans | ORVEXA Mobility</title>
   <meta name="description" content="Explore ORVEXA's curated subscription fleet. Drive premium sedans, luxury SUVs, and high-performance EVs with 1 to 24 month flexible terms, $0 down, full insurance, and zero maintenance.">
   <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" href="assets/images/website-logo.png">
+  <link rel="apple-touch-icon" href="assets/images/website-logo.png">
   <style>
+    /* Unified Hero Standard */
     .fleet-hero {
-      padding: 9rem 0 3.5rem;
-      background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-bg) 100%);
+      min-height: 450px;
+      padding: 9.5rem 0 4.5rem;
+      background-image: linear-gradient(180deg, rgba(15, 17, 21, 0.72) 0%, rgba(15, 17, 21, 0.88) 100%), url('assets/images/fleet.png');
+      background-size: cover;
+      background-position: center 40%;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
       border-bottom: 1px solid var(--color-border);
       position: relative;
+      box-sizing: border-box;
     }
     .fleet-hero .eyebrow {
       display: inline-block;
@@ -22,20 +32,51 @@
       letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--color-primary);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.85rem;
+    }
+    .fleet-hero h1 {
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: #FFFFFF;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+      margin-bottom: 1rem;
+      max-width: 850px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.18;
+    }
+    .fleet-hero p {
+      font-size: 1.1rem;
+      line-height: 1.65;
+      color: #E2E8F0;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.35);
+      max-width: 650px;
+      margin: 0 auto;
+    }
+    @media (max-width: 768px) {
+      .fleet-hero {
+        padding: 8rem 0 3.5rem;
+        min-height: 360px;
+      }
     }
 
-    /* Subscription Guide Banner */
+    /* Subscription Guide Banner - Positioned cleanly below hero */
     .sub-guide-banner {
       background: var(--color-surface);
       border: 1px solid var(--color-border);
       border-radius: 16px;
       padding: 2rem;
-      margin: -2rem auto 3rem;
+      margin: 2.5rem auto 2.5rem;
       max-width: 1200px;
-      box-shadow: var(--shadow-md);
+      box-shadow: var(--shadow-sm);
       position: relative;
-      z-index: 5;
+    }
+    @media (max-width: 768px) {
+      .sub-guide-banner {
+        margin: 1.5rem auto 1.5rem;
+        padding: 1.25rem;
+      }
     }
     .sub-guide-header {
       display: flex;
@@ -170,6 +211,88 @@
       border-color: var(--color-primary);
     }
 
+    .fleet-need-strip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1.25rem auto 1.5rem;
+      max-width: 900px;
+    }
+    .fleet-need-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-right: 0.35rem;
+    }
+    .fleet-need-chip {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      padding: 0.4rem 0.95rem;
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .fleet-need-chip:hover {
+      border-color: rgba(242, 106, 33, 0.5);
+      color: var(--color-primary);
+    }
+    .fleet-need-chip.active {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(242, 106, 33, 0.35);
+    }
+    .fleet-results-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 0.85rem 1.5rem;
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+      color: var(--color-text);
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .clear-filters-btn {
+      background: none;
+      border: none;
+      color: var(--color-primary);
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.85rem;
+      text-decoration: underline;
+    }
+    .no-results-box {
+      width: 100%;
+      text-align: center;
+      padding: 4rem 2rem;
+      background: var(--color-surface);
+      border: 1px dashed var(--color-border);
+      border-radius: 16px;
+      margin: 2rem 0;
+    }
+    .no-results-box h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .no-results-box p {
+      color: var(--color-text-muted);
+      margin-bottom: 1.5rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     .advanced-filters {
       display: flex;
       justify-content: center;
@@ -190,18 +313,20 @@
       font-size: 0.875rem;
     }
 
-    /* Vehicle Grid & Cards */
+    /* Vehicle Grid & Cards - Centered Alignment for 1, 2 or Any Number of Cards */
     .vehicle-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 2rem;
       margin-bottom: 6rem;
     }
-    @media (max-width: 450px) {
-      .vehicle-grid { grid-template-columns: 1fr; }
-    }
 
     .v-card {
+      flex: 0 1 360px;
+      width: 100%;
+      max-width: 370px;
+      min-width: 310px;
       background: var(--color-surface);
       border: 1px solid var(--color-border);
       border-radius: 16px;
@@ -210,6 +335,12 @@
       display: flex;
       flex-direction: column;
       position: relative;
+    }
+    @media (max-width: 450px) {
+      .v-card {
+        min-width: 100%;
+        max-width: 100%;
+      }
     }
     .v-card:hover {
       transform: translateY(-6px);
@@ -543,6 +674,120 @@
     @media (max-width: 900px) {
       .delivery-grid, .flex-cards-grid { grid-template-columns: 1fr; gap: 2rem; }
     }
+    @media (min-width: 576px) and (max-width: 768px) {
+      .vehicle-grid {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 1.5rem !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+      .v-card {
+        flex: 0 1 340px !important;
+        width: 100% !important;
+        max-width: 350px !important;
+        min-width: 290px !important;
+        box-sizing: border-box !important;
+      }
+      .v-card.last-orphan-card,
+      .vehicle-grid > .v-card:last-child:nth-child(odd) {
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+    }
+    @media (max-width: 768px) {
+      /* Mobile View: Duration Selector, Need Matcher & Filters - One by One Alignment */
+      .duration-control-bar {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        max-width: 440px !important;
+        border-radius: 20px !important;
+        padding: 1.25rem 1rem !important;
+        box-sizing: border-box !important;
+        margin: 1.5rem auto !important;
+      }
+      .duration-label {
+        margin-bottom: 0.75rem !important;
+        text-align: center !important;
+        font-size: 0.9rem !important;
+        padding: 0 !important;
+      }
+      .duration-btn-group {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        border-radius: 14px !important;
+        padding: 6px !important;
+        gap: 0.4rem !important;
+      }
+      .duration-pill {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        text-align: center !important;
+        justify-content: center !important;
+        padding: 0.7rem 1rem !important;
+        border-radius: 10px !important;
+        font-size: 0.875rem !important;
+      }
+
+      .fleet-need-strip {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        max-width: 440px !important;
+        gap: 0.5rem !important;
+        margin: 1.25rem auto 1.5rem !important;
+        box-sizing: border-box !important;
+        padding: 0 0.5rem !important;
+      }
+      .fleet-need-label {
+        margin-right: 0 !important;
+        margin-bottom: 0.35rem !important;
+        text-align: center !important;
+        font-size: 0.85rem !important;
+      }
+      .fleet-need-chip {
+        width: 100% !important;
+        max-width: 320px !important;
+        box-sizing: border-box !important;
+        text-align: center !important;
+        justify-content: center !important;
+        padding: 0.65rem 1rem !important;
+        border-radius: 25px !important;
+      }
+
+      .filter-bar {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+        width: 100% !important;
+        max-width: 440px !important;
+        margin: 1.25rem auto !important;
+        box-sizing: border-box !important;
+        padding: 0 0.5rem !important;
+      }
+      .filter-btn {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.85rem !important;
+      }
+
+      .scroll-to-top {
+        bottom: 1rem !important;
+        right: 1rem !important;
+        width: 38px !important;
+        height: 38px !important;
+        z-index: 90 !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -551,7 +796,11 @@
   <nav class="navbar" id="navbar">
     <div class="container nav-container">
       <a href="index.html" class="nav-logo" aria-label="ORVEXA Home">
-        <img src="assets/brand-mark.svg" alt="ORVEXA Logo" height="38">
+        <img src="assets/images/website-logo.png" alt="ORVEXA Logo" class="brand-logo-img">
+        <span class="brand-text-wrap">
+          <span class="brand-logo-text">ORVEXA</span>
+          <span class="brand-logo-sub">CAR SUBSCRIPTION</span>
+        </span>
       </a>
       <ul class="nav-links">
         <li class="nav-dropdown">
@@ -621,20 +870,20 @@
   <header class="fleet-hero fade-up">
     <div class="container">
       <span class="eyebrow">The Subscription Fleet</span>
-      <h1 class="heading-lg" style="margin-bottom: 1rem;">Choose Your Car.<br>Enjoy 100% Commitment-Free Driving.</h1>
-      <p class="text-muted" style="max-width: 650px; margin: 0 auto;">
+      <h1>Choose Your Car.<br>Enjoy 100% Commitment-Free Driving.</h1>
+      <p>
         No dealer negotiations, no depreciating assets, and $0 down. Every subscription bundles comprehensive insurance, zero maintenance, and seasonal vehicle swapping into a single monthly fee.
       </p>
     </div>
   </header>
 
-  <!-- SUBSCRIPTION GUIDE BANNER (Issues 4, 6, 8) -->
-  <div class="container">
+  <!-- SUBSCRIPTION GUIDE BANNER (Positioned cleanly below hero section) -->
+  <section class="container" aria-label="Available Subscription Durations & Flexibility Tiers">
     <div class="sub-guide-banner fade-up">
       <div class="sub-guide-header">
         <div class="sub-guide-title">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          Available Subscription Durations & Flexibility Tiers
+          Available Subscription Durations &amp; Flexibility Tiers
         </div>
         <div style="font-size: 0.85rem; color: var(--color-text-muted);">
           <strong>Min Lease Period:</strong> 30 Days (1 Month) &bull; <strong>Max Period:</strong> 24 Months
@@ -663,7 +912,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- INTERACTIVE DURATION PRICE SELECTOR & FILTERS -->
   <main class="container">
@@ -675,6 +924,17 @@
         <button class="duration-pill active" data-term="6">6 Months (Popular)</button>
         <button class="duration-pill" data-term="12">12+ Months (Save 15%)</button>
       </div>
+    </div>
+
+    <!-- Quick Lifestyle & Need-Based Matcher Strip -->
+    <div class="fleet-need-strip fade-up" id="fleetNeedStrip">
+      <span class="fleet-need-label">Match Need:</span>
+      <button type="button" class="fleet-need-chip active" data-need="all">All Fleet (18)</button>
+      <button type="button" class="fleet-need-chip" data-need="commute">🚗 Daily Commute (&lt;$800)</button>
+      <button type="button" class="fleet-need-chip" data-need="family">🏔️ Family &amp; AWD SUVs</button>
+      <button type="button" class="fleet-need-chip" data-need="ev">⚡ 100% Electric (EV)</button>
+      <button type="button" class="fleet-need-chip" data-need="executive">💼 Executive Luxury</button>
+      <button type="button" class="fleet-need-chip" data-need="sport">🏎️ Sports &amp; Track</button>
     </div>
 
     <!-- Category Filters -->
@@ -708,8 +968,23 @@
       </select>
     </div>
 
+    <!-- Results & Active Filter Summary -->
+    <div class="fleet-results-bar fade-up" id="fleetResultsBar">
+      <div>
+        Showing <strong id="resultsCount">18</strong> vehicles &bull; <span id="resultsDescription">All Categories &bull; 6-Month Commitment &bull; $0 Capital Down</span>
+      </div>
+      <button type="button" id="clearAllFiltersBtn" class="clear-filters-btn" style="display:none;">Clear Filters ✕</button>
+    </div>
+
     <!-- VEHICLE GRID (18 Curated Vehicles with Full Subscription Specs) -->
     <div class="vehicle-grid" id="vehicleGrid">
+
+      <!-- Empty Results State -->
+      <div id="noResultsState" class="no-results-box" style="display: none;">
+        <h3>No Exact Match for Selected Filters</h3>
+        <p>No vehicles match this specific combination of category, powertrain, and budget. Broaden your search or reset filters to browse all 18 subscription vehicles.</p>
+        <button type="button" class="btn btn-primary" id="resetFiltersEmptyBtn">Reset All Filters (View 18 Vehicles)</button>
+      </div>
 
       <!-- 1. BMW 5 Series -->
       <div class="v-card fade-up vehicle-item" data-category="all sedan luxury" data-price="800-1500" data-fuel="hybrid" data-transmission="auto"
@@ -1713,7 +1988,13 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="assets/brand-mark.svg" alt="ORVEXA" height="34">
+          <a href="index.html" class="nav-logo" aria-label="ORVEXA Home" style="margin-bottom: 1.5rem; display: inline-flex;">
+            <img src="assets/images/website-logo.png" alt="ORVEXA Logo" class="brand-logo-img">
+            <span class="brand-text-wrap">
+              <span class="brand-logo-text">ORVEXA</span>
+              <span class="brand-logo-sub">CAR SUBSCRIPTION</span>
+            </span>
+          </a>
           <p>The premium car subscription and flexible leasing service. Drive the world's finest vehicles on your terms.</p>
           <div class="social-links">
             <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
@@ -1927,59 +2208,220 @@
         if (e.target === modal) modal.classList.remove('active');
       });
 
-      // 5. Category & Advanced Filters
+      // 5. Category, Need & Advanced Filters Logic
       const filterBtns = document.querySelectorAll('.filter-btn');
+      const needChips = document.querySelectorAll('.fleet-need-chip');
       const priceFilter = document.getElementById('priceFilter');
       const fuelFilter = document.getElementById('fuelFilter');
       const transFilter = document.getElementById('transFilter');
+      const resultsCountEl = document.getElementById('resultsCount');
+      const resultsDescEl = document.getElementById('resultsDescription');
+      const clearAllBtn = document.getElementById('clearAllFiltersBtn');
+      const resetEmptyBtn = document.getElementById('resetFiltersEmptyBtn');
+      const noResultsBox = document.getElementById('noResultsState');
+
       let currentCategory = 'all';
+      let searchQuery = '';
 
       const filterVehicles = () => {
-        const priceVal = priceFilter.value;
-        const fuelVal = fuelFilter.value;
-        const transVal = transFilter.value;
+        const priceVal = priceFilter ? priceFilter.value : '';
+        const fuelVal = fuelFilter ? fuelFilter.value : '';
+        const transVal = transFilter ? transFilter.value : '';
+
+        let visibleCount = 0;
 
         vehicleItems.forEach(item => {
           const cat = item.dataset.category || '';
           const price = item.dataset.price || '';
           const fuel = item.dataset.fuel || '';
           const trans = item.dataset.transmission || '';
+          const name = (item.dataset.name || '').toLowerCase();
+          const brand = (item.querySelector('.v-brand')?.textContent || '').toLowerCase();
 
           let show = true;
           if (currentCategory !== 'all' && !cat.includes(currentCategory)) show = false;
           if (priceVal && price !== priceVal) show = false;
           if (fuelVal && fuel !== fuelVal) show = false;
           if (transVal && trans !== transVal) show = false;
+          if (searchQuery && !name.includes(searchQuery) && !brand.includes(searchQuery)) show = false;
 
           item.style.display = show ? 'flex' : 'none';
+          item.classList.remove('last-orphan-card');
+          if (show) visibleCount++;
         });
+
+        // Center odd trailing card in 2-column tablet layout
+        const visibleItems = Array.from(vehicleItems).filter(item => item.style.display !== 'none');
+        if (visibleItems.length % 2 === 1) {
+          visibleItems[visibleItems.length - 1].classList.add('last-orphan-card');
+        }
+
+        // Update count and active filter summary description
+        if (resultsCountEl) resultsCountEl.textContent = visibleCount;
+        if (noResultsBox) noResultsBox.style.display = visibleCount === 0 ? 'block' : 'none';
+
+        // Update description summary
+        let descParts = [];
+        if (currentCategory === 'all') descParts.push('All Fleet');
+        else descParts.push(currentCategory.toUpperCase());
+
+        let termNames = { '1': '1-Month Flex', '3': '3-Month Seasonal', '6': '6-Month Plan (Save 15%)', '12': '12–24 Month Plan (Save 22%)' };
+        descParts.push(termNames[currentTerm] || `${currentTerm}-Month Plan`);
+
+        if (priceVal === 'under-800') descParts.push('Under $800/mo');
+        else if (priceVal === '800-1500') descParts.push('$800–$1,500/mo');
+        else if (priceVal === 'over-1500') descParts.push('Over $1,500/mo');
+
+        if (fuelVal) descParts.push(fuelVal);
+        if (transVal) descParts.push(transVal);
+        if (searchQuery) descParts.push(`Search: "${searchQuery}"`);
+        descParts.push('$0 Capital Down');
+
+        if (resultsDescEl) resultsDescEl.textContent = descParts.join(' • ');
+
+        // Show/hide Clear button
+        const isFiltered = currentCategory !== 'all' || priceVal !== '' || fuelVal !== '' || transVal !== '' || searchQuery !== '';
+        if (clearAllBtn) clearAllBtn.style.display = isFiltered ? 'inline-block' : 'none';
       };
+
+      const resetAllFilters = () => {
+        currentCategory = 'all';
+        searchQuery = '';
+        if (priceFilter) priceFilter.value = '';
+        if (fuelFilter) fuelFilter.value = '';
+        if (transFilter) transFilter.value = '';
+
+        filterBtns.forEach(b => {
+          if (b.dataset.filter === 'all') b.classList.add('active');
+          else b.classList.remove('active');
+        });
+
+        needChips.forEach(c => {
+          if (c.dataset.need === 'all') c.classList.add('active');
+          else c.classList.remove('active');
+        });
+
+        filterVehicles();
+      };
+
+      if (clearAllBtn) clearAllBtn.addEventListener('click', resetAllFilters);
+      if (resetEmptyBtn) resetEmptyBtn.addEventListener('click', resetAllFilters);
+
+      // Need Chips interaction
+      needChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          needChips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          const need = chip.dataset.need;
+
+          if (need === 'all') {
+            currentCategory = 'all';
+            if (priceFilter) priceFilter.value = '';
+          } else if (need === 'commute') {
+            currentCategory = 'compact';
+            if (priceFilter) priceFilter.value = 'under-800';
+          } else if (need === 'family') {
+            currentCategory = 'suv';
+            if (priceFilter) priceFilter.value = '';
+          } else if (need === 'ev') {
+            currentCategory = 'electric';
+            if (priceFilter) priceFilter.value = '';
+          } else if (need === 'executive') {
+            currentCategory = 'luxury';
+            if (priceFilter) priceFilter.value = '';
+          } else if (need === 'sport') {
+            currentCategory = 'performance';
+            if (priceFilter) priceFilter.value = '';
+          }
+
+          // Sync category button
+          filterBtns.forEach(b => {
+            if (b.dataset.filter === currentCategory) b.classList.add('active');
+            else b.classList.remove('active');
+          });
+
+          filterVehicles();
+        });
+      });
 
       filterBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
           filterBtns.forEach(b => b.classList.remove('active'));
           e.target.classList.add('active');
           currentCategory = e.target.dataset.filter || 'all';
+
+          // Reset need chip if manually selecting category
+          needChips.forEach(c => {
+            if (c.dataset.need === 'all') c.classList.add('active');
+            else c.classList.remove('active');
+          });
+
           filterVehicles();
         });
       });
 
-      priceFilter.addEventListener('change', filterVehicles);
-      fuelFilter.addEventListener('change', filterVehicles);
-      transFilter.addEventListener('change', filterVehicles);
+      if (priceFilter) priceFilter.addEventListener('change', filterVehicles);
+      if (fuelFilter) fuelFilter.addEventListener('change', filterVehicles);
+      if (transFilter) transFilter.addEventListener('change', filterVehicles);
 
-      // Support URL query parameters (e.g. ?type=sedan, ?type=suv, ?type=electric, ?type=performance)
+      // 6. Comprehensive URL Query Parameter Support
+      // ?type=sedan|suv|electric|performance|compact|luxury|all
+      // ?duration=1|3|6|12
+      // ?budget=under-800|800-1500|over-1500|all
+      // ?need=commute|family|ev|executive|sport
+      // ?search=BMW|Tesla|Velar|...
       const urlParams = new URLSearchParams(window.location.search);
+      
+      const durationParam = urlParams.get('duration');
+      if (durationParam && ['1', '3', '6', '12'].includes(durationParam)) {
+        updateCardPrices(durationParam);
+      }
+
+      const budgetParam = urlParams.get('budget');
+      if (budgetParam && priceFilter) {
+        if (budgetParam === 'under-800' || budgetParam === '800-1500' || budgetParam === 'over-1500') {
+          priceFilter.value = budgetParam;
+        }
+      }
+
+      const searchParam = urlParams.get('search');
+      if (searchParam) {
+        searchQuery = searchParam.toLowerCase().trim();
+      }
+
+      const needParam = urlParams.get('need');
+      if (needParam) {
+        const matchingNeedChip = document.querySelector(`.fleet-need-chip[data-need="${needParam}"]`);
+        if (matchingNeedChip) {
+          needChips.forEach(c => c.classList.remove('active'));
+          matchingNeedChip.classList.add('active');
+          if (needParam === 'commute') {
+            currentCategory = 'compact';
+            if (priceFilter && !budgetParam) priceFilter.value = 'under-800';
+          } else if (needParam === 'family') {
+            currentCategory = 'suv';
+          } else if (needParam === 'ev') {
+            currentCategory = 'electric';
+          } else if (needParam === 'executive') {
+            currentCategory = 'luxury';
+          } else if (needParam === 'sport') {
+            currentCategory = 'performance';
+          }
+        }
+      }
+
       const typeParam = urlParams.get('type');
-      if (typeParam) {
+      if (typeParam && typeParam !== 'all') {
         const matchingBtn = document.querySelector(`.filter-btn[data-filter="${typeParam}"]`);
         if (matchingBtn) {
           filterBtns.forEach(b => b.classList.remove('active'));
           matchingBtn.classList.add('active');
           currentCategory = typeParam;
-          filterVehicles();
         }
       }
+
+      // Initial filter execution with URL parameters applied
+      filterVehicles();
     });
   </script>
 </body>

@@ -1,43 +1,128 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 110" fill="none" width="520" height="110">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 92" fill="none" width="460" height="92">
   <defs>
-    <linearGradient id="orvexa-accent-dark" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FF8A3D" />
-      <stop offset="100%" stop-color="#F26A21" />
+    <!-- Luminous Automotive Orange Gradients for Dark Mode -->
+    <linearGradient id="bm-org-body-dark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFA020" />
+      <stop offset="25%" stop-color="#FF6A00" />
+      <stop offset="70%" stop-color="#F25000" />
+      <stop offset="100%" stop-color="#D93800" />
     </linearGradient>
-    <linearGradient id="orvexa-accent-subtle-dark" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#F26A21" stop-opacity="0.9" />
-      <stop offset="100%" stop-color="#FF8A3D" stop-opacity="0.2" />
+    <linearGradient id="bm-org-arrow-dark" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E04000" />
+      <stop offset="40%" stop-color="#FF6A00" />
+      <stop offset="85%" stop-color="#FFA228" />
+      <stop offset="100%" stop-color="#FFBF50" />
+    </linearGradient>
+    <linearGradient id="bm-org-key-dark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF8E00" />
+      <stop offset="60%" stop-color="#FF5700" />
+      <stop offset="100%" stop-color="#D93800" />
     </linearGradient>
   </defs>
 
-  <!-- Emblem: Aerodynamic Car Silhouette + Continuous Subscription Loop -->
-  <g transform="translate(8, 12)">
-    <!-- Outer Mobility Ring / Loop -->
-    <path d="M 44 14 C 64 14 80 30 80 48 C 80 62 70 74 56 79 L 52 71 C 62 67 69 58 69 48 C 69 35 58 24 44 24 C 34 24 25 30 21 39 L 12 35 C 18 22 30 14 44 14 Z" fill="url(#orvexa-accent-dark)" />
-    
-    <!-- Aerodynamic Fastback Car Roofline & Bonnet flowing into loop -->
-    <path d="M 6 62 C 14 62 22 56 26 48 L 34 32 C 37 26 43 22 50 22 L 62 22 C 70 22 76 28 77 36 L 82 54 C 84 62 80 70 72 74 C 66 77 58 78 50 78 L 18 78 C 10 78 4 72 4 64 Z" fill="#FFFFFF" opacity="0.95" />
-    
-    <!-- Speed Wing Cutout / Dynamic Window & Subscription Cycle Arrow -->
-    <path d="M 33 42 L 48 30 L 60 30 L 64 42 Z" fill="#181818" />
-    <path d="M 38 48 L 66 48 C 68 48 70 50 70 52 C 70 54 68 56 66 56 L 38 56 C 36 56 34 54 34 52 C 34 50 36 48 38 48 Z" fill="url(#orvexa-accent-dark)" />
-    
-    <!-- Wheels as precision metallic loop nodes -->
-    <circle cx="24" cy="74" r="10" fill="#181818" stroke="#FFFFFF" stroke-width="3" />
-    <circle cx="24" cy="74" r="4" fill="url(#orvexa-accent-dark)" />
-    <circle cx="66" cy="74" r="10" fill="#181818" stroke="#FFFFFF" stroke-width="3" />
-    <circle cx="66" cy="74" r="4" fill="url(#orvexa-accent-dark)" />
+  <!-- SVG Logo Model: Sports Car + Key Fob + Padlock + Circular Arrow (Kept BEFORE the website name) -->
+  <g transform="translate(4, 3) scale(0.172)">
+    <!-- 1. Circular Sweeping Arrow (Arching over car) -->
+    <path d="M 85 305
+             C 70 232 86 150 142 102
+             C 194 55 268 48 332 74
+             L 312 110
+             L 374 165
+             L 352 74
+             L 332 108
+             C 274 78 206 86 160 130
+             C 112 176 100 240 114 300
+             Z"
+          fill="url(#bm-org-arrow-dark)" />
+
+    <!-- 2. Lower S-Loop Road Ribbon -->
+    <path d="M 85 305
+             C 74 365 106 430 166 456
+             C 226 482 298 474 348 432
+             C 388 398 392 355 356 336
+             C 322 318 266 332 242 344
+             C 285 342 334 336 352 355
+             C 374 378 358 412 320 435
+             C 272 464 204 466 150 436
+             C 106 412 85 365 85 305 Z"
+          fill="url(#bm-org-body-dark)" />
+
+    <!-- Solid White Crescent Accent along Lower Loop -->
+    <path d="M 180 432
+             C 236 452 296 444 340 405
+             C 362 386 362 368 344 358
+             C 326 348 290 354 262 362
+             C 292 358 330 356 342 370
+             C 356 386 344 406 315 422
+             C 268 448 214 446 180 432 Z"
+          fill="#FFFFFF" />
+
+    <!-- 3. The Sports Car Body -->
+    <path d="M 106 238
+             C 116 198 154 162 206 156
+             C 256 150 314 182 368 222
+             C 384 234 392 248 386 260
+             C 380 272 358 282 336 288
+             C 292 298 238 294 192 288
+             C 152 282 120 265 106 238 Z"
+          fill="url(#bm-org-body-dark)" />
+
+    <!-- Solid White Cabin Windows -->
+    <path d="M 152 206 C 168 180 198 174 204 174 L 204 206 Z" fill="#FFFFFF" />
+    <path d="M 214 174 C 248 174 288 188 314 206 L 214 206 Z" fill="#FFFFFF" />
+    <path d="M 172 170 C 206 160 252 160 292 178" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" fill="none" />
+
+    <!-- Solid White Headlights (LED Slit) -->
+    <path d="M 264 236 L 332 246 L 302 256 L 258 246 Z" fill="#FFFFFF" />
+
+    <!-- Solid White Grille Bars -->
+    <path d="M 324 260 L 372 262" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+    <path d="M 318 270 L 366 272" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+    <path d="M 334 279 L 360 280" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+
+    <!-- Muscular Rear Wheel Arch & White Wheel Ring -->
+    <path d="M 104 246 C 104 220 134 220 138 248 L 138 276 C 126 278 104 272 104 246 Z" fill="#FFFFFF" />
+    <ellipse cx="124" cy="264" rx="10" ry="16" fill="url(#bm-org-body-dark)" />
+
+    <!-- Muscular Front Wheel Arch & White Wheel Ring -->
+    <path d="M 206 238 C 210 210 254 210 258 242 L 258 288 C 240 290 206 280 206 238 Z" fill="#FFFFFF" />
+    <ellipse cx="236" cy="272" rx="13" ry="20" fill="url(#bm-org-body-dark)" />
+
+    <!-- Aerodynamic Lower Rocker / Contour (White) -->
+    <path d="M 138 272 C 160 274 186 270 206 262" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" fill="none" />
+    <path d="M 258 278 C 288 282 328 280 354 274" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" fill="none" />
+
+    <!-- 4. The Car Key Fob & Key Blade -->
+    <g transform="translate(140, 290) rotate(-22)">
+      <rect x="0" y="20" width="115" height="65" rx="30" fill="url(#bm-org-key-dark)" stroke="#FFFFFF" stroke-width="7" />
+      <rect x="8" y="28" width="99" height="49" rx="22" fill="none" stroke="#FFFFFF" stroke-width="2.5" opacity="0.9" />
+
+      <!-- Centered Padlock Symbol -->
+      <path d="M 50 44 C 50 34 65 34 65 44 L 65 49 L 50 49 Z" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" />
+      <rect x="43" y="49" width="29" height="21" rx="4.5" fill="#FFFFFF" />
+      <circle cx="57.5" cy="58" r="2.5" fill="#D93800" />
+      <path d="M 57.5 58 L 57.5 64" stroke="#D93800" stroke-width="2.2" stroke-linecap="round" />
+
+      <!-- Key Blade -->
+      <path d="M 115 44
+               L 190 44
+               L 204 58
+               L 186 58
+               L 174 68
+               L 160 58
+               L 148 68
+               L 134 58
+               L 115 58 Z"
+            fill="url(#bm-org-key-dark)" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" />
+      <line x1="120" y1="51" x2="182" y2="51" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+    </g>
   </g>
 
-  <!-- Brand Typography -->
-  <g transform="translate(112, 0)">
-    <!-- Primary Logotype -->
-    <text x="0" y="62" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif" font-size="54" font-weight="800" letter-spacing="3" fill="#FFFFFF">ORVEXA</text>
-    
-    <!-- Tagline: subscription badge & descriptor -->
-    <rect x="1" y="74" width="388" height="2" fill="url(#orvexa-accent-subtle-dark)" />
-    <text x="1" y="93" font-family="'Inter', -apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700" letter-spacing="3.8" fill="#F26A21">CAR SUBSCRIPTION</text>
-    <circle cx="198" cy="89" r="2.5" fill="#FFFFFF" opacity="0.5" />
-    <text x="210" y="93" font-family="'Inter', -apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" letter-spacing="3.8" fill="#D0D0D0">FLEXIBLE LEASING</text>
+  <!-- Website Name in White for Dark Mode (Kept intact, logo positioned right before it) -->
+  <g transform="translate(100, 0)">
+    <text x="0" y="55" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif" font-size="46" font-weight="700" letter-spacing="2.5" fill="#FFFFFF">ORVEXA</text>
+    <text x="2" y="75" font-family="'Inter', -apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="600" letter-spacing="3" fill="#F26A21">CAR SUBSCRIPTION</text>
+    <circle cx="146" cy="72" r="2" fill="#FFFFFF" opacity="0.4" />
+    <text x="156" y="75" font-family="'Inter', -apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="500" letter-spacing="3" fill="#D0D0D0">FLEXIBLE LEASING</text>
   </g>
 </svg>

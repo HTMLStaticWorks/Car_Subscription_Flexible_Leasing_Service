@@ -5,10 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
   const updateLogos = (theme) => {
-    const logos = document.querySelectorAll('.nav-logo img, .footer-brand img');
+    const isDark = theme === 'dark';
+    const logos = document.querySelectorAll('.brand-logo-img, .nav-logo img, .footer-brand img, .sidebar-header img, img[src*="website-logo"], img[src*="brand-mark"]');
     logos.forEach(img => {
-      const isDark = theme === 'dark';
-      img.src = isDark ? 'assets/brand-mark-dark.svg' : 'assets/brand-mark.svg';
+      img.src = isDark ? 'assets/images/website-logo-dark.png' : 'assets/images/website-logo.png';
     });
   };
   

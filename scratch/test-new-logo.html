@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Refined Car + Key Logo in Orange SVG</title>
+  <style>
+    body {
+      background: #0f1115;
+      color: #fff;
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      align-items: center;
+    }
+    .preview-card {
+      padding: 30px 45px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .preview-light {
+      background: #F5F2ED;
+      color: #111;
+      border: 1px solid #D8D4CE;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .preview-dark {
+      background: #181818;
+      color: #fff;
+      border: 1px solid #2a2a2a;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .brand-title {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      line-height: 1;
+    }
+    .brand-sub {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3.5px;
+      color: #F26A21;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>ORVEXA Logo: Sports Car + Key Fob + Arrow (Orange SVG Model)</h2>
+
+  <!-- LIGHT MODE PREVIEW -->
+  <div class="preview-card preview-light">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="85" height="85" fill="none">
+      <defs>
+        <linearGradient id="org-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FFA126" />
+          <stop offset="35%" stop-color="#FF6A00" />
+          <stop offset="80%" stop-color="#F25000" />
+          <stop offset="100%" stop-color="#D43800" />
+        </linearGradient>
+        <linearGradient id="org-arrow" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#E04000" />
+          <stop offset="45%" stop-color="#FF6A00" />
+          <stop offset="90%" stop-color="#FFA82E" />
+          <stop offset="100%" stop-color="#FFBE54" />
+        </linearGradient>
+      </defs>
+
+      <!-- 1. Circular Swooping Arrow (Arching clockwise over the car) -->
+      <!-- Curves from lower-left (85, 305) up around (80, 160), over (250, 60), to arrowhead at (355, 175) -->
+      <path d="M 85 305
+               C 72 235 88 155 142 105
+               C 192 58 266 50 330 75
+               L 312 110
+               L 372 165
+               L 352 75
+               L 332 108
+               C 274 78 206 86 160 130
+               C 114 175 102 240 115 300
+               Z"
+            fill="url(#org-arrow)" />
+
+      <!-- 2. Bottom Wave / S-Loop Road Ribbon -->
+      <!-- Curves under the key, around to the bottom right, and swoops back along the bottom to the left -->
+      <path d="M 85 305
+               C 74 365 106 430 166 456
+               C 226 482 298 474 348 432
+               C 388 398 392 355 356 336
+               C 322 318 266 332 242 344
+               C 285 342 334 336 352 355
+               C 374 378 358 412 320 435
+               C 272 464 204 466 150 436
+               C 106 412 85 365 85 305 Z"
+            fill="url(#org-grad)" />
+
+      <!-- Inner White Crescent Accent of the Bottom Wave Loop -->
+      <path d="M 180 432
+               C 236 452 296 444 340 405
+               C 362 386 362 368 344 358
+               C 326 348 290 354 262 362
+               C 292 358 330 356 342 370
+               C 356 386 344 406 315 422
+               C 268 448 214 446 180 432 Z"
+            fill="#FFFFFF" opacity="0.95" />
+
+      <!-- 3. The Sports Car (Coupe Silhouette facing 3/4 right) -->
+      <!-- Main Car Body in Orange Gradient -->
+      <path d="M 108 238
+               C 118 198 156 162 208 156
+               C 258 150 314 182 368 222
+               C 384 234 392 248 386 260
+               C 380 272 358 282 336 288
+               C 292 298 238 294 192 288
+               C 152 282 122 265 108 238 Z"
+            fill="url(#org-grad)" />
+
+      <!-- Cabin Roofline & Window Cutouts (White) -->
+      <!-- Rear Side Window -->
+      <path d="M 152 206 C 168 180 198 174 204 174 L 204 206 Z" fill="#FFFFFF" />
+      <!-- Front Windshield & Side Window -->
+      <path d="M 214 174 C 248 174 288 188 314 206 L 214 206 Z" fill="#FFFFFF" />
+      <!-- Top Roof Arc Highlight (White) -->
+      <path d="M 172 170 C 206 160 252 160 292 178" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" fill="none" />
+
+      <!-- Headlight LED Slit (White Cutout) -->
+      <path d="M 264 236 L 332 246 L 302 256 L 258 246 Z" fill="#FFFFFF" />
+
+      <!-- Front Grille Horizontal Slits (White Cutout) -->
+      <path d="M 324 260 L 372 262" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+      <path d="M 318 270 L 366 272" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+      <path d="M 334 279 L 360 280" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+
+      <!-- Muscular Rear Wheel Arch & Wheel Hollow (White) -->
+      <path d="M 104 246 C 104 220 134 220 138 248 L 138 276 C 126 278 104 272 104 246 Z" fill="#FFFFFF" />
+      <ellipse cx="124" cy="264" rx="11" ry="18" fill="url(#org-grad)" />
+
+      <!-- Muscular Front Wheel Arch & Wheel Hollow (White) -->
+      <path d="M 206 238 C 210 210 254 210 258 242 L 258 288 C 240 290 206 280 206 238 Z" fill="#FFFFFF" />
+      <ellipse cx="236" cy="272" rx="14" ry="22" fill="url(#org-grad)" />
+
+      <!-- Underbody Aerodynamic Contour Line (White) -->
+      <path d="M 138 272 C 160 274 186 270 206 262" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" fill="none" />
+      <path d="M 258 278 C 288 282 328 280 354 274" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" fill="none" />
+
+      <!-- 4. The Car Key Fob & Key Blade (Tilted at -22 degrees under the car) -->
+      <g transform="translate(140, 290) rotate(-22)">
+        <!-- Key Fob Outer Housing -->
+        <rect x="0" y="20" width="115" height="65" rx="30" fill="url(#org-grad)" stroke="#FFFFFF" stroke-width="6" />
+
+        <!-- Inner Inset Frame Line on Fob (White) -->
+        <rect x="8" y="28" width="99" height="49" rx="22" fill="none" stroke="#FFFFFF" stroke-width="2.5" opacity="0.85" />
+
+        <!-- Padlock Icon Centered on Fob (White) -->
+        <!-- Shackle -->
+        <path d="M 50 44 C 50 34 65 34 65 44 L 65 49 L 50 49 Z" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+        <!-- Lock Body -->
+        <rect x="44" y="49" width="27" height="20" rx="4.5" fill="#FFFFFF" />
+        <!-- Keyhole -->
+        <circle cx="57.5" cy="57" r="2.2" fill="#E65100" />
+        <path d="M 57.5 57 L 57.5 63" stroke="#E65100" stroke-width="2" stroke-linecap="round" />
+
+        <!-- Key Blade Extends to the Right -->
+        <path d="M 115 44
+                 L 190 44
+                 L 204 58
+                 L 186 58
+                 L 174 68
+                 L 160 58
+                 L 148 68
+                 L 134 58
+                 L 115 58 Z"
+              fill="url(#org-grad)" stroke="#FFFFFF" stroke-width="4.5" stroke-linejoin="round" />
+        <!-- Center Blade Groove Line (White) -->
+        <line x1="120" y1="51" x2="182" y2="51" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" />
+      </g>
+    </svg>
+
+    <div>
+      <div class="brand-title">ORVEXA</div>
+      <div class="brand-sub">CAR SUBSCRIPTION • FLEXIBLE LEASING</div>
+    </div>
+  </div>
+
+  <!-- DARK MODE PREVIEW -->
+  <div class="preview-card preview-dark">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="85" height="85" fill="none">
+      <defs>
+        <linearGradient id="org-grad-dark" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FFA126" />
+          <stop offset="35%" stop-color="#FF6A00" />
+          <stop offset="80%" stop-color="#F25000" />
+          <stop offset="100%" stop-color="#D43800" />
+        </linearGradient>
+        <linearGradient id="org-arrow-dark" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#E04000" />
+          <stop offset="45%" stop-color="#FF6A00" />
+          <stop offset="90%" stop-color="#FFA82E" />
+          <stop offset="100%" stop-color="#FFBE54" />
+        </linearGradient>
+      </defs>
+
+      <!-- 1. Circular Swooping Arrow -->
+      <path d="M 85 305
+               C 72 235 88 155 142 105
+               C 192 58 266 50 330 75
+               L 312 110
+               L 372 165
+               L 352 75
+               L 332 108
+               C 274 78 206 86 160 130
+               C 114 175 102 240 115 300
+               Z"
+            fill="url(#org-arrow-dark)" />
+
+      <!-- 2. Bottom Wave / S-Loop Road Ribbon -->
+      <path d="M 85 305
+               C 74 365 106 430 166 456
+               C 226 482 298 474 348 432
+               C 388 398 392 355 356 336
+               C 322 318 266 332 242 344
+               C 285 342 334 336 352 355
+               C 374 378 358 412 320 435
+               C 272 464 204 466 150 436
+               C 106 412 85 365 85 305 Z"
+            fill="url(#org-grad-dark)" />
+
+      <!-- Inner White Crescent Accent of the Bottom Wave Loop -->
+      <path d="M 180 432
+               C 236 452 296 444 340 405
+               C 362 386 362 368 344 358
+               C 326 348 290 354 262 362
+               C 292 358 330 356 342 370
+               C 356 386 344 406 315 422
+               C 268 448 214 446 180 432 Z"
+            fill="#FFFFFF" opacity="0.95" />
+
+      <!-- 3. The Sports Car -->
+      <path d="M 108 238
+               C 118 198 156 162 208 156
+               C 258 150 314 182 368 222
+               C 384 234 392 248 386 260
+               C 380 272 358 282 336 288
+               C 292 298 238 294 192 288
+               C 152 282 122 265 108 238 Z"
+            fill="url(#org-grad-dark)" />
+
+      <!-- Cabin Roofline & Window Cutouts -->
+      <path d="M 152 206 C 168 180 198 174 204 174 L 204 206 Z" fill="#FFFFFF" />
+      <path d="M 214 174 C 248 174 288 188 314 206 L 214 206 Z" fill="#FFFFFF" />
+      <path d="M 172 170 C 206 160 252 160 292 178" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" fill="none" />
+
+      <!-- Headlight LED Slit -->
+      <path d="M 264 236 L 332 246 L 302 256 L 258 246 Z" fill="#FFFFFF" />
+
+      <!-- Front Grille Horizontal Slits -->
+      <path d="M 324 260 L 372 262" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+      <path d="M 318 270 L 366 272" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+      <path d="M 334 279 L 360 280" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+
+      <!-- Rear Wheel Arch & Hollow -->
+      <path d="M 104 246 C 104 220 134 220 138 248 L 138 276 C 126 278 104 272 104 246 Z" fill="#FFFFFF" />
+      <ellipse cx="124" cy="264" rx="11" ry="18" fill="url(#org-grad-dark)" />
+
+      <!-- Front Wheel Arch & Hollow -->
+      <path d="M 206 238 C 210 210 254 210 258 242 L 258 288 C 240 290 206 280 206 238 Z" fill="#FFFFFF" />
+      <ellipse cx="236" cy="272" rx="14" ry="22" fill="url(#org-grad-dark)" />
+
+      <!-- Underbody Aerodynamic Contour Line -->
+      <path d="M 138 272 C 160 274 186 270 206 262" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" fill="none" />
+      <path d="M 258 278 C 288 282 328 280 354 274" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" fill="none" />
+
+      <!-- 4. The Car Key Fob & Key Blade -->
+      <g transform="translate(140, 290) rotate(-22)">
+        <rect x="0" y="20" width="115" height="65" rx="30" fill="url(#org-grad-dark)" stroke="#FFFFFF" stroke-width="6" />
+        <rect x="8" y="28" width="99" height="49" rx="22" fill="none" stroke="#FFFFFF" stroke-width="2.5" opacity="0.85" />
+        <path d="M 50 44 C 50 34 65 34 65 44 L 65 49 L 50 49 Z" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+        <rect x="44" y="49" width="27" height="20" rx="4.5" fill="#FFFFFF" />
+        <circle cx="57.5" cy="57" r="2.2" fill="#E65100" />
+        <path d="M 57.5 57 L 57.5 63" stroke="#E65100" stroke-width="2" stroke-linecap="round" />
+
+        <path d="M 115 44
+                 L 190 44
+                 L 204 58
+                 L 186 58
+                 L 174 68
+                 L 160 58
+                 L 148 68
+                 L 134 58
+                 L 115 58 Z"
+              fill="url(#org-grad-dark)" stroke="#FFFFFF" stroke-width="4.5" stroke-linejoin="round" />
+        <line x1="120" y1="51" x2="182" y2="51" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" />
+      </g>
+    </svg>
+
+    <div>
+      <div class="brand-title">ORVEXA</div>
+      <div class="brand-sub">CAR SUBSCRIPTION • FLEXIBLE LEASING</div>
+    </div>
+  </div>
+
+</body>
+</html>
