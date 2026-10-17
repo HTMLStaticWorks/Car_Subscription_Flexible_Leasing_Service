@@ -114,6 +114,8 @@
       padding: 3rem 2rem;
       display: flex;
       flex-direction: column;
+      height: 100%;
+      box-sizing: border-box;
       transition: transform var(--transition-normal), box-shadow var(--transition-normal);
     }
     .p-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
@@ -154,6 +156,33 @@
     }
     .p-features li:last-child { border-bottom: none; }
     .p-icon { color: var(--color-primary); }
+
+    .p-card-action {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .p-card-action .plan-book-btn {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
+    .plan-sub-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--color-primary);
+      font-weight: 600;
+      min-height: 2.2rem;
+      line-height: 1.3;
+      text-decoration: none;
+    }
+    .plan-sub-link:hover {
+      text-decoration: underline;
+    }
 
         .included-grid {
       display: grid;
@@ -657,8 +686,10 @@
           <li><span style="color:var(--color-text-muted); margin-right: 0.5rem;">✕</span> <span style="color:var(--color-text-muted);">Vehicle Swaps</span></li>
           <li><span class="p-icon">✓</span> Standard Support</li>
         </ul>
-        <a href="register.html?plan=essential&term=1&price=699" class="btn btn-secondary btn-full plan-book-btn" data-plan="essential">Choose Essential</a>
-        <a href="fleet.html?budget=under-800" style="display:block; text-align:center; margin-top:0.75rem; font-size:0.8rem; color:var(--color-primary); font-weight:600;">Explore Essential Vehicles (from $599) &rarr;</a>
+        <div class="p-card-action">
+          <a href="register.html?plan=essential&term=1&price=699" class="btn btn-secondary btn-full plan-book-btn" data-plan="essential">Choose Essential</a>
+          <a href="fleet.html?budget=under-800" class="plan-sub-link">Explore Essential Vehicles &rarr;</a>
+        </div>
       </div>
 
       <!-- Flex -->
@@ -673,8 +704,10 @@
           <li><span class="p-icon">✓</span> 1 Swap / Year</li>
           <li><span class="p-icon">✓</span> Priority Support</li>
         </ul>
-        <a href="register.html?plan=flex&term=1&price=899" class="btn btn-secondary btn-full plan-book-btn" data-plan="flex">Choose Flex</a>
-        <a href="fleet.html?type=suv&budget=800-1500" style="display:block; text-align:center; margin-top:0.75rem; font-size:0.8rem; color:var(--color-primary); font-weight:600;">Explore Flex SUVs &amp; Crossovers &rarr;</a>
+        <div class="p-card-action">
+          <a href="register.html?plan=flex&term=1&price=899" class="btn btn-secondary btn-full plan-book-btn" data-plan="flex">Choose Flex</a>
+          <a href="fleet.html?type=suv&budget=800-1500" class="plan-sub-link">Explore Flex SUVs &amp; Crossovers &rarr;</a>
+        </div>
       </div>
 
       <!-- Premium -->
@@ -690,8 +723,10 @@
           <li><span class="p-icon">✓</span> 4 Swaps / Year</li>
           <li><span class="p-icon">✓</span> Concierge Delivery</li>
         </ul>
-        <a href="register.html?plan=premium&term=1&price=1299" class="btn btn-primary btn-full plan-book-btn" data-plan="premium">Choose Premium</a>
-        <a href="fleet.html?type=luxury" style="display:block; text-align:center; margin-top:0.75rem; font-size:0.8rem; color:var(--color-primary); font-weight:600;">Explore Premium Luxury &amp; EVs &rarr;</a>
+        <div class="p-card-action">
+          <a href="register.html?plan=premium&term=1&price=1299" class="btn btn-primary btn-full plan-book-btn" data-plan="premium">Choose Premium</a>
+          <a href="fleet.html?type=luxury" class="plan-sub-link">Explore Premium Luxury &amp; EVs &rarr;</a>
+        </div>
       </div>
 
       <!-- Performance -->
@@ -706,8 +741,10 @@
           <li><span class="p-icon">✓</span> Unlimited Swaps</li>
           <li><span class="p-icon">✓</span> Dedicated Account Manager</li>
         </ul>
-        <a href="register.html?plan=performance&term=1&price=2499" class="btn btn-secondary btn-full plan-book-btn" data-plan="performance">Choose Performance</a>
-        <a href="fleet.html?type=performance" style="display:block; text-align:center; margin-top:0.75rem; font-size:0.8rem; color:var(--color-primary); font-weight:600;">Explore Sports &amp; Track Fleet &rarr;</a>
+        <div class="p-card-action">
+          <a href="register.html?plan=performance&term=1&price=2499" class="btn btn-secondary btn-full plan-book-btn" data-plan="performance">Choose Performance</a>
+          <a href="fleet.html?type=performance" class="plan-sub-link">Explore Sports &amp; Track Fleet &rarr;</a>
+        </div>
       </div>
       </div>
     </div>

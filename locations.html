@@ -168,6 +168,8 @@
       margin-bottom: 8rem;
     }
     .loc-card {
+      display: flex;
+      flex-direction: column;
       background: var(--color-surface);
       border: 1px solid var(--color-border);
       border-radius: 12px;
@@ -182,6 +184,7 @@
       height: 220px;
       object-fit: cover;
       display: block;
+      flex-shrink: 0;
     }
     .loc-card:hover, .loc-card.active {
       border-color: var(--color-primary);
@@ -193,6 +196,15 @@
     
     .loc-info { font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
     .loc-info svg { width: 16px; height: 16px; color: var(--color-primary); }
+
+    .loc-card-footer {
+      margin-top: auto !important;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
     .demo-notice {
       background: rgba(255,152,0,0.1);
@@ -206,11 +218,68 @@
       font-size: 0.875rem;
     }
 
+    /* Hub Coverage & Delivery Radius Checker */
+    .delivery-checker-box {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 4rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .delivery-checker-form {
+      display: flex;
+      gap: 0.75rem;
+      flex: 1;
+      min-width: 300px;
+      max-width: 480px;
+    }
+    .delivery-checker-form input {
+      flex: 1;
+      padding: 0.9rem 1.25rem;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      min-width: 0;
+    }
+    .delivery-checker-form button {
+      padding: 0.9rem 1.5rem;
+      white-space: nowrap;
+    }
+
     @media (max-width: 1024px) {
       .loc-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
       .map-container { display: none; } /* Hide map on small screens, keep cards */
+      .delivery-checker-box {
+        padding: 1.5rem 1.25rem !important;
+        margin-bottom: 2.5rem !important;
+      }
+      .delivery-checker-form {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        gap: 0.75rem !important;
+      }
+      .delivery-checker-form input {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .delivery-checker-form button,
+      #loc-search-btn {
+        width: 100% !important;
+        max-width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+      }
     }
     @media (max-width: 576px) {
       .loc-grid { grid-template-columns: 1fr; }
@@ -450,16 +519,16 @@
     </div>
 
     <!-- Hub Coverage & Delivery Radius Checker -->
-    <div class="delivery-checker-box fade-up" style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:16px; padding:2.5rem; margin-bottom:4rem; box-shadow:var(--shadow-sm);">
+    <div class="delivery-checker-box fade-up">
       <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:2rem;">
         <div style="max-width:550px;">
           <span class="eyebrow" style="margin-bottom:0.5rem;">Doorstep Handover Coverage</span>
           <h2 style="font-size:1.75rem; margin-bottom:0.75rem;">Check Your Delivery Zone</h2>
           <p class="text-muted">Enter your ZIP code or city to verify white-glove doorstep car subscription delivery and same-day swap eligibility.</p>
         </div>
-        <div style="display:flex; gap:0.75rem; flex:1; min-width:300px; max-width:480px;">
-          <input type="text" id="loc-search-input" placeholder="e.g. 10001 or Los Angeles" style="flex:1; padding:0.9rem 1.25rem; border:1px solid var(--color-border); border-radius:8px; background:var(--color-bg); color:var(--color-text); font-family:var(--font-body); font-size:1rem;">
-          <button id="loc-search-btn" class="btn btn-primary" style="padding:0.9rem 1.5rem; white-space:nowrap;">Check Zone</button>
+        <div class="delivery-checker-form">
+          <input type="text" id="loc-search-input" placeholder="e.g. 10001 or Los Angeles">
+          <button id="loc-search-btn" class="btn btn-primary">Check Zone</button>
         </div>
       </div>
       <div id="loc-search-result" style="margin-top:1.25rem; display:none; padding:1rem 1.25rem; border-radius:8px; font-weight:500;"></div>
@@ -489,7 +558,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <strong>Airport Valet:</strong> JFK, LaGuardia & Newark (EWR)
         </div>
-        <div style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center;">
+        <div class="loc-card-footer">
           <span style="font-size:0.875rem; color:var(--color-primary); font-weight:600;">180+ Vehicles Ready</span>
           <a href="fleet.html" class="btn btn-secondary" style="padding:0.5rem 1rem; font-size:0.875rem;">View NYC Fleet</a>
         </div>
@@ -516,7 +585,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <strong>Airport Valet:</strong> LAX & Burbank (BUR)
         </div>
-        <div style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center;">
+        <div class="loc-card-footer">
           <span style="font-size:0.875rem; color:var(--color-primary); font-weight:600;">220+ Vehicles Ready</span>
           <a href="fleet.html" class="btn btn-secondary" style="padding:0.5rem 1rem; font-size:0.875rem;">View LA Fleet</a>
         </div>
@@ -543,7 +612,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <strong>Airport Valet:</strong> MIA & Fort Lauderdale (FLL)
         </div>
-        <div style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center;">
+        <div class="loc-card-footer">
           <span style="font-size:0.875rem; color:var(--color-primary); font-weight:600;">140+ Vehicles Ready</span>
           <a href="fleet.html" class="btn btn-secondary" style="padding:0.5rem 1rem; font-size:0.875rem;">View Miami Fleet</a>
         </div>
@@ -570,7 +639,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <strong>Airport Valet:</strong> O'Hare (ORD) & Midway (MDW)
         </div>
-        <div style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center;">
+        <div class="loc-card-footer">
           <span style="font-size:0.875rem; color:var(--color-primary); font-weight:600;">110+ Vehicles Ready</span>
           <a href="fleet.html" class="btn btn-secondary" style="padding:0.5rem 1rem; font-size:0.875rem;">View Chicago Fleet</a>
         </div>
@@ -597,7 +666,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <strong>Airport Valet:</strong> DFW International & Dallas Love Field (DAL)
         </div>
-        <div style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center;">
+        <div class="loc-card-footer">
           <span style="font-size:0.875rem; color:var(--color-primary); font-weight:600;">160+ Vehicles Ready</span>
           <a href="fleet.html" class="btn btn-secondary" style="padding:0.5rem 1rem; font-size:0.875rem;">View Dallas Fleet</a>
         </div>
@@ -624,7 +693,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <strong>Airport Valet:</strong> Austin-Bergstrom (AUS)
         </div>
-        <div style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center;">
+        <div class="loc-card-footer">
           <span style="font-size:0.875rem; color:var(--color-primary); font-weight:600;">130+ Vehicles Ready</span>
           <a href="fleet.html" class="btn btn-secondary" style="padding:0.5rem 1rem; font-size:0.875rem;">View Austin Fleet</a>
         </div>
